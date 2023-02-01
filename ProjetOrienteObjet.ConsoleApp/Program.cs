@@ -1,10 +1,11 @@
 ﻿namespace ProjetOrienteObjet.ConsoleApp
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            ProjetEasySave.consoleApp.Views.ConsoleAppView view = new();
+            view.Show();
         }
     }
 }
