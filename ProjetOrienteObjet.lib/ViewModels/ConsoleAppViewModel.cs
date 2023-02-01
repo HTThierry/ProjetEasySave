@@ -38,7 +38,7 @@ namespace ProjetEasySave.lib.ViewModels
         {
             if (System.IO.Directory.Exists(PathFrom))
             {
-                int fichierNum = 1;
+                int fichierNum = 0;
                 int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
                 foreach (string dirPath in Directory.GetDirectories(PathFrom, "*", SearchOption.AllDirectories))
                 {
