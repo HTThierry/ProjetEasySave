@@ -10,7 +10,7 @@ namespace ProjetEasySave.lib.ViewModels
         public string PathFrom { get; set; }
 
         public string PathTo { get; set; }
-        public int Choix { get; set; }
+        public string Choix { get; set; }
         public string Message { get; set; }
         public string Name { get; set; }
         public string FullPath { get; set; }
@@ -22,13 +22,13 @@ namespace ProjetEasySave.lib.ViewModels
         {
             switch (Choix)
             {
-                case 1:
+                case "1":
                     //Console.WriteLine("Sauvegarde Complète");
                     Message = "\nSauvegarde Complète";
                     Complete();
                     break;
 
-                case 2:
+                case "2":
                     //Console.WriteLine("Sauvegarde Incrementielle");
                     Message = "\nSauvegarde Incrementielle";
                     Incrementiel();
