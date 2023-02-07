@@ -2,12 +2,11 @@
 
 namespace ProjetEasySave.lib.Functions
 {
-    public class Logs
+    public class Etat
     {
         public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
 
-        //Créer un fichier log
-        public void logs()
+        public void etat()
         {
             //Nom fichier
             string path = _viewModel.FullPath;
@@ -16,18 +15,21 @@ namespace ProjetEasySave.lib.Functions
             //Date et heure
             DateTime today = DateTime.Now;
 
-            //Taille fichier
-            FileInfo size = new FileInfo(_viewModel.FullPath); //Resultat en Octet
+            //Etat du travail de sauvegarde
+            string state;
+            if (_viewModel.SaveState == true){
+                state = "Actif";
+            }
+            else
+            {
+                state = "Non actif";
+            }
 
             var test = new
             {
                 nom = _viewModel.Name,
-                FileSource = _viewModel.FullPath,
-                FileTarget = _viewModel.PathTo,
-                destPath = "",
-                FileSize = size.Length,
-                FileTransferTime = _viewModel.timer(),
                 time = today.ToString("MM/dd/yyyy hh:mm:ss"),
+                etat = state,
             };
             string json = JsonConvert.SerializeObject(test, Formatting.Indented);
 
