@@ -13,10 +13,9 @@ namespace ProjetEasySave.consoleApp.Views
 
         public void Show()
         {
-
-            Console.WriteLine(langue.LanguageData[langue.LanguageCode].ChoiceBackup.title);
-            Console.WriteLine(langue.LanguageData[langue.LanguageCode].ChoiceBackup.choice1);
-            Console.WriteLine(langue.LanguageData[langue.LanguageCode].ChoiceBackup.choice2);
+            Console.WriteLine("type de sauvegarde :");
+            Console.WriteLine("1 - Sauvegarde Complète (default)");
+            Console.WriteLine("2 - Sauvegarde Incrementielle");
             _viewModel.Choix = Console.ReadLine();
 
             Console.WriteLine(langue.LanguageData[langue.LanguageCode].PathSource);
