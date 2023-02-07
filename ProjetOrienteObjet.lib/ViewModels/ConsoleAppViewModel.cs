@@ -37,7 +37,7 @@
 
         public void Complete()
         {
-            if (System.IO.Directory.Exists(PathFrom))
+            if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))
             {
                 int fichierNum = 0;
                 int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
@@ -61,10 +61,15 @@
 
         public void Incrementiel()
         {
-            int modifiedFiles = 0;
-            int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
-            if (System.IO.Directory.Exists(PathFrom))
+            int totalFiles = 0;
+            int modifiedFiles = -1;
+            if(System.IO.Directory.Exists(PathTo))
             {
+                totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
+            }
+            if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))
+            {
+                modifiedFiles = 0;
                 foreach (string dirPath in Directory.GetDirectories(PathFrom, "*", SearchOption.AllDirectories))
                 {
                     Directory.CreateDirectory(dirPath.Replace(PathFrom, PathTo));
@@ -81,13 +86,17 @@
                     }
                 }
             }
-            if (modifiedFiles == 0)
-            {
-                Message = $"Copie terminée, aucun fichier n'a été modifié sur {totalFiles} analysés.";
-            }
             else
             {
-                Console.WriteLine(modifiedFiles + " fichier(s) modifié(s)");
+                Message = "Votre chemin initial ou de destination n'existe pas";
+            }
+
+            if (modifiedFiles == 0)
+            {
+                Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
+            }
+            if(modifiedFiles > 0)
+            {
                 Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {totalFiles} analysés.";
             }
         }
