@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjetEasySave.consoleApp.Views
+﻿namespace ProjetEasySave.consoleApp.Views
 {
     public class ConsoleAppView
     {
         private lib.ViewModels.ConsoleAppViewModel _viewModel = new();
+
         public void Show()
         {
             Console.WriteLine("type de sauvegarde :");
             Console.WriteLine("1 - Sauvegarde Complète (default)");
             Console.WriteLine("2 - Sauvegarde Incrementielle");
-            _viewModel.Choix = Convert.ToInt32(Console.ReadLine());
+            _viewModel.Choix = Console.ReadLine();
 
             Console.WriteLine("chemin de sauvegarde initial :");
             _viewModel.PathFrom = Console.ReadLine();
