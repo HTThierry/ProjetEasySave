@@ -1,0 +1,51 @@
+{
+  "fr": {
+    "ChoiceBackup": {
+      "title": "Type de sauvegarde :",
+      "choice1": "1 - Sauvegarde Complète (default)",
+      "choice2": "2 - Sauvegarde Incrementielle"
+    },
+    "PathDest": "Chemin de sauvegarde final :",
+    "PathSource": "chemin de sauvegarde initial :",
+    "FullBackup": "Sauvegarde Complète",
+    "IncrBackup": "Sauvegarde Incrementielle",
+    "MessageFull": {
+      "endCopy": "Copie terminée, ",
+      "copyOn": "fichiers copiés sur",
+      "of": " de ",
+      "to": " vers "
+    },
+    "MessageIncr": {
+      "endCopy0": "Copie terminée, aucun fichier n'a été modifié sur ",
+      "analyse": " analysés.",
+      "nbrOfModif": " fichier(s) modifié(s)",
+      "endCopy": "Copie terminée, ",
+      "modifTo": " fichiers modifiés sur "
+    }
+  },
+  "en": {
+    "ChoiceBackup": {
+      "title": "Type of backup :",
+      "choice1": "1 - Full Backup (default)",
+      "choice2": "2 - Incremental Backup"
+    },
+    "PathDest": "Final backup path :",
+    "PathSource": "Initial backup path :",
+    "FullBackup": "Full Backup",
+    "IncrBackup": "Incremental Backup",
+    "MessageFull": {
+      "endCopy": "Copy completed, ",
+      "copyOn": "files copied to",
+      "of": " of ",
+      "to": " to "
+    },
+    "MessageIncr": {
+      "endCopy0": "Copy completed, no files have been modified on ",
+      "analyse": " analyzed.",
+      "nbrOfModif": " modified file(s)",
+      "endCopy": "Copy completed, ",
+      "modifTo": " modified files to "
+    }
+  }
+}
+
