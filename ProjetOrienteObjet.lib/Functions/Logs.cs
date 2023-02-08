@@ -1,11 +1,19 @@
-﻿/*using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ProjetEasySave.lib.Functions
 {
+    
     public class Logs
     {
         public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
-
+        
         //Créer un fichier log
         public void logs()
         {
@@ -41,4 +49,4 @@ namespace ProjetEasySave.lib.Functions
             }
         }
     }
-}*/
+}

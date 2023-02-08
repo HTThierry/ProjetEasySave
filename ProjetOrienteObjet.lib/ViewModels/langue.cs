@@ -20,7 +20,7 @@ namespace ProjetEasySave.lib.ViewModels
             this.LanguageData = JsonConvert.DeserializeObject(json);
         }
         // Change le language code celon le choix de l'utilisateur, sinon retourne un langague code celon le système
-        private string GetLanguageCode(string specifiedLanguageCode = "")
+        public string GetLanguageCode(string specifiedLanguageCode = "")
         {
             if (!string.IsNullOrEmpty(specifiedLanguageCode))
             {
