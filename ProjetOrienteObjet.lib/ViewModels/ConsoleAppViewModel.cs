@@ -17,6 +17,7 @@ namespace ProjetEasySave.lib.ViewModels
         public float fichierNum = 0;
         private DateTime TimerA;
         private DateTime TimerB;
+        public bool SaveState = false;
 
         public void Sauvegarde()
         {
@@ -24,19 +25,19 @@ namespace ProjetEasySave.lib.ViewModels
             {
                 case "1":
                     //Console.WriteLine("Sauvegarde Complète");
-                    Message = "\nSauvegarde Complète";
+                    Message = "\n Sauvegarde Complète";
                     Complete();
                     break;
 
                 case "2":
                     //Console.WriteLine("Sauvegarde Incrementielle");
-                    Message = "\nSauvegarde Incrementielle";
+                    Message = "\n Sauvegarde Incrementielle";
                     Incrementiel();
                     break;
 
                 default:
                     //Console.WriteLine("Sauvegarde Complète");
-                    Message = "\nSauvegarde Complète";
+                    Message = "\n Sauvegarde Complète";
                     break;
             }
         }
@@ -53,6 +54,7 @@ namespace ProjetEasySave.lib.ViewModels
                 }
                 foreach (string newPath in Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories))
                 {
+                    SaveState = true;
                     TimerA = DateTime.Now;
                     FullPath = newPath;
                     File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
@@ -85,7 +87,9 @@ namespace ProjetEasySave.lib.ViewModels
                 {
                     if (File.GetLastWriteTime(newPath) > File.GetLastWriteTime(newPath.Replace(PathFrom, PathTo)))
                     {
+                        SaveState = true;
                         TimerA = DateTime.Now;
+                        FullPath = newPath;
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
                         TimerB = DateTime.Now;
@@ -153,6 +157,8 @@ namespace ProjetEasySave.lib.ViewModels
 
         public void etat()
         {
+
+
             //Nom fichier
             string path = FullPath;
             Name = Path.GetFileName(path);
@@ -161,7 +167,6 @@ namespace ProjetEasySave.lib.ViewModels
             DateTime today = DateTime.Now;
 
             //Etat du travail de sauvegarde
-            bool SaveState = false;
             string state;
 
             //Nombre de fichiers restants
@@ -171,6 +176,7 @@ namespace ProjetEasySave.lib.ViewModels
 
             //Taille des fichiers restants
             FileInfo size = new FileInfo(FullPath); //Resultat en Octet
+            //float totalsizefiles = 
 
             //Adresse complète du fichier Source en cours de sauvegarde
 
@@ -184,10 +190,13 @@ namespace ProjetEasySave.lib.ViewModels
                 state = "Actif";
                 var stateObject = new
                 {
-                    nom = Name,
+                    name = Name,
                     time = today.ToString("MM/dd/yyyy hh:mm:ss"),
-                    etat = state,
-                    //remainingFiles = totalFiles.Length - size.Length,
+                    state = state,
+                    remaining_files  = remainingFiles,
+                    //remaining_size_files = totalFiles.Length - size.Length,
+                    FileSource = FullPath,
+                    FileTarget = PathTo,
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
@@ -222,10 +231,10 @@ namespace ProjetEasySave.lib.ViewModels
             }
 
 
-
+            /*Console.Clear();
             Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
             float result = (fichierNum / totalFiles) * 100;
-            Console.WriteLine((int)result + "%");
+            Console.WriteLine((int)result + "%");*/
         }
     }
 }
