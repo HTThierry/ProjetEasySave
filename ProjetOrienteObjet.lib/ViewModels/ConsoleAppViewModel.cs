@@ -227,5 +227,21 @@ namespace ProjetEasySave.lib.ViewModels
             float result = (fichierNum / totalFiles) * 100;
             Console.WriteLine((int)result + "%");
         }
+
+        public void EnregistrerSave(string nom, string from, string to, string type)
+        {
+            var save = new lib.Functions.SaveManager(nom, from, to, type);
+            save.Creator();
+        }
+
+        public void SupprimerSave(string nom)
+        {
+            lib.Functions.SaveManager.Supprimer(nom);
+        }
+
+        public void AfficherSave()
+        {
+            lib.Functions.SaveManager.Afficher();
+        }
     }
 }
