@@ -44,46 +44,29 @@ namespace ProjetEasySave.lib.ViewModels
 
         public void Complete()
         {
-        if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))
-        {
-            int fichierNum = 0;
-            int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
-            foreach (string dirPath in Directory.GetDirectories(PathFrom, "*", SearchOption.AllDirectories))
-            {
-                Directory.CreateDirectory(dirPath.Replace(PathFrom, PathTo));
-            }
-            foreach (string newPath in Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories))
-            {
-                TimerA = DateTime.Now;
-                FullPath = newPath;
-                File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
-                fichierNum++;
-                TimerB = DateTime.Now;
-                _Logs.logs();
-            }
-                //Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
-                Message = new string[] { "backupFull", fichierNum.ToString(), totalFiles.ToString(), PathFrom, PathTo };
-            if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))
-            {
-                int fichierNum = 0;
-                int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
-                foreach (string dirPath in Directory.GetDirectories(PathFrom, "*", SearchOption.AllDirectories))
+            
+                if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(PathFrom, PathTo));
+                    int fichierNum = 0;
+                    int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
+                    foreach (string dirPath in Directory.GetDirectories(PathFrom, "*", SearchOption.AllDirectories))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(PathFrom, PathTo));
+                    }
+                    foreach (string newPath in Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories))
+                    {
+                        TimerA = DateTime.Now;
+                        FullPath = newPath;
+                        File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
+                        fichierNum++;
+                        TimerB = DateTime.Now;
+                        //logs();
+                        //etat();
+                    }
+                     //Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
+                     Message = new string[] { "backupFull", fichierNum.ToString(), totalFiles.ToString(), PathFrom, PathTo };
                 }
-                foreach (string newPath in Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories))
-                {
-                    TimerA = DateTime.Now;
-                    FullPath = newPath;
-                    File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
-                    fichierNum++;
-                    TimerB = DateTime.Now;
-                    logs();
-                    etat();
-                }
-                Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
-            }
-            timer();
+                timer();
         }
 
         public void Incrementiel()
@@ -109,8 +92,8 @@ namespace ProjetEasySave.lib.ViewModels
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
                         TimerB = DateTime.Now;
-                        logs();
-                        etat();
+                       // logs();
+                        //etat();
                     }
                 }
             }
@@ -128,9 +111,12 @@ namespace ProjetEasySave.lib.ViewModels
             if(modifiedFiles > 0)
             {
             //Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {modifiedFiles} analysés.";
-            Message = new string[] { "copyend", modifiedFiles.ToString(), modifiedFiles.ToString() };
+            Message = new string[] { "copyEnd", modifiedFiles.ToString(), modifiedFiles.ToString() };
         }
         }
+
+
+
 
         //Fonction qui calcule le temps entre chaque copie de fichier
         public TimeSpan timer()
@@ -246,9 +232,9 @@ namespace ProjetEasySave.lib.ViewModels
 
 
 
-            Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
-            float result = (fichierNum / totalFiles) * 100;
-            Console.WriteLine((int)result + "%");
+            //Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
+            //float result = (fichierNum / totalFiles) * 100;
+            //Console.WriteLine((int)result + "%");
         }
     }
 }
