@@ -11,7 +11,7 @@ namespace ProjetEasySave.lib.ViewModels
 
         public string PathTo { get; set; }
         public string Choix { get; set; }
-        public string Message { get; set; }
+        public string[] Message { get; set; }
         public string Name { get; set; }
         public string FullPath { get; set; }
         public float fichierNum = 0;
@@ -93,25 +93,31 @@ namespace ProjetEasySave.lib.ViewModels
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
                         TimerB = DateTime.Now;
-                        logs();
-                        etat();
+                       // logs();
+                        //etat();
                     }
                 }
             }
             else
             {
-                Message = "Votre chemin initial ou de destination n'existe pas";
-            }
+                //Message = "Votre chemin initial ou de destination n'existe pas";
+                Message = new string[] { "wrongPath" };
+        }
 
             if (modifiedFiles == 0)
             {
-                Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
-            }
-            if (modifiedFiles > 0)
-            {
-                Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {totalFiles} analysés.";
-            }
+                //Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
+                Message = new string[] { "noFiles", totalFiles.ToString() };
         }
+            if(modifiedFiles > 0)
+            {
+            //Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {modifiedFiles} analysés.";
+            Message = new string[] { "copyEnd", modifiedFiles.ToString(), modifiedFiles.ToString() };
+        }
+        }
+
+
+
 
         //Fonction qui calcule le temps entre chaque copie de fichier
         public TimeSpan timer()
@@ -231,7 +237,27 @@ namespace ProjetEasySave.lib.ViewModels
             }
 
 
+
+            //Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
+            //float result = (fichierNum / totalFiles) * 100;
+            //Console.WriteLine((int)result + "%");
+        }
+
+        public void EnregistrerSave(string nom, string from, string to, string type)
+        {
+            var save = new lib.Functions.SaveManager(nom, from, to, type);
+            save.Creator();
+        }
+
+        public void SupprimerSave(string nom)
+        {
+            lib.Functions.SaveManager.Supprimer(nom);
+        }
+
             /*Console.Clear();
+        public void AfficherSave()
+        {
+            lib.Functions.SaveManager.Afficher();
             Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
             float result = (fichierNum / totalFiles) * 100;
             Console.WriteLine((int)result + "%");*/
