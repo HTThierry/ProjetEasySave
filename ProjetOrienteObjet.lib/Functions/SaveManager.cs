@@ -8,34 +8,23 @@ namespace ProjetEasySave.lib.Functions
 {
     internal class SaveManager
     {
-        public string? Name { get; set; }
-        public string? From { get; set; }
-        public string? To { get; set; }
-        public string? Save { get; set; }
+        private Models.SaveManagerModel _SaveManagerModel = new();
 
-        public SaveManager(string name, string from, string to, string save)
-        {
-            Name = name;
-            From = from;
-            To = to;
-            Save = save;
-        }
-        
-        public void Creator()
+        public void Create()
         {
             int filecount = Directory.GetFiles(@"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde").Length;
             if(filecount<5)
             {
-                string path = @"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde\" + Name + ".json";
+                string path = @"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde\" + _SaveManagerModel.Name + ".json";
                 if (!File.Exists(path))
                 {
                     using (StreamWriter sw = File.CreateText(path))
                     {
                         sw.WriteLine("{");
-                        sw.WriteLine("    \"name\": \"" + Name + "\",");
-                        sw.WriteLine("    \"from\": \"" + From + "\",");
-                        sw.WriteLine("    \"to\": \"" + To + "\",");
-                        sw.WriteLine("    \"save\": \"" + Save + "\"");
+                        sw.WriteLine("    \"name\": \"" + _SaveManagerModel.Name + "\",");
+                        sw.WriteLine("    \"from\": \"" + _SaveManagerModel.From + "\",");
+                        sw.WriteLine("    \"to\": \"" + _SaveManagerModel.To + "\",");
+                        sw.WriteLine("    \"save\": \"" + _SaveManagerModel.Save + "\"");
                         sw.WriteLine("}");
                     }
                 }
@@ -46,7 +35,7 @@ namespace ProjetEasySave.lib.Functions
             }
         }
 
-        public static void Supprimer(string nom)
+        public static void Delete(string nom)
         {
             string path = @"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde\" + nom + ".json";
             if (File.Exists(path))
@@ -55,7 +44,7 @@ namespace ProjetEasySave.lib.Functions
             }
         }
 
-        public static void Afficher()
+        public static void Show()
         {
             string path = @"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde\";
             string[] files = Directory.GetFiles(path, "*.json");

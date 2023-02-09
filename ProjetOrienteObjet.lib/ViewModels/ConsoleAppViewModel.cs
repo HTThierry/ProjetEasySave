@@ -231,33 +231,27 @@ namespace ProjetEasySave.lib.ViewModels
                     File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
                 }
             }
-
-
-
-            //Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
-            //float result = (fichierNum / totalFiles) * 100;
-            //Console.WriteLine((int)result + "%");
         }
 
-        public void EnregistrerSave(string nom, string from, string to, string type)
+        public void CreateSave(string nom, string from, string to, string type)
         {
             var save = new lib.Functions.SaveManager(nom, from, to, type);
-            save.Creator();
+            save.Create();
         }
 
-        public void SupprimerSave(string nom)
+        public void DeleteSave(string nom)
         {
-            lib.Functions.SaveManager.Supprimer(nom);
+            lib.Functions.SaveManager.Delete(nom);
         }
 
-        /*Console.Clear();
-        Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
-        float result = (fichierNum / totalFiles) * 100;
-        Console.WriteLine((int) result + "%");*/
-        public void AfficherSave()
+        public void ShowSave()
         {
-            lib.Functions.SaveManager.Afficher();
+            lib.Functions.SaveManager.Show();
         }
 
+        public void CompleteNew(int choix)
+        {
+            
+        }
     }
 }

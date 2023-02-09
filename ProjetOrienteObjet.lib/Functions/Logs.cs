@@ -13,7 +13,6 @@ namespace ProjetEasySave.lib.Functions
     public class Logs
     {
         public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
-        
         //Créer un fichier log
         public void logs()
         {
