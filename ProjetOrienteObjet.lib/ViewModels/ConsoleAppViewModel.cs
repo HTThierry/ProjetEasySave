@@ -17,6 +17,7 @@ namespace ProjetEasySave.lib.ViewModels
         public float fichierNum = 0;
         private DateTime TimerA;
         private DateTime TimerB;
+        public bool SaveState = false;
 
         public void Sauvegarde()
         {
@@ -85,7 +86,9 @@ namespace ProjetEasySave.lib.ViewModels
                 {
                     if (File.GetLastWriteTime(newPath) > File.GetLastWriteTime(newPath.Replace(PathFrom, PathTo)))
                     {
+                        SaveState = true;
                         TimerA = DateTime.Now;
+                        FullPath = newPath;
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
                         TimerB = DateTime.Now;
@@ -167,7 +170,6 @@ namespace ProjetEasySave.lib.ViewModels
             DateTime today = DateTime.Now;
 
             //Status of the backup work
-            bool SaveState = false;
             string state;
 
             //Number of files remaining
@@ -190,10 +192,13 @@ namespace ProjetEasySave.lib.ViewModels
                 state = "Actif";
                 var stateObject = new
                 {
-                    nom = Name,
+                    name = Name,
                     time = today.ToString("MM/dd/yyyy hh:mm:ss"),
-                    etat = state,
-                    //remainingFiles = totalFiles.Length - size.Length,
+                    state = state,
+                    remaining_files  = remainingFiles,
+                    //remaining_size_files = totalFiles.Length - size.Length,
+                    FileSource = FullPath,
+                    FileTarget = PathTo,
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
@@ -232,6 +237,26 @@ namespace ProjetEasySave.lib.ViewModels
             //Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
             //float result = (fichierNum / totalFiles) * 100;
             //Console.WriteLine((int)result + "%");
+        }
+
+        public void EnregistrerSave(string nom, string from, string to, string type)
+        {
+            var save = new lib.Functions.SaveManager(nom, from, to, type);
+            save.Creator();
+        }
+
+        public void SupprimerSave(string nom)
+        {
+            lib.Functions.SaveManager.Supprimer(nom);
+        }
+
+            /*Console.Clear();
+        public void AfficherSave()
+        {
+            lib.Functions.SaveManager.Afficher();
+            Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
+            float result = (fichierNum / totalFiles) * 100;
+            Console.WriteLine((int)result + "%");*/
         }
     }
 }
