@@ -6,14 +6,19 @@ namespace ProjetEasySave.lib.Functions
 {
     public class Etat
     {
-        public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
+        public string Name { get; set; }
+        public string FullPath { get; set; }
+        public string PathTo { get; set; }
+        public float fichierNum = 0;
+        public string PathFrom { get; set; }
+        public bool SaveState = false;
+
         public void etat()
         {
 
-
             //Nom fichier
-            string path = _viewModel.FullPath;
-            _viewModel.Name = Path.GetFileName(path);
+            string path = FullPath;
+            Name = Path.GetFileName(path);
 
             //Date et heure
             DateTime today = DateTime.Now;
@@ -22,12 +27,12 @@ namespace ProjetEasySave.lib.Functions
             string state;
 
             //Nombre de fichiers restants
-            _viewModel.fichierNum++;
-            float totalFiles = Directory.GetFiles(_viewModel.PathFrom, "*.*", SearchOption.AllDirectories).Length;
-            float remainingFiles = totalFiles - _viewModel.fichierNum;
+            fichierNum++;
+            float totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
+            float remainingFiles = totalFiles - fichierNum;
 
             //Taille des fichiers restants
-            FileInfo size = new FileInfo(_viewModel.FullPath); //Resultat en Octet
+            FileInfo size = new FileInfo(FullPath); //Resultat en Octet
             //float totalsizefiles = 
 
             //Adresse complète du fichier Source en cours de sauvegarde
@@ -37,18 +42,18 @@ namespace ProjetEasySave.lib.Functions
             //Adresse complète du fichier de destination
 
 
-            if (_viewModel.SaveState == true)
+            if (SaveState == true)
             {
                 state = "Actif";
                 var stateObject = new
                 {
-                    name = _viewModel.Name,
+                    name = Name,
                     time = today.ToString("MM/dd/yyyy hh:mm:ss"),
                     state = state,
                     remaining_files = remainingFiles,
                     //remaining_size_files = totalFiles.Length - size.Length,
-                    FileSource = _viewModel.FullPath,
-                    FileTarget = _viewModel.PathTo,
+                    FileSource = FullPath,
+                    FileTarget = PathTo,
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
@@ -66,7 +71,7 @@ namespace ProjetEasySave.lib.Functions
                 state = "Non actif";
                 var stateObject = new
                 {
-                    nom = _viewModel.Name,
+                    nom = Name,
                     time = today.ToString("MM/dd/yyyy hh:mm:ss"),
                     etat = state,
                 };

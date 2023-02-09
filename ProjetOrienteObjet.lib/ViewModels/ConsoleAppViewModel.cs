@@ -121,7 +121,7 @@ namespace ProjetEasySave.lib.ViewModels
         //Fonction qui calcule le temps entre chaque copie de fichier
         public TimeSpan timer()
         {
-            TimeSpan time = TimerB.Subtract(TimerA);
+            TimeSpan time = TimerB - TimerA;
             return time;
         }
 
