@@ -250,13 +250,14 @@ namespace ProjetEasySave.lib.ViewModels
             lib.Functions.SaveManager.Supprimer(nom);
         }
 
-            /*Console.Clear();
+        /*Console.Clear();
+        Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
+        float result = (fichierNum / totalFiles) * 100;
+        Console.WriteLine((int) result + "%");*/
         public void AfficherSave()
         {
             lib.Functions.SaveManager.Afficher();
-            Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
-            float result = (fichierNum / totalFiles) * 100;
-            Console.WriteLine((int)result + "%");*/
         }
+
     }
 }
