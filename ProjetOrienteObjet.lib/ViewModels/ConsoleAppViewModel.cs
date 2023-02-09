@@ -23,20 +23,17 @@ namespace ProjetEasySave.lib.ViewModels
             switch (Choix)
             {
                 case "1":
-                    //Console.WriteLine("Sauvegarde Complète");
-                    //Message = "\nSauvegarde Complète";
+                    //Message = "\nFull backup";
                     Complete();
                     break;
 
                 case "2":
-                    //Console.WriteLine("Sauvegarde Incrementielle");
-                    //Message = "\nSauvegarde Incrementielle";
+                    //Message = "\nIncremental Backup";
                     Incrementiel();
                     break;
 
                 default:
-                    //Console.WriteLine("Sauvegarde Complète");
-                    //Message = "\nSauvegarde Complète";
+                    //Message = "\nFull backup";
                     Complete();
                     break;
             }
@@ -63,8 +60,8 @@ namespace ProjetEasySave.lib.ViewModels
                         //logs();
                         //etat();
                     }
-                     //Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
-                     Message = new string[] { "backupFull", fichierNum.ToString(), totalFiles.ToString(), PathFrom, PathTo };
+                //Message = $"Copy completed, {fichierNum} files copied to {totalFiles} of {PathFrom} to {PathTo}.";
+                Message = new string[] { "backupFull", fichierNum.ToString(), totalFiles.ToString(), PathFrom, PathTo };
                 }
                 timer();
         }
@@ -99,26 +96,26 @@ namespace ProjetEasySave.lib.ViewModels
             }
             else
             {
-                //Message = "Votre chemin initial ou de destination n'existe pas";
+                //Message = "Your starting or destination path does not exist.";
                 Message = new string[] { "wrongPath" };
         }
 
             if (modifiedFiles == 0)
             {
-                //Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
+                //Message = $"Copy completed, your files are up to date, no files have been modified on {totalFiles} analyzed.";
                 Message = new string[] { "noFiles", totalFiles.ToString() };
         }
             if(modifiedFiles > 0)
             {
-            //Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {modifiedFiles} analysés.";
-            Message = new string[] { "copyEnd", modifiedFiles.ToString(), modifiedFiles.ToString() };
+                //Message = $"Copy completed, {modifiedFiles} modified files to {modifiedFiles} analyzed..";
+                Message = new string[] { "copyEnd", modifiedFiles.ToString(), modifiedFiles.ToString() };
         }
         }
 
 
 
-
-        //Fonction qui calcule le temps entre chaque copie de fichier
+         
+        // Function that calculates the time between each file copy
         public TimeSpan timer()
         {
             TimeSpan time = TimerB.Subtract(TimerA);
@@ -127,15 +124,15 @@ namespace ProjetEasySave.lib.ViewModels
 
         public void logs()
         {
-            //Nom fichier
+            //File name
             string path = FullPath;
             Name = Path.GetFileName(path);
 
-            //Date et heure
+            //Date and time
             DateTime today = DateTime.Now;
 
-            //Taille fichier
-            FileInfo size = new FileInfo(FullPath); //Resultat en Octet
+            //File size
+            FileInfo size = new FileInfo(FullPath); //Result in Byte
 
             var test = new
             {
@@ -150,7 +147,7 @@ namespace ProjetEasySave.lib.ViewModels
 
             string json = JsonConvert.SerializeObject(test, Formatting.Indented);
 
-            if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json")) //A changer avec le dossie on recupere les logs
+            if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json")) //To change with the file we recover the logs
             {
                 File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
             }
@@ -162,30 +159,30 @@ namespace ProjetEasySave.lib.ViewModels
 
         public void etat()
         {
-            //Nom fichier
+            //File name
             string path = FullPath;
             Name = Path.GetFileName(path);
 
-            //Date et heure
+            //Date and time
             DateTime today = DateTime.Now;
 
-            //Etat du travail de sauvegarde
+            //Status of the backup work
             bool SaveState = false;
             string state;
 
-            //Nombre de fichiers restants
+            //Number of files remaining
             fichierNum++;
             float totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
             float remainingFiles = totalFiles - fichierNum;
 
-            //Taille des fichiers restants
-            FileInfo size = new FileInfo(FullPath); //Resultat en Octet
+            //Size of remaining files
+            FileInfo size = new FileInfo(FullPath); //Result in Byte
 
-            //Adresse complète du fichier Source en cours de sauvegarde
+            //Full address of the Source file being saved
 
 
 
-            //Adresse complète du fichier de destination
+            //Full address of the destination file
 
 
             if (SaveState == true)
@@ -200,7 +197,7 @@ namespace ProjetEasySave.lib.ViewModels
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
-                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //A changer avec le dossie on recupere les logs
+                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //To change with the file we recover the logs
                 {
                     File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
                 }
@@ -220,7 +217,7 @@ namespace ProjetEasySave.lib.ViewModels
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
-                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //A changer avec le dossie on recupere les logs
+                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //To change with the file we recover the logs
                 {
                     File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
                 }
