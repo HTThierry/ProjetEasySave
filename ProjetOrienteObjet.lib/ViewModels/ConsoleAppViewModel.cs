@@ -254,9 +254,9 @@ namespace ProjetEasySave.lib.ViewModels
         Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
         float result = (fichierNum / totalFiles) * 100;
         Console.WriteLine((int) result + "%");*/
-        public void AfficherSave()
+        public string[] ShowSave()
         {
-            lib.Functions.SaveManager.Afficher();
+            return lib.Functions.SaveManager.Afficher();
         }
 
     }
