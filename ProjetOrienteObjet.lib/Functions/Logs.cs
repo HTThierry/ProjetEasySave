@@ -4,40 +4,40 @@ namespace ProjetEasySave.lib.Functions
 {
     public class Logs
     {
-        public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
+        public PropertiesModel _PropertiesModel = new();
 
         //Créer un fichier log
         public void logs()
         {
             //Nom fichier
-            string path = _viewModel.FullPath;
-            _viewModel.Name = Path.GetFileName(path);
+            string path = _PropertiesModel.FullPath;
+            _PropertiesModel.Name = Path.GetFileName(path);
 
             //Date et heure
             DateTime today = DateTime.Now;
 
             //Taille fichier
-            FileInfo size = new FileInfo(_viewModel.FullPath); //Resultat en Octet
+            FileInfo size = new FileInfo(_PropertiesModel.FullPath); //Resultat en Octet
 
             var test = new
             {
-                nom = _viewModel.Name,
-                FileSource = _viewModel.FullPath,
-                FileTarget = _viewModel.PathTo,
+                nom = _PropertiesModel.Name,
+                FileSource = _PropertiesModel.FullPath,
+                FileTarget = _PropertiesModel.PathTo,
                 destPath = "",
                 FileSize = size.Length,
-                FileTransferTime = _viewModel.Timer(),
+                FileTransferTime = _PropertiesModel.Timer(),
                 time = today.ToString("MM/dd/yyyy hh:mm:ss"),
             };
             string json = JsonConvert.SerializeObject(test, Formatting.Indented);
 
-            if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json")) //A changer avec le dossie on recupere les logs
+            if (!System.IO.File.Exists(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\log.json")) //A changer avec le dossie on recupere les logs
             {
-                File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
+                File.WriteAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\log.json", json);
             }
             else
             {
-                File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
+                File.AppendAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\log.json", json);
             }
         }
     }

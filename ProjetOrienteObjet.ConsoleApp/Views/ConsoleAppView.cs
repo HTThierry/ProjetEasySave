@@ -41,7 +41,7 @@ namespace ProjetEasySave.consoleApp.Views
             }
             Console.WriteLine(Message);
             _viewModel.Sauvegarde();
-            switch (_viewModel.Message[0])
+            /*switch (_viewModel.Message)
             {
                 case "backupFull":
                     Message = $"{langue.LanguageData[langue.LanguageCode].MessageFull.endCopy}{_viewModel.Message[1]} {langue.LanguageData[langue.LanguageCode].MessageFull.copyOn} {_viewModel.Message[2]}{langue.LanguageData[langue.LanguageCode].MessageFull.of}{_viewModel.Message[3]}{langue.LanguageData[langue.LanguageCode].MessageFull.to}{_viewModel.Message[4]}.";
@@ -59,7 +59,7 @@ namespace ProjetEasySave.consoleApp.Views
                     Message = $"{langue.LanguageData[langue.LanguageCode].wrongPath}";
                     break;
             }
-            Console.WriteLine(Message);
+            Console.WriteLine(Message);*/
         }
     }
 }

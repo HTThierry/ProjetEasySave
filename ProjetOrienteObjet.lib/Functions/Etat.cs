@@ -4,13 +4,14 @@ namespace ProjetEasySave.lib.Functions
 {
     public class Etat
     {
-        public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
+        public PropertiesModel _PropertiesModel = new();
 
         public void etat()
         {
+
             //Nom fichier
-            string path = _viewModel.FullPath;
-            _viewModel.Name = Path.GetFileName(path);
+            string path = _PropertiesModel.FullPath;
+            _PropertiesModel.Name = Path.GetFileName(path);
 
             //Date et heure
             DateTime today = DateTime.Now;
@@ -19,40 +20,41 @@ namespace ProjetEasySave.lib.Functions
             string state;
 
             //Nombre de fichiers restants
-            _viewModel.fichierNum++;
-            float totalFiles = Directory.GetFiles(_viewModel.PathFrom, "*.*", SearchOption.AllDirectories).Length;
-            float remainingFiles = totalFiles - _viewModel.fichierNum;
+            _PropertiesModel.fichierNum++;
+            float totalFiles = Directory.GetFiles(_PropertiesModel.PathFrom, "*.*", SearchOption.AllDirectories).Length;
+            float remainingFiles = totalFiles - _PropertiesModel.fichierNum;
 
             //Taille des fichiers restants
-            FileInfo size = new FileInfo(_viewModel.FullPath); //Resultat en Octet
-            //float totalsizefiles =
+            FileInfo size = new FileInfo(_PropertiesModel.FullPath); //Resultat en Octet
+            //float totalsizefiles = 
 
             //Adresse complète du fichier Source en cours de sauvegarde
 
             //Adresse complète du fichier de destination
 
-            if (_viewModel.SaveState == true)
+
+            if (_PropertiesModel.SaveState == true)
             {
                 state = "Actif";
                 var stateObject = new
                 {
-                    name = _viewModel.Name,
+                    name = _PropertiesModel.Name,
                     time = today.ToString("MM/dd/yyyy hh:mm:ss"),
                     state = state,
                     remaining_files = remainingFiles,
                     //remaining_size_files = totalFiles.Length - size.Length,
-                    FileSource = _viewModel.FullPath,
-                    FileTarget = _viewModel.PathTo,
+                    FileSource = _PropertiesModel.FullPath,
+                    FileTarget = _PropertiesModel.PathTo,
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
-                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //A changer avec le dossie on recupere les logs
+                if (!System.IO.File.Exists(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\etat.json")) //A changer avec le dossie on recupere les logs
                 {
-                    File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
+                    File.WriteAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\etat.json", json);
                 }
                 else
                 {
-                    File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
+                    File.AppendAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\etat.json", json);
                 }
             }
             else
@@ -60,19 +62,19 @@ namespace ProjetEasySave.lib.Functions
                 state = "Non actif";
                 var stateObject = new
                 {
-                    nom = _viewModel.Name,
+                    nom = _PropertiesModel.Name,
                     time = today.ToString("MM/dd/yyyy hh:mm:ss"),
                     etat = state,
                 };
                 string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
 
-                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //A changer avec le dossie on recupere les logs
+                if (!System.IO.File.Exists(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\etat.json")) //A changer avec le dossie on recupere les logs
                 {
-                    File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
+                    File.WriteAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\etat.json", json);
                 }
                 else
                 {
-                    File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
+                    File.AppendAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\etat.json", json);
                 }
             }
 
