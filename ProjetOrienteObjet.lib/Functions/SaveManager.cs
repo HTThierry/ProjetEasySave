@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjetEasySave.lib.Functions
+﻿namespace ProjetEasySave.lib.Functions
 {
     internal class SaveManager
     {
@@ -20,11 +14,11 @@ namespace ProjetEasySave.lib.Functions
             To = to;
             Save = save;
         }
-        
+
         public void Creator()
         {
             int filecount = Directory.GetFiles(@"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde").Length;
-            if(filecount<5)
+            if (filecount < 5)
             {
                 string path = @"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde\" + Name + ".json";
                 if (!File.Exists(path))

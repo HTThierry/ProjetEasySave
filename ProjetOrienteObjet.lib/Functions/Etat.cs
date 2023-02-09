@@ -1,16 +1,13 @@
 ﻿using Newtonsoft.Json;
-using System.IO;
-using System.Xml.Linq;
 
 namespace ProjetEasySave.lib.Functions
 {
     public class Etat
     {
         public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
+
         public void etat()
         {
-
-
             //Nom fichier
             string path = _viewModel.FullPath;
             _viewModel.Name = Path.GetFileName(path);
@@ -28,14 +25,11 @@ namespace ProjetEasySave.lib.Functions
 
             //Taille des fichiers restants
             FileInfo size = new FileInfo(_viewModel.FullPath); //Resultat en Octet
-            //float totalsizefiles = 
+            //float totalsizefiles =
 
             //Adresse complète du fichier Source en cours de sauvegarde
 
-
-
             //Adresse complète du fichier de destination
-
 
             if (_viewModel.SaveState == true)
             {
@@ -81,8 +75,6 @@ namespace ProjetEasySave.lib.Functions
                     File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
                 }
             }
-
-
 
             //Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
             //float result = (fichierNum / totalFiles) * 100;

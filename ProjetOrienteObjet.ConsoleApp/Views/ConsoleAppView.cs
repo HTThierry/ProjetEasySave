@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using Newtonsoft.Json;
-using System;
-using System.IO;
-using ProjetEasySave.lib.ViewModels;
+﻿using ProjetEasySave.lib.ViewModels;
 
 namespace ProjetEasySave.consoleApp.Views
 {
@@ -29,13 +25,13 @@ namespace ProjetEasySave.consoleApp.Views
                 case "1":
                     //Console.WriteLine("Sauvegarde Complète");
                     Message = $"\n{langue.LanguageData[langue.LanguageCode].FullBackup}";
-                    
+
                     break;
 
                 case "2":
                     //Console.WriteLine("Sauvegarde Incrementielle");
                     Message = $"\n{langue.LanguageData[langue.LanguageCode].IncrBackup}";
-                    
+
                     break;
 
                 default:
@@ -58,6 +54,7 @@ namespace ProjetEasySave.consoleApp.Views
                 case "copyEnd"://"Copie terminée, {_viewModel.Message[1]} fichiers modifiés sur {_viewModel.Message[2]} analysés."
                     Message = $"{langue.LanguageData[langue.LanguageCode].MessageIncr.endCopy}{_viewModel.Message[1]}{langue.LanguageData[langue.LanguageCode].MessageIncr.modifTo} {_viewModel.Message[2]} {langue.LanguageData[langue.LanguageCode].MessageIncr.analyse}";
                     break;
+
                 default:
                     Message = $"{langue.LanguageData[langue.LanguageCode].wrongPath}";
                     break;

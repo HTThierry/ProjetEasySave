@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace ProjetEasySave.lib.ViewModels
 {
@@ -19,6 +14,7 @@ namespace ProjetEasySave.lib.ViewModels
             string json = File.ReadAllText(@"..\..\..\..\ProjetOrienteObjet.lib\ViewModels\languages.json"); //C: \Users\cocac\Source\Repos\HTThierry\ProjetEasySave\ProjetOrienteObjet.lib\ViewModels\languages.json
             this.LanguageData = JsonConvert.DeserializeObject(json);
         }
+
         // Change le language code celon le choix de l'utilisateur, sinon retourne un langague code celon le système
         public string GetLanguageCode(string specifiedLanguageCode = "")
         {

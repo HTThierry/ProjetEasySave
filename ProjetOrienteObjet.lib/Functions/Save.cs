@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjetEasySave.lib.Functions
+﻿namespace ProjetEasySave.lib.Functions
 {
     internal class Save
     {
         public string? PathFrom { get; set; }
         public string? PathTo { get; set; }
+
         public void Complete()
         {
             if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))

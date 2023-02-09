@@ -1,19 +1,11 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace ProjetEasySave.lib.Functions
 {
-    
     public class Logs
     {
         public lib.ViewModels.ConsoleAppViewModel _viewModel = new();
-        
+
         //Créer un fichier log
         public void logs()
         {
@@ -34,7 +26,7 @@ namespace ProjetEasySave.lib.Functions
                 FileTarget = _viewModel.PathTo,
                 destPath = "",
                 FileSize = size.Length,
-                FileTransferTime = _viewModel.timer(),
+                FileTransferTime = _viewModel.Timer(),
                 time = today.ToString("MM/dd/yyyy hh:mm:ss"),
             };
             string json = JsonConvert.SerializeObject(test, Formatting.Indented);

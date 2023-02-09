@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿//using ProjetEasySave.lib.Functions;
 
-//using ProjetEasySave.lib.Functions;
+using System.Diagnostics;
 
 namespace ProjetEasySave.lib.ViewModels
 {
@@ -9,14 +9,13 @@ namespace ProjetEasySave.lib.ViewModels
         //public lib.Functions.Logs _Logs = new();
         public string PathFrom { get; set; }
 
-        public string PathTo { get; set; }
-        public string Choix { get; set; }
-        public string[] Message { get; set; }
+        public string? PathTo { get; set; }
+        public string? Choix { get; set; }
+        public string[]? Message { get; set; }
         public string Name { get; set; }
         public string FullPath { get; set; }
-        public float fichierNum = 0;
-        private DateTime TimerA;
-        private DateTime TimerB;
+        public int fichierNum = 0;
+        private Stopwatch TimerA = new Stopwatch();
         public bool SaveState = false;
         private lib.Functions.Etat _Etat = new();
         private lib.Functions.Logs _Logs = new();
@@ -48,7 +47,6 @@ namespace ProjetEasySave.lib.ViewModels
         {
             if (System.IO.Directory.Exists(PathFrom) && System.IO.Directory.Exists(PathTo))
             {
-                int fichierNum = 0;
                 int totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
                 foreach (string dirPath in Directory.GetDirectories(PathFrom, "*", SearchOption.AllDirectories))
                 {
@@ -57,17 +55,17 @@ namespace ProjetEasySave.lib.ViewModels
                 foreach (string newPath in Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories))
                 {
                     SaveState = true;
-                    TimerA = DateTime.Now;
+                    TimerA.Start();
                     FullPath = newPath;
                     File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                     fichierNum++;
-                    TimerB = DateTime.Now;
+                    TimerA.Stop();
                     _Logs.logs();
                     _Etat.etat();
                 }
                 //Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
             }
-            timer();
+            Timer();
         }
 
         public void Incrementiel()
@@ -90,15 +88,16 @@ namespace ProjetEasySave.lib.ViewModels
                     if (File.GetLastWriteTime(newPath) > File.GetLastWriteTime(newPath.Replace(PathFrom, PathTo)))
                     {
                         SaveState = true;
-                        TimerA = DateTime.Now;
+                        TimerA.Start();
                         FullPath = newPath;
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
-                        TimerB = DateTime.Now;
+                        TimerA.Start();
                         _Logs.logs();
                         _Etat.etat();
                     }
                 }
+                Timer();
             }
             else
             {
@@ -119,9 +118,9 @@ namespace ProjetEasySave.lib.ViewModels
         }
 
         //Fonction qui calcule le temps entre chaque copie de fichier
-        public TimeSpan timer()
+        public long Timer()
         {
-            TimeSpan time = TimerB.Subtract(TimerA);
+            long time = TimerA.ElapsedMilliseconds;
             return time;
         }
 
