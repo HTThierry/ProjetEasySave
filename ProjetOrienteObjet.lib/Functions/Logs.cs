@@ -39,13 +39,13 @@ namespace ProjetEasySave.lib.Functions
             };
             string json = JsonConvert.SerializeObject(test, Formatting.Indented);
 
-            if (!System.IO.File.Exists(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\test.json")) //A changer avec le dossie on recupere les logs
+            if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json")) //A changer avec le dossie on recupere les logs
             {
-                File.WriteAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\test.json", json);
+                File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
             }
             else
             {
-                File.AppendAllText(@"C:\Users\Utilisateur\Documents\CESI\Prosit 2\edqgezgez\test.json", json);
+                File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
             }
         }
     }

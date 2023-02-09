@@ -19,6 +19,7 @@ namespace ProjetEasySave.lib.ViewModels
         private DateTime TimerB;
         public bool SaveState = false;
         private lib.Functions.Etat _Etat = new();
+        private lib.Functions.Logs _Logs = new();
 
         public void Sauvegarde()
         {
@@ -61,7 +62,7 @@ namespace ProjetEasySave.lib.ViewModels
                     File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                     fichierNum++;
                     TimerB = DateTime.Now;
-                    logs();
+                    _Logs.logs();
                     _Etat.etat();
                 }
                 //Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
@@ -94,7 +95,7 @@ namespace ProjetEasySave.lib.ViewModels
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
                         TimerB = DateTime.Now;
-                        logs();
+                        _Logs.logs();
                         _Etat.etat();
                     }
                 }
@@ -122,41 +123,6 @@ namespace ProjetEasySave.lib.ViewModels
         {
             TimeSpan time = TimerB.Subtract(TimerA);
             return time;
-        }
-
-        public void logs()
-        {
-            //Nom fichier
-            string path = FullPath;
-            Name = Path.GetFileName(path);
-
-            //Date et heure
-            DateTime today = DateTime.Now;
-
-            //Taille fichier
-            FileInfo size = new FileInfo(FullPath); //Resultat en Octet
-
-            var test = new
-            {
-                nom = Name,
-                FileSource = FullPath,
-                FileTarget = PathTo,
-                destPath = "",
-                FileSize = size.Length,
-                FileTransferTime = timer(),
-                time = today.ToString("MM/dd/yyyy hh:mm:ss"),
-            };
-
-            string json = JsonConvert.SerializeObject(test, Formatting.Indented);
-
-            if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json")) //A changer avec le dossie on recupere les logs
-            {
-                File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
-            }
-            else
-            {
-                File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\log.json", json);
-            }
         }
 
         public void EnregistrerSave(string nom, string from, string to, string type)
