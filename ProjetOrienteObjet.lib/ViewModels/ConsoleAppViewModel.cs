@@ -18,6 +18,7 @@ namespace ProjetEasySave.lib.ViewModels
         private DateTime TimerA;
         private DateTime TimerB;
         public bool SaveState = false;
+        private lib.Functions.Etat _Etat = new();
 
         public void Sauvegarde()
         {
@@ -25,19 +26,19 @@ namespace ProjetEasySave.lib.ViewModels
             {
                 case "1":
                     //Console.WriteLine("Sauvegarde Complète");
-                    Message = "\n Sauvegarde Complète";
+                    //Message = "\n Sauvegarde Complète";
                     Complete();
                     break;
 
                 case "2":
                     //Console.WriteLine("Sauvegarde Incrementielle");
-                    Message = "\n Sauvegarde Incrementielle";
+                    //Message = "\n Sauvegarde Incrementielle";
                     Incrementiel();
                     break;
 
                 default:
                     //Console.WriteLine("Sauvegarde Complète");
-                    Message = "\n Sauvegarde Complète";
+                    //Message = "\n Sauvegarde Complète";
                     break;
             }
         }
@@ -61,9 +62,9 @@ namespace ProjetEasySave.lib.ViewModels
                     fichierNum++;
                     TimerB = DateTime.Now;
                     logs();
-                    etat();
+                    _Etat.etat();
                 }
-                Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
+                //Message = $"Copie terminée, {fichierNum} fichiers copiés sur {totalFiles} de {PathFrom} vers {PathTo}.";
             }
             timer();
         }
@@ -93,8 +94,8 @@ namespace ProjetEasySave.lib.ViewModels
                         File.Copy(newPath, newPath.Replace(PathFrom, PathTo), true);
                         modifiedFiles++;
                         TimerB = DateTime.Now;
-                       // logs();
-                        //etat();
+                        logs();
+                        _Etat.etat();
                     }
                 }
             }
@@ -102,22 +103,19 @@ namespace ProjetEasySave.lib.ViewModels
             {
                 //Message = "Votre chemin initial ou de destination n'existe pas";
                 Message = new string[] { "wrongPath" };
-        }
+            }
 
             if (modifiedFiles == 0)
             {
                 //Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
                 Message = new string[] { "noFiles", totalFiles.ToString() };
-        }
-            if(modifiedFiles > 0)
+            }
+            if (modifiedFiles > 0)
             {
-            //Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {modifiedFiles} analysés.";
-            Message = new string[] { "copyEnd", modifiedFiles.ToString(), modifiedFiles.ToString() };
+                //Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {modifiedFiles} analysés.";
+                Message = new string[] { "copyEnd", modifiedFiles.ToString(), modifiedFiles.ToString() };
+            }
         }
-        }
-
-
-
 
         //Fonction qui calcule le temps entre chaque copie de fichier
         public TimeSpan timer()
@@ -161,88 +159,6 @@ namespace ProjetEasySave.lib.ViewModels
             }
         }
 
-        public void etat()
-        {
-
-
-            //Nom fichier
-            string path = FullPath;
-            Name = Path.GetFileName(path);
-
-            //Date et heure
-            DateTime today = DateTime.Now;
-
-            //Etat du travail de sauvegarde
-            string state;
-
-            //Nombre de fichiers restants
-            fichierNum++;
-            float totalFiles = Directory.GetFiles(PathFrom, "*.*", SearchOption.AllDirectories).Length;
-            float remainingFiles = totalFiles - fichierNum;
-
-            //Taille des fichiers restants
-            FileInfo size = new FileInfo(FullPath); //Resultat en Octet
-            //float totalsizefiles = 
-
-            //Adresse complète du fichier Source en cours de sauvegarde
-
-
-
-            //Adresse complète du fichier de destination
-
-
-            if (SaveState == true)
-            {
-                state = "Actif";
-                var stateObject = new
-                {
-                    name = Name,
-                    time = today.ToString("MM/dd/yyyy hh:mm:ss"),
-                    state = state,
-                    remaining_files  = remainingFiles,
-                    //remaining_size_files = totalFiles.Length - size.Length,
-                    FileSource = FullPath,
-                    FileTarget = PathTo,
-                };
-                string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
-
-                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //A changer avec le dossie on recupere les logs
-                {
-                    File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
-                }
-                else
-                {
-                    File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
-                }
-            }
-            else
-            {
-                state = "Non actif";
-                var stateObject = new
-                {
-                    nom = Name,
-                    time = today.ToString("MM/dd/yyyy hh:mm:ss"),
-                    etat = state,
-                };
-                string json = JsonConvert.SerializeObject(stateObject, Formatting.Indented);
-
-                if (!System.IO.File.Exists(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json")) //A changer avec le dossie on recupere les logs
-                {
-                    File.WriteAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
-                }
-                else
-                {
-                    File.AppendAllText(@"C:\Users\peyo6\OneDrive\Bureau\GIGATEST\etat.json", json);
-                }
-            }
-
-
-
-            //Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
-            //float result = (fichierNum / totalFiles) * 100;
-            //Console.WriteLine((int)result + "%");
-        }
-
         public void EnregistrerSave(string nom, string from, string to, string type)
         {
             var save = new lib.Functions.SaveManager(nom, from, to, type);
@@ -254,13 +170,14 @@ namespace ProjetEasySave.lib.ViewModels
             lib.Functions.SaveManager.Supprimer(nom);
         }
 
-            /*Console.Clear();
+        /*Console.Clear();
+        Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
+        float result = (fichierNum / totalFiles) * 100;
+        Console.WriteLine((int)result + "%");*/
+
         public void AfficherSave()
         {
             lib.Functions.SaveManager.Afficher();
-            Console.WriteLine($"Il y a {fichierNum} fichiers copiés sur {totalFiles}");
-            float result = (fichierNum / totalFiles) * 100;
-            Console.WriteLine((int)result + "%");*/
         }
     }
 }

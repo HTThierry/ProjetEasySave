@@ -59,16 +59,16 @@ namespace ProjetEasySave.lib.Functions
             }
             else
             {
-                Message = "Votre chemin initial ou de destination n'existe pas";
+                //Message = "Votre chemin initial ou de destination n'existe pas";
             }
 
             if (modifiedFiles == 0)
             {
-                Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
+                //Message = $"Copie terminée, vos fichiers sont à jour, aucun fichier n'a été modifié sur {totalFiles} analysés.";
             }
             if (modifiedFiles > 0)
             {
-                Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {totalFiles} analysés.";
+                //Message = $"Copie terminée, {modifiedFiles} fichiers modifiés sur {totalFiles} analysés.";
             }
         }
     }
