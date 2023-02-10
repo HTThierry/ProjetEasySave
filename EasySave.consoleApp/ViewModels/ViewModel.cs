@@ -124,6 +124,7 @@ namespace EasySave.consoleApp.ViewModels
                 if (_Model.ArrayOfSaveWork[i] == null)
                 {
                     _Model.ArrayOfSaveWork[i] = SaveWorkCreator(AttributsForSaveWork);
+                    
                     var SaveWorkJson = new SaveWorkModel
                     {
                         NameSaveWork = AttributsForSaveWork[0],
@@ -146,12 +147,15 @@ namespace EasySave.consoleApp.ViewModels
         /// <summary>
         /// Instance all save works from the json files
         /// </summary>
-        public void SaveWorkInstancing()
+        public int SaveWorkInstancing()
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
             int filecount = Directory.GetFiles(path, "*.json").Length;
             string[] files = Directory.GetFiles(path, "*.json");
             string[] AttributsForPresentation = new string[4];
+            if (filecount > 5)
+                return 1;
+
             for (int i = 0; i < filecount; i++)
             {
                 string json = File.ReadAllText(Path.Combine(path, files[i]));
@@ -163,7 +167,10 @@ namespace EasySave.consoleApp.ViewModels
                 _SaveWork._SaveWorkModel.TypeSaveWork = saveWork.TypeSaveWork;
                 _SaveWork._SaveWorkModel.SourcePathSaveWork = saveWork.SourcePathSaveWork;
                 _SaveWork._SaveWorkModel.DestinationPathSaveWork = saveWork.DestinationPathSaveWork;
+
+                _Model.ArrayOfSaveWork[i] = _SaveWork;
             }
+            return 0;
         }
 
         public string[][] GetSaveWorkInfo()

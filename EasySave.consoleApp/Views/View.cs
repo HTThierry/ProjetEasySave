@@ -1,10 +1,5 @@
-﻿using EasySave.consoleApp.ViewModels;
-using EasySave.lib.Models;
-using System.Resources;
-using EasySave.consoleApp.Resources;
-using System.Globalization;
-using System.Reflection;
-using Microsoft.VisualBasic;
+﻿using EasySave.consoleApp.Resources;
+using EasySave.consoleApp.ViewModels;
 
 namespace EasySave.consoleApp.Views
 {
@@ -14,7 +9,13 @@ namespace EasySave.consoleApp.Views
 
         public void Show()
         {
-            _ViewModel.SaveWorkInstancing();
+            if (_ViewModel.SaveWorkInstancing() == 1)
+            {
+                Console.WriteLine("The limit of SaveWork files has been exceeded.");
+                Console.WriteLine("Please, check your SaveWork files and free up space.");
+                Environment.Exit(0);
+            }
+
             while (true)
             {
                 string UserInput = Menu();
@@ -142,12 +143,12 @@ namespace EasySave.consoleApp.Views
                     Console.WriteLine("============================================================");
                 }
             }
-            
+
             Console.WriteLine();
             Console.WriteLine($"{langage.exit}");
             Console.ReadKey();
         }
-         
+
         private void PresentationOfSaveWork(string[] AttributsForPresentation)
         {
             Console.WriteLine($"    {langage.nameSaveWork} {AttributsForPresentation[0]}");
