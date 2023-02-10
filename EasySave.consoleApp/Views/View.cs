@@ -1,5 +1,7 @@
 ﻿using EasySave.consoleApp.ViewModels;
 using EasySave.lib.Services;
+using System.Resources;
+using EasySave.consoleApp.Resources;
 
 namespace EasySave.consoleApp.Views
 {
