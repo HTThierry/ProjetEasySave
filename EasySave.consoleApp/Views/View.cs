@@ -11,8 +11,10 @@ namespace EasySave.consoleApp.Views
     public class View
     {
         public ViewModel _ViewModel = new ViewModel();
+
         public void Show()
         {
+            _ViewModel.SaveWorkInstancing();
             while (true)
             {
                 string UserInput = Menu();
@@ -24,15 +26,19 @@ namespace EasySave.consoleApp.Views
                         case "1":
                             MenuChoice1();
                             break;
+
                         case "2":
                             Console.WriteLine($"{langage.option2}");
                             break;
+
                         case "3":
                             Console.WriteLine($"{langage.option3}");
                             break;
+
                         case "4":
                             Console.WriteLine($"{langage.option4}");
                             break;
+
                         case "5":
                             MenuChoice5();
                             break;
