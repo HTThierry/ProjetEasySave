@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Functions\travauxSauvegarde\" />
+    <Folder Include="Functions\travauxSauvegarde\" />
   </ItemGroup>
 
 </Project>

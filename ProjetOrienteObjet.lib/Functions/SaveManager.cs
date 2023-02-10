@@ -55,15 +55,11 @@ namespace ProjetEasySave.lib.Functions
             }
         }
 
-        public static void Afficher()
+        public static string[] Afficher()
         {
             string path = @"..\..\..\..\ProjetOrienteObjet.lib\Functions\travauxSauvegarde\";
             string[] files = Directory.GetFiles(path, "*.json");
-            foreach (string file in files)
-            {
-                //print only the name of the file without the extension
-                Console.WriteLine(Path.GetFileNameWithoutExtension(file));
-            }
+            return files;
         }
     }
 }
