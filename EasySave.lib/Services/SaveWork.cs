@@ -7,7 +7,7 @@ namespace EasySave.lib.Services
     {
         public SaveWorkModel _SaveWorkModel = new SaveWorkModel();
 
-        public string[] GetClassInfo()
+        public string[] GetInstanceInfo()
         {
             string[] AttributsForPresentation = new string[4] { _SaveWorkModel.NameSaveWork, $"{_SaveWorkModel.TypeSaveWork}", _SaveWorkModel.SourcePathSaveWork, _SaveWorkModel.DestinationPathSaveWork };
             return AttributsForPresentation;

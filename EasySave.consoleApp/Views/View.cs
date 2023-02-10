@@ -1,5 +1,5 @@
 ﻿using EasySave.consoleApp.ViewModels;
-using EasySave.lib.Services;
+using EasySave.lib.Models;
 using System.Resources;
 using EasySave.consoleApp.Resources;
 using System.Globalization;
@@ -132,28 +132,31 @@ namespace EasySave.consoleApp.Views
         {
             Console.Clear();
             Console.WriteLine("============================================================");
-            foreach (SaveWork _SaveWork in _ViewModel._Model.ArrayOfSaveWork)
+            string[][] SaveWorkInfos = _ViewModel.GetSaveWorkInfo();
+
+            foreach (string[] SaveWorkInfo in SaveWorkInfos)
             {
-                if (_SaveWork != null)
+                if (SaveWorkInfo != null)
                 {
-                    PresentationOfSaveWork(_SaveWork.GetClassInfo());
+                    PresentationOfSaveWork(SaveWorkInfo);
                     Console.WriteLine("============================================================");
                 }
             }
+            
             Console.WriteLine();
             Console.WriteLine($"{langage.exit}");
             Console.ReadKey();
         }
-
+         
         private void PresentationOfSaveWork(string[] AttributsForPresentation)
         {
-            Console.WriteLine($"    {langage.nameSaveWork}               {AttributsForPresentation[0]}");
+            Console.WriteLine($"    {langage.nameSaveWork} {AttributsForPresentation[0]}");
 
-            Console.WriteLine($"    {langage.typeSaveWork}                 {AttributsForPresentation[1]}");
+            Console.WriteLine($"    {langage.typeSaveWork} {AttributsForPresentation[1]}");
 
-            Console.WriteLine($"    {langage.sourcePathSaveWork}        {AttributsForPresentation[2]}");
+            Console.WriteLine($"    {langage.sourcePathSaveWork} {AttributsForPresentation[2]}");
 
-            Console.WriteLine($"    {langage.destPathSaveWork}{AttributsForPresentation[3]}");
+            Console.WriteLine($"    {langage.destPathSaveWork} {AttributsForPresentation[3]}");
         }
     }
 }
