@@ -125,5 +125,17 @@ namespace EasySave.consoleApp.ViewModels
 
             }
         }
+
+        public string[][] GetSaveWorkInfo()
+        {
+            string[][] SaveWorkInfos = new string[_Model.ArrayOfSaveWork.Length][];
+
+            for (int i = 0; i < _Model.ArrayOfSaveWork.Length; ++i)
+            {
+                if (_Model.ArrayOfSaveWork[i] != null)
+                    SaveWorkInfos[i] = _Model.ArrayOfSaveWork[i].GetInstanceInfo();
+            }
+            return SaveWorkInfos;
+        }
     }
 }

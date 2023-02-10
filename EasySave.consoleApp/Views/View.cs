@@ -1,5 +1,6 @@
 ﻿using EasySave.consoleApp.ViewModels;
-using EasySave.lib.Services;
+using EasySave.lib.Models;
+//using EasySave.lib.Services;
 
 namespace EasySave.consoleApp.Views
 {
@@ -121,19 +122,22 @@ namespace EasySave.consoleApp.Views
         {
             Console.Clear();
             Console.WriteLine("============================================================");
-            foreach (SaveWork _SaveWork in _ViewModel._Model.ArrayOfSaveWork)
+            string[][] SaveWorkInfos = _ViewModel.GetSaveWorkInfo();
+
+            foreach (string[] SaveWorkInfo in SaveWorkInfos)
             {
-                if (_SaveWork != null)
+                if (SaveWorkInfo != null)
                 {
-                    PresentationOfSaveWork(_SaveWork.GetClassInfo());
+                    PresentationOfSaveWork(SaveWorkInfo);
                     Console.WriteLine("============================================================");
                 }
             }
+            
             Console.WriteLine();
             Console.WriteLine("Press a key for exit...");
             Console.ReadKey();
         }
-
+         
         private void PresentationOfSaveWork(string[] AttributsForPresentation)
         {
             Console.WriteLine($"    The name of this SaveWork is :               {AttributsForPresentation[0]}");
