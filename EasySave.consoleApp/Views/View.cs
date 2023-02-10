@@ -11,8 +11,8 @@ namespace EasySave.consoleApp.Views
         {
             if (_ViewModel.SaveWorkInstancing() == 1)
             {
-                Console.WriteLine("The limit of SaveWork files has been exceeded.");
-                Console.WriteLine("Please, check your SaveWork files and free up space.");
+                Console.WriteLine($"{langage.fullSaveWorks}");
+                Console.WriteLine($"{langage.checkYourFiles}");
                 Environment.Exit(0);
             }
 

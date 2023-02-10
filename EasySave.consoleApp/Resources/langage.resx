@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="checkYourFiles" xml:space="preserve">
+    <value>Please, check your SaveWork files and free up space.</value>
+  </data>
   <data name="choseName" xml:space="preserve">
     <value>Please enter a name for the SaveWork</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="exit" xml:space="preserve">
     <value>Press a key for exit...</value>
+  </data>
+  <data name="fullSaveWorks" xml:space="preserve">
+    <value>The limit of SaveWork files has been exceeded.</value>
   </data>
   <data name="gretting" xml:space="preserve">
     <value>Hi, please select a choice:</value>

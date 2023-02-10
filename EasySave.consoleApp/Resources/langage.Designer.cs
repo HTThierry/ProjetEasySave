@@ -61,6 +61,15 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please, check your SaveWork files and free up space..
+        /// </summary>
+        public static string checkYourFiles {
+            get {
+                return ResourceManager.GetString("checkYourFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Please enter a name for the SaveWork.
         /// </summary>
         public static string choseName {
@@ -111,6 +120,15 @@ namespace EasySave.consoleApp.Resources {
         public static string exit {
             get {
                 return ResourceManager.GetString("exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The limit of SaveWork files has been exceeded..
+        /// </summary>
+        public static string fullSaveWorks {
+            get {
+                return ResourceManager.GetString("fullSaveWorks", resourceCulture);
             }
         }
         
