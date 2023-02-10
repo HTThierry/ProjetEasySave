@@ -1,0 +1,12 @@
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.csproj.AssemblyReference.cache
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.AssemblyInfoInputs.cache
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.AssemblyInfo.cs
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.csproj.CoreCompileInputs.cache
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\bin\Debug\net6.0\EasySave.lib.deps.json
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\bin\Debug\net6.0\EasySave.lib.dll
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\bin\Debug\net6.0\EasySave.lib.pdb
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.dll
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\refint\EasySave.lib.dll
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\EasySave.lib.pdb
+C:\Users\antho\OneDrive - Association Cesi Viacesi mail\Bureau\TakeItEasy\EasySave\EasySave.lib\obj\Debug\net6.0\ref\EasySave.lib.dll

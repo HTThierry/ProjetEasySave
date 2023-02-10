@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "EasySave.consoleApp/1.0.0": {
+        "dependencies": {
+          "EasySave.lib": "1.0.0"
+        },
+        "runtime": {
+          "EasySave.consoleApp.dll": {}
+        }
+      },
+      "EasySave.lib/1.0.0": {
+        "runtime": {
+          "EasySave.lib.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EasySave.consoleApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EasySave.lib/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
