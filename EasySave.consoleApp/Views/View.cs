@@ -1,15 +1,15 @@
 ﻿using EasySave.consoleApp.ViewModels;
 using EasySave.lib.Services;
-using System.Resources;
-using EasySave.consoleApp.Resources;
 
 namespace EasySave.consoleApp.Views
 {
     public class View
     {
         public ViewModel _ViewModel = new ViewModel();
+
         public void Show()
         {
+            _ViewModel.SaveWorkInstancing();
             while (true)
             {
                 string UserInput = Menu();
@@ -21,15 +21,19 @@ namespace EasySave.consoleApp.Views
                         case "1":
                             MenuChoice1();
                             break;
+
                         case "2":
                             Console.WriteLine("Il a demandé l'option 2");
                             break;
+
                         case "3":
                             Console.WriteLine("Il a demandé l'option 3");
                             break;
+
                         case "4":
                             Console.WriteLine("Il a demandé l'option 4");
                             break;
+
                         case "5":
                             MenuChoice5();
                             break;

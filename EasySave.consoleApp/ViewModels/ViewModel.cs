@@ -111,18 +111,57 @@ namespace EasySave.consoleApp.ViewModels
             return 0;
         }
 
-        public void AddNewSaveWork(string[] AttributsForSaveWork)
+        /// <summary>
+        /// Adds a SaveWork as an instance and saves it in a JSON file
+        /// </summary>
+        /// <param name="AttributsForSaveWork"></param>
+        /// <returns></returns>
+        public int AddNewSaveWork(string[] AttributsForSaveWork)
         {
             for (int i = 0; i < _Model.ArrayOfSaveWork.Length; i++)
             {
                 if (_Model.ArrayOfSaveWork[i] == null)
                 {
                     _Model.ArrayOfSaveWork[i] = SaveWorkCreator(AttributsForSaveWork);
-                    break;
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
+                    if (!File.Exists(path))
+                    {
+                        using (StreamWriter sw = File.CreateText(path))
+                        {
+                            sw.WriteLine("{");
+                            sw.WriteLine("    \"NameSaveWork\": \"" + AttributsForSaveWork[0] + "\",");
+                            sw.WriteLine("    \"TypeSaveWork\": \"" + AttributsForSaveWork[1] + "\"");
+                            sw.WriteLine("    \"SourcePathSaveWork\": \"" + AttributsForSaveWork[2] + "\",");
+                            sw.WriteLine("    \"DestinationPathSaveWork\": \"" + AttributsForSaveWork[3] + "\",");
+                            sw.WriteLine("}");
+                        }
+                    }
+                    return 0;
                 }
                 if (i >= 5)
-                    break;
-
+                    return 1;
+            }
+            return 1;
+        }
+        
+        /// <summary>
+        /// Instance all save works from the json files
+        /// </summary>
+        public void SaveWorkInstancing()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
+            int filecount = Directory.GetFiles(path, "*.json").Length;
+            string[] files = Directory.GetFiles(path, "*.json");
+            string[] AttributsForPresentation = new string[4];
+            for (int i = 0; i < filecount; i++)
+            {
+                string[] lines = File.ReadAllLines(Path.Combine(path, files[i]));
+                AttributsForPresentation[0] = lines[0];
+                AttributsForPresentation[1] = lines[1];
+                AttributsForPresentation[2] = lines[2];
+                AttributsForPresentation[3] = lines[3];
+                
+                SaveWorkCreator(AttributsForPresentation);
             }
         }
     }
