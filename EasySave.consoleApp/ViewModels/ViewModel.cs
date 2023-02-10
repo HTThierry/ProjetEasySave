@@ -1,5 +1,6 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
+using System.Text.Json;
 
 namespace EasySave.consoleApp.ViewModels
 {
@@ -123,19 +124,17 @@ namespace EasySave.consoleApp.ViewModels
                 if (_Model.ArrayOfSaveWork[i] == null)
                 {
                     _Model.ArrayOfSaveWork[i] = SaveWorkCreator(AttributsForSaveWork);
-                    string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
-                    if (!File.Exists(path))
+                    var SaveWorkJson = new SaveWorkModel
                     {
-                        using (StreamWriter sw = File.CreateText(path))
-                        {
-                            sw.WriteLine("{");
-                            sw.WriteLine("    \"NameSaveWork\": \"" + AttributsForSaveWork[0] + "\",");
-                            sw.WriteLine("    \"TypeSaveWork\": \"" + AttributsForSaveWork[1] + "\"");
-                            sw.WriteLine("    \"SourcePathSaveWork\": \"" + AttributsForSaveWork[2] + "\",");
-                            sw.WriteLine("    \"DestinationPathSaveWork\": \"" + AttributsForSaveWork[3] + "\",");
-                            sw.WriteLine("}");
-                        }
-                    }
+                        NameSaveWork = AttributsForSaveWork[0],
+                        TypeSaveWork = Int32.Parse(AttributsForSaveWork[1]),
+                        SourcePathSaveWork = AttributsForSaveWork[2],
+                        DestinationPathSaveWork = AttributsForSaveWork[3]
+                    };
+                    string jsonString = JsonSerializer.Serialize(SaveWorkJson);
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
+                    File.WriteAllText(path, jsonString);
+                    
                     return 0;
                 }
                 if (i >= 5)
@@ -155,13 +154,15 @@ namespace EasySave.consoleApp.ViewModels
             string[] AttributsForPresentation = new string[4];
             for (int i = 0; i < filecount; i++)
             {
-                string[] lines = File.ReadAllLines(Path.Combine(path, files[i]));
-                AttributsForPresentation[0] = lines[0];
-                AttributsForPresentation[1] = lines[1];
-                AttributsForPresentation[2] = lines[2];
-                AttributsForPresentation[3] = lines[3];
-                
-                SaveWorkCreator(AttributsForPresentation);
+                string json = File.ReadAllText(Path.Combine(path, files[i]));
+                SaveWorkModel saveWork = JsonSerializer.Deserialize<SaveWorkModel>(json)!;
+
+                SaveWork _SaveWork = new();
+
+                _SaveWork._SaveWorkModel.NameSaveWork = saveWork.NameSaveWork;
+                _SaveWork._SaveWorkModel.TypeSaveWork = saveWork.TypeSaveWork;
+                _SaveWork._SaveWorkModel.SourcePathSaveWork = saveWork.SourcePathSaveWork;
+                _SaveWork._SaveWorkModel.DestinationPathSaveWork = saveWork.DestinationPathSaveWork;
             }
         }
     }
