@@ -41,8 +41,13 @@ namespace EasySave.lib.Services
                         Directory.CreateDirectory(DestinationPath);
                     }
 
-                    string[] files = Directory.GetFiles(SourcePath);
+                    foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
+                    }
 
+                    string[] files = Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories);
+                    
                     foreach (string file in files)
                     {
                         string fileName = Path.GetFileName(file);
@@ -53,8 +58,8 @@ namespace EasySave.lib.Services
                         long fileSize = fileInfo.Length;                                        // Utile
                         var stopwatch = Stopwatch.StartNew();                                   // Utile
 
-                        File.Copy(file, destFile, true);        
-                        
+                        File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
+
                         stopwatch.Stop();                                                       // Utile
                         double fileTransferTime = stopwatch.Elapsed.TotalSeconds;               // Utile
 
