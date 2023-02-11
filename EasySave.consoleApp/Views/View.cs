@@ -1,5 +1,6 @@
 ﻿using EasySave.consoleApp.Resources;
 using EasySave.consoleApp.ViewModels;
+using EasySave.lib.Services;
 
 namespace EasySave.consoleApp.Views
 {
@@ -11,8 +12,8 @@ namespace EasySave.consoleApp.Views
         {
             if (_ViewModel.SaveWorkInstancing() == 1)
             {
-                Console.WriteLine($"{langage.fullSaveWorks}");
-                Console.WriteLine($"{langage.checkYourFiles}");
+                Console.WriteLine($"{langage.fullSaveWorks}");                                                  // The limit of SaveWork files has been exceeded.
+                Console.WriteLine($"{langage.checkYourFiles}");                                                 // Please, check your SaveWork files and free up space.
                 Environment.Exit(0);
             }
 
@@ -51,13 +52,13 @@ namespace EasySave.consoleApp.Views
         private string Menu()
         {
             Console.Clear();
-            Console.WriteLine($"{langage.gretting}");
+            Console.WriteLine($"{langage.gretting}");                                                           // Hi, please select a choice:
             Console.WriteLine();
-            Console.WriteLine($"{langage.menu_choice1}");
-            Console.WriteLine($"{langage.menu_choice2}");
-            Console.WriteLine($"{langage.menu_choice3}");
-            Console.WriteLine($"{langage.menu_choice4}");
-            Console.WriteLine($"{langage.menu_choice5}");
+            Console.WriteLine($"{langage.menu_choice1}");                                                       // [1] : Create a new SaveWork
+            Console.WriteLine($"{langage.menu_choice2}");                                                       // [2] : Delete an existing SaveWork
+            Console.WriteLine($"{langage.menu_choice3}");                                                       // [3] : Launch a SaveWork
+            Console.WriteLine($"{langage.menu_choice4}");                                                       // [4] : Launch all the existings SaveWork
+            Console.WriteLine($"{langage.menu_choice5}");                                                       // [5] : List all the existings SaveWork
             Console.WriteLine();
             Console.Write("==> ");
 
@@ -71,7 +72,7 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"{langage.choseName}");
+                Console.WriteLine($"{langage.choseName}");                                                      // Please enter a name for the SaveWork :
                 Console.WriteLine();
                 Console.Write("==> ");
                 AttributsForSaveWork[0] = Console.ReadLine();
@@ -82,10 +83,10 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"{langage.choseType}");
+                Console.WriteLine($"{langage.choseType}");                                                      // Please enter a type for the SaveWork :
                 Console.WriteLine();
-                Console.WriteLine($"    {langage.typeComplete}");
-                Console.WriteLine($"    {langage.typeDiff}");
+                Console.WriteLine($"    {langage.typeComplete}");                                               // [1] : Complete
+                Console.WriteLine($"    {langage.typeDiff}");                                                   // [2] : Differential
                 Console.WriteLine();
                 Console.Write("==> ");
                 AttributsForSaveWork[1] = Console.ReadLine();
@@ -96,7 +97,7 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"{langage.sourcePath}");
+                Console.WriteLine($"{langage.sourcePath}");                                                     // Please enter a source path for the SaveWork :
                 Console.WriteLine();
                 Console.Write("==> ");
                 AttributsForSaveWork[2] = Console.ReadLine();
@@ -107,7 +108,7 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"{langage.destPath}");
+                Console.WriteLine($"{langage.destPath}");                                                       // Please enter a destination path for the SaveWork :
                 Console.WriteLine();
                 Console.Write("==> ");
                 AttributsForSaveWork[3] = Console.ReadLine();
@@ -116,13 +117,13 @@ namespace EasySave.consoleApp.Views
             }
 
             Console.Clear();
-            Console.WriteLine($"{langage.validation}");
+            Console.WriteLine($"{langage.validation}");                                                         // Validation step:
 
             Console.WriteLine();
             PresentationOfSaveWork(AttributsForSaveWork);
             Console.WriteLine();
 
-            Console.Write($"{langage.confirmLine}");
+            Console.Write($"{langage.confirmLine}");                                                            // Press [Y] for creation, [Enter] for abandon...
             if (_ViewModel.UserConfirmationTraitement(Console.ReadLine()) == 0)
             {
                 _ViewModel.AddNewSaveWork(AttributsForSaveWork);
@@ -133,6 +134,7 @@ namespace EasySave.consoleApp.Views
         {
             Console.Clear();
             Console.WriteLine("============================================================");
+            Console.WriteLine();
             string[][] SaveWorkInfos = _ViewModel.GetSaveWorkInfo();
 
             foreach (string[] SaveWorkInfo in SaveWorkInfos)
@@ -140,24 +142,24 @@ namespace EasySave.consoleApp.Views
                 if (SaveWorkInfo != null)
                 {
                     PresentationOfSaveWork(SaveWorkInfo);
+                    Console.WriteLine();
                     Console.WriteLine("============================================================");
+                    Console.WriteLine();
                 }
             }
-
-            Console.WriteLine();
-            Console.WriteLine($"{langage.exit}");
+            Console.WriteLine($"{langage.exit}");                                                               // Press a key for exit...
             Console.ReadKey();
         }
 
         private void PresentationOfSaveWork(string[] AttributsForPresentation)
         {
-            Console.WriteLine($"    {langage.nameSaveWork} {AttributsForPresentation[0]}");
+            Console.WriteLine($"    {langage.nameSaveWork} {AttributsForPresentation[0]}");                     // The name of this SaveWork is :
 
-            Console.WriteLine($"    {langage.typeSaveWork} {AttributsForPresentation[1]}");
+            Console.WriteLine($"    {langage.typeSaveWork} {AttributsForPresentation[1]}");                     // The type of this SaveWork is :
 
-            Console.WriteLine($"    {langage.sourcePathSaveWork} {AttributsForPresentation[2]}");
+            Console.WriteLine($"    {langage.sourcePathSaveWork} {AttributsForPresentation[2]}");               // The source path of this SaveWork is :
 
-            Console.WriteLine($"    {langage.destPathSaveWork} {AttributsForPresentation[3]}");
+            Console.WriteLine($"    {langage.destPathSaveWork} {AttributsForPresentation[3]}");                 // The destination path of this SaveWork is :
         }
     }
 }

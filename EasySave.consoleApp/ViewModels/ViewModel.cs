@@ -119,29 +119,27 @@ namespace EasySave.consoleApp.ViewModels
         /// <returns></returns>
         public int AddNewSaveWork(string[] AttributsForSaveWork)
         {
-            for (int i = 0; i < _Model.ArrayOfSaveWork.Length; i++)
+            if (_Model.ArrayOfSaveWork.Count < 5)
             {
-                if (_Model.ArrayOfSaveWork[i] == null)
+                _Model.ArrayOfSaveWork.Add(SaveWorkCreator(AttributsForSaveWork));
+
+                var SaveWorkJson = new SaveWorkModel
                 {
-                    _Model.ArrayOfSaveWork[i] = SaveWorkCreator(AttributsForSaveWork);
-                    
-                    var SaveWorkJson = new SaveWorkModel
-                    {
-                        NameSaveWork = AttributsForSaveWork[0],
-                        TypeSaveWork = Int32.Parse(AttributsForSaveWork[1]),
-                        SourcePathSaveWork = AttributsForSaveWork[2],
-                        DestinationPathSaveWork = AttributsForSaveWork[3]
-                    };
-                    string jsonString = JsonSerializer.Serialize(SaveWorkJson);
-                    string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
-                    File.WriteAllText(path, jsonString);
-                    
-                    return 0;
-                }
-                if (i >= 5)
-                    return 1;
+                    NameSaveWork = AttributsForSaveWork[0],
+                    TypeSaveWork = Int32.Parse(AttributsForSaveWork[1]),
+                    SourcePathSaveWork = AttributsForSaveWork[2],
+                    DestinationPathSaveWork = AttributsForSaveWork[3]
+                };
+                string jsonString = JsonSerializer.Serialize(SaveWorkJson);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
+                File.WriteAllText(path, jsonString);
+
+                return 0;
             }
-            return 1;
+            else
+            {
+                return 1;
+            }
         }
         
         /// <summary>
@@ -159,30 +157,55 @@ namespace EasySave.consoleApp.ViewModels
             for (int i = 0; i < filecount; i++)
             {
                 string json = File.ReadAllText(Path.Combine(path, files[i]));
-                SaveWorkModel saveWork = JsonSerializer.Deserialize<SaveWorkModel>(json)!;
+                SaveWorkModel saveWorkJSON = JsonSerializer.Deserialize<SaveWorkModel>(json)!;
 
+                string[] AttributsForSaveWork = new string[4] { saveWorkJSON.NameSaveWork, $"{saveWorkJSON.TypeSaveWork}" , saveWorkJSON.SourcePathSaveWork, saveWorkJSON.DestinationPathSaveWork } ;
+
+                /*
                 SaveWork _SaveWork = new();
 
-                _SaveWork._SaveWorkModel.NameSaveWork = saveWork.NameSaveWork;
-                _SaveWork._SaveWorkModel.TypeSaveWork = saveWork.TypeSaveWork;
-                _SaveWork._SaveWorkModel.SourcePathSaveWork = saveWork.SourcePathSaveWork;
-                _SaveWork._SaveWorkModel.DestinationPathSaveWork = saveWork.DestinationPathSaveWork;
+                _SaveWork._SaveWorkModel.NameSaveWork = saveWorkJSON.NameSaveWork;
+                _SaveWork._SaveWorkModel.TypeSaveWork = saveWorkJSON.TypeSaveWork;
+                _SaveWork._SaveWorkModel.SourcePathSaveWork = saveWorkJSON.SourcePathSaveWork;
+                _SaveWork._SaveWorkModel.DestinationPathSaveWork = saveWorkJSON.DestinationPathSaveWork;
 
-                _Model.ArrayOfSaveWork[i] = _SaveWork;
+                */
+
+                _Model.ArrayOfSaveWork.Add(SaveWorkCreator(AttributsForSaveWork));
             }
             return 0;
         }
 
         public string[][] GetSaveWorkInfo()
         {
-            string[][] SaveWorkInfos = new string[_Model.ArrayOfSaveWork.Length][];
+            string[][] SaveWorkInfos = new string[_Model.ArrayOfSaveWork.Count][];
 
-            for (int i = 0; i < _Model.ArrayOfSaveWork.Length; ++i)
+            for (int i = 0; i < _Model.ArrayOfSaveWork.Count; ++i)
             {
                 if (_Model.ArrayOfSaveWork[i] != null)
                     SaveWorkInfos[i] = _Model.ArrayOfSaveWork[i].GetInstanceInfo();
             }
             return SaveWorkInfos;
+        }
+
+        public int RemoveSaveWork(int SaveWorkID, string SaveWorkFilePath)
+        {
+            try
+            {
+                if (File.Exists(SaveWorkFilePath))
+                {
+                    File.Delete(SaveWorkFilePath);
+                    _Model.ArrayOfSaveWork.RemoveAt(SaveWorkID);
+                    return 0;
+                }
+                else
+                    return 1;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
+                return 1;
+            }
         }
     }
 }
