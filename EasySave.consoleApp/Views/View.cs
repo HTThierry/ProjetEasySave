@@ -31,11 +31,10 @@ namespace EasySave.consoleApp.Views
 
                         case "2":
                             MenuChoice2();
-                            //Console.WriteLine($"{langage.option2}");
                             break;
 
                         case "3":
-                            Console.WriteLine($"{langage.option3}");
+                            MenuChoice3();
                             break;
 
                         case "4":
@@ -143,7 +142,25 @@ namespace EasySave.consoleApp.Views
                 string UserID = Console.ReadLine();
                 if (_ViewModel.UserCheckSaveWorkID(UserID) == 0)
                 {
-                    _ViewModel.RemoveSaveWork(UserID);
+                    _ViewModel.RemoveSaveWork(UserID);                                                  // TODO (Code de retour)
+                    break;
+                }
+            }
+        }
+
+        private void MenuChoice3()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Please choice a SaveWork for execution :");
+                Console.WriteLine();
+                ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.Write("==> ");
+                string UserID = Console.ReadLine();
+                if (_ViewModel.UserCheckSaveWorkID(UserID) == 0)
+                {
+                    _ViewModel.ExecuteSaveWork(UserID);
                     break;
                 }
             }

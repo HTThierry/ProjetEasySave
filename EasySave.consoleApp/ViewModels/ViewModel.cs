@@ -204,6 +204,11 @@ namespace EasySave.consoleApp.ViewModels
             return NameOfSaveWorks;
         }
 
+        public int ExecuteSaveWork(string SaveWorkID)
+        {
+            return _Model.ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].LaunchSaveWork();
+        }
+
         public int RemoveSaveWork(string SaveWorkID)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{_Model.ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");

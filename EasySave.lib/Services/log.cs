@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace EasySave.lib.Services
 {
-    public class log
+    public class Log
     {
        public static int logFiles(string[] LogArray)
         {

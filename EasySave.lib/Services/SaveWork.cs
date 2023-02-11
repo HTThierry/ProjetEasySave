@@ -15,43 +15,59 @@ namespace EasySave.lib.Services
             return AttributsForPresentation;
         }
 
-        static int CompleteCopyFilesFromDirToDir(string sourcePath, string destinationPath)
+        public int LaunchSaveWork()
         {
+            if (_SaveWorkModel.TypeSaveWork == 1)
+            {
+                return CompleteCopyFiles();
+            }
+            else
+            {
+                return DifferentialCopyFiles();
+            }
+        }
+
+        private int CompleteCopyFiles()
+        {
+            string SourcePath = _SaveWorkModel.SourcePathSaveWork;
+            string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
+
             try
             {
-                if (Directory.Exists(sourcePath))
+                if (Directory.Exists(SourcePath))
                 {
-                    if (!Directory.Exists(destinationPath))
+                    if (!Directory.Exists(DestinationPath))
                     {
-                        Directory.CreateDirectory(destinationPath);
+                        Directory.CreateDirectory(DestinationPath);
                     }
 
-                    string[] files = Directory.GetFiles(sourcePath);
+                    string[] files = Directory.GetFiles(SourcePath);
 
                     foreach (string file in files)
                     {
-                        DateTime today = DateTime.Now;
                         string fileName = Path.GetFileName(file);
-                        string destFile = Path.Combine(destinationPath, fileName);
-                        FileInfo fileInfo = new FileInfo(file);                               //Files size
-                        long fileSize = fileInfo.Length;    
+                        string destFile = Path.Combine(DestinationPath, fileName);
 
-                        var stopwatch = Stopwatch.StartNew();                                 //start of the stopwatch
-                        File.Copy(file, destFile, true);                                      
-                        stopwatch.Stop();                                                     // stop it
-                        double fileTransferTime = stopwatch.Elapsed.TotalSeconds;             //get the time in second
+                        DateTime today = DateTime.Now;                                          // Utile
+                        FileInfo fileInfo = new FileInfo(file);                                 // Utile
+                        long fileSize = fileInfo.Length;                                        // Utile
+                        var stopwatch = Stopwatch.StartNew();                                   // Utile
+
+                        File.Copy(file, destFile, true);        
+                        
+                        stopwatch.Stop();                                                       // Utile
+                        double fileTransferTime = stopwatch.Elapsed.TotalSeconds;               // Utile
 
                         string[] LogArray = new string[] {
                             fileName,
                             file,
                             destFile,
-                            destinationPath,
+                            DestinationPath,
                             $"{fileSize}",
                             $"{fileTransferTime}",
                             today.ToString("MM/dd/yyyy hh:mm:ss")
                         };
-                        //Append of information to the logs
-                        log.logFiles(LogArray);
+                        Log.logFiles(LogArray);
                     }
 
                     return 0;
@@ -63,27 +79,27 @@ namespace EasySave.lib.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
+                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                 //A retirer après test
                 return 1;
             }
         }
 
-        static int DifferentialCopyFilesFromDirToDir(string sourcePath, string destinationPath)
+        private int DifferentialCopyFiles()                                                     //string _SaveWorkModel.SourcePathSaveWork, string _SaveWorkModel.DestinationPathSaveWork
         {
             try
             {
-                if (Directory.Exists(sourcePath))
+                if (Directory.Exists(_SaveWorkModel.SourcePathSaveWork))
                 {
-                    if (!Directory.Exists(destinationPath))
+                    if (!Directory.Exists(_SaveWorkModel.DestinationPathSaveWork))
                     {
-                        Directory.CreateDirectory(destinationPath);
+                        Directory.CreateDirectory(_SaveWorkModel.DestinationPathSaveWork);
 
-                        string[] files = Directory.GetFiles(sourcePath);
+                        string[] files = Directory.GetFiles(_SaveWorkModel.SourcePathSaveWork);
 
                         foreach (string file in files)
                         {
                             string fileName = Path.GetFileName(file);
-                            string destFile = Path.Combine(destinationPath, fileName);
+                            string destFile = Path.Combine(_SaveWorkModel.DestinationPathSaveWork, fileName);
                             FileInfo fileInfo = new FileInfo(file);
                             long fileSize = fileInfo.Length;
 
@@ -93,13 +109,13 @@ namespace EasySave.lib.Services
                             double fileTransferTime = stopwatch.Elapsed.TotalSeconds;
                         }
                     }
-                    else // A modifier pour les logs !!!!
+                    else                                                                        // A modifier pour les logs !!!!
                     {
-                        string[] files = Directory.GetFiles(sourcePath);
+                        string[] files = Directory.GetFiles(_SaveWorkModel.SourcePathSaveWork);
                         foreach (string file in files)
                         {
                             FileInfo fileInfo = new FileInfo(file);
-                            string destinationFile = Path.Combine(destinationPath, fileInfo.Name);
+                            string destinationFile = Path.Combine(_SaveWorkModel.DestinationPathSaveWork, fileInfo.Name);
 
                             if (File.Exists(destinationFile))
                             {
