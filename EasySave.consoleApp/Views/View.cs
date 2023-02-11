@@ -139,8 +139,9 @@ namespace EasySave.consoleApp.Views
                 Console.WriteLine("Please choice a SaveWork for deletion :");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
-                Console.ReadLine();
-
+                Console.Write("==> ");
+                Console.Read();
+                break;
             }
         }
 
@@ -151,7 +152,6 @@ namespace EasySave.consoleApp.Views
                 Console.Write($"    SaveWork {i + 1} : ");
                 Console.WriteLine($"{NameSaveWork[i]}");
                 Console.WriteLine();
-                Console.Write("==> ");
             }
         }
 
