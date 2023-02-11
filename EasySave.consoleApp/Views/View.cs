@@ -38,7 +38,7 @@ namespace EasySave.consoleApp.Views
                             break;
 
                         case "4":
-                            Console.WriteLine($"{langage.option4}");
+                            MenuChoice4();
                             break;
 
                         case "5":
@@ -166,7 +166,26 @@ namespace EasySave.consoleApp.Views
             }
         }
 
-        private void ListingOfSaveWork(string[] NameSaveWork)
+        private void MenuChoice4()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Are you sure to execute all these SaveWork :");
+                Console.WriteLine();
+                ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.WriteLine("Enter [Y] for execution, [Enter] for abandon...");
+                Console.WriteLine();
+                Console.Write("==> ");
+                if (_ViewModel.UserConfirmationTraitement(Console.ReadLine()) == 0)
+                {
+                    _ViewModel.SequentialSaveWorksExecution();
+                    break;
+                }
+            }
+        }
+
+    private void ListingOfSaveWork(string[] NameSaveWork)
         {
             for (int i=0; i < NameSaveWork.Length; i++)
             {
