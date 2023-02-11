@@ -91,55 +91,21 @@ namespace EasySave.lib.Services
 
         private int DifferentialCopyFiles()                                                     //string _SaveWorkModel.SourcePathSaveWork, string _SaveWorkModel.DestinationPathSaveWork
         {
+            string SourcePath = _SaveWorkModel.SourcePathSaveWork;
+            string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
             try
             {
                 if (Directory.Exists(_SaveWorkModel.SourcePathSaveWork))
                 {
-                    if (!Directory.Exists(_SaveWorkModel.DestinationPathSaveWork))
+                    foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
                     {
-                        Directory.CreateDirectory(_SaveWorkModel.DestinationPathSaveWork);
-
-                        string[] files = Directory.GetFiles(_SaveWorkModel.SourcePathSaveWork);
-
-                        foreach (string file in files)
-                        {
-                            string fileName = Path.GetFileName(file);
-                            string destFile = Path.Combine(_SaveWorkModel.DestinationPathSaveWork, fileName);
-                            FileInfo fileInfo = new FileInfo(file);
-                            long fileSize = fileInfo.Length;
-
-                            var stopwatch = Stopwatch.StartNew();
-                            File.Copy(file, destFile, true);
-                            stopwatch.Stop();
-                            double fileTransferTime = stopwatch.Elapsed.TotalSeconds;
-                        }
+                        Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
                     }
-                    else                                                                        // A modifier pour les logs !!!!
+                    foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
                     {
-                        string[] files = Directory.GetFiles(_SaveWorkModel.SourcePathSaveWork);
-                        foreach (string file in files)
+                        if (File.GetLastWriteTime(newPath) > File.GetLastWriteTime(newPath.Replace(SourcePath, DestinationPath)))
                         {
-                            FileInfo fileInfo = new FileInfo(file);
-                            string destinationFile = Path.Combine(_SaveWorkModel.DestinationPathSaveWork, fileInfo.Name);
-
-                            if (File.Exists(destinationFile))
-                            {
-                                FileInfo destinationFileInfo = new FileInfo(destinationFile);
-                                if (destinationFileInfo.LastWriteTime < fileInfo.LastWriteTime)
-                                {
-                                    File.Copy(file, destinationFile, true);
-                                    Console.WriteLine($"Le fichier {fileInfo.Name} a été copié avec succès.");              //A retirer après test
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"Le fichier {fileInfo.Name} existe déjà et est plus récent.");       //A retirer après test
-                                }
-                            }
-                            else
-                            {
-                                File.Copy(file, destinationFile);
-                                Console.WriteLine($"Le fichier {fileInfo.Name} a été copié avec succès.");                  //A retirer après test
-                            }
+                            File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
                         }
                     }
                     return 0;
