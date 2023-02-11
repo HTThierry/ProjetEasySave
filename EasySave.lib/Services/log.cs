@@ -4,25 +4,27 @@ using System.Xml.Linq;
 
 namespace EasySave.lib.Services
 {
-    public class Log
+    public static class Log
     {
-       public static int logFiles(string[] LogArray)
+       public static void LogFiles(string[] LogArray)
         {
             if (LogArray != null)
             {
-                DateTime today = DateTime.Now;
-                string day=today.ToString("MM/dd/yyyy");
+                Console.WriteLine(LogArray.GetType());
+                Console.ReadKey();
+                //DateTime today = DateTime.Now;
+                //string day = today.ToString("MM/dd/yyyy");
 
-                var logPath = Path.Combine("\\Services\\log\\", $"{ day}_log.json");
+                //var LogPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "EasySave.lib", "Log", "log.json");               //{day}_
 
-                string jsonLog = JsonSerializer.Serialize(LogArray);
+                //string JsonLog = JsonSerializer.Serialize(LogArray);
 
-                File.AppendAllText(logPath, jsonLog + Environment.NewLine);
+                //File.AppendAllText(LogPath, JsonLog);                                                                                           // +Environment.NewLine
 
-                return 0;
+                //return 0;
             }
-            else { return 1; }
+            //else
+                //return 1;
         }
     }
 }
-

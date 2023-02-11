@@ -67,7 +67,7 @@ namespace EasySave.lib.Services
                             $"{fileTransferTime}",
                             today.ToString("MM/dd/yyyy hh:mm:ss")
                         };
-                        Log.logFiles(LogArray);
+                        Log.LogFiles(LogArray);
                     }
 
                     return 0;
