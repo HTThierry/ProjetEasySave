@@ -1,41 +1,36 @@
 ﻿using System.Text.Json;
-using System.Xml.Linq;
-
 
 namespace EasySave.lib.Services
 {
     public static class Log
     {
-       public static int LogFiles(string[] LogArray)
+        public static int LogFiles(string[] LogArray)
         {
             if (LogArray != null)
             {
-                var logs = new List<LogEntry>();
+                List<LogEntry> logs = new List<LogEntry>();
                 DateTime today = DateTime.Now;
                 string day = today.ToString("MM_dd_yyyy");
 
-                var LogPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Log", $"{day}_log.json");
+                string LogPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Log", $"{day}_log.json");
 
+                LogEntry LogEntry = new LogEntry
+                {
+                    Name = LogArray[0],
+                    FileSource = LogArray[1],
+                    FileTarget = LogArray[2],
+                    destPath = LogArray[3],
+                    FileSize = int.Parse(LogArray[4]),
+                    FileTransferTime = double.Parse(LogArray[5].Replace('.', ',')),
+                    time = DateTime.Parse(LogArray[6])
+                };
 
-                    var entry = new LogEntry
-                    {
-                        Name = LogArray[0],
-                        FileSource = LogArray[1],
-                        FileTarget = LogArray[2],
-                        destPath = LogArray[3],
-                        FileSize = int.Parse(LogArray[4]),
-                        FileTransferTime = double.Parse(LogArray[5].Replace('.', ',')),
-                        time = DateTime.Parse(LogArray[6])
-                    };
-
-                logs.Add(entry);
-                var options = new JsonSerializerOptions
+                logs.Add(LogEntry);
+                JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     WriteIndented = true
                 };
                 string JsonLog = JsonSerializer.Serialize(logs, options);
-
-                //string JsonLog = JsonSerializer.Serialize(LogArray, LogArray.GetType());
 
                 File.AppendAllText(LogPath, JsonLog + Environment.NewLine);
 
