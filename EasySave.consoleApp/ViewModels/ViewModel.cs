@@ -176,7 +176,7 @@ namespace EasySave.consoleApp.ViewModels
             return 0;
         }
 
-        public string[][] GetSaveWorkInfo()
+        public string[][] GetSaveWorkInfos()
         {
             string[][] SaveWorkInfos = new string[_Model.ArrayOfSaveWork.Count][];
 
@@ -186,6 +186,17 @@ namespace EasySave.consoleApp.ViewModels
                     SaveWorkInfos[i] = _Model.ArrayOfSaveWork[i].GetInstanceInfo();
             }
             return SaveWorkInfos;
+        }
+
+        public string[] GetSaveWorkNames()
+        {
+            string[] NameOfSaveWorks = new string[_Model.ArrayOfSaveWork.Count];
+
+            for (int i = 0; i < _Model.ArrayOfSaveWork.Count; i++)
+            {
+                NameOfSaveWorks[i] = _Model.ArrayOfSaveWork[i].GetInstanceInfo()[0];
+            }
+            return NameOfSaveWorks;
         }
 
         public int RemoveSaveWork(int SaveWorkID, string SaveWorkFilePath)
