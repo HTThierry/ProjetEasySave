@@ -30,7 +30,8 @@ namespace EasySave.consoleApp.Views
                             break;
 
                         case "2":
-                            Console.WriteLine($"{langage.option2}");
+                            MenuChoice2();
+                            //Console.WriteLine($"{langage.option2}");
                             break;
 
                         case "3":
@@ -130,12 +131,36 @@ namespace EasySave.consoleApp.Views
             }
         }
 
+        private void MenuChoice2()
+        {
+            while(true)
+            {
+                Console.Clear();
+                Console.WriteLine("Please choice a SaveWork for deletion :");
+                Console.WriteLine();
+                ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.Write("==> ");
+                Console.Read();
+                break;
+            }
+        }
+
+        private void ListingOfSaveWork(string[] NameSaveWork)
+        {
+            for (int i=0; i < NameSaveWork.Length; i++)
+            {
+                Console.Write($"    SaveWork {i + 1} : ");
+                Console.WriteLine($"{NameSaveWork[i]}");
+                Console.WriteLine();
+            }
+        }
+
         private void MenuChoice5()
         {
             Console.Clear();
             Console.WriteLine("============================================================");
             Console.WriteLine();
-            string[][] SaveWorkInfos = _ViewModel.GetSaveWorkInfo();
+            string[][] SaveWorkInfos = _ViewModel.GetSaveWorkInfos();
 
             foreach (string[] SaveWorkInfo in SaveWorkInfos)
             {

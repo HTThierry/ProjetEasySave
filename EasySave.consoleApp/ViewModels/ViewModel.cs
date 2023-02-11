@@ -161,22 +161,12 @@ namespace EasySave.consoleApp.ViewModels
 
                 string[] AttributsForSaveWork = new string[4] { saveWorkJSON.NameSaveWork, $"{saveWorkJSON.TypeSaveWork}" , saveWorkJSON.SourcePathSaveWork, saveWorkJSON.DestinationPathSaveWork } ;
 
-                /*
-                SaveWork _SaveWork = new();
-
-                _SaveWork._SaveWorkModel.NameSaveWork = saveWorkJSON.NameSaveWork;
-                _SaveWork._SaveWorkModel.TypeSaveWork = saveWorkJSON.TypeSaveWork;
-                _SaveWork._SaveWorkModel.SourcePathSaveWork = saveWorkJSON.SourcePathSaveWork;
-                _SaveWork._SaveWorkModel.DestinationPathSaveWork = saveWorkJSON.DestinationPathSaveWork;
-
-                */
-
                 _Model.ArrayOfSaveWork.Add(SaveWorkCreator(AttributsForSaveWork));
             }
             return 0;
         }
 
-        public string[][] GetSaveWorkInfo()
+        public string[][] GetSaveWorkInfos()
         {
             string[][] SaveWorkInfos = new string[_Model.ArrayOfSaveWork.Count][];
 
@@ -186,6 +176,17 @@ namespace EasySave.consoleApp.ViewModels
                     SaveWorkInfos[i] = _Model.ArrayOfSaveWork[i].GetInstanceInfo();
             }
             return SaveWorkInfos;
+        }
+
+        public string[] GetSaveWorkNames()
+        {
+            string[] NameOfSaveWorks = new string[_Model.ArrayOfSaveWork.Count];
+
+            for (int i = 0; i < _Model.ArrayOfSaveWork.Count; i++)
+            {
+                NameOfSaveWorks[i] = _Model.ArrayOfSaveWork[i].GetInstanceInfo()[0];
+            }
+            return NameOfSaveWorks;
         }
 
         public int RemoveSaveWork(int SaveWorkID, string SaveWorkFilePath)
