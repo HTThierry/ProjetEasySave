@@ -4,6 +4,6 @@ namespace EasySave.lib.Models
 {
     public class Model
     {
-        public SaveWork[] ArrayOfSaveWork = new SaveWork[5];
+        public List<SaveWork> ArrayOfSaveWork = new List<SaveWork>();
     }
 }
