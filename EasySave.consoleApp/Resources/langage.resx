@@ -121,16 +121,16 @@
     <value>Please, check your SaveWork files and free up space.</value>
   </data>
   <data name="choseName" xml:space="preserve">
-    <value>Please enter a name for the SaveWork</value>
+    <value>Please enter a name for the SaveWork :</value>
   </data>
   <data name="choseType" xml:space="preserve">
-    <value>Please enter a type for the SaveWork</value>
+    <value>Please enter a type for the SaveWork :</value>
   </data>
   <data name="confirmLine" xml:space="preserve">
     <value>Press [Y] for creation, [Enter] for abandon...</value>
   </data>
   <data name="destPath" xml:space="preserve">
-    <value>Please enter a destination path for the SaveWork</value>
+    <value>Please enter a destination path for the SaveWork :</value>
   </data>
   <data name="destPathSaveWork" xml:space="preserve">
     <value>The destination path of this SaveWork is :</value>
@@ -172,7 +172,7 @@
     <value>He requested option 4</value>
   </data>
   <data name="sourcePath" xml:space="preserve">
-    <value>Please enter a source path for the SaveWork</value>
+    <value>Please enter a source path for the SaveWork :</value>
   </data>
   <data name="sourcePathSaveWork" xml:space="preserve">
     <value>The source path of this SaveWork is :</value>
@@ -190,6 +190,6 @@
     <value>The type of this SaveWork is :</value>
   </data>
   <data name="validation" xml:space="preserve">
-    <value>Validation step:</value>
+    <value>Validation step :</value>
   </data>
 </root>
