@@ -118,6 +118,7 @@ namespace EasySave.consoleApp.ViewModels
                 return 1;
             }
         }
+
         public int TestDestinationPathSaveWork(string SaveWorkDestinationPath)
         {
             if (SaveWorkDestinationPath == "")
@@ -224,6 +225,7 @@ namespace EasySave.consoleApp.ViewModels
                 return 1;
             }
         }
+
         public int ExecuteSaveWork(string SaveWorkID)
         {
             return _Model.ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].LaunchSaveWork();
