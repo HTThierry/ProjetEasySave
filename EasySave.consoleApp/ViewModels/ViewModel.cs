@@ -53,6 +53,27 @@ namespace EasySave.consoleApp.ViewModels
             }
         }
 
+        public int UserCheckSaveWorkID(string UserSaveWorkID)
+        {
+            int SaveWorkID;
+
+            if (int.TryParse(UserSaveWorkID, out SaveWorkID))
+            {
+                if (SaveWorkID > 0 && SaveWorkID <= _Model.ArrayOfSaveWork.Count)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
         public int TestNameSaveWork(string SaveWorkName)
         {
             if (SaveWorkName != "")
@@ -121,16 +142,10 @@ namespace EasySave.consoleApp.ViewModels
         {
             if (_Model.ArrayOfSaveWork.Count < 5)
             {
-                _Model.ArrayOfSaveWork.Add(SaveWorkCreator(AttributsForSaveWork));
+                SaveWork _SaveWorkToSave = SaveWorkCreator(AttributsForSaveWork);
+                _Model.ArrayOfSaveWork.Add(_SaveWorkToSave);
 
-                var SaveWorkJson = new SaveWorkModel
-                {
-                    NameSaveWork = AttributsForSaveWork[0],
-                    TypeSaveWork = Int32.Parse(AttributsForSaveWork[1]),
-                    SourcePathSaveWork = AttributsForSaveWork[2],
-                    DestinationPathSaveWork = AttributsForSaveWork[3]
-                };
-                string jsonString = JsonSerializer.Serialize(SaveWorkJson);
+                string jsonString = JsonSerializer.Serialize(_SaveWorkToSave._SaveWorkModel);
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
                 File.WriteAllText(path, jsonString);
 
@@ -189,14 +204,15 @@ namespace EasySave.consoleApp.ViewModels
             return NameOfSaveWorks;
         }
 
-        public int RemoveSaveWork(int SaveWorkID, string SaveWorkFilePath)
+        public int RemoveSaveWork(string SaveWorkID)
         {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{_Model.ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");
             try
             {
-                if (File.Exists(SaveWorkFilePath))
+                if (File.Exists(path))
                 {
-                    File.Delete(SaveWorkFilePath);
-                    _Model.ArrayOfSaveWork.RemoveAt(SaveWorkID);
+                    File.Delete(path);
+                    _Model.ArrayOfSaveWork.RemoveAt(Int32.Parse(SaveWorkID) - 1);
                     return 0;
                 }
                 else

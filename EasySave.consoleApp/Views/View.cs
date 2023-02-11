@@ -140,8 +140,12 @@ namespace EasySave.consoleApp.Views
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
                 Console.Write("==> ");
-                Console.Read();
-                break;
+                string UserID = Console.ReadLine();
+                if (_ViewModel.UserCheckSaveWorkID(UserID) == 0)
+                {
+                    _ViewModel.RemoveSaveWork(UserID);
+                    break;
+                }
             }
         }
 
