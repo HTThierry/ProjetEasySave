@@ -161,16 +161,6 @@ namespace EasySave.consoleApp.ViewModels
 
                 string[] AttributsForSaveWork = new string[4] { saveWorkJSON.NameSaveWork, $"{saveWorkJSON.TypeSaveWork}" , saveWorkJSON.SourcePathSaveWork, saveWorkJSON.DestinationPathSaveWork } ;
 
-                /*
-                SaveWork _SaveWork = new();
-
-                _SaveWork._SaveWorkModel.NameSaveWork = saveWorkJSON.NameSaveWork;
-                _SaveWork._SaveWorkModel.TypeSaveWork = saveWorkJSON.TypeSaveWork;
-                _SaveWork._SaveWorkModel.SourcePathSaveWork = saveWorkJSON.SourcePathSaveWork;
-                _SaveWork._SaveWorkModel.DestinationPathSaveWork = saveWorkJSON.DestinationPathSaveWork;
-
-                */
-
                 _Model.ArrayOfSaveWork.Add(SaveWorkCreator(AttributsForSaveWork));
             }
             return 0;
