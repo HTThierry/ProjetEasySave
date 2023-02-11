@@ -187,5 +187,25 @@ namespace EasySave.consoleApp.ViewModels
             }
             return SaveWorkInfos;
         }
+
+        public int RemoveSaveWork(int SaveWorkID, string SaveWorkFilePath)
+        {
+            try
+            {
+                if (File.Exists(SaveWorkFilePath))
+                {
+                    File.Delete(SaveWorkFilePath);
+                    _Model.ArrayOfSaveWork.RemoveAt(SaveWorkID);
+                    return 0;
+                }
+                else
+                    return 1;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
+                return 1;
+            }
+        }
     }
 }
