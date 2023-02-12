@@ -17,8 +17,7 @@ namespace EasySave.DesktopApp
         private Presenter _Presenter = new Presenter();
         private Initializer _Initializer = new Initializer();
         private SaveWorkModel _SaveWorkModel = new SaveWorkModel();
-        private SaveWork _saveWork = new SaveWork();
-        private List<SaveWorkModel> listSaveWorkModels = new List<SaveWorkModel>();
+
 
         public string[] GetInstanceInfo()
         {
