@@ -142,7 +142,12 @@ namespace EasySave.consoleApp.Views
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
-                    _ViewModel.RemoveSaveWork(UserID);                                                  // TODO (Code de retour)
+                    if (_ViewModel.RemoveSaveWork(UserID) == 1)                        // TODO (Code de retour)
+                    {
+                        Console.WriteLine("Remove errors occurred...");
+                    }
+                    Console.WriteLine("Press any key to return on the menu...");
+                    Console.ReadKey();
                     break;
                 }
             }
@@ -160,7 +165,13 @@ namespace EasySave.consoleApp.Views
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
-                    _ViewModel.ExecuteSaveWork(UserID);
+                    if (_ViewModel.ExecuteSaveWork(UserID) == 1)
+                    {
+                        Console.WriteLine("Potential errors occurred...");
+                    }
+                    Console.WriteLine("The copy of the files is complete.");
+                    Console.WriteLine("Press any key to return on the menu...");
+                    Console.ReadKey();
                     break;
                 }
             }
@@ -179,7 +190,13 @@ namespace EasySave.consoleApp.Views
                 Console.Write("==> ");
                 if (_ViewModel.ConfirmationTreatment(Console.ReadLine()) == 0)
                 {
-                    _ViewModel.SequentialSaveWorksExecution();
+                    if (_ViewModel.SequentialSaveWorksExecution() == 1)
+                    {
+                        Console.WriteLine("Potential errors occurred...");
+                    }
+                    Console.WriteLine("The sequencial copy of the files is complete.");
+                    Console.WriteLine("Press any key to return on the menu...");
+                    Console.ReadKey();
                     break;
                 }
             }

@@ -1,27 +1,13 @@
 [
   {
-    "Name": "D\u0026D",
-    "SourceFilePath": "D:\\SteamLibrary\\steamapps\\common\\Dark and Darker Demo\\DungeonCrawler.exe",
-    "TargetFilePath": "D:\\testComplete\\DungeonCrawler.exe",
-    "Time": "02/12/2023 01:35:22",
-    "IsActive": "Active",
-    "TotalFilesToCopy": "94",
-    "TotalFilesSize": "290304",
-    "NbFilesLeftToDo": "1",
-    "FilesSizeLeftToDo": "290304"
-  }
-]
-
-[
-  {
-    "Name": "Eco",
-    "SourceFilePath": "D:\\SteamLibrary\\steamapps\\common\\Eco\\baselib.dll",
-    "TargetFilePath": "D:\\testComplete\\baselib.dll",
-    "Time": "02/12/2023 01:45:36",
-    "IsActive": "Active",
-    "TotalFilesToCopy": "4148",
-    "TotalFilesSize": "405016",
-    "NbFilesLeftToDo": "1",
-    "FilesSizeLeftToDo": "405016"
+    "Name": "T2",
+    "Time": "02/12/2023 09:44:09",
+    "CurrentState": "Inactive",
+    "TotalFilesToCopy": "0",
+    "TotalFilesSizeToCopy": "0",
+    "NbFilesLeft": "0",
+    "FilesSizeLeft": "0",
+    "FilePath": "",
+    "FileDestinationPath": ""
   }
 ]

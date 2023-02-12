@@ -8,13 +8,13 @@ namespace EasySave.lib.Services
         {
             if (LogArray != null)
             {
-                List<LogEntry> logs = new List<LogEntry>();
+                List<LogModel> logs = new List<LogModel>();
                 DateTime today = DateTime.Now;
                 string day = today.ToString("MM_dd_yyyy");
 
                 string LogPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Log", $"{day}_log.json");
 
-                LogEntry LogEntry = new LogEntry
+                LogModel _LogModel = new LogModel
                 {
                     Name = LogArray[0],
                     FileSource = LogArray[1],
@@ -25,30 +25,28 @@ namespace EasySave.lib.Services
                     time = DateTime.Parse(LogArray[6])
                 };
 
-                logs.Add(LogEntry);
+                logs.Add(_LogModel);
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     WriteIndented = true
                 };
                 string JsonLog = JsonSerializer.Serialize(logs, options);
 
-                File.AppendAllText(LogPath, JsonLog + Environment.NewLine);
+                try
+                {
+                    File.AppendAllText(LogPath, JsonLog + Environment.NewLine);
+                }
+                catch 
+                {
+                    return 1;
+                }
 
                 return 0;
             }
             else
+            {
                 return 1;
+            }
         }
     }
-}
-
-public class LogEntry
-{
-    public string Name { get; set; }
-    public string FileSource { get; set; }
-    public string FileTarget { get; set; }
-    public string destPath { get; set; }
-    public int FileSize { get; set; }
-    public double FileTransferTime { get; set; }
-    public DateTime time { get; set; }
 }
