@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,31 @@ namespace EasySave.wpfApp
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new MainViewModel();
+            
+
+        }
+        public void btnQuit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        public void btnKill_Click(object sender, RoutedEventArgs e)
+        {
+            Process selectedProcess = dgProcess.SelectedItem as Process;
+            if (selectedProcess != null)
+            {
+                selectedProcess.Kill();
+            }
+        }
+        public void btnAddProcess_Click(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+        public static void startProcess(string name)
+        {
+
+
 
         }
     }

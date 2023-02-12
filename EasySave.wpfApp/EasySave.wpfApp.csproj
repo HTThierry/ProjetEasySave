@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EasySave.lib\EasySave.lib.csproj">
+      <Project>{a16d0dff-9ec1-4172-b788-f9beacd39bdc}</Project>
+      <Name>EasySave.lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
