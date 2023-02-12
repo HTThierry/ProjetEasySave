@@ -27,25 +27,21 @@ namespace EasySave.wpfApp
             
 
         }
-        public void btnQuit_Click(object sender, RoutedEventArgs e)
+        public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+
         }
 
-        public void btnKill_Click(object sender, RoutedEventArgs e)
+        public void LaunchAllCommand(object sender, RoutedEventArgs e)
         {
-            Process selectedProcess = dgProcess.SelectedItem as Process;
-            if (selectedProcess != null)
-            {
-                selectedProcess.Kill();
-            }
+
         }
-        public void btnAddProcess_Click(object sender, RoutedEventArgs e)
+        public void LaunchCommand(object sender, RoutedEventArgs e)
         {
 
 
         }
-        public static void startProcess(string name)
+        public static void deleteCommand(string name)
         {
 
 

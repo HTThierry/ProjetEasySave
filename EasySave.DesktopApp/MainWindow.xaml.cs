@@ -24,5 +24,25 @@ namespace EasySave.DesktopApp
         {
             InitializeComponent();
         }
+        public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void LaunchAllCommand(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void LaunchCommand(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+        public static void deleteCommand(string name)
+        {
+
+
+
+        }
     }
 }
