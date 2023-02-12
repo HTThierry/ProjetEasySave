@@ -10,7 +10,7 @@ namespace EasySave.consoleApp.Views
 
         public void Show()
         {
-            if (_ViewModel.SaveWorkInstancing() == 1)
+            if (_ViewModel.SaveWorkInitializing() == 1)
             {
                 Console.WriteLine($"{langage.fullSaveWorks}");                                                  // The limit of SaveWork files has been exceeded.
                 Console.WriteLine($"{langage.checkYourFiles}");                                                 // Please, check your SaveWork files and free up space.
@@ -20,7 +20,7 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 string UserInput = Menu();
-                if (_ViewModel.UserChoiceTraitement(UserInput) == 0)
+                if (_ViewModel.OptionSelectedTreatment(UserInput) == 0)
                 {
                     Console.Clear();
                     switch (UserInput)
@@ -124,7 +124,7 @@ namespace EasySave.consoleApp.Views
             Console.WriteLine();
 
             Console.Write($"{langage.confirmLine}");                                                            // Press [Y] for creation, [Enter] for abandon...
-            if (_ViewModel.UserConfirmationTraitement(Console.ReadLine()) == 0)
+            if (_ViewModel.ConfirmationTreatment(Console.ReadLine()) == 0)
             {
                 _ViewModel.AddNewSaveWork(AttributsForSaveWork);
             }
@@ -140,7 +140,7 @@ namespace EasySave.consoleApp.Views
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
                 Console.Write("==> ");
                 string UserID = Console.ReadLine();
-                if (_ViewModel.UserCheckSaveWorkID(UserID) == 0)
+                if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
                     _ViewModel.RemoveSaveWork(UserID);                                                  // TODO (Code de retour)
                     break;
@@ -158,7 +158,7 @@ namespace EasySave.consoleApp.Views
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
                 Console.Write("==> ");
                 string UserID = Console.ReadLine();
-                if (_ViewModel.UserCheckSaveWorkID(UserID) == 0)
+                if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
                     _ViewModel.ExecuteSaveWork(UserID);
                     break;
@@ -177,7 +177,7 @@ namespace EasySave.consoleApp.Views
                 Console.WriteLine("Enter [Y] for execution, [Enter] for abandon...");
                 Console.WriteLine();
                 Console.Write("==> ");
-                if (_ViewModel.UserConfirmationTraitement(Console.ReadLine()) == 0)
+                if (_ViewModel.ConfirmationTreatment(Console.ReadLine()) == 0)
                 {
                     _ViewModel.SequentialSaveWorksExecution();
                     break;
