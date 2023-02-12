@@ -32,16 +32,19 @@ namespace EasySave.lib.Services
                 Etats.Add(EtatEntry);
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
-                    WriteIndented = true
+                    WriteIndented = true,
+                    IgnoreNullValues = true
                 };
 
                 string json = File.ReadAllText(EtatPath);
-
-                List<EtatEntry> EtatsVerif = JsonSerializer.Deserialize<List<EtatEntry>>(json);
+                // Sa pète ici à partir du moment ou y a 2 fichiers dans etat.json, Quand y a un fichier dans etat.json on passe la condition et ça affiche test modif
+                List<EtatEntry> EtatsVerif = JsonSerializer.Deserialize<List<EtatEntry>>(json, options);
                 //Console.WriteLine(EtatArray[4]);
-
-                EtatEntry etatTest = EtatsVerif.FirstOrDefault(Etat => Etat.Name == EtatArray[0]);
-
+                Console.WriteLine(EtatsVerif[0].Name);
+               // Console.ReadKey();
+                EtatEntry etatTest = EtatsVerif.FirstOrDefault(name => name.Name == $"{EtatArray[0]}");
+                Console.WriteLine(etatTest);
+                //Console.ReadKey();
                 if (etatTest == null)
                 {
                     string JsonLog = JsonSerializer.Serialize(Etats, options);
@@ -49,6 +52,8 @@ namespace EasySave.lib.Services
                 }
                 else
                 {
+                    Console.WriteLine("test modif");
+                   // Console.ReadKey();
                     etatTest.Name = EtatArray[0];
                     etatTest.SourceFilePath = EtatArray[1];
                     etatTest.TargetFilePath = EtatArray[2];

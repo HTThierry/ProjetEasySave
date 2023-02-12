@@ -32,7 +32,7 @@ namespace EasySave.lib.Services
         {
             string SourcePath = _SaveWorkModel.SourcePathSaveWork;
             string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
-            bool IsActive = true;
+            string IsActive = "Active";
             int TotalFilesToCopy = 0;
             long TotalFilesSize = 0;
             int NbFilesLeftToDo = 0;
@@ -83,17 +83,18 @@ namespace EasySave.lib.Services
                             today.ToString("MM/dd/yyyy hh:mm:ss")
                         };
                         Log.LogFiles(LogArray);
+
                         appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo, $"{file}", $"{destFile}");
                     }
-                    IsActive = false;
-                    Console.WriteLine("test d'appel END !!!");
+                    IsActive = "END";
+                    Console.WriteLine("test d'appel END !!! After foreach");
                     Console.ReadKey();
                     appelEtat(IsActive,TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
                     return 0;
                 }
                 else
                 {
-                    IsActive = false;
+                    IsActive = "END";
                     Console.WriteLine("test d'appel END !!!");
                     Console.ReadKey();
                     appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
@@ -162,7 +163,7 @@ namespace EasySave.lib.Services
             }
         }
 
-        private int appelEtat(bool IsActive,int TotalFilesToCopy,long TotalFilesSize,int NbFilesLeftToDo, long FilesSizeLeftToDo, string file = "0", string destFile = "0")
+        private int appelEtat(string IsActive,int TotalFilesToCopy,long TotalFilesSize,int NbFilesLeftToDo, long FilesSizeLeftToDo, string file = "0", string destFile = "0")
         {
            
             string[] ProgressArray = new string[] {
@@ -170,7 +171,7 @@ namespace EasySave.lib.Services
                         file,
                         destFile,
                         DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"),
-                        IsActive ? "ACTIVE" : "END",
+                        IsActive,
                         $"{TotalFilesToCopy}",
                         $"{TotalFilesSize}",
                         $"{NbFilesLeftToDo}",
