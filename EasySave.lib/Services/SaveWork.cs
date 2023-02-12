@@ -1,15 +1,30 @@
 ﻿using EasySave.lib.Models;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 namespace EasySave.lib.Services
 {
-    public class SaveWork
+    public class SaveWork : INotifyPropertyChanged
     {
         public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
-
+        public SaveWorkModel SaveWorkModel
+        {
+            get { return _SaveWorkModel; }
+            set
+            {
+                _SaveWorkModel = value;
+                RaisePropertyChanged("SaveWorkModel");
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public string[] GetInstanceInfo()
         {
@@ -81,7 +96,7 @@ namespace EasySave.lib.Services
                             DestinationPath,
                             $"{fileSize}",
                             $"{fileTransferTime}",
-                            today.ToString("MM/dd/yyyy hh:mm:ss")
+                            today.ToString("dd/MM/yyyy HH:mm:ss")
                         };
                         Log.LogFiles(LogArray);
 
@@ -145,7 +160,7 @@ namespace EasySave.lib.Services
                             DestinationPath,
                             $"{fileSize}",
                             $"{fileTransferTime}",
-                            today.ToString("MM/dd/yyyy hh:mm:ss")
+                            today.ToString("dd/MM/yyyy HH:mm:ss")
                             };
                             Log.LogFiles(LogArray);
                         }
@@ -171,7 +186,7 @@ namespace EasySave.lib.Services
                         _SaveWorkModel.NameSaveWork,
                         file,
                         destFile,
-                        DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"),
+                        DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
                         IsActive,
                         $"{TotalFilesToCopy}",
                         $"{TotalFilesSize}",

@@ -14,12 +14,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
-        <DataGrid Grid.Row="1" Margin="5" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding SaveWork, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid Grid.Row="1" Margin="5" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding _SaveWorkModel.NameSaveWork, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding _SaveWorkModel.TypeSaveWork, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="PathFrom" Binding="{Binding _SaveWorkModel.SourcePathSaveWork, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="PathTo" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding _SaveWorkModel.NameSaveWork}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding _SaveWorkModel.TypeSaveWork}"/>
+                <DataGridTextColumn Header="PathFrom" Binding="{Binding _SaveWorkModel.SourcePathSaveWork}"/>
+                <DataGridTextColumn Header="PathTo" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">

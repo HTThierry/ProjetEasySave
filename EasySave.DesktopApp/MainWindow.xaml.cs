@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Windows;
 using EasySave.DesktopApp.ViewModels;
 using System.Collections.ObjectModel;
-
 namespace EasySave.DesktopApp
 {
     /// <summary>
@@ -49,6 +48,10 @@ namespace EasySave.DesktopApp
 
         public void LaunchAllCommand(object sender, RoutedEventArgs e)
         {
+            foreach (SaveWork _saveWork in _Model.ArrayOfSaveWork)
+            {
+                _saveWork.LaunchSaveWork();
+            }
         }
 
         public void LaunchCommand(object sender, RoutedEventArgs e)
@@ -64,7 +67,8 @@ namespace EasySave.DesktopApp
         {
             SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
-            //dgSaveWorks.
+            _Model.RaisePropertyChanged("ArrayOfSaveWork");
+
         }
     }
 }
