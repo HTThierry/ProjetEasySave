@@ -1,5 +1,8 @@
 ﻿using EasySave.lib.Models;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace EasySave.lib.Services
 {
@@ -116,11 +119,33 @@ namespace EasySave.lib.Services
                     {
                         Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
                     }
-                    foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
+                    foreach (string file in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
                     {
-                        if (File.GetLastWriteTime(newPath) > File.GetLastWriteTime(newPath.Replace(SourcePath, DestinationPath)))
+                        if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(SourcePath, DestinationPath)))
                         {
-                            File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
+                            string fileName = Path.GetFileName(file);
+                            string destFile = Path.Combine(DestinationPath, fileName);
+                            FileInfo fileInfo = new FileInfo(file);
+                            long fileSize = fileInfo.Length;
+                            DateTime today = DateTime.Now;
+
+                            var stopwatch = Stopwatch.StartNew();
+
+                            File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
+
+                            stopwatch.Stop();
+                            double fileTransferTime = stopwatch.Elapsed.TotalSeconds;
+                            
+                            string[] LogArray = new string[] {
+                            fileName,
+                            file,
+                            destFile,
+                            DestinationPath,
+                            $"{fileSize}",
+                            $"{fileTransferTime}",
+                            today.ToString("MM/dd/yyyy hh:mm:ss")
+                            };
+                            Log.LogFiles(LogArray);
                         }
                     }
                     return 0;
