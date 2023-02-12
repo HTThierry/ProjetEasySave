@@ -241,15 +241,6 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 4.
-        /// </summary>
-        public static string String3 {
-            get {
-                return ResourceManager.GetString("String3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à [1] : Complete.
         /// </summary>
         public static string typeComplete {
@@ -282,6 +273,51 @@ namespace EasySave.consoleApp.Resources {
         public static string validation {
             get {
                 return ResourceManager.GetString("validation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à deletion:.
+        /// </summary>
+        public static string deletion
+        {
+            get
+            {
+                return ResourceManager.GetString("deletion", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à execution:.
+        /// </summary>
+        public static string execution
+        {
+
+            get
+            {
+                return ResourceManager.GetString("execution", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// Recherche une chaîne localisée semblable à SequentialValidadtion.
+        /// </summary>
+        public static string SequentialValidation
+        {
+            get
+            {
+                return ResourceManager.GetString("SequentialValidation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// Recherche une chaîne localisée semblable à SequentialConfirm.
+        /// </summary>
+        public static string SequentialConfirm
+        {
+            get
+            {
+                return ResourceManager.GetString("SequentialConfirm", resourceCulture);
             }
         }
     }

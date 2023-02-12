@@ -129,20 +129,26 @@
   <data name="confirmLine" xml:space="preserve">
     <value>Press [Y] for creation, [Enter] for abandon...</value>
   </data>
+  <data name="deletion" xml:space="preserve">
+    <value>Please choose a SaveWork for deletion :</value>
+  </data>
   <data name="destPath" xml:space="preserve">
     <value>Please enter a destination path for the SaveWork :</value>
   </data>
   <data name="destPathSaveWork" xml:space="preserve">
-    <value>The destination path of this SaveWork is :</value>
+    <value>This SaveWork's destination path is :</value>
+  </data>
+  <data name="execution" xml:space="preserve">
+    <value>Please choose a SaveWork for execution :</value>
   </data>
   <data name="exit" xml:space="preserve">
-    <value>Press a key for exit...</value>
+    <value>Press a key to exit...</value>
   </data>
   <data name="fullSaveWorks" xml:space="preserve">
     <value>The limit of SaveWork files has been exceeded.</value>
   </data>
   <data name="gretting" xml:space="preserve">
-    <value>Hi, please select a choice:</value>
+    <value>Hello, please select an option:</value>
   </data>
   <data name="menu.choice1" xml:space="preserve">
     <value>[1] : Create a new SaveWork</value>
@@ -154,31 +160,34 @@
     <value>[3] : Launch a SaveWork</value>
   </data>
   <data name="menu.choice4" xml:space="preserve">
-    <value>[4] : Launch all the existings SaveWork</value>
+    <value>[4] : Launch all the existing SaveWorks</value>
   </data>
   <data name="menu.choice5" xml:space="preserve">
-    <value>[5] : List all the existings SaveWork</value>
+    <value>[5] : List all the existing SaveWorks</value>
   </data>
   <data name="nameSaveWork" xml:space="preserve">
-    <value>The name of this SaveWork is :</value>
+    <value>This SaveWork's Name is :</value>
   </data>
   <data name="option2" xml:space="preserve">
-    <value>He requested option 2</value>
+    <value>Option 2 requested</value>
   </data>
   <data name="option3" xml:space="preserve">
-    <value>He requested option 3</value>
+    <value>Option 3 requested</value>
   </data>
   <data name="option4" xml:space="preserve">
-    <value>He requested option 4</value>
+    <value>Option 4 requested</value>
+  </data>
+  <data name="SequentialConfirm" xml:space="preserve">
+    <value>Enter [Y] for execution, [Enter] for abandon...</value>
+  </data>
+  <data name="SequentialValidation" xml:space="preserve">
+    <value>Are you sure you want to execute all saved SaveWorks ?</value>
   </data>
   <data name="sourcePath" xml:space="preserve">
     <value>Please enter a source path for the SaveWork :</value>
   </data>
   <data name="sourcePathSaveWork" xml:space="preserve">
-    <value>The source path of this SaveWork is :</value>
-  </data>
-  <data name="String3" xml:space="preserve">
-    <value>He requested option 4</value>
+    <value>This SaveWork's source path is :</value>
   </data>
   <data name="typeComplete" xml:space="preserve">
     <value>[1] : Complete</value>
@@ -187,7 +196,7 @@
     <value>[2] : Differential</value>
   </data>
   <data name="typeSaveWork" xml:space="preserve">
-    <value>The type of this SaveWork is :</value>
+    <value>This SaveWork's type is :</value>
   </data>
   <data name="validation" xml:space="preserve">
     <value>Validation step :</value>

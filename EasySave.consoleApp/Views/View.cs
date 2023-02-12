@@ -135,7 +135,7 @@ namespace EasySave.consoleApp.Views
             while(true)
             {
                 Console.Clear();
-                Console.WriteLine("Please choice a SaveWork for deletion :");
+                Console.WriteLine($"{langage.deletion}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
                 Console.Write("==> ");
@@ -153,7 +153,7 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Please choice a SaveWork for execution :");
+                Console.WriteLine($"{langage.execution}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
                 Console.Write("==> ");
@@ -171,10 +171,10 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Are you sure to execute all these SaveWork :");
+                Console.WriteLine($"{ langage.SequentialValidation }");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
-                Console.WriteLine("Enter [Y] for execution, [Enter] for abandon...");
+                Console.WriteLine($"{langage.SequentialConfirm}");
                 Console.WriteLine();
                 Console.Write("==> ");
                 if (_ViewModel.ConfirmationTreatment(Console.ReadLine()) == 0)
