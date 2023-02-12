@@ -1,7 +1,5 @@
 ﻿using EasySave.lib.Models;
 using System.Diagnostics;
-using System.IO;
-using System.Xml.Linq;
 
 namespace EasySave.lib.Services
 {
@@ -31,6 +29,11 @@ namespace EasySave.lib.Services
         {
             string SourcePath = _SaveWorkModel.SourcePathSaveWork;
             string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
+            bool IsActive = true;
+            int TotalFilesToCopy = 0;
+            long TotalFilesSize = 0;
+            int NbFilesLeftToDo = 0;
+            long FilesSizeLeftToDo = 0;
 
             try
             {
@@ -47,7 +50,8 @@ namespace EasySave.lib.Services
                     }
 
                     string[] files = Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories);
-                    
+                    TotalFilesToCopy = files.Length;
+
                     foreach (string file in files)
                     {
                         string fileName = Path.GetFileName(file);
@@ -56,12 +60,15 @@ namespace EasySave.lib.Services
                         DateTime today = DateTime.Now;                                          // Utile
                         FileInfo fileInfo = new FileInfo(file);                                 // Utile
                         long fileSize = fileInfo.Length;                                        // Utile
+                        TotalFilesSize += fileSize;
                         var stopwatch = Stopwatch.StartNew();                                   // Utile
 
                         File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
 
                         stopwatch.Stop();                                                       // Utile
                         double fileTransferTime = stopwatch.Elapsed.TotalSeconds;               // Utile
+                        NbFilesLeftToDo++;
+                        FilesSizeLeftToDo += fileSize;
 
                         string[] LogArray = new string[] {
                             fileName,
@@ -73,12 +80,20 @@ namespace EasySave.lib.Services
                             today.ToString("MM/dd/yyyy hh:mm:ss")
                         };
                         Log.LogFiles(LogArray);
+                        appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo, $"{file}", $"{destFile}");
                     }
-
+                    IsActive = false;
+                    Console.WriteLine("test d'appel END !!!");
+                    Console.ReadKey();
+                    appelEtat(IsActive,TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
                     return 0;
                 }
                 else
                 {
+                    IsActive = false;
+                    Console.WriteLine("test d'appel END !!!");
+                    Console.ReadKey();
+                    appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
                     return 1;
                 }
             }
@@ -120,6 +135,25 @@ namespace EasySave.lib.Services
                 Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
                 return 1;
             }
+        }
+
+        private int appelEtat(bool IsActive,int TotalFilesToCopy,long TotalFilesSize,int NbFilesLeftToDo, long FilesSizeLeftToDo, string file = "0", string destFile = "0")
+        {
+           
+            string[] ProgressArray = new string[] {
+                        _SaveWorkModel.NameSaveWork,
+                        file,
+                        destFile,
+                        DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"),
+                        IsActive ? "ACTIVE" : "END",
+                        $"{TotalFilesToCopy}",
+                        $"{TotalFilesSize}",
+                        $"{NbFilesLeftToDo}",
+                        $"{FilesSizeLeftToDo}"
+                        };
+            Etat.EtatFile(ProgressArray);
+
+            return 0;
         }
     }
 }

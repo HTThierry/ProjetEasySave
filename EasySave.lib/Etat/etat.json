@@ -1,0 +1,13 @@
+[
+  {
+    "Name": "Eco",
+    "SourceFilePath": "D:\\SteamLibrary\\steamapps\\common\\Eco\\baselib.dll",
+    "TargetFilePath": "D:\\testComplete\\baselib.dll",
+    "Time": "02/12/2023 12:42:40",
+    "IsActive": "ACTIVE",
+    "TotalFilesToCopy": "4148",
+    "TotalFilesSize": "405016",
+    "NbFilesLeftToDo": "1",
+    "FilesSizeLeftToDo": "405016"
+  }
+]
