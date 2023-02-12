@@ -13,12 +13,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
-        <DataGrid Grid.Row="1" Margin="5" Name="dgSaveWorks" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" Margin="5" Name="dgSaveWorks" AutoGenerateColumns="False" SelectionChanged="dgSaveWorks_SelectionChanged" ItemsSource="{Binding SaveWorks}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding NameSaveWork}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding TypeSaveWork}"/>
-                <DataGridTextColumn Header="PathFrom" Binding="{Binding SourcePathSaveWork}"/>
-                <DataGridTextColumn Header="PathTo" Binding="{Binding DestinationPathSaveWork}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding _SaveWorkModel.NameSaveWork}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding _SaveWorkModel.NameSaveWork}"/>
+                <DataGridTextColumn Header="PathFrom" Binding="{Binding _SaveWorkModel.NameSaveWork}"/>
+                <DataGridTextColumn Header="PathTo" Binding="{Binding _SaveWorkModel.NameSaveWork}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
