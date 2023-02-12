@@ -55,11 +55,32 @@ namespace EasySave.lib.Services
                 return 1;
             }
         }
+        public int RemoveSaveWorkWPF(SaveWork _SaveWork, List<SaveWork> ArrayOfSaveWork)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{_SaveWork.GetInstanceInfo()[0]}.json");
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    ArrayOfSaveWork.Remove(_SaveWork);
+                    return 0;
+                }
+                else
+                    return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
+                return 1;
+            }
+        }
 
         public int ExecuteSaveWork(string SaveWorkID, List<SaveWork> ArrayOfSaveWork)
         {
             return ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].LaunchSaveWork();
         }
+        
 
         public int SequentialSaveWorksExecution(List<SaveWork> ArrayOfSaveWork)
         {

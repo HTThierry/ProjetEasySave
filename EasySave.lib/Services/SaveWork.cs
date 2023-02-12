@@ -8,7 +8,8 @@ namespace EasySave.lib.Services
 {
     public class SaveWork
     {
-        public SaveWorkModel _SaveWorkModel = new SaveWorkModel();
+        public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
+
 
         public string[] GetInstanceInfo()
         {
@@ -84,20 +85,20 @@ namespace EasySave.lib.Services
                         };
                         Log.LogFiles(LogArray);
 
-                        appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo, $"{file}", $"{destFile}");
+                       // appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo, $"{file}", $"{destFile}");
                     }
                     IsActive = "END";
-                    Console.WriteLine("test d'appel END !!! After foreach");
-                    Console.ReadKey();
-                    appelEtat(IsActive,TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
+                    //Console.WriteLine("test d'appel END !!! After foreach");
+                    //Console.ReadKey();
+                    //appelEtat(IsActive,TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
                     return 0;
                 }
                 else
                 {
                     IsActive = "END";
-                    Console.WriteLine("test d'appel END !!!");
-                    Console.ReadKey();
-                    appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
+                    //Console.WriteLine("test d'appel END !!!");
+                    //Console.ReadKey();
+                    //appelEtat(IsActive, TotalFilesToCopy, TotalFilesSize, NbFilesLeftToDo, FilesSizeLeftToDo);
                     return 1;
                 }
             }
