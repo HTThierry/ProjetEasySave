@@ -24,6 +24,8 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="Créer un SaveWork" Margin="5" Command="{Binding AddSaveWorkCommand}"/>
             <Button Content="Tout lancer" Margin="5" Command="{Binding LaunchAllCommand}"/>
+            <Button Content="lancer" Margin="5" Command="{Binding LaunchCommand}"/>
+            <Button Content="Supprimer" Margin="5" Command="{Binding deleteCommand}"/>
         </StackPanel>
     </Grid>
 </Window>
