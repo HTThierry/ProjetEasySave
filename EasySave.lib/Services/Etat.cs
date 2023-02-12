@@ -4,12 +4,17 @@ namespace EasySave.lib.Services
 {
     public class Etat
     {
+        public static List<EtatModel> Etats = new List<EtatModel>();
+
+        private static string CurrentName { get; set; } = "";
+
+        private static int CurrentIndex { get; set; }
+
         public static int EtatFile(string[] ProgressArray)
         {
             if (ProgressArray != null)
             {
-                List<EtatModel> Etats = new List<EtatModel>();
-                string EtatPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Etat", "etat.json");
+                Console.WriteLine($"{ProgressArray[0]}");
 
                 EtatModel _EtatModel = new EtatModel
                 {
@@ -24,60 +29,73 @@ namespace EasySave.lib.Services
                     FileDestinationPath = ProgressArray[8]
                 };
 
-                Etats.Add(_EtatModel);
-                JsonSerializerOptions options = new JsonSerializerOptions
+                if (CurrentName != ProgressArray[0])
                 {
-                    WriteIndented = true,
-                    //IgnoreNullValues = true
-                };
-                string JsonEtat = JsonSerializer.Serialize(Etats, options);
-
-                try
-                {
-                    File.WriteAllText(EtatPath, JsonEtat + Environment.NewLine);
+                    for (int i = 0; i < Etats.Count; i++)
+                    {
+                        if (Etats[i].Name == ProgressArray[0])
+                        {
+                            CurrentIndex = i;
+                        }
+                    }
                 }
-                catch
-                {
-                    return 1;
-                }
+                CurrentName = ProgressArray[0];
 
+                Etats[CurrentIndex] = _EtatModel;
 
-
-                //string json = File.ReadAllText(EtatPath);
-
-
-                // Sa pète ici à partir du moment ou y a 2 fichiers dans etat.json, Quand y a un fichier dans etat.json on passe la condition et ça affiche test modif
-
-                //List<EtatModel> EtatsVerif = JsonSerializer.Deserialize<List<EtatModel>>(json, options);
-
-                //EtatModel etatTest = EtatsVerif.FirstOrDefault(name => name.Name == $"{ProgressArray[0]}");
-
-                /*
-                if (etatTest == null)
-                {
-                    string JsonLog = JsonSerializer.Serialize(Etats, options);
-                    File.AppendAllText(EtatPath, JsonLog + Environment.NewLine);
-                }
-                else
-                {
-                    Console.WriteLine("test modif");
-                    etatTest.Name = ProgressArray[0];
-                    etatTest.SourceFilePath = ProgressArray[1];
-                    etatTest.TargetFilePath = ProgressArray[2];
-                    etatTest.Time = ProgressArray[3];
-                    etatTest.IsActive = ProgressArray[4];
-                    etatTest.TotalFilesToCopy = ProgressArray[5];
-                    etatTest.TotalFilesSize = ProgressArray[6];
-                    etatTest.NbFilesLeftToDo = ProgressArray[7];
-                    etatTest.FilesSizeLeftToDo = ProgressArray[8];
-                }
-                */
-                return 0;
+                return Serializer(Etats);
             }
             else
             {
-                Console.WriteLine("Merde1...");
-                Console.ReadLine();
+                return 1;
+            }
+        }
+        public static int AddNewSaveWorkEtat(string SaveWorkName)
+        {
+            DateTime today = DateTime.Now;
+
+            EtatModel _EtatModel = new EtatModel
+            {
+                Name = SaveWorkName,
+                Time = today.ToString("MM/dd/yyyy hh:mm:ss"),
+                CurrentState = "Inactive",
+                TotalFilesToCopy = "",
+                TotalFilesSizeToCopy = "",
+                NbFilesLeft = "",
+                FilesSizeLeft = "",
+                FilePath = "",
+                FileDestinationPath = ""
+            };
+
+            Etats.Add(_EtatModel);
+
+            Serializer(Etats);
+
+            return 0;
+        }
+
+        public static int RemoveSaveWork(string SaveWorkName)
+        {
+            return 0;
+        }
+
+        private static int Serializer(List<EtatModel> Etats)
+        {
+            string EtatPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Etat", "etat.json");
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+            };
+            string JsonEtat = JsonSerializer.Serialize(Etats, options);
+
+            try
+            {
+                File.WriteAllText(EtatPath, JsonEtat + Environment.NewLine);
+                return 0;
+            }
+            catch
+            {
                 return 1;
             }
         }

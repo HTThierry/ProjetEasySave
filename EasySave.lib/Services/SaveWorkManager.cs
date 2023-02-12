@@ -22,6 +22,7 @@ namespace EasySave.lib.Services
             {
                 SaveWork _SaveWorkToSave = SaveWorkCreator(AttributsForSaveWork);
                 ArrayOfSaveWork.Add(_SaveWorkToSave);
+                Etat.AddNewSaveWorkEtat(AttributsForSaveWork[0]);
 
                 string jsonString = JsonSerializer.Serialize(_SaveWorkToSave._SaveWorkModel);
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
