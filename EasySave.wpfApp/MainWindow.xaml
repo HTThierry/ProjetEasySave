@@ -1,0 +1,29 @@
+﻿<Window x:Class="EasySave.wpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EasySave.wpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
+        <DataGrid Grid.Row="1" Margin="5" Name="dgSaveWorks" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding NameSaveWork}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding TypeSaveWork}"/>
+                <DataGridTextColumn Header="PathFrom" Binding="{Binding SourcePathSaveWork}"/>
+                <DataGridTextColumn Header="PathTo" Binding="{Binding DestinationPathSaveWork}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Créer un SaveWork" Margin="5" Command="{Binding AddSaveWorkCommand}"/>
+            <Button Content="Tout lancer" Margin="5" Command="{Binding LaunchAllCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
