@@ -14,8 +14,6 @@ namespace EasySave.lib.Services
         {
             if (ProgressArray != null)
             {
-                Console.WriteLine($"{ProgressArray[0]}");
-
                 EtatModel _EtatModel = new EtatModel
                 {
                     Name = ProgressArray[0],
@@ -43,7 +41,7 @@ namespace EasySave.lib.Services
 
                 Etats[CurrentIndex] = _EtatModel;
 
-                return Serializer(Etats);
+                return Serializer();
             }
             else
             {
@@ -69,17 +67,25 @@ namespace EasySave.lib.Services
 
             Etats.Add(_EtatModel);
 
-            Serializer(Etats);
-
-            return 0;
+            return Serializer();
         }
 
         public static int RemoveSaveWork(string SaveWorkName)
         {
-            return 0;
+            for (int i = 0; i < Etats.Count; i++)
+            {
+                if (Etats[i].Name == SaveWorkName)
+                {
+                    CurrentIndex = i;
+                }
+            }
+
+            Etats.RemoveAt(CurrentIndex);
+
+            return Serializer();
         }
 
-        private static int Serializer(List<EtatModel> Etats)
+        private static int Serializer()
         {
             string EtatPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Etat", "etat.json");
 
@@ -96,6 +102,7 @@ namespace EasySave.lib.Services
             }
             catch
             {
+                Console.WriteLine("Chiant 1");
                 return 1;
             }
         }

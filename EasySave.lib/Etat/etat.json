@@ -1,23 +1,23 @@
 [
   {
     "Name": "T1",
-    "Time": "02/13/2023 12:04:56",
+    "Time": "02/13/2023 12:46:30",
     "CurrentState": "Inactive",
-    "TotalFilesToCopy": "0",
-    "TotalFilesSizeToCopy": "0",
-    "NbFilesLeft": "0",
-    "FilesSizeLeft": "0",
+    "TotalFilesToCopy": "",
+    "TotalFilesSizeToCopy": "",
+    "NbFilesLeft": "",
+    "FilesSizeLeft": "",
     "FilePath": "",
     "FileDestinationPath": ""
   },
   {
     "Name": "T2",
-    "Time": "02/13/2023 12:04:59",
+    "Time": "02/13/2023 12:46:30",
     "CurrentState": "Inactive",
-    "TotalFilesToCopy": "0",
-    "TotalFilesSizeToCopy": "0",
-    "NbFilesLeft": "0",
-    "FilesSizeLeft": "0",
+    "TotalFilesToCopy": "",
+    "TotalFilesSizeToCopy": "",
+    "NbFilesLeft": "",
+    "FilesSizeLeft": "",
     "FilePath": "",
     "FileDestinationPath": ""
   }

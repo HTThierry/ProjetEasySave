@@ -91,7 +91,7 @@ namespace EasySave.lib.Services
                     CurrentState = "Inactive";
                     EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, 0, 0, 0, 0, "", ""));
                 }
-                if (LogReturnCode >= 1 | EtatReturnCode >= 1)
+                if (LogReturnCode >= 1 || EtatReturnCode >= 1)
                     return 1;
                 else
                     return 0;
@@ -148,7 +148,7 @@ namespace EasySave.lib.Services
             return ProgressArray;
         }
 
-        private int DifferentialCopyFiles()                                                     //string _SaveWorkModel.SourcePathSaveWork, string _SaveWorkModel.DestinationPathSaveWork
+        private int DifferentialCopyFiles()
         {
             string SourcePath = _SaveWorkModel.SourcePathSaveWork;
             string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;

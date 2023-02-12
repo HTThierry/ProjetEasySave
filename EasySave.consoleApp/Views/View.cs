@@ -199,6 +199,8 @@ namespace EasySave.consoleApp.Views
                     Console.ReadKey();
                     break;
                 }
+                else
+                    break;
             }
         }
 

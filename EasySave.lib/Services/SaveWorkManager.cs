@@ -44,6 +44,7 @@ namespace EasySave.lib.Services
                 if (File.Exists(path))
                 {
                     File.Delete(path);
+                    Etat.RemoveSaveWork(ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1]._SaveWorkModel.NameSaveWork);
                     ArrayOfSaveWork.RemoveAt(Int32.Parse(SaveWorkID) - 1);
                     return 0;
                 }
@@ -64,14 +65,18 @@ namespace EasySave.lib.Services
 
         public int SequentialSaveWorksExecution(List<SaveWork> ArrayOfSaveWork)
         {
+            int ReturnCode = 0;
             for (int i = 1; i < (ArrayOfSaveWork.Count + 1); i++)
             {
                 if (ExecuteSaveWork($"{i}", ArrayOfSaveWork) == 1)
                 {
-                    return 1;
+                    ReturnCode++;
                 }
             }
-            return 0;
+            if (ReturnCode > 0)
+                return 1;
+            else
+                return 0;
         }
     }
 }
