@@ -130,7 +130,7 @@
     <value>Press [Y] for creation, [Enter] for abandon...</value>
   </data>
   <data name="copyCompleted" xml:space="preserve">
-    <value>The copy of the files was completed.</value>
+    <value>The copy of the files is completed.</value>
   </data>
   <data name="deleteError" xml:space="preserve">
     <value>Remove error(s) occurred...</value>
@@ -193,7 +193,7 @@
     <value>Enter [Y] for execution, [Enter] for abandon...</value>
   </data>
   <data name="sequentialCopyCompleted" xml:space="preserve">
-    <value>The sequential copy of the files was completed.</value>
+    <value>The sequential copy of the files is completed.</value>
   </data>
   <data name="SequentialValidation" xml:space="preserve">
     <value>Are you sure you want to execute all saved SaveWorks ?</value>
