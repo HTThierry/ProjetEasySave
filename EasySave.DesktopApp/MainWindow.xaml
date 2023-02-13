@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave.DesktopApp"
         xmlns:ig="http://schemas.infragistics.com/xaml"
-        xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+        xmlns:language="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
 
-        <DataGrid Grid.Row="1" Margin="5" IsReadOnly="True"  Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}" SelectionChanged="dgSaveWorks_SelectionChanged">
+        <DataGrid Grid.Row="1" Margin="5" IsReadOnly="True"  Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding _SaveWorkModel.NameSaveWork}" Width="*"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding _SaveWorkModel.TypeSaveWork}" Width="*"/>
@@ -26,7 +26,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Créer un SaveWork" Margin="5" Click="AddSaveWorkCommand"/>
+            <Button Content="{x:Static Resources:langage.tabName}" Margin="5" Click="AddSaveWorkCommand"/>
             <Button Content="Tout lancer" Margin="5" Click="LaunchAllCommand"/>
             <Button Content="lancer" Margin="5" Click="LaunchCommand"/>
             <Button Content="Supprimer" Margin="5" Click="deleteCommand"/>

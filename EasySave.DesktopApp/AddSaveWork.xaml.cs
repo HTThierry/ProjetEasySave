@@ -28,24 +28,22 @@ namespace EasySave.DesktopApp
         {
             InitializeComponent();
         }
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            // Fermer la fenêtre pop-up sans sauvegarder le SaveWork
+            //for the windows
             Close();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Sauvegarder le nouveau SaveWork
+            // get the data of the new saveWork
             string name = NameTextBox.Text;
             string type = (TypeComboBox.SelectedIndex == 0) ? "1" : "2";
             string sourcePath = SourcePathTextBox.Text;
             string destinationPath = DestinationPathTextBox.Text;
 
             this.AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
-            
-
-
 
             Close();
         }
