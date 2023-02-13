@@ -34,7 +34,7 @@ namespace EasySave.lib.Services
             int NbFilesLeft = 0;
             long FilesSizeLeft = 0;
             int LogReturnCode = 0;
-            int CurrentStateReturnCode = 0;
+            int ProgressStateReturnCode = 0;
 
             try
             {
@@ -80,15 +80,15 @@ namespace EasySave.lib.Services
                         FilesSizeLeft -= fileInfo.Length;
 
                         LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
-                        CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                        ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                     }
-                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
-                if (LogReturnCode >= 1 || CurrentStateReturnCode >= 1)
+                if (LogReturnCode >= 1 || ProgressStateReturnCode >= 1)
                     return 1;
                 else
                     return 0;
@@ -121,11 +121,11 @@ namespace EasySave.lib.Services
             return LogArray;
         }
 
-        private string[] ProgressArrayCreator(string CurrentState, int TotalFilesToCopy, long TotalFilesSizeToCopy, int NbFilesLeft, long FilesSizeLeft, string FilePath, string DestinationPath)
+        private string[] ProgressArrayCreator(string ProgressState, int TotalFilesToCopy, long TotalFilesSizeToCopy, int NbFilesLeft, long FilesSizeLeft, string FilePath, string DestinationPath)
         {
             DateTime today = DateTime.Now;
             string FileDestinationPath = "";
-            if (CurrentState == "Active")
+            if (ProgressState == "Active")
             {
                 FileDestinationPath = Path.Combine(DestinationPath, Path.GetFileName(FilePath));
             }
@@ -133,7 +133,7 @@ namespace EasySave.lib.Services
             string[] ProgressArray = new string[] {
                         _SaveWorkModel.NameSaveWork,
                         today.ToString("dd/MM/yyyy hh:mm:ss"),
-                        CurrentState,
+                        ProgressState,
                         $"{TotalFilesToCopy}",
                         $"{TotalFilesSizeToCopy}",
                         $"{NbFilesLeft}",
@@ -154,7 +154,7 @@ namespace EasySave.lib.Services
             int NbFilesLeft = 0;
             long FilesSizeLeft = 0;
             int LogReturnCode = 0;
-            int CurrentStateReturnCode = 0;
+            int ProgressStateReturnCode = 0;
 
             
             try
@@ -204,16 +204,16 @@ namespace EasySave.lib.Services
                             FilesSizeLeft -= fileInfo.Length;
 
                             LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
-                            CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                            ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                         };
                     }
-                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
-                if (LogReturnCode >= 1 || CurrentStateReturnCode >= 1)
+                if (LogReturnCode >= 1 || ProgressStateReturnCode >= 1)
                     return 1;
                 else
                     return 0;

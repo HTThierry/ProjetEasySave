@@ -1,10 +1,10 @@
 ﻿namespace EasySave.lib.Models
 {
-    public class CurrentStateModel
+    public class ProgressStateModel
     {
         public string Name { get; set; }
         public string Time { get; set; }
-        public string CurrentState { get; set; }
+        public string ProgressState { get; set; }
         public string TotalFilesToCopy { get; set; }
         public string TotalFilesSizeToCopy { get; set; }
         public string NbFilesLeft { get; set; }

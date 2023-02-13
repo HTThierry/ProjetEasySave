@@ -29,7 +29,7 @@ namespace EasySave.lib.Services
                 string[] AttributsForSaveWork = new string[4] { saveWorkJSON.NameSaveWork, $"{saveWorkJSON.TypeSaveWork}", saveWorkJSON.SourcePathSaveWork, saveWorkJSON.DestinationPathSaveWork };
 
                 ArrayOfSaveWork.Add(_SaveWorkManager.SaveWorkCreator(AttributsForSaveWork));
-                CurrentState.AddNewSaveWorkCurrentState(AttributsForSaveWork[0]);
+                ProgressState.AddNewSaveWorkProgressState(AttributsForSaveWork[0]);
             }
             return 0;
         }

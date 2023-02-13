@@ -4,23 +4,23 @@ using EasySave.lib.Models;
 
 namespace EasySave.lib.Services
 {
-    public class CurrentState
+    public class ProgressState
     {
-        public static List<CurrentStateModel> CurrentStates = new List<CurrentStateModel>();
+        public static List<ProgressStateModel> ProgressStates = new List<ProgressStateModel>();
 
         private static string CurrentName { get; set; } = "";
 
         private static int CurrentIndex { get; set; }
 
-        public static int CurrentStateFile(string[] ProgressArray)
+        public static int ProgressStateFile(string[] ProgressArray)
         {
             if (ProgressArray != null)
             {
-                CurrentStateModel _CurrentStateModel = new CurrentStateModel
+                ProgressStateModel _ProgressStateModel = new ProgressStateModel
                 {
                     Name = ProgressArray[0],
                     Time = ProgressArray[1],
-                    CurrentState = ProgressArray[2],
+                    ProgressState = ProgressArray[2],
                     TotalFilesToCopy = ProgressArray[3],
                     TotalFilesSizeToCopy = ProgressArray[4],
                     NbFilesLeft = ProgressArray[5],
@@ -31,9 +31,9 @@ namespace EasySave.lib.Services
 
                 if (CurrentName != ProgressArray[0])
                 {
-                    for (int i = 0; i < CurrentStates.Count; i++)
+                    for (int i = 0; i < ProgressStates.Count; i++)
                     {
-                        if (CurrentStates[i].Name == ProgressArray[0])
+                        if (ProgressStates[i].Name == ProgressArray[0])
                         {
                             CurrentIndex = i;
                         }
@@ -41,7 +41,7 @@ namespace EasySave.lib.Services
                 }
                 CurrentName = ProgressArray[0];
 
-                CurrentStates[CurrentIndex] = _CurrentStateModel;
+                ProgressStates[CurrentIndex] = _ProgressStateModel;
 
                 return Serializer();
             }
@@ -50,15 +50,15 @@ namespace EasySave.lib.Services
                 return 1;
             }
         }
-        public static int AddNewSaveWorkCurrentState(string SaveWorkName)
+        public static int AddNewSaveWorkProgressState(string SaveWorkName)
         {
             DateTime today = DateTime.Now;
 
-            CurrentStateModel _CurrentStateModel = new CurrentStateModel
+            ProgressStateModel _ProgressStateModel = new ProgressStateModel
             {
                 Name = SaveWorkName,
                 Time = today.ToString("dd/MM/yyyy hh:mm:ss"),
-                CurrentState = "Inactive",
+                ProgressState = "Inactive",
                 TotalFilesToCopy = "",
                 TotalFilesSizeToCopy = "",
                 NbFilesLeft = "",
@@ -67,30 +67,30 @@ namespace EasySave.lib.Services
                 FileDestinationPath = ""
             };
 
-            CurrentStates.Add(_CurrentStateModel);
+            ProgressStates.Add(_ProgressStateModel);
 
             return Serializer();
         }
 
         public static int RemoveSaveWork(string SaveWorkName)
         {
-            for (int i = 0; i < CurrentStates.Count; i++)
+            for (int i = 0; i < ProgressStates.Count; i++)
             {
-                if (CurrentStates[i].Name == SaveWorkName)
+                if (ProgressStates[i].Name == SaveWorkName)
                 {
                     CurrentIndex = i;
                 }
             }
 
-            CurrentStates.RemoveAt(CurrentIndex);
+            ProgressStates.RemoveAt(CurrentIndex);
 
             return Serializer();
         }
 
         private static int Serializer()
         {
-            string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "CurrentState");
-            string CurrentStatePath = Path.Combine(DirectoryPath, "CurrentState.json");
+            string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "ProgressState");
+            string ProgressStatePath = Path.Combine(DirectoryPath, "ProgressState.json");
 
             if (!Directory.Exists(DirectoryPath))
             {
@@ -101,11 +101,11 @@ namespace EasySave.lib.Services
             {
                 WriteIndented = true,
             };
-            string JsonCurrentState = JsonSerializer.Serialize(CurrentStates, options);
+            string JsonProgressState = JsonSerializer.Serialize(ProgressStates, options);
 
             try
             {
-                File.WriteAllText(CurrentStatePath, JsonCurrentState + Environment.NewLine);
+                File.WriteAllText(ProgressStatePath, JsonProgressState + Environment.NewLine);
                 return 0;
             }
             catch
