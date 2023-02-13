@@ -116,7 +116,7 @@ namespace EasySave.lib.Services
                 DestinationPath,
                 $"{FileSize}",
                 $"{FileTransferTime}",
-                today.ToString("MM/dd/yyyy hh:mm:ss")
+                today.ToString("dd/MM/yyyy hh:mm:ss")
             };
 
             return LogArray;
@@ -133,7 +133,7 @@ namespace EasySave.lib.Services
 
             string[] ProgressArray = new string[] {
                         _SaveWorkModel.NameSaveWork,
-                        today.ToString("MM/dd/yyyy hh:mm:ss"),
+                        today.ToString("dd/MM/yyyy hh:mm:ss"),
                         CurrentState,
                         $"{TotalFilesToCopy}",
                         $"{TotalFilesSizeToCopy}",

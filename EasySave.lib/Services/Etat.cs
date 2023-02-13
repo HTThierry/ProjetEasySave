@@ -57,7 +57,7 @@ namespace EasySave.lib.Services
             EtatModel _EtatModel = new EtatModel
             {
                 Name = SaveWorkName,
-                Time = today.ToString("MM/dd/yyyy hh:mm:ss"),
+                Time = today.ToString("dd/MM/yyyy hh:mm:ss"),
                 CurrentState = "Inactive",
                 TotalFilesToCopy = "",
                 TotalFilesSizeToCopy = "",

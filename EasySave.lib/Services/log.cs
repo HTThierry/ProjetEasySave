@@ -11,7 +11,7 @@ namespace EasySave.lib.Services
             {
                 List<LogModel> logs = new List<LogModel>();
                 DateTime today = DateTime.Now;
-                string day = today.ToString("MM_dd_yyyy");
+                string day = today.ToString("dd_MM_yyyy");
 
                 string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Log");
                 string LogPath = Path.Combine(DirectoryPath, $"{day}_log.json");
