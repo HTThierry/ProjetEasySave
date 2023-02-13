@@ -83,13 +83,11 @@ namespace EasySave.lib.Services
                         LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
                         EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                     }
-                    CurrentState = "Inactive";
-                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, 0, 0, 0, 0, "", ""));
+                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    CurrentState = "Inactive";
-                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, 0, 0, 0, 0, "", ""));
+                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 if (LogReturnCode >= 1 || EtatReturnCode >= 1)
                     return 1;
@@ -152,49 +150,75 @@ namespace EasySave.lib.Services
         {
             string SourcePath = _SaveWorkModel.SourcePathSaveWork;
             string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
+            string CurrentState = "Active";
+            int TotalFilesToCopy = 0;
+            long TotalFilesSizeToCopy = 0;
+            int NbFilesLeft = 0;
+            long FilesSizeLeft = 0;
+            int LogReturnCode = 0;
+            int EtatReturnCode = 0;
+
+            
             try
             {
                 if (Directory.Exists(_SaveWorkModel.SourcePathSaveWork))
                 {
+                    if (!Directory.Exists(DestinationPath))
+                    {
+                        Directory.CreateDirectory(DestinationPath);
+                    }
+                    
                     foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
                     {
                         Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
                     }
-                    foreach (string file in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
+
+                    string[] files = Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories);
+                    TotalFilesToCopy = files.Length;
+                    NbFilesLeft = TotalFilesToCopy;
+
+                    foreach (string file in files)
+                    {
+                        FileInfo fileInfo = new FileInfo(file);
+                        TotalFilesSizeToCopy += fileInfo.Length;
+                    }
+                    FilesSizeLeft = TotalFilesSizeToCopy;
+
+                    foreach (string file in files)
                     {
                         if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(SourcePath, DestinationPath)))
                         {
-                            string fileName = Path.GetFileName(file);
-                            string destFile = Path.Combine(DestinationPath, fileName);
-                            FileInfo fileInfo = new FileInfo(file);
-                            long fileSize = fileInfo.Length;
-                            DateTime today = DateTime.Now;
-
                             var stopwatch = Stopwatch.StartNew();
+                            try
+                            {
+                                File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
 
-                            File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
-
+                            }
+                            catch
+                            {
+                                return 1;
+                            }
                             stopwatch.Stop();
-                            double fileTransferTime = stopwatch.Elapsed.TotalSeconds;
+                            double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
 
-                            string[] LogArray = new string[] {
-                            fileName,
-                            file,
-                            destFile,
-                            DestinationPath,
-                            $"{fileSize}",
-                            $"{fileTransferTime}",
-                            today.ToString("MM/dd/yyyy hh:mm:ss")
-                            };
-                            Log.LogFiles(LogArray);
-                        }
+                            NbFilesLeft--;
+                            FileInfo fileInfo = new FileInfo(file);
+                            FilesSizeLeft -= fileInfo.Length;
+
+                            LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
+                            EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                        };
                     }
-                    return 0;
+                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    return 1;
+                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
+                if (LogReturnCode >= 1 || EtatReturnCode >= 1)
+                    return 1;
+                else
+                    return 0;
             }
             catch (Exception ex)
             {
