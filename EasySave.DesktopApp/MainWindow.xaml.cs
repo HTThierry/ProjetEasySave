@@ -1,9 +1,12 @@
-﻿using EasySave.lib.Models;
-using EasySave.lib.Services;
+﻿using EasySave.lib.Services;
+using EasySave.lib.Models;
+using EasySave.DesktopApp.ViewModels;
 using System.Collections.Generic;
 using System.Windows;
-using EasySave.DesktopApp.ViewModels;
 using System.Collections.ObjectModel;
+using System;
+using System.Windows.Navigation;
+
 namespace EasySave.DesktopApp
 {
     /// <summary>
@@ -11,12 +14,11 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewModel _ViewModel = new ViewModel();
         private Model _Model = new Model();
         private Presenter _Presenter = new Presenter();
         private Initializer _Initializer = new Initializer();
         private SaveWorkModel _SaveWorkModel = new SaveWorkModel();
-
+        private ViewModel _ViewModel = new ViewModel();
 
         public string[] GetInstanceInfo()
         {
@@ -38,14 +40,24 @@ namespace EasySave.DesktopApp
         {
             InitializeComponent();
             SaveWorkInitializing();
-
+            NavigationService navService = NavigationService.GetNavigationService(this);
             dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
+            _ViewModel.ReturnModelList(_Model.ArrayOfSaveWork);
         }
 
         public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
         {
-        }
+            
+            AddSaveWork NewsPage= new AddSaveWork();
 
+            NewsPage.ShowDialog();
+
+        }
+        public void RefreshSaveWorks()
+        {
+            // Mettre à jour la liste de SaveWork dans le DataGrid
+            dgSaveWorks.Items.Refresh();
+        }
         public void LaunchAllCommand(object sender, RoutedEventArgs e)
         {
             foreach (SaveWork _saveWork in _Model.ArrayOfSaveWork)
@@ -66,8 +78,9 @@ namespace EasySave.DesktopApp
         public void deleteCommand(object sender, RoutedEventArgs e)
         {
             SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
+
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
-            _Model.RaisePropertyChanged("ArrayOfSaveWork");
+            dgSaveWorks.Items.Refresh();
 
         }
     }

@@ -2,12 +2,13 @@
 using EasySave.lib.Services;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Xml.Linq;
 
 namespace EasySave.DesktopApp.ViewModels
 {
     public class ViewModel
     {
-        public Model _Model = new Model();
+        public Model _Model { get; set; } = new Model(); 
         public InputProcessingService _InputProcessingService = new InputProcessingService();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
         public Initializer _Initializer = new Initializer();
@@ -69,6 +70,7 @@ namespace EasySave.DesktopApp.ViewModels
 
         public int RemoveSaveWorkWPF(SaveWork _SaveWork)
         {
+
             return _SaveWorkManager.RemoveSaveWorkWPF(_SaveWork, _Model.ArrayOfSaveWork);
         }
 
@@ -80,6 +82,12 @@ namespace EasySave.DesktopApp.ViewModels
         public int SequentialSaveWorksExecution()
         {
             return _SaveWorkManager.SequentialSaveWorksExecution(_Model.ArrayOfSaveWork);
+        }
+
+        public int ReturnModelList(List<SaveWork> _ArrayOfSaveWork)
+        {
+            _Model.ArrayOfSaveWork= _ArrayOfSaveWork;
+            return 0;
         }
     }
 }

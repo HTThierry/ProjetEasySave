@@ -5,6 +5,7 @@ namespace EasySave.lib.Services
 {
     public class SaveWorkManager
     {
+        public static int index;
         public SaveWork SaveWorkCreator(string[] AttributsForSaveWork)
         {
             SaveWork _SaveWork = new SaveWork();
@@ -63,7 +64,16 @@ namespace EasySave.lib.Services
                 if (File.Exists(path))
                 {
                     File.Delete(path);
-                    ArrayOfSaveWork.Remove(_SaveWork);
+
+                    string NameOfSaveWork = _SaveWork._SaveWorkModel.NameSaveWork;
+                    for (int i=0; i<ArrayOfSaveWork.Count; i++)
+                    {
+                        if (ArrayOfSaveWork[i]._SaveWorkModel.NameSaveWork == _SaveWork._SaveWorkModel.NameSaveWork)
+                        {
+                            index = i;
+                        }
+                    }
+                    ArrayOfSaveWork.RemoveAt(index);
                     return 0;
                 }
                 else
