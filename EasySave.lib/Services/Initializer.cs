@@ -9,6 +9,12 @@ namespace EasySave.lib.Services
         public int SaveWorkInitializing(List<SaveWork> ArrayOfSaveWork)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             int filecount = Directory.GetFiles(path, "*.json").Length;
             string[] files = Directory.GetFiles(path, "*.json");
             string[] AttributsForPresentation = new string[4];
@@ -23,6 +29,7 @@ namespace EasySave.lib.Services
                 string[] AttributsForSaveWork = new string[4] { saveWorkJSON.NameSaveWork, $"{saveWorkJSON.TypeSaveWork}", saveWorkJSON.SourcePathSaveWork, saveWorkJSON.DestinationPathSaveWork };
 
                 ArrayOfSaveWork.Add(_SaveWorkManager.SaveWorkCreator(AttributsForSaveWork));
+                ProgressState.AddNewSaveWorkProgressState(AttributsForSaveWork[0]);
             }
             return 0;
         }

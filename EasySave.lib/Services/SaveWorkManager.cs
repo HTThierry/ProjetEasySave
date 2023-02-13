@@ -22,12 +22,27 @@ namespace EasySave.lib.Services
             {
                 SaveWork _SaveWorkToSave = SaveWorkCreator(AttributsForSaveWork);
                 ArrayOfSaveWork.Add(_SaveWorkToSave);
+                ProgressState.AddNewSaveWorkProgressState(AttributsForSaveWork[0]);
 
                 string jsonString = JsonSerializer.Serialize(_SaveWorkToSave._SaveWorkModel);
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
-                File.WriteAllText(path, jsonString);
+                string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
+                string path = Path.Combine(DirectoryPath, $"{AttributsForSaveWork[0]}.json");
 
-                return 0;
+                if (!Directory.Exists(DirectoryPath))
+                {
+                    Directory.CreateDirectory(DirectoryPath);
+                }
+
+                try
+                {
+                    File.WriteAllText(path, jsonString);
+                    return 0;
+                }
+                catch
+                {
+                    return 1;
+                }
+
             }
             else
             {
@@ -43,6 +58,7 @@ namespace EasySave.lib.Services
                 if (File.Exists(path))
                 {
                     File.Delete(path);
+                    ProgressState.RemoveSaveWork(ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1]._SaveWorkModel.NameSaveWork);
                     ArrayOfSaveWork.RemoveAt(Int32.Parse(SaveWorkID) - 1);
                     return 0;
                 }
@@ -63,14 +79,18 @@ namespace EasySave.lib.Services
 
         public int SequentialSaveWorksExecution(List<SaveWork> ArrayOfSaveWork)
         {
+            int ReturnCode = 0;
             for (int i = 1; i < (ArrayOfSaveWork.Count + 1); i++)
             {
                 if (ExecuteSaveWork($"{i}", ArrayOfSaveWork) == 1)
                 {
-                    return 1;
+                    ReturnCode++;
                 }
             }
-            return 0;
+            if (ReturnCode > 0)
+                return 1;
+            else
+                return 0;
         }
     }
 }
