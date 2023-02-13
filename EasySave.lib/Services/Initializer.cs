@@ -9,6 +9,12 @@ namespace EasySave.lib.Services
         public int SaveWorkInitializing(List<SaveWork> ArrayOfSaveWork)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             int filecount = Directory.GetFiles(path, "*.json").Length;
             string[] files = Directory.GetFiles(path, "*.json");
             string[] AttributsForPresentation = new string[4];

@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Text.Json;
+using EasySave.lib.Models;
 
 namespace EasySave.lib.Services
 {
@@ -87,7 +89,13 @@ namespace EasySave.lib.Services
 
         private static int Serializer()
         {
-            string EtatPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Etat", "etat.json");
+            string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Etat");
+            string EtatPath = Path.Combine(DirectoryPath, "etat.json");
+
+            if (!Directory.Exists(DirectoryPath))
+            {
+                Directory.CreateDirectory(DirectoryPath);
+            }
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {

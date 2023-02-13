@@ -1,6 +1,5 @@
 ﻿using EasySave.consoleApp.Resources;
 using EasySave.consoleApp.ViewModels;
-using EasySave.lib.Services;
 
 namespace EasySave.consoleApp.Views
 {
@@ -132,7 +131,7 @@ namespace EasySave.consoleApp.Views
 
         private void MenuChoice2()
         {
-            while(true)
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine($"{langage.deletion}");
@@ -182,7 +181,7 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"{ langage.SequentialValidation }");
+                Console.WriteLine($"{langage.SequentialValidation}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
                 Console.WriteLine($"{langage.SequentialConfirm}");
@@ -204,9 +203,9 @@ namespace EasySave.consoleApp.Views
             }
         }
 
-    private void ListingOfSaveWork(string[] NameSaveWork)
+        private void ListingOfSaveWork(string[] NameSaveWork)
         {
-            for (int i=0; i < NameSaveWork.Length; i++)
+            for (int i = 0; i < NameSaveWork.Length; i++)
             {
                 Console.Write($"    SaveWork {i + 1} : ");
                 Console.WriteLine($"{NameSaveWork[i]}");

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using EasySave.lib.Models;
 
 namespace EasySave.lib.Services
 {
@@ -12,7 +13,8 @@ namespace EasySave.lib.Services
                 DateTime today = DateTime.Now;
                 string day = today.ToString("MM_dd_yyyy");
 
-                string LogPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Log", $"{day}_log.json");
+                string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Log");
+                string LogPath = Path.Combine(DirectoryPath, $"{day}_log.json");
 
                 LogModel _LogModel = new LogModel
                 {
@@ -26,6 +28,12 @@ namespace EasySave.lib.Services
                 };
 
                 logs.Add(_LogModel);
+
+                if (!Directory.Exists(DirectoryPath))
+                {
+                    Directory.CreateDirectory(DirectoryPath);
+                }
+
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     WriteIndented = true

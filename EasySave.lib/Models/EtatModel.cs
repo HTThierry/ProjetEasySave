@@ -1,4 +1,4 @@
-﻿namespace EasySave.lib.Services
+﻿namespace EasySave.lib.Models
 {
     public class EtatModel
     {
