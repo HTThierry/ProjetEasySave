@@ -22,7 +22,7 @@ namespace EasySave.lib.Services
             {
                 SaveWork _SaveWorkToSave = SaveWorkCreator(AttributsForSaveWork);
                 ArrayOfSaveWork.Add(_SaveWorkToSave);
-                Etat.AddNewSaveWorkEtat(AttributsForSaveWork[0]);
+                CurrentState.AddNewSaveWorkCurrentState(AttributsForSaveWork[0]);
 
                 string jsonString = JsonSerializer.Serialize(_SaveWorkToSave._SaveWorkModel);
                 string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
@@ -58,7 +58,7 @@ namespace EasySave.lib.Services
                 if (File.Exists(path))
                 {
                     File.Delete(path);
-                    Etat.RemoveSaveWork(ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1]._SaveWorkModel.NameSaveWork);
+                    CurrentState.RemoveSaveWork(ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1]._SaveWorkModel.NameSaveWork);
                     ArrayOfSaveWork.RemoveAt(Int32.Parse(SaveWorkID) - 1);
                     return 0;
                 }

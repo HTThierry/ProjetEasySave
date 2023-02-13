@@ -29,13 +29,12 @@ namespace EasySave.lib.Services
         {
             string SourcePath = _SaveWorkModel.SourcePathSaveWork;
             string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
-            string CurrentState = "Active";
             int TotalFilesToCopy = 0;
             long TotalFilesSizeToCopy = 0;
             int NbFilesLeft = 0;
             long FilesSizeLeft = 0;
             int LogReturnCode = 0;
-            int EtatReturnCode = 0;
+            int CurrentStateReturnCode = 0;
 
             try
             {
@@ -81,15 +80,15 @@ namespace EasySave.lib.Services
                         FilesSizeLeft -= fileInfo.Length;
 
                         LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
-                        EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                        CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                     }
-                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
-                if (LogReturnCode >= 1 || EtatReturnCode >= 1)
+                if (LogReturnCode >= 1 || CurrentStateReturnCode >= 1)
                     return 1;
                 else
                     return 0;
@@ -150,13 +149,12 @@ namespace EasySave.lib.Services
         {
             string SourcePath = _SaveWorkModel.SourcePathSaveWork;
             string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
-            string CurrentState = "Active";
             int TotalFilesToCopy = 0;
             long TotalFilesSizeToCopy = 0;
             int NbFilesLeft = 0;
             long FilesSizeLeft = 0;
             int LogReturnCode = 0;
-            int EtatReturnCode = 0;
+            int CurrentStateReturnCode = 0;
 
             
             try
@@ -206,16 +204,16 @@ namespace EasySave.lib.Services
                             FilesSizeLeft -= fileInfo.Length;
 
                             LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
-                            EtatReturnCode += Etat.EtatFile(ProgressArrayCreator(CurrentState, TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                            CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                         };
                     }
-                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    EtatReturnCode += Etat.EtatFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    CurrentStateReturnCode += CurrentState.CurrentStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
                 }
-                if (LogReturnCode >= 1 || EtatReturnCode >= 1)
+                if (LogReturnCode >= 1 || CurrentStateReturnCode >= 1)
                     return 1;
                 else
                     return 0;
