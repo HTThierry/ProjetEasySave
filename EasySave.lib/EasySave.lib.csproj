@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Etat\" />
     <Folder Include="Log\" />
     <Folder Include="ProgressState\" />
   </ItemGroup>
