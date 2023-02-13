@@ -78,6 +78,10 @@ namespace EasySave.DesktopApp.ViewModels
         {
             return _SaveWorkManager.ExecuteSaveWork(SaveWorkID, _Model.ArrayOfSaveWork);
         }
+        public int ExecuteSaveWorkWPF(SaveWork _SaveWork)
+        {
+            return _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
+        }
 
         public int SequentialSaveWorksExecution()
         {

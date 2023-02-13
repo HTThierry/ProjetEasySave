@@ -90,7 +90,10 @@ namespace EasySave.lib.Services
         {
             return ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].LaunchSaveWork();
         }
-        
+        public int ExecuteSaveWorkWPF(SaveWork _SaveWork)
+        {
+            return _SaveWork.LaunchSaveWork();
+        }
 
         public int SequentialSaveWorksExecution(List<SaveWork> ArrayOfSaveWork)
         {

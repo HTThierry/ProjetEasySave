@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System;
-using System.Windows.Navigation;
 
 namespace EasySave.DesktopApp
 {
@@ -40,8 +39,8 @@ namespace EasySave.DesktopApp
         {
             InitializeComponent();
             SaveWorkInitializing();
-            NavigationService navService = NavigationService.GetNavigationService(this);
             dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
+            var test = _Model.ArrayOfSaveWork;
             _ViewModel.ReturnModelList(_Model.ArrayOfSaveWork);
         }
 
@@ -51,6 +50,20 @@ namespace EasySave.DesktopApp
             AddSaveWork NewsPage= new AddSaveWork();
 
             NewsPage.ShowDialog();
+            //if (result == true)
+            //{
+            //    string[] savedVariable = NewsPage.AttributsForSaveWork;
+            //    _ViewModel.AddNewSaveWork(savedVariable);
+            //    dgSaveWorks.Items.Refresh();
+
+            //}
+            string[] savedVariable = NewsPage.AttributsForSaveWork;
+            if (savedVariable != null)
+            {
+
+                _ViewModel.AddNewSaveWork(savedVariable);
+                dgSaveWorks.Items.Refresh();
+            }
 
         }
         public void RefreshSaveWorks()
@@ -62,7 +75,7 @@ namespace EasySave.DesktopApp
         {
             foreach (SaveWork _saveWork in _Model.ArrayOfSaveWork)
             {
-                _saveWork.LaunchSaveWork();
+                _ViewModel.ExecuteSaveWorkWPF(_saveWork);
             }
         }
 
@@ -71,7 +84,7 @@ namespace EasySave.DesktopApp
             SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
             if (selectedSaveWork != null)
             {
-                selectedSaveWork.LaunchSaveWork();
+                _ViewModel.ExecuteSaveWorkWPF(selectedSaveWork);
             }
         }
 
@@ -81,6 +94,11 @@ namespace EasySave.DesktopApp
 
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
             dgSaveWorks.Items.Refresh();
+
+        }
+
+        private void dgSaveWorks_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
 
         }
     }

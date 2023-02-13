@@ -22,7 +22,7 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class AddSaveWork : Window
     {
-        private ViewModel _ViewModel = new ViewModel();
+        public string[] AttributsForSaveWork { get; private set; }
 
         public AddSaveWork()
         {
@@ -42,10 +42,11 @@ namespace EasySave.DesktopApp
             string sourcePath = SourcePathTextBox.Text;
             string destinationPath = DestinationPathTextBox.Text;
 
-            string[] AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
-
-
+            this.AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
             
+
+
+
             Close();
         }
     }
