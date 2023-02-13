@@ -1,6 +1,6 @@
 ﻿namespace EasySave.lib.Models
 {
-    public class EtatModel
+    public class CurrentStateModel
     {
         public string Name { get; set; }
         public string Time { get; set; }

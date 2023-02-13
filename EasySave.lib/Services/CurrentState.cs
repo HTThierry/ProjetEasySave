@@ -4,19 +4,19 @@ using EasySave.lib.Models;
 
 namespace EasySave.lib.Services
 {
-    public class Etat
+    public class CurrentState
     {
-        public static List<EtatModel> Etats = new List<EtatModel>();
+        public static List<CurrentStateModel> CurrentStates = new List<CurrentStateModel>();
 
         private static string CurrentName { get; set; } = "";
 
         private static int CurrentIndex { get; set; }
 
-        public static int EtatFile(string[] ProgressArray)
+        public static int CurrentStateFile(string[] ProgressArray)
         {
             if (ProgressArray != null)
             {
-                EtatModel _EtatModel = new EtatModel
+                CurrentStateModel _CurrentStateModel = new CurrentStateModel
                 {
                     Name = ProgressArray[0],
                     Time = ProgressArray[1],
@@ -31,9 +31,9 @@ namespace EasySave.lib.Services
 
                 if (CurrentName != ProgressArray[0])
                 {
-                    for (int i = 0; i < Etats.Count; i++)
+                    for (int i = 0; i < CurrentStates.Count; i++)
                     {
-                        if (Etats[i].Name == ProgressArray[0])
+                        if (CurrentStates[i].Name == ProgressArray[0])
                         {
                             CurrentIndex = i;
                         }
@@ -41,7 +41,7 @@ namespace EasySave.lib.Services
                 }
                 CurrentName = ProgressArray[0];
 
-                Etats[CurrentIndex] = _EtatModel;
+                CurrentStates[CurrentIndex] = _CurrentStateModel;
 
                 return Serializer();
             }
@@ -50,11 +50,11 @@ namespace EasySave.lib.Services
                 return 1;
             }
         }
-        public static int AddNewSaveWorkEtat(string SaveWorkName)
+        public static int AddNewSaveWorkCurrentState(string SaveWorkName)
         {
             DateTime today = DateTime.Now;
 
-            EtatModel _EtatModel = new EtatModel
+            CurrentStateModel _CurrentStateModel = new CurrentStateModel
             {
                 Name = SaveWorkName,
                 Time = today.ToString("dd/MM/yyyy hh:mm:ss"),
@@ -67,30 +67,30 @@ namespace EasySave.lib.Services
                 FileDestinationPath = ""
             };
 
-            Etats.Add(_EtatModel);
+            CurrentStates.Add(_CurrentStateModel);
 
             return Serializer();
         }
 
         public static int RemoveSaveWork(string SaveWorkName)
         {
-            for (int i = 0; i < Etats.Count; i++)
+            for (int i = 0; i < CurrentStates.Count; i++)
             {
-                if (Etats[i].Name == SaveWorkName)
+                if (CurrentStates[i].Name == SaveWorkName)
                 {
                     CurrentIndex = i;
                 }
             }
 
-            Etats.RemoveAt(CurrentIndex);
+            CurrentStates.RemoveAt(CurrentIndex);
 
             return Serializer();
         }
 
         private static int Serializer()
         {
-            string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Etat");
-            string EtatPath = Path.Combine(DirectoryPath, "etat.json");
+            string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "CurrentState");
+            string CurrentStatePath = Path.Combine(DirectoryPath, "CurrentState.json");
 
             if (!Directory.Exists(DirectoryPath))
             {
@@ -101,11 +101,11 @@ namespace EasySave.lib.Services
             {
                 WriteIndented = true,
             };
-            string JsonEtat = JsonSerializer.Serialize(Etats, options);
+            string JsonCurrentState = JsonSerializer.Serialize(CurrentStates, options);
 
             try
             {
-                File.WriteAllText(EtatPath, JsonEtat + Environment.NewLine);
+                File.WriteAllText(CurrentStatePath, JsonCurrentState + Environment.NewLine);
                 return 0;
             }
             catch
