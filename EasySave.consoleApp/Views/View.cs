@@ -141,7 +141,7 @@ namespace EasySave.consoleApp.Views
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
-                    if (_ViewModel.RemoveSaveWork(UserID) == 1)                        // TODO (Code de retour)
+                    if (_ViewModel.RemoveSaveWork(UserID) == 1)
                     {
                         Console.WriteLine("Remove errors occurred...");
                     }
