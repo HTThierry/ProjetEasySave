@@ -11,4 +11,22 @@
     <ProjectReference Include="..\EasySave.lib\EasySave.lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\langage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>langage.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\langage.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\langage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>langage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

@@ -129,6 +129,12 @@
   <data name="confirmLine" xml:space="preserve">
     <value>Press [Y] for creation, [Enter] for abandon...</value>
   </data>
+  <data name="copyCompleted" xml:space="preserve">
+    <value>The copy of the files is completed.</value>
+  </data>
+  <data name="deleteError" xml:space="preserve">
+    <value>Remove error(s) occurred...</value>
+  </data>
   <data name="deletion" xml:space="preserve">
     <value>Please choose a SaveWork for deletion :</value>
   </data>
@@ -177,8 +183,17 @@
   <data name="option4" xml:space="preserve">
     <value>Option 4 requested</value>
   </data>
+  <data name="potentialError" xml:space="preserve">
+    <value>Potential error(s) occured...</value>
+  </data>
+  <data name="pressKeyMenu" xml:space="preserve">
+    <value>Press any key to return to the menu...</value>
+  </data>
   <data name="SequentialConfirm" xml:space="preserve">
     <value>Enter [Y] for execution, [Enter] for abandon...</value>
+  </data>
+  <data name="sequentialCopyCompleted" xml:space="preserve">
+    <value>The sequential copy of the files is completed.</value>
   </data>
   <data name="SequentialValidation" xml:space="preserve">
     <value>Are you sure you want to execute all saved SaveWorks ?</value>

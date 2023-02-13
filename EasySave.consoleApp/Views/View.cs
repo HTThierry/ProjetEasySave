@@ -143,9 +143,9 @@ namespace EasySave.consoleApp.Views
                 {
                     if (_ViewModel.RemoveSaveWork(UserID) == 1)
                     {
-                        Console.WriteLine("Remove errors occurred...");
+                        Console.WriteLine($"{langage.potentialError}");
                     }
-                    Console.WriteLine("Press any key to return on the menu...");
+                    Console.WriteLine($"{langage.pressKeyMenu}");
                     Console.ReadKey();
                     break;
                 }
@@ -166,10 +166,10 @@ namespace EasySave.consoleApp.Views
                 {
                     if (_ViewModel.ExecuteSaveWork(UserID) == 1)
                     {
-                        Console.WriteLine("Potential errors occurred...");
+                        Console.WriteLine($"{langage.potentialError}");
                     }
-                    Console.WriteLine("The copy of the files is complete.");
-                    Console.WriteLine("Press any key to return on the menu...");
+                    Console.WriteLine($"{langage.copyCompleted}");
+                    Console.WriteLine($"{langage.pressKeyMenu}");
                     Console.ReadKey();
                     break;
                 }
@@ -191,10 +191,10 @@ namespace EasySave.consoleApp.Views
                 {
                     if (_ViewModel.SequentialSaveWorksExecution() == 1)
                     {
-                        Console.WriteLine("Potential errors occurred...");
+                        Console.WriteLine($"{langage.potentialError}");
                     }
-                    Console.WriteLine("The sequencial copy of the files is complete.");
-                    Console.WriteLine("Press any key to return on the menu...");
+                    Console.WriteLine($"{langage.sequentialCopyCompleted}");
+                    Console.WriteLine($"{langage.pressKeyMenu}");
                     Console.ReadKey();
                     break;
                 }
