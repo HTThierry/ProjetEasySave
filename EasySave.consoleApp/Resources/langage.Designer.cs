@@ -97,7 +97,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The copy of the files is completed..
+        ///   Looks up a localized string similar to The copy of the files was completed..
         /// </summary>
         public static string copyCompleted {
             get {
@@ -286,7 +286,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The sequential copy of the files is completed..
+        ///   Looks up a localized string similar to The sequential copy of the files was completed..
         /// </summary>
         public static string sequentialCopyCompleted {
             get {
