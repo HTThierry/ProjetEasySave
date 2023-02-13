@@ -1,7 +1,7 @@
 [
   {
     "Name": "TDS1",
-    "Time": "02/13/2023 09:39:11",
+    "Time": "02/13/2023 10:35:25",
     "CurrentState": "Inactive",
     "TotalFilesToCopy": "0",
     "TotalFilesSizeToCopy": "0",
@@ -12,12 +12,23 @@
   },
   {
     "Name": "TDS2",
-    "Time": "02/13/2023 09:39:19",
+    "Time": "02/13/2023 10:35:05",
     "CurrentState": "Inactive",
-    "TotalFilesToCopy": "0",
-    "TotalFilesSizeToCopy": "0",
-    "NbFilesLeft": "0",
-    "FilesSizeLeft": "0",
+    "TotalFilesToCopy": "",
+    "TotalFilesSizeToCopy": "",
+    "NbFilesLeft": "",
+    "FilesSizeLeft": "",
+    "FilePath": "",
+    "FileDestinationPath": ""
+  },
+  {
+    "Name": "TDS3",
+    "Time": "02/13/2023 10:35:05",
+    "CurrentState": "Inactive",
+    "TotalFilesToCopy": "",
+    "TotalFilesSizeToCopy": "",
+    "NbFilesLeft": "",
+    "FilesSizeLeft": "",
     "FilePath": "",
     "FileDestinationPath": ""
   }
