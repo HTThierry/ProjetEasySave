@@ -1,5 +1,6 @@
 ﻿using EasySave.lib.Models;
 using System.Text.Json;
+using System.Configuration;
 
 namespace EasySave.lib.Services
 {
@@ -25,7 +26,7 @@ namespace EasySave.lib.Services
                 ProgressState.AddNewSaveWorkProgressState(AttributsForSaveWork[0]);
 
                 string jsonString = JsonSerializer.Serialize(_SaveWorkToSave._SaveWorkModel);
-                string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
+                string DirectoryPath = ConfigurationManager.AppSettings["SaveWorkPath"];
                 string path = Path.Combine(DirectoryPath, $"{AttributsForSaveWork[0]}.json");
 
                 if (!Directory.Exists(DirectoryPath))
@@ -52,7 +53,8 @@ namespace EasySave.lib.Services
 
         public int RemoveSaveWork(string SaveWorkID, List<SaveWork> ArrayOfSaveWork)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");
+            string directory = ConfigurationManager.AppSettings["SaveWorkPath"];
+            string path = Path.Combine(directory, $"{ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");
             try
             {
                 if (File.Exists(path))
