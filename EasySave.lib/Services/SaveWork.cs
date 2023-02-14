@@ -1,11 +1,14 @@
 ﻿using EasySave.lib.Models;
+using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 
 namespace EasySave.lib.Services
 {
     public class SaveWork
     {
         public SaveWorkModel _SaveWorkModel = new SaveWorkModel();
+        public cryptoSoft _cryptoSoft = new cryptoSoft();
 
         public string[] GetInstanceInfo()
         {
@@ -63,10 +66,39 @@ namespace EasySave.lib.Services
 
                     foreach (string file in files)
                     {
+                        int timeForCryp = 0;
+
+
+                        string FileDestinationPath = Path.Combine(DestinationPath, Path.GetFileName(file));
+                        string extentionOfFile = Path.GetExtension(file);
+                        string FilesToCryp = ConfigurationManager.AppSettings["fileToCryp"];
+                        string[] extensionsToCryp = FilesToCryp.Split(',');
+                        bool isFileToCryp = false;
+
+                        foreach (string extension in extensionsToCryp)
+                        {
+                            if (extentionOfFile == extension)
+                            {
+                                isFileToCryp = true;
+                                break;
+                            }
+                        }
                         Stopwatch stopwatch = Stopwatch.StartNew();
                         try
                         {
-                            File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
+
+                            if (isFileToCryp)
+                            {
+                               timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}", $"{ConfigurationManager.AppSettings["CryptKeyPath"]}");
+                                var test = timeForCryp;
+                            }
+                            else
+                            {
+                                File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
+                            }
+                            
+                            
+
                         }
                         catch
                         {
@@ -79,7 +111,7 @@ namespace EasySave.lib.Services
                         FileInfo fileInfo = new FileInfo(file);
                         FilesSizeLeft -= fileInfo.Length;
 
-                        LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
+                        LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime, timeForCryp));
                         ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                     }
                     ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
@@ -99,7 +131,7 @@ namespace EasySave.lib.Services
             }
         }
 
-        private string[] LogArrayCreator(string FilePath, string DestinationPath, double FileTransferTime)
+        private string[] LogArrayCreator(string FilePath, string DestinationPath, double FileTransferTime,int timeForCryp)
         {
             DateTime today = DateTime.Now;
             FileInfo _FileInfo = new FileInfo(FilePath);
@@ -112,6 +144,7 @@ namespace EasySave.lib.Services
                 FilePath,
                 FileDestinationPath,
                 DestinationPath,
+                $"{timeForCryp}",
                 $"{FileSize}",
                 $"{FileTransferTime}",
                 today.ToString("dd/MM/yyyy hh:mm:ss")
@@ -155,6 +188,7 @@ namespace EasySave.lib.Services
             int LogReturnCode = 0;
             int ProgressStateReturnCode = 0;
 
+
             
             try
             {
@@ -185,10 +219,36 @@ namespace EasySave.lib.Services
                     {
                         if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(SourcePath, DestinationPath)))
                         {
+                            int timeForCryp = 0;
+
+
+                            string FileDestinationPath = Path.Combine(DestinationPath, Path.GetFileName(file));
+                            string extentionOfFile = Path.GetExtension(file);
+                            string FilesToCryp = ConfigurationManager.AppSettings["fileToCryp"];
+                            string[] extensionsToCryp = FilesToCryp.Split(',');
+                            bool isFileToCryp = false;
+
+                            foreach (string extension in extensionsToCryp)
+                            {
+                                if (extentionOfFile == extension)
+                                {
+                                    isFileToCryp = true;
+                                    break;
+                                }
+                            }
+
                             var stopwatch = Stopwatch.StartNew();
                             try
                             {
-                                File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
+                                if (isFileToCryp)
+                                {
+                                    timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}", $"{ConfigurationManager.AppSettings["CryptKeyPath"]}");
+                                    var test = timeForCryp;
+                                }
+                                else
+                                {
+                                    File.Copy(file, file.Replace(SourcePath, DestinationPath), true);
+                                }
 
                             }
                             catch
@@ -202,7 +262,7 @@ namespace EasySave.lib.Services
                             FileInfo fileInfo = new FileInfo(file);
                             FilesSizeLeft -= fileInfo.Length;
 
-                            LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime));
+                            LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime, timeForCryp));
                             ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                         };
                     }

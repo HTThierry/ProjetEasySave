@@ -28,9 +28,10 @@ namespace EasySave.lib.Services
                         FileSource = LogArray[1],
                         FileTarget = LogArray[2],
                         destPath = LogArray[3],
-                        FileSize = int.Parse(LogArray[4]),
-                        FileTransferTime = double.Parse(LogArray[5].Replace('.', ',')),
-                        time = DateTime.Parse(LogArray[6])
+                        TimeToCrypt = int.Parse(LogArray[4]),
+                        FileSize = int.Parse(LogArray[5]),
+                        FileTransferTime = double.Parse(LogArray[6].Replace('.', ',')),
+                        time = DateTime.Parse(LogArray[7])
                     };
 
                     logs.Add(_LogModel);
