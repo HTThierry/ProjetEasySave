@@ -16,6 +16,7 @@ namespace EasySave.lib.Services
             };
 
             Process process = new Process();
+            info.CreateNoWindow = true;
             process.StartInfo = info;
             process.Start();
             process.WaitForExit();
