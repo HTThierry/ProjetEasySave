@@ -132,6 +132,9 @@
   <data name="diffSelect" xml:space="preserve">
     <value>Differentiel</value>
   </data>
+  <data name="generate" xml:space="preserve">
+    <value>Genère une nouvelle clé</value>
+  </data>
   <data name="launch" xml:space="preserve">
     <value>Lancer</value>
   </data>

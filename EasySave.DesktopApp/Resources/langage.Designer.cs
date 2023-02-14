@@ -106,6 +106,15 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Generate a new key.
+        /// </summary>
+        public static string generate {
+            get {
+                return ResourceManager.GetString("generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Launch.
         /// </summary>
         public static string launch {

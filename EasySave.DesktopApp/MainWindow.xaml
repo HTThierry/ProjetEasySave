@@ -30,6 +30,7 @@
             <Button Content="{x:Static lang:langage.launchAll}" Margin="5" Click="LaunchAllCommand"/>
             <Button Content="{x:Static lang:langage.launch}" Margin="5" Click="LaunchCommand"/>
             <Button Content="{x:Static lang:langage.delete}" Margin="5" Click="deleteCommand"/>
+            <Button Content="{x:Static lang:langage.generate}" Margin="5" Click="generateCommand"/>
         </StackPanel>
     </Grid>
 </Window>

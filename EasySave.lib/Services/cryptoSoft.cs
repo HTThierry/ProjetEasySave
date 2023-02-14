@@ -5,8 +5,10 @@ namespace EasySave.lib.Services
 {
     public class cryptoSoft
     {
-        public int cryptoSoftEasySave(string type, string fichier_source, string fichier_destination, string key)
+        public int cryptoSoftEasySave(string type, string fichier_source, string fichier_destination)
         {
+            string filePath = ConfigurationManager.AppSettings["CryptKeyPath"]; // spécifiez le chemin d'accès complet à votre fichier key.txt
+            string key = File.ReadAllText(filePath);
             ProcessStartInfo info = new ProcessStartInfo
             {
                 FileName = $@"{ConfigurationManager.AppSettings["pathToCryptoSoft"]}\CryptoSoftEasySave.exe",

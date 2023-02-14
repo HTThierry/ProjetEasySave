@@ -19,8 +19,6 @@ namespace EasySave.lib.Services
             int filecount = Directory.GetFiles(path, "*.json").Length;
             string[] files = Directory.GetFiles(path, "*.json");
             string[] AttributsForPresentation = new string[4];
-            if (filecount > 5)
-                return 1;
 
             for (int i = 0; i < filecount; i++)
             {

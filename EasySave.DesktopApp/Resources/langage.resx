@@ -132,6 +132,9 @@
   <data name="diffSelect" xml:space="preserve">
     <value>Differential</value>
   </data>
+  <data name="generate" xml:space="preserve">
+    <value>Generate a new key</value>
+  </data>
   <data name="launch" xml:space="preserve">
     <value>Launch</value>
   </data>

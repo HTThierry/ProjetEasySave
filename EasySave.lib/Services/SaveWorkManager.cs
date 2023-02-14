@@ -21,8 +21,7 @@ namespace EasySave.lib.Services
         }
         public int AddNewSaveWork(string[] AttributsForSaveWork, List<SaveWork> ArrayOfSaveWork)
         {
-            if (ArrayOfSaveWork.Count < 5)
-            {
+          
                 SaveWork _SaveWorkToSave = SaveWorkCreator(AttributsForSaveWork);
                 ArrayOfSaveWork.Add(_SaveWorkToSave);
                 ProgressState.AddNewSaveWorkProgressState(AttributsForSaveWork[0]);
@@ -46,11 +45,7 @@ namespace EasySave.lib.Services
                     return 1;
                 }
 
-            }
-            else
-            {
-                return 1;
-            }
+            
         }
 
         public int RemoveSaveWork(string SaveWorkID, List<SaveWork> ArrayOfSaveWork)
