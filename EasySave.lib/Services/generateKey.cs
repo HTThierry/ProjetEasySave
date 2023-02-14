@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasySave.lib.Services
 {
-    internal class generateKey
+    public class generateKey
     {
         public bool Generate()
         {

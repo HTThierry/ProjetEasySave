@@ -1,8 +1,6 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Xml.Linq;
 
 namespace EasySave.DesktopApp.ViewModels
 {
@@ -14,6 +12,13 @@ namespace EasySave.DesktopApp.ViewModels
         public Initializer _Initializer = new Initializer();
         public Presenter _Presenter = new Presenter();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
+        public generateKey _generateKey = new generateKey();
+
+        public void generateNewKey()
+        {
+            var test = _generateKey.Generate();
+            var jePrendMontest = test;
+        }
 
         public SaveWork SaveWorkCreator(string[] AttributsForSaveWork)
         {
@@ -70,7 +75,6 @@ namespace EasySave.DesktopApp.ViewModels
 
         public int RemoveSaveWorkWPF(SaveWork _SaveWork)
         {
-
             return _SaveWorkManager.RemoveSaveWorkWPF(_SaveWork, _Model.ArrayOfSaveWork);
         }
 
@@ -78,6 +82,7 @@ namespace EasySave.DesktopApp.ViewModels
         {
             return _SaveWorkManager.ExecuteSaveWork(SaveWorkID, _Model.ArrayOfSaveWork);
         }
+
         public int ExecuteSaveWorkWPF(SaveWork _SaveWork)
         {
             return _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);

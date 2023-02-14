@@ -75,5 +75,9 @@ namespace EasySave.DesktopApp
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
             RefreshSaveWorks();
         }
+        public void generateCommand(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.generateNewKey();
+        }
     }
 }
