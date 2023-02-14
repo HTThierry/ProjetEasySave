@@ -2,6 +2,7 @@
 using EasySave.lib.Models;
 using EasySave.lib.Services;
 using System.Configuration;
+using System.Threading;
 using System.Windows;
 
 namespace EasySave.DesktopApp
@@ -72,7 +73,8 @@ namespace EasySave.DesktopApp
 
             if (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
-                _SoftwarePackage.ShowDialog();
+                _SoftwarePackage.Show();
+                //Thread.Sleep(10);
                 _ViewModel.RunningProcessClosed(ConfigurationManager.AppSettings["RunningProcess"]);
                 _SoftwarePackage.Close();
             }

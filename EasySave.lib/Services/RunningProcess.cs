@@ -7,12 +7,10 @@ namespace EasySave.lib.Services
         public bool CheckRunningProcess(string ProcessName)
         {
             bool ProcessRunning = false;
-            foreach (System.Diagnostics.Process process in System.Diagnostics.Process.GetProcesses())
+            var process = Process.GetProcessesByName(ProcessName);
+            if (process.Length > 0)
             {
-                if (process.ProcessName == ProcessName)
-                {
-                    ProcessRunning = true;
-                }
+                ProcessRunning = true;
             }
             return ProcessRunning;
         }
@@ -20,7 +18,7 @@ namespace EasySave.lib.Services
         public bool RunningProcessClosed(string ProcessName)
         {
             Process process = new();
-            process.StartInfo.FileName = ProcessName;
+            process = Process.GetProcessesByName(ProcessName)[0];
             process.WaitForExit();
             return true;
         }
