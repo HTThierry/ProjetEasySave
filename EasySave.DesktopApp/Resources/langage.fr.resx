@@ -117,79 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="checkYourFiles" xml:space="preserve">
-    <value>Veuillez vérifier vos fichiers SaveWork et libérer de l'espace.</value>
+  <data name="AddSaveWork" xml:space="preserve">
+    <value>Ajouter un nouveaux SaveWork</value>
   </data>
-  <data name="choseName" xml:space="preserve">
-    <value>Veuillez saisir un nom pour le programme SaveWork</value>
+  <data name="cancel" xml:space="preserve">
+    <value>Annuler</value>
   </data>
-  <data name="choseType" xml:space="preserve">
-    <value>Veuillez entrer un type pour le SaveWork</value>
+  <data name="CompSelect" xml:space="preserve">
+    <value>Complète</value>
   </data>
-  <data name="confirmLine" xml:space="preserve">
-    <value>Appuyez sur [Y] pour la création, [Enter] pour l'abandon...</value>
+  <data name="delete" xml:space="preserve">
+    <value>Supprimer</value>
   </data>
-  <data name="destPath" xml:space="preserve">
-    <value>Veuillez entrer un chemin de destination pour le SaveWork</value>
+  <data name="diffSelect" xml:space="preserve">
+    <value>Differentiel</value>
   </data>
-  <data name="destPathSaveWork" xml:space="preserve">
-    <value>Le chemin de destination de ce SaveWork est :</value>
+  <data name="launch" xml:space="preserve">
+    <value>Lancer</value>
   </data>
-  <data name="exit" xml:space="preserve">
-    <value>Appuyez sur une touche pour sortir...</value>
+  <data name="launchAll" xml:space="preserve">
+    <value>Tout lancer</value>
   </data>
-  <data name="fullSaveWorks" xml:space="preserve">
-    <value>La limite de travaux de sauvegardes à était dépasser.</value>
+  <data name="nameInput" xml:space="preserve">
+    <value>Nom :</value>
   </data>
-  <data name="gretting" xml:space="preserve">
-    <value>Bonjour, veuillez sélectionner un choix :</value>
+  <data name="namePopUp" xml:space="preserve">
+    <value>Crée SaveWork</value>
   </data>
-  <data name="menu.choice1" xml:space="preserve">
-    <value>[1] : Créer un nouveau SaveWork</value>
+  <data name="pathFromInput" xml:space="preserve">
+    <value>Chemin de base :</value>
   </data>
-  <data name="menu.choice2" xml:space="preserve">
-    <value>[2] : Supprimer un SaveWork existant</value>
+  <data name="pathToInput" xml:space="preserve">
+    <value>Chemin de destination :</value>
   </data>
-  <data name="menu.choice3" xml:space="preserve">
-    <value>[3] : Lancer un SaveWork</value>
+  <data name="save" xml:space="preserve">
+    <value>Enregistrer</value>
   </data>
-  <data name="menu.choice4" xml:space="preserve">
-    <value>[4] : Lancer toutes les SaveWork existants</value>
+  <data name="tabName" xml:space="preserve">
+    <value>Nom</value>
   </data>
-  <data name="menu.choice5" xml:space="preserve">
-    <value>[5] : Lister toutes les SaveWork existants</value>
+  <data name="tabPathFrom" xml:space="preserve">
+    <value>Chemin de base</value>
   </data>
-  <data name="nameSaveWork" xml:space="preserve">
-    <value>Le nom de cette SaveWork est :</value>
+  <data name="tabPathTo" xml:space="preserve">
+    <value>Chemin de destination</value>
   </data>
-  <data name="option2" xml:space="preserve">
-    <value>Il a demandé l'option 2</value>
+  <data name="tabType" xml:space="preserve">
+    <value>Type</value>
   </data>
-  <data name="option3" xml:space="preserve">
-    <value>Il a demandé l'option 3</value>
+  <data name="typeInput" xml:space="preserve">
+    <value>Type :</value>
   </data>
-  <data name="option4" xml:space="preserve">
-    <value>Il a demandé l'option 4</value>
-  </data>
-  <data name="sourcePath" xml:space="preserve">
-    <value>Veuillez entrer un chemin d'accès à la source pour le SaveWork</value>
-  </data>
-  <data name="sourcePathSaveWork" xml:space="preserve">
-    <value>Le chemin source de ce SaveWork est :</value>
-  </data>
-  <data name="String3" xml:space="preserve">
-    <value>Il a demandé l'option 4</value>
-  </data>
-  <data name="typeComplete" xml:space="preserve">
-    <value>[1] : Complete</value>
-  </data>
-  <data name="typeDiff" xml:space="preserve">
-    <value>[2] : Differential</value>
-  </data>
-  <data name="typeSaveWork" xml:space="preserve">
-    <value>Le type de ce SaveWork est :</value>
-  </data>
-  <data name="validation" xml:space="preserve">
-    <value>Étape de validation :</value>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>EasySave</value>
   </data>
 </root>

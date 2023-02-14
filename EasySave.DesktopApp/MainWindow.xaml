@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave.DesktopApp"
+        xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
         xmlns:ig="http://schemas.infragistics.com/xaml"
-        xmlns:language="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{x:Static lang:langage.WindowTitle}" Height="450" Width="800">
     <Grid>
         
         <Grid.RowDefinitions>
@@ -19,17 +19,17 @@
 
         <DataGrid Grid.Row="1" Margin="5" IsReadOnly="True"  Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding _SaveWorkModel.NameSaveWork}" Width="*"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding _SaveWorkModel.TypeSaveWork}" Width="*"/>
-                <DataGridTextColumn Header="PathFrom" Binding="{Binding _SaveWorkModel.SourcePathSaveWork}" Width="*"/>
-                <DataGridTextColumn Header="PathTo" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static lang:langage.tabName}" Binding="{Binding _SaveWorkModel.NameSaveWork}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static lang:langage.tabType}" Binding="{Binding _SaveWorkModel.TypeSaveWork}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static lang:langage.tabPathFrom}" Binding="{Binding _SaveWorkModel.SourcePathSaveWork}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static lang:langage.tabPathTo}" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="{x:Static Resources:langage.tabName}" Margin="5" Click="AddSaveWorkCommand"/>
-            <Button Content="Tout lancer" Margin="5" Click="LaunchAllCommand"/>
-            <Button Content="lancer" Margin="5" Click="LaunchCommand"/>
-            <Button Content="Supprimer" Margin="5" Click="deleteCommand"/>
+            <Button Content="{x:Static lang:langage.AddSaveWork}" Margin="5" Click="AddSaveWorkCommand"/>
+            <Button Content="{x:Static lang:langage.launchAll}" Margin="5" Click="LaunchAllCommand"/>
+            <Button Content="{x:Static lang:langage.launch}" Margin="5" Click="LaunchCommand"/>
+            <Button Content="{x:Static lang:langage.delete}" Margin="5" Click="deleteCommand"/>
         </StackPanel>
     </Grid>
 </Window>

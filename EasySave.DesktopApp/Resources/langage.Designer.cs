@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EasySave.consoleApp.Resources {
+namespace EasySave.DesktopApp.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EasySave.consoleApp.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EasySave.consoleApp.Resources.langage", typeof(langage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EasySave.DesktopApp.Resources.langage", typeof(langage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,227 +61,164 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please, check your SaveWork files and free up space..
+        ///   Recherche une chaîne localisée semblable à Add new SaveWork.
         /// </summary>
-        public static string checkYourFiles {
+        public static string AddSaveWork {
             get {
-                return ResourceManager.GetString("checkYourFiles", resourceCulture);
+                return ResourceManager.GetString("AddSaveWork", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a name for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à Cancel.
         /// </summary>
-        public static string choseName {
+        public static string cancel {
             get {
-                return ResourceManager.GetString("choseName", resourceCulture);
+                return ResourceManager.GetString("cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a type for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à Complete.
         /// </summary>
-        public static string choseType {
+        public static string CompSelect {
             get {
-                return ResourceManager.GetString("choseType", resourceCulture);
+                return ResourceManager.GetString("CompSelect", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press [Y] for creation, [Enter] for abandon....
+        ///   Recherche une chaîne localisée semblable à Delete.
         /// </summary>
-        public static string confirmLine {
+        public static string delete {
             get {
-                return ResourceManager.GetString("confirmLine", resourceCulture);
+                return ResourceManager.GetString("delete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a destination path for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à Differential.
         /// </summary>
-        public static string destPath {
+        public static string diffSelect {
             get {
-                return ResourceManager.GetString("destPath", resourceCulture);
+                return ResourceManager.GetString("diffSelect", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The destination path of this SaveWork is :.
+        ///   Recherche une chaîne localisée semblable à Launch.
         /// </summary>
-        public static string destPathSaveWork {
+        public static string launch {
             get {
-                return ResourceManager.GetString("destPathSaveWork", resourceCulture);
+                return ResourceManager.GetString("launch", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press a key for exit....
+        ///   Recherche une chaîne localisée semblable à Launch All.
         /// </summary>
-        public static string exit {
+        public static string launchAll {
             get {
-                return ResourceManager.GetString("exit", resourceCulture);
+                return ResourceManager.GetString("launchAll", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The limit of SaveWork files has been exceeded..
+        ///   Recherche une chaîne localisée semblable à Name:.
         /// </summary>
-        public static string fullSaveWorks {
+        public static string nameInput {
             get {
-                return ResourceManager.GetString("fullSaveWorks", resourceCulture);
+                return ResourceManager.GetString("nameInput", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Hi, please select a choice:.
+        ///   Recherche une chaîne localisée semblable à Create SaveWork.
         /// </summary>
-        public static string gretting {
+        public static string namePopUp {
             get {
-                return ResourceManager.GetString("gretting", resourceCulture);
+                return ResourceManager.GetString("namePopUp", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [1] : Create a new SaveWork.
+        ///   Recherche une chaîne localisée semblable à Source Path:.
         /// </summary>
-        public static string menu_choice1 {
+        public static string pathFromInput {
             get {
-                return ResourceManager.GetString("menu.choice1", resourceCulture);
+                return ResourceManager.GetString("pathFromInput", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [2] : Delete an existing SaveWork.
+        ///   Recherche une chaîne localisée semblable à Destination Path:.
         /// </summary>
-        public static string menu_choice2 {
+        public static string pathToInput {
             get {
-                return ResourceManager.GetString("menu.choice2", resourceCulture);
+                return ResourceManager.GetString("pathToInput", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [3] : Launch a SaveWork.
+        ///   Recherche une chaîne localisée semblable à Save.
         /// </summary>
-        public static string menu_choice3 {
+        public static string save {
             get {
-                return ResourceManager.GetString("menu.choice3", resourceCulture);
+                return ResourceManager.GetString("save", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [4] : Launch all the existings SaveWork.
+        ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
-        public static string menu_choice4 {
+        public static string tabName {
             get {
-                return ResourceManager.GetString("menu.choice4", resourceCulture);
+                return ResourceManager.GetString("tabName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [5] : List all the existings SaveWork.
+        ///   Recherche une chaîne localisée semblable à Path from.
         /// </summary>
-        public static string menu_choice5 {
+        public static string tabPathFrom {
             get {
-                return ResourceManager.GetString("menu.choice5", resourceCulture);
+                return ResourceManager.GetString("tabPathFrom", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The name of this SaveWork is :.
+        ///   Recherche une chaîne localisée semblable à Path to.
         /// </summary>
-        public static string nameSaveWork {
+        public static string tabPathTo {
             get {
-                return ResourceManager.GetString("nameSaveWork", resourceCulture);
+                return ResourceManager.GetString("tabPathTo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 2.
+        ///   Recherche une chaîne localisée semblable à Type.
         /// </summary>
-        public static string option2 {
+        public static string tabType {
             get {
-                return ResourceManager.GetString("option2", resourceCulture);
+                return ResourceManager.GetString("tabType", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 3.
+        ///   Recherche une chaîne localisée semblable à Type:.
         /// </summary>
-        public static string option3 {
+        public static string typeInput {
             get {
-                return ResourceManager.GetString("option3", resourceCulture);
+                return ResourceManager.GetString("typeInput", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 4.
+        ///   Recherche une chaîne localisée semblable à EasySave.
         /// </summary>
-        public static string option4 {
+        public static string WindowTitle {
             get {
-                return ResourceManager.GetString("option4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a source path for the SaveWork.
-        /// </summary>
-        public static string sourcePath {
-            get {
-                return ResourceManager.GetString("sourcePath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The source path of this SaveWork is :.
-        /// </summary>
-        public static string sourcePathSaveWork {
-            get {
-                return ResourceManager.GetString("sourcePathSaveWork", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 4.
-        /// </summary>
-        public static string String3 {
-            get {
-                return ResourceManager.GetString("String3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à [1] : Complete.
-        /// </summary>
-        public static string typeComplete {
-            get {
-                return ResourceManager.GetString("typeComplete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à [2] : Differential.
-        /// </summary>
-        public static string typeDiff {
-            get {
-                return ResourceManager.GetString("typeDiff", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The type of this SaveWork is :.
-        /// </summary>
-        public static string typeSaveWork {
-            get {
-                return ResourceManager.GetString("typeSaveWork", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Validation step:.
-        /// </summary>
-        public static string validation {
-            get {
-                return ResourceManager.GetString("validation", resourceCulture);
+                return ResourceManager.GetString("WindowTitle", resourceCulture);
             }
         }
     }
