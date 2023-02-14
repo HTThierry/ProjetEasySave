@@ -89,7 +89,7 @@ namespace EasySave.lib.Services
 
                             if (isFileToCryp)
                             {
-                               timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}", $"{ConfigurationManager.AppSettings["CryptKeyPath"]}");
+                               timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}");
                                 var test = timeForCryp;
                             }
                             else
@@ -242,7 +242,7 @@ namespace EasySave.lib.Services
                             {
                                 if (isFileToCryp)
                                 {
-                                    timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}", $"{ConfigurationManager.AppSettings["CryptKeyPath"]}");
+                                    timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}");
                                     var test = timeForCryp;
                                 }
                                 else
