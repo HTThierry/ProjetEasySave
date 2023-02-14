@@ -86,11 +86,6 @@ namespace EasySave.DesktopApp.ViewModels
 
         public int ExecuteSaveWorkWPF(SaveWork _SaveWork)
         {
-            if (_RunningProcess.CheckRunningProcess("notepad.exe") == true)
-            {
-                
-                _RunningProcess.RunningProcessClosed("notepad.exe");
-            }
             return _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
         }
 
@@ -108,11 +103,6 @@ namespace EasySave.DesktopApp.ViewModels
         public bool CheckRunningProcess(string ProcessName)
         {
             return _RunningProcess.CheckRunningProcess(ProcessName);
-        }
-
-        public bool RunningProcessClosed(string ProcessName)
-        {
-            return _RunningProcess.RunningProcessClosed(ProcessName);
         }
     }
 }
