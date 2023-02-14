@@ -1,5 +1,6 @@
 ﻿using EasySave.lib.Models;
 using System.Text.Json;
+using System.Configuration;
 
 namespace EasySave.lib.Services
 {
@@ -8,7 +9,7 @@ namespace EasySave.lib.Services
         private SaveWorkManager _SaveWorkManager = new SaveWorkManager();
         public int SaveWorkInitializing(List<SaveWork> ArrayOfSaveWork)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks");
+            string path = ConfigurationManager.AppSettings["SaveWorkPath"];
 
             if (!Directory.Exists(path))
             {

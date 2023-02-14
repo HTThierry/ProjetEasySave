@@ -137,6 +137,7 @@ namespace EasySave.consoleApp.Views
                 Console.WriteLine($"{langage.deletion}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.WriteLine(langage.backMenu);
                 Console.Write("==> ");
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
@@ -149,6 +150,8 @@ namespace EasySave.consoleApp.Views
                     Console.ReadKey();
                     break;
                 }
+                else
+                    break;
             }
         }
 
@@ -160,12 +163,13 @@ namespace EasySave.consoleApp.Views
                 Console.WriteLine($"{langage.execution}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.WriteLine(langage.backMenu);
                 Console.Write("==> ");
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
                     if (_ViewModel.ExecuteSaveWork(UserID) == 1)
-                    {
+                    {   
                         Console.WriteLine($"{langage.potentialError}");
                     }
                     Console.WriteLine($"{langage.copyCompleted}");
@@ -173,6 +177,8 @@ namespace EasySave.consoleApp.Views
                     Console.ReadKey();
                     break;
                 }
+                else
+                    break;
             }
         }
 

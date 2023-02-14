@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="backMenu" xml:space="preserve">
+    <value>Pour retourer au menu, appuyez sur [Entrée]</value>
+  </data>
   <data name="checkYourFiles" xml:space="preserve">
     <value>Veuillez vérifier vos fichiers SaveWork et libérer de l'espace.</value>
   </data>
