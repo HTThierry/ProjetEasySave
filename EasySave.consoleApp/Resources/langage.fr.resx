@@ -117,17 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="backMenu" xml:space="preserve">
+    <value>Pour retourer au menu, appuyez sur [Entrée]</value>
+  </data>
   <data name="checkYourFiles" xml:space="preserve">
     <value>Veuillez vérifier vos fichiers SaveWork et libérer de l'espace.</value>
   </data>
   <data name="choseName" xml:space="preserve">
-    <value>Veuillez saisir un nom pour le programme SaveWork</value>
+    <value>Veuillez saisir un nom pour le SaveWork</value>
   </data>
   <data name="choseType" xml:space="preserve">
     <value>Veuillez entrer un type pour le SaveWork</value>
   </data>
   <data name="confirmLine" xml:space="preserve">
-    <value>Appuyez sur [Y] pour la création, [Enter] pour l'abandon...</value>
+    <value>Entrez [Y] pour la création, [Entrée] pour abandonner...</value>
+  </data>
+  <data name="copyCompleted" xml:space="preserve">
+    <value>La copie des fichiers est terminée.</value>
+  </data>
+  <data name="deleteError" xml:space="preserve">
+    <value>Erreur(s) de délétion rencontrée(s)...</value>
+  </data>
+  <data name="deletion" xml:space="preserve">
+    <value>Choisissez un SaveWork à supprimer :</value>
   </data>
   <data name="destPath" xml:space="preserve">
     <value>Veuillez entrer un chemin de destination pour le SaveWork</value>
@@ -135,14 +147,17 @@
   <data name="destPathSaveWork" xml:space="preserve">
     <value>Le chemin de destination de ce SaveWork est :</value>
   </data>
+  <data name="execution" xml:space="preserve">
+    <value>Choisissez un SaveWork à exécuter :</value>
+  </data>
   <data name="exit" xml:space="preserve">
     <value>Appuyez sur une touche pour sortir...</value>
   </data>
   <data name="fullSaveWorks" xml:space="preserve">
-    <value>La limite de travaux de sauvegardes à était dépasser.</value>
+    <value>La limite de travaux de sauvegarde à été dépassée</value>
   </data>
   <data name="gretting" xml:space="preserve">
-    <value>Bonjour, veuillez sélectionner un choix :</value>
+    <value>Bonjour, veuillez sélectionner une option :</value>
   </data>
   <data name="menu.choice1" xml:space="preserve">
     <value>[1] : Créer un nouveau SaveWork</value>
@@ -154,37 +169,49 @@
     <value>[3] : Lancer un SaveWork</value>
   </data>
   <data name="menu.choice4" xml:space="preserve">
-    <value>[4] : Lancer toutes les SaveWork existants</value>
+    <value>[4] : Lancer tous les SaveWorks existants</value>
   </data>
   <data name="menu.choice5" xml:space="preserve">
-    <value>[5] : Lister toutes les SaveWork existants</value>
+    <value>[5] : Lister tous les SaveWorks existants</value>
   </data>
   <data name="nameSaveWork" xml:space="preserve">
-    <value>Le nom de cette SaveWork est :</value>
+    <value>Le nom de ce SaveWork est :</value>
   </data>
   <data name="option2" xml:space="preserve">
-    <value>Il a demandé l'option 2</value>
+    <value>Option 2 demandée</value>
   </data>
   <data name="option3" xml:space="preserve">
-    <value>Il a demandé l'option 3</value>
+    <value>Option 3 demandée</value>
   </data>
   <data name="option4" xml:space="preserve">
-    <value>Il a demandé l'option 4</value>
+    <value>Option 4 demandée</value>
+  </data>
+  <data name="potentialError" xml:space="preserve">
+    <value>Erreur(s) potentielle(s) rencontrée(s)...</value>
+  </data>
+  <data name="pressKeyMenu" xml:space="preserve">
+    <value>Appuyez sur n'importe quelle touche pour retourner au menu...</value>
+  </data>
+  <data name="SequentialConfirm" xml:space="preserve">
+    <value>Entrez [Y] pour l'exécution, [Enter] pour l'abandon...</value>
+  </data>
+  <data name="sequentialCopyCompleted" xml:space="preserve">
+    <value>La copie séquentelle des fichiers est terminée.</value>
+  </data>
+  <data name="SequentialValidation" xml:space="preserve">
+    <value>Êtes vous sûr de vouloir exécuter tous les SaveWorks ?</value>
   </data>
   <data name="sourcePath" xml:space="preserve">
-    <value>Veuillez entrer un chemin d'accès à la source pour le SaveWork</value>
+    <value>Veuillez entrer un chemin d'accès source pour le SaveWork</value>
   </data>
   <data name="sourcePathSaveWork" xml:space="preserve">
     <value>Le chemin source de ce SaveWork est :</value>
   </data>
-  <data name="String3" xml:space="preserve">
-    <value>Il a demandé l'option 4</value>
-  </data>
   <data name="typeComplete" xml:space="preserve">
-    <value>[1] : Complete</value>
+    <value>[1] : Complète</value>
   </data>
   <data name="typeDiff" xml:space="preserve">
-    <value>[2] : Differential</value>
+    <value>[2] : Differentielle</value>
   </data>
   <data name="typeSaveWork" xml:space="preserve">
     <value>Le type de ce SaveWork est :</value>

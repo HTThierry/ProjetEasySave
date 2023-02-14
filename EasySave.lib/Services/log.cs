@@ -10,14 +10,11 @@ namespace EasySave.lib.Services
     {
         public static int LogFiles(string[] LogArray)
         {
-
             if (LogArray != null)
             {
-                if ("true" != ConfigurationManager.AppSettings["typeLogXML"])
-                {
-                    List<LogModel> logs = new List<LogModel>();
-                    DateTime today = DateTime.Now;
-                    string day = today.ToString("dd_MM_yyyy");
+                List<LogEntry> logs = new List<LogEntry>();
+                DateTime today = DateTime.Now;
+                string day = today.ToString("MM_dd_yyyy");
 
                     string DirectoryPath = ConfigurationManager.AppSettings["LogPath"];
                     string LogPath = Path.Combine(DirectoryPath, $"{day}_log.json");
@@ -28,9 +25,10 @@ namespace EasySave.lib.Services
                         FileSource = LogArray[1],
                         FileTarget = LogArray[2],
                         destPath = LogArray[3],
-                        FileSize = int.Parse(LogArray[4]),
-                        FileTransferTime = double.Parse(LogArray[5].Replace('.', ',')),
-                        time = DateTime.Parse(LogArray[6])
+                        TimeToCrypt = int.Parse(LogArray[4]),
+                        FileSize = int.Parse(LogArray[5]),
+                        FileTransferTime = double.Parse(LogArray[6].Replace('.', ',')),
+                        time = DateTime.Parse(LogArray[7])
                     };
 
                     logs.Add(_LogModel);
@@ -138,10 +136,10 @@ namespace EasySave.lib.Services
 
 
                     return 0;
+                
 
-
-                }
-
+            }
+                
             }
             else
             {

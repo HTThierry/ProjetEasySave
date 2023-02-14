@@ -61,6 +61,15 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à To go back to the menu, press [Enter].
+        /// </summary>
+        public static string backMenu {
+            get {
+                return ResourceManager.GetString("backMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Please, check your SaveWork files and free up space..
         /// </summary>
         public static string checkYourFiles {
@@ -70,7 +79,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a name for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à Please enter a name for the SaveWork :.
         /// </summary>
         public static string choseName {
             get {
@@ -79,7 +88,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a type for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à Please enter a type for the SaveWork :.
         /// </summary>
         public static string choseType {
             get {
@@ -97,7 +106,34 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a destination path for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à The copy of the files was completed..
+        /// </summary>
+        public static string copyCompleted {
+            get {
+                return ResourceManager.GetString("copyCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove error(s) occurred....
+        /// </summary>
+        public static string deleteError {
+            get {
+                return ResourceManager.GetString("deleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please choose a SaveWork for deletion :.
+        /// </summary>
+        public static string deletion {
+            get {
+                return ResourceManager.GetString("deletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter a destination path for the SaveWork :.
         /// </summary>
         public static string destPath {
             get {
@@ -106,7 +142,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The destination path of this SaveWork is :.
+        ///   Recherche une chaîne localisée semblable à This SaveWork&apos;s destination path is :.
         /// </summary>
         public static string destPathSaveWork {
             get {
@@ -115,7 +151,16 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press a key for exit....
+        ///   Recherche une chaîne localisée semblable à Please choose a SaveWork for execution :.
+        /// </summary>
+        public static string execution {
+            get {
+                return ResourceManager.GetString("execution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press a key to exit....
         /// </summary>
         public static string exit {
             get {
@@ -133,7 +178,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Hi, please select a choice:.
+        ///   Recherche une chaîne localisée semblable à Hello, please select an option:.
         /// </summary>
         public static string gretting {
             get {
@@ -169,7 +214,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [4] : Launch all the existings SaveWork.
+        ///   Recherche une chaîne localisée semblable à [4] : Launch all the existing SaveWorks.
         /// </summary>
         public static string menu_choice4 {
             get {
@@ -178,7 +223,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à [5] : List all the existings SaveWork.
+        ///   Recherche une chaîne localisée semblable à [5] : List all the existing SaveWorks.
         /// </summary>
         public static string menu_choice5 {
             get {
@@ -187,7 +232,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The name of this SaveWork is :.
+        ///   Recherche une chaîne localisée semblable à This SaveWork&apos;s Name is :.
         /// </summary>
         public static string nameSaveWork {
             get {
@@ -196,7 +241,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 2.
+        ///   Recherche une chaîne localisée semblable à Option 2 requested.
         /// </summary>
         public static string option2 {
             get {
@@ -205,7 +250,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 3.
+        ///   Recherche une chaîne localisée semblable à Option 3 requested.
         /// </summary>
         public static string option3 {
             get {
@@ -214,7 +259,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 4.
+        ///   Recherche une chaîne localisée semblable à Option 4 requested.
         /// </summary>
         public static string option4 {
             get {
@@ -223,7 +268,52 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a source path for the SaveWork.
+        ///   Recherche une chaîne localisée semblable à Potential error(s) occured....
+        /// </summary>
+        public static string potentialError {
+            get {
+                return ResourceManager.GetString("potentialError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press any key to return to the menu....
+        /// </summary>
+        public static string pressKeyMenu {
+            get {
+                return ResourceManager.GetString("pressKeyMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter [Y] for execution, [Enter] for abandon....
+        /// </summary>
+        public static string SequentialConfirm {
+            get {
+                return ResourceManager.GetString("SequentialConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The sequential copy of the files was completed..
+        /// </summary>
+        public static string sequentialCopyCompleted {
+            get {
+                return ResourceManager.GetString("sequentialCopyCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to execute all saved SaveWorks ?.
+        /// </summary>
+        public static string SequentialValidation {
+            get {
+                return ResourceManager.GetString("SequentialValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter a source path for the SaveWork :.
         /// </summary>
         public static string sourcePath {
             get {
@@ -232,20 +322,11 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The source path of this SaveWork is :.
+        ///   Recherche une chaîne localisée semblable à This SaveWork&apos;s source path is :.
         /// </summary>
         public static string sourcePathSaveWork {
             get {
                 return ResourceManager.GetString("sourcePathSaveWork", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à He requested option 4.
-        /// </summary>
-        public static string String3 {
-            get {
-                return ResourceManager.GetString("String3", resourceCulture);
             }
         }
         
@@ -268,7 +349,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The type of this SaveWork is :.
+        ///   Recherche une chaîne localisée semblable à This SaveWork&apos;s type is :.
         /// </summary>
         public static string typeSaveWork {
             get {
@@ -277,7 +358,7 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Validation step:.
+        ///   Recherche une chaîne localisée semblable à Validation step :.
         /// </summary>
         public static string validation {
             get {

@@ -1,6 +1,5 @@
 ﻿using EasySave.consoleApp.Resources;
 using EasySave.consoleApp.ViewModels;
-using EasySave.lib.Services;
 
 namespace EasySave.consoleApp.Views
 {
@@ -132,19 +131,27 @@ namespace EasySave.consoleApp.Views
 
         private void MenuChoice2()
         {
-            while(true)
+            while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Please choice a SaveWork for deletion :");
+                Console.WriteLine($"{langage.deletion}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.WriteLine(langage.backMenu);
                 Console.Write("==> ");
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
-                    _ViewModel.RemoveSaveWork(UserID);                                                  // TODO (Code de retour)
+                    if (_ViewModel.RemoveSaveWork(UserID) == 1)
+                    {
+                        Console.WriteLine($"{langage.potentialError}");
+                    }
+                    Console.WriteLine($"{langage.pressKeyMenu}");
+                    Console.ReadKey();
                     break;
                 }
+                else
+                    break;
             }
         }
 
@@ -153,16 +160,25 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Please choice a SaveWork for execution :");
+                Console.WriteLine($"{langage.execution}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
+                Console.WriteLine(langage.backMenu);
                 Console.Write("==> ");
                 string UserID = Console.ReadLine();
                 if (_ViewModel.CheckSaveWorkIDTreatment(UserID) == 0)
                 {
-                    _ViewModel.ExecuteSaveWork(UserID);
+                    if (_ViewModel.ExecuteSaveWork(UserID) == 1)
+                    {   
+                        Console.WriteLine($"{langage.potentialError}");
+                    }
+                    Console.WriteLine($"{langage.copyCompleted}");
+                    Console.WriteLine($"{langage.pressKeyMenu}");
+                    Console.ReadKey();
                     break;
                 }
+                else
+                    break;
             }
         }
 
@@ -171,23 +187,31 @@ namespace EasySave.consoleApp.Views
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Are you sure to execute all these SaveWork :");
+                Console.WriteLine($"{langage.SequentialValidation}");
                 Console.WriteLine();
                 ListingOfSaveWork(_ViewModel.GetSaveWorkNames());
-                Console.WriteLine("Enter [Y] for execution, [Enter] for abandon...");
+                Console.WriteLine($"{langage.SequentialConfirm}");
                 Console.WriteLine();
                 Console.Write("==> ");
                 if (_ViewModel.ConfirmationTreatment(Console.ReadLine()) == 0)
                 {
-                    _ViewModel.SequentialSaveWorksExecution();
+                    if (_ViewModel.SequentialSaveWorksExecution() == 1)
+                    {
+                        Console.WriteLine($"{langage.potentialError}");
+                    }
+                    Console.WriteLine($"{langage.sequentialCopyCompleted}");
+                    Console.WriteLine($"{langage.pressKeyMenu}");
+                    Console.ReadKey();
                     break;
                 }
+                else
+                    break;
             }
         }
 
-    private void ListingOfSaveWork(string[] NameSaveWork)
+        private void ListingOfSaveWork(string[] NameSaveWork)
         {
-            for (int i=0; i < NameSaveWork.Length; i++)
+            for (int i = 0; i < NameSaveWork.Length; i++)
             {
                 Console.Write($"    SaveWork {i + 1} : ");
                 Console.WriteLine($"{NameSaveWork[i]}");
