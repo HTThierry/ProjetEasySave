@@ -61,6 +61,15 @@ namespace EasySave.consoleApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à To go back to the menu, press [Enter].
+        /// </summary>
+        public static string backMenu {
+            get {
+                return ResourceManager.GetString("backMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Please, check your SaveWork files and free up space..
         /// </summary>
         public static string checkYourFiles {

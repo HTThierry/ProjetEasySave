@@ -95,7 +95,6 @@ namespace EasySave.lib.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                 //A retirer après test
                 return 1;
             }
         }
@@ -220,7 +219,6 @@ namespace EasySave.lib.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
                 return 1;
             }
         }
