@@ -26,6 +26,7 @@ namespace EasySave.DesktopApp
         {
             InitializeComponent();
             SaveWorkInitializing();
+            _ViewModel.generateNewKey();
             //set ArrayOfSaveWork in datagrid
             dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
             var test = _Model.ArrayOfSaveWork;
