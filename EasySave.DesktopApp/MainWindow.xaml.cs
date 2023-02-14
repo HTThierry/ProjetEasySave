@@ -1,6 +1,7 @@
 ﻿using EasySave.DesktopApp.ViewModels;
 using EasySave.lib.Models;
 using EasySave.lib.Services;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading;
 using System.Windows;
@@ -13,22 +14,19 @@ namespace EasySave.DesktopApp
     public partial class MainWindow : Window
     {
         private Model _Model { get; set; } = new Model();
-        private Initializer _Initializer = new Initializer();
         private ViewModel _ViewModel = new ViewModel();
-
-        public int SaveWorkInitializing()
-        {
-            return _Initializer.SaveWorkInitializing(_Model.ArrayOfSaveWork);
-        }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _ViewModel.SaveWorkInitializing();
+
             SaveWorkInitializing();
             _ViewModel.generateNewKey();
             //set ArrayOfSaveWork in datagrid
             dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
-            var test = _Model.ArrayOfSaveWork;
+
             //force link _Model.ArrayOfSaveWork
             _ViewModel.ReturnModelList(_Model.ArrayOfSaveWork);
         }

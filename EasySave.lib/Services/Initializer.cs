@@ -9,20 +9,21 @@ namespace EasySave.lib.Services
         private SaveWorkManager _SaveWorkManager = new SaveWorkManager();
         public int SaveWorkInitializing(List<SaveWork> ArrayOfSaveWork)
         {
-            string path = ConfigurationManager.AppSettings["SaveWorkPath"];
+            string SaveWorkPath = ConfigurationManager.AppSettings["SaveWorkPath"];
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(SaveWorkPath))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(SaveWorkPath);
+                return 0;
             }
 
-            int filecount = Directory.GetFiles(path, "*.json").Length;
-            string[] files = Directory.GetFiles(path, "*.json");
+            int FileCount = Directory.GetFiles(SaveWorkPath, "*.json").Length;
+            string[] files = Directory.GetFiles(SaveWorkPath, "*.json");
             string[] AttributsForPresentation = new string[4];
 
-            for (int i = 0; i < filecount; i++)
+            for (int i = 0; i < FileCount; i++)
             {
-                string json = File.ReadAllText(Path.Combine(path, files[i]));
+                string json = File.ReadAllText(Path.Combine(SaveWorkPath, files[i]));
                 SaveWorkModel saveWorkJSON = JsonSerializer.Deserialize<SaveWorkModel>(json)!;
 
                 string[] AttributsForSaveWork = new string[4] { saveWorkJSON.NameSaveWork, $"{saveWorkJSON.TypeSaveWork}", saveWorkJSON.SourcePathSaveWork, saveWorkJSON.DestinationPathSaveWork };
