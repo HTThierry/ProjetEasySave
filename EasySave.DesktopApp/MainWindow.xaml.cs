@@ -89,7 +89,7 @@ namespace EasySave.DesktopApp
         }
         public void generateCommand(object sender, RoutedEventArgs e)
         {
-            _ViewModel.generateNewKey();
+            _ViewModel.GenerateNewKey();
         }
     }
 }
