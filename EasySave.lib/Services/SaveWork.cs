@@ -7,7 +7,7 @@ namespace EasySave.lib.Services
 {
     public class SaveWork
     {
-        public SaveWorkModel _SaveWorkModel = new SaveWorkModel();
+        public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         public cryptoSoft _cryptoSoft = new cryptoSoft();
 
         public string[] GetInstanceInfo()
@@ -189,7 +189,7 @@ namespace EasySave.lib.Services
             int ProgressStateReturnCode = 0;
 
 
-            
+
             try
             {
                 if (Directory.Exists(_SaveWorkModel.SourcePathSaveWork))
@@ -198,7 +198,7 @@ namespace EasySave.lib.Services
                     {
                         Directory.CreateDirectory(DestinationPath);
                     }
-                    
+
                     foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
                     {
                         Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
@@ -237,10 +237,6 @@ namespace EasySave.lib.Services
                                 }
                             }
 
-                    foreach (string file in files)
-                    {
-                        if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(SourcePath, DestinationPath)))
-                        {
                             var stopwatch = Stopwatch.StartNew();
                             try
                             {

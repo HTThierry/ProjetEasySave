@@ -1,8 +1,7 @@
 ﻿using EasySave.lib.Models;
-using System.Text.Json;
 using System.Configuration;
+using System.Text.Json;
 using System.Xml;
-using System.Text;
 
 namespace EasySave.lib.Services
 {
@@ -12,9 +11,11 @@ namespace EasySave.lib.Services
         {
             if (LogArray != null)
             {
-                List<LogEntry> logs = new List<LogEntry>();
-                DateTime today = DateTime.Now;
-                string day = today.ToString("MM_dd_yyyy");
+                if (ConfigurationManager.AppSettings["typeLogXML"] == "false")
+                {
+                    List<LogModel> logs = new List<LogModel>();
+                    DateTime today = DateTime.Now;
+                    string day = today.ToString("dd_MM_yyyy");
 
                     string DirectoryPath = ConfigurationManager.AppSettings["LogPath"];
                     string LogPath = Path.Combine(DirectoryPath, $"{day}_log.json");
@@ -57,7 +58,6 @@ namespace EasySave.lib.Services
                 }
                 else
                 {
-
                     DateTime today = DateTime.Now;
                     string day = today.ToString("dd_MM_yyyy");
 
@@ -134,11 +134,8 @@ namespace EasySave.lib.Services
 
                     doc.Save(LogPath);
 
-
                     return 0;
-                
-
-            }
+                }
                 
             }
             else
