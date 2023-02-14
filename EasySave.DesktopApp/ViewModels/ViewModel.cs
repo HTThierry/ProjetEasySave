@@ -12,13 +12,12 @@ namespace EasySave.DesktopApp.ViewModels
         public Initializer _Initializer = new Initializer();
         public Presenter _Presenter = new Presenter();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
-        public generateKey _generateKey = new generateKey();
+        public GenerateKey _GenerateKey = new GenerateKey();
         public RunningProcess _RunningProcess = new RunningProcess();
 
-        public void generateNewKey()
+        public void GenerateNewKey()
         {
-            var test = _generateKey.Generate();
-            var jePrendMontest = test;
+            var test = _GenerateKey.Generate();
         }
 
         public SaveWork SaveWorkCreator(string[] AttributsForSaveWork)

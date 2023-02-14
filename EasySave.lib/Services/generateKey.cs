@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace EasySave.lib.Services
 {
-    public class generateKey
+    public class GenerateKey
     {
-        public bool Generate()
+        public int Generate()
         {
             var random = new Random();
             ulong key = (ulong)random.Next() << 32 | (ulong)random.Next();
@@ -20,11 +15,11 @@ namespace EasySave.lib.Services
                 {
                     sw.WriteLine(key.ToString());
                 }
-                return true;
+                return 0;
             }
-            catch (Exception e)
+            catch
             {
-                return false;
+                return 1;
             }
         }
     }
