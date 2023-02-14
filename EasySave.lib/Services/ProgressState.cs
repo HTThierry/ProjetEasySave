@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
 using EasySave.lib.Models;
+using System.Configuration;
 
 namespace EasySave.lib.Services
 {
@@ -89,7 +90,7 @@ namespace EasySave.lib.Services
 
         private static int Serializer()
         {
-            string DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "ProgressState");
+            string DirectoryPath = ConfigurationManager.AppSettings["ProgressStatePath"];
             string ProgressStatePath = Path.Combine(DirectoryPath, "ProgressState.json");
 
             if (!Directory.Exists(DirectoryPath))
