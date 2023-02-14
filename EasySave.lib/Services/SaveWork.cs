@@ -9,6 +9,7 @@ namespace EasySave.lib.Services
     {
         public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         public cryptoSoft _cryptoSoft = new cryptoSoft();
+        public RunningProcess _RunningProcess = new RunningProcess();
 
         public string[] GetInstanceInfo()
         {

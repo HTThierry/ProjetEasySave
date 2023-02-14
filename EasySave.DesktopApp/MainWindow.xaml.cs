@@ -1,6 +1,7 @@
 ﻿using EasySave.DesktopApp.ViewModels;
 using EasySave.lib.Models;
 using EasySave.lib.Services;
+using System.Configuration;
 using System.Windows;
 
 namespace EasySave.DesktopApp
@@ -13,6 +14,7 @@ namespace EasySave.DesktopApp
         private Model _Model { get; set; } = new Model();
         private Initializer _Initializer = new Initializer();
         private ViewModel _ViewModel = new ViewModel();
+        CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
 
         public int SaveWorkInitializing()
         {
@@ -54,6 +56,12 @@ namespace EasySave.DesktopApp
         {
             foreach (SaveWork _saveWork in _Model.ArrayOfSaveWork)
             {
+                if (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+                {
+                    _SoftwarePackage.ShowDialog();
+                    _ViewModel.RunningProcessClosed(ConfigurationManager.AppSettings["RunningProcess"]);
+                    _SoftwarePackage.Close();
+                }
                 _ViewModel.ExecuteSaveWorkWPF(_saveWork);
             }
         }
@@ -62,9 +70,17 @@ namespace EasySave.DesktopApp
         {
             SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
 
+            if (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            {
+                _SoftwarePackage.ShowDialog();
+                _ViewModel.RunningProcessClosed(ConfigurationManager.AppSettings["RunningProcess"]);
+                _SoftwarePackage.Close();
+            }
+
             if (selectedSaveWork != null)
             {
-                _ViewModel.ExecuteSaveWorkWPF(selectedSaveWork);
+                int x = _ViewModel.ExecuteSaveWorkWPF(selectedSaveWork);
+                if (x == 2) { }
             }
         }
 
