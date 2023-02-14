@@ -15,9 +15,9 @@ namespace EasySave.DesktopApp.ViewModels
         public GenerateKey _GenerateKey = new GenerateKey();
         public RunningProcess _RunningProcess = new RunningProcess();
 
-        public void GenerateNewKey()
+        public int GenerateNewKey()
         {
-            var test = _GenerateKey.Generate();
+            return _GenerateKey.Generate();
         }
 
         public SaveWork SaveWorkCreator(string[] AttributsForSaveWork)

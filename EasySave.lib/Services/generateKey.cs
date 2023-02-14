@@ -6,14 +6,14 @@ namespace EasySave.lib.Services
     {
         public int Generate()
         {
-            var random = new Random();
-            ulong key = (ulong)random.Next() << 32 | (ulong)random.Next();
-            string keyPath = $@"{ConfigurationManager.AppSettings["CryptKeyPath"]}";
+            Random _Random = new Random();
+            ulong Key = ((ulong)_Random.Next() << 32 | (ulong)_Random.Next());
+            string KeyPath = $"{ConfigurationManager.AppSettings["CryptKeyPath"]}";
             try
             {
-                using (StreamWriter sw = new StreamWriter(keyPath))
+                using (StreamWriter _StreamWriter = new StreamWriter(KeyPath))
                 {
-                    sw.WriteLine(key.ToString());
+                    _StreamWriter.WriteLine(Key.ToString());
                 }
                 return 0;
             }
