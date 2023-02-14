@@ -8,7 +8,7 @@ namespace EasySave.DesktopApp.ViewModels
 {
     public class ViewModel
     {
-        public Model _Model { get; set; } = new Model(); 
+        public Model _Model { get; set; } = new Model();
         public InputProcessingService _InputProcessingService = new InputProcessingService();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
         public Initializer _Initializer = new Initializer();
@@ -49,7 +49,7 @@ namespace EasySave.DesktopApp.ViewModels
         {
             return _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork, _Model.ArrayOfSaveWork);
         }
-        
+
         /// <summary>
         /// Instance all save works from the json files
         /// </summary>
@@ -90,7 +90,7 @@ namespace EasySave.DesktopApp.ViewModels
 
         public int ReturnModelList(List<SaveWork> _ArrayOfSaveWork)
         {
-            _Model.ArrayOfSaveWork= _ArrayOfSaveWork;
+            _Model.ArrayOfSaveWork = _ArrayOfSaveWork;
             return 0;
         }
     }

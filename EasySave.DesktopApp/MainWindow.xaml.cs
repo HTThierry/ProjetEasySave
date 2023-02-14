@@ -10,7 +10,7 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Model _Model = new Model();
+        private Model _Model { get; set; } = new Model();
         private Initializer _Initializer = new Initializer();
         private ViewModel _ViewModel = new ViewModel();
 

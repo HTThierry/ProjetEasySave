@@ -1,4 +1,5 @@
 ﻿using EasySave.lib.Models;
+using System.Configuration;
 using System.Text.Json;
 
 namespace EasySave.lib.Services
@@ -23,12 +24,27 @@ namespace EasySave.lib.Services
             {
                 SaveWork _SaveWorkToSave = SaveWorkCreator(AttributsForSaveWork);
                 ArrayOfSaveWork.Add(_SaveWorkToSave);
+                ProgressState.AddNewSaveWorkProgressState(AttributsForSaveWork[0]);
 
                 string jsonString = JsonSerializer.Serialize(_SaveWorkToSave._SaveWorkModel);
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{AttributsForSaveWork[0]}.json");
-                File.WriteAllText(path, jsonString);
+                string DirectoryPath = ConfigurationManager.AppSettings["SaveWorkPath"];
+                string path = Path.Combine(DirectoryPath, $"{AttributsForSaveWork[0]}.json");
 
-                return 0;
+                if (!Directory.Exists(DirectoryPath))
+                {
+                    Directory.CreateDirectory(DirectoryPath);
+                }
+
+                try
+                {
+                    File.WriteAllText(path, jsonString);
+                    return 0;
+                }
+                catch
+                {
+                    return 1;
+                }
+
             }
             else
             {
@@ -38,12 +54,14 @@ namespace EasySave.lib.Services
 
         public int RemoveSaveWork(string SaveWorkID, List<SaveWork> ArrayOfSaveWork)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");
+            string directory = ConfigurationManager.AppSettings["SaveWorkPath"];
+            string path = Path.Combine(directory, $"{ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");
             try
             {
                 if (File.Exists(path))
                 {
                     File.Delete(path);
+                    ProgressState.RemoveSaveWork(ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1]._SaveWorkModel.NameSaveWork);
                     ArrayOfSaveWork.RemoveAt(Int32.Parse(SaveWorkID) - 1);
                     return 0;
                 }
@@ -56,9 +74,10 @@ namespace EasySave.lib.Services
                 return 1;
             }
         }
+        
         public int RemoveSaveWorkWPF(SaveWork _SaveWork, List<SaveWork> ArrayOfSaveWork)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "EasySave.lib", "Services", "SaveWorks", $"{_SaveWork.GetInstanceInfo()[0]}.json");
+            string path = Path.Combine(ConfigurationManager.AppSettings["SaveWorkPath"], $"{_SaveWork.GetInstanceInfo()[0]}.json");
             try
             {
                 if (File.Exists(path))
@@ -81,7 +100,6 @@ namespace EasySave.lib.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
                 return 1;
             }
         }
@@ -97,14 +115,18 @@ namespace EasySave.lib.Services
 
         public int SequentialSaveWorksExecution(List<SaveWork> ArrayOfSaveWork)
         {
+            int ReturnCode = 0;
             for (int i = 1; i < (ArrayOfSaveWork.Count + 1); i++)
             {
                 if (ExecuteSaveWork($"{i}", ArrayOfSaveWork) == 1)
                 {
-                    return 1;
+                    ReturnCode++;
                 }
             }
-            return 0;
+            if (ReturnCode > 0)
+                return 1;
+            else
+                return 0;
         }
     }
 }
