@@ -19,13 +19,13 @@ namespace EasySave.DesktopApp
         public MainWindow()
         {
             InitializeComponent();
-
+            _ViewModel.ReturnModelList(_Model.ArrayOfSaveWork);
             _ViewModel.GenerateNewKey();
             _ViewModel.SaveWorkInitializing();
-            _ViewModel.ReturnModelList(_Model.ArrayOfSaveWork);
 
             //set ArrayOfSaveWork in datagrid
             dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
+
         }
 
         public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
