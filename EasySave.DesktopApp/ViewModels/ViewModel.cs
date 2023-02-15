@@ -12,13 +12,12 @@ namespace EasySave.DesktopApp.ViewModels
         public Initializer _Initializer = new Initializer();
         public Presenter _Presenter = new Presenter();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
-        public generateKey _generateKey = new generateKey();
+        public GenerateKey _GenerateKey = new GenerateKey();
         public RunningProcess _RunningProcess = new RunningProcess();
 
-        public void generateNewKey()
+        public int GenerateNewKey()
         {
-            var test = _generateKey.Generate();
-            var jePrendMontest = test;
+            return _GenerateKey.Generate();
         }
 
         public SaveWork SaveWorkCreator(string[] AttributsForSaveWork)
@@ -86,11 +85,6 @@ namespace EasySave.DesktopApp.ViewModels
 
         public int ExecuteSaveWorkWPF(SaveWork _SaveWork)
         {
-            if (_RunningProcess.CheckRunningProcess("notepad.exe") == true)
-            {
-                
-                _RunningProcess.RunningProcessClosed("notepad.exe");
-            }
             return _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
         }
 
@@ -108,11 +102,6 @@ namespace EasySave.DesktopApp.ViewModels
         public bool CheckRunningProcess(string ProcessName)
         {
             return _RunningProcess.CheckRunningProcess(ProcessName);
-        }
-
-        public bool RunningProcessClosed(string ProcessName)
-        {
-            return _RunningProcess.RunningProcessClosed(ProcessName);
         }
     }
 }

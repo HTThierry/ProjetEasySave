@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace EasySave.lib.Services
 {
-    public class generateKey
+    public class GenerateKey
     {
-        public bool Generate()
+        public int Generate()
         {
-            var random = new Random();
-            ulong key = (ulong)random.Next() << 32 | (ulong)random.Next();
-            string keyPath = $@"{ConfigurationManager.AppSettings["CryptKeyPath"]}";
+            Random _Random = new Random();
+            ulong Key = ((ulong)_Random.Next() << 32 | (ulong)_Random.Next());
+            string KeyPath = $"{ConfigurationManager.AppSettings["CryptKeyPath"]}";
             try
             {
-                using (StreamWriter sw = new StreamWriter(keyPath))
+                using (StreamWriter _StreamWriter = new StreamWriter(KeyPath))
                 {
-                    sw.WriteLine(key.ToString());
+                    _StreamWriter.WriteLine(Key.ToString());
                 }
-                return true;
+                return 0;
             }
-            catch (Exception e)
+            catch
             {
-                return false;
+                return 1;
             }
         }
     }

@@ -1,9 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace EasySave.lib.Services
 {
     public class RunningProcess
     {
+        private TaskCompletionSource<bool> eventHandled;
+        
         public bool CheckRunningProcess(string ProcessName)
         {
             bool ProcessRunning = false;
@@ -13,14 +17,6 @@ namespace EasySave.lib.Services
                 ProcessRunning = true;
             }
             return ProcessRunning;
-        }
-
-        public bool RunningProcessClosed(string ProcessName)
-        {
-            Process process = new();
-            process = Process.GetProcessesByName(ProcessName)[0];
-            process.WaitForExit();
-            return true;
         }
     }
 }

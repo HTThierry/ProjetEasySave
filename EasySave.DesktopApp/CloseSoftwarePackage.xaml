@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:EasySave.DesktopApp"
         xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
-        Title="Alerte" Height="117" Width="391">
-    <Grid>
+        Title="Alerte" Height="145" Width="449">
+    <Grid Margin="0,0,-41,-30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="375*"/>
             <ColumnDefinition Width="16*"/>
         </Grid.ColumnDefinitions>
         <Label>Veuillez fermer votre logiciel métier avant de continuer</Label>
+        <Button Content="Fermer" Height="20" Width="50" Margin="375,90,45,45" Click="Button_Click"/>
     </Grid>
 </Window>
