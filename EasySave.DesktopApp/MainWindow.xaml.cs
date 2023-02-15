@@ -1,9 +1,7 @@
 ﻿using EasySave.DesktopApp.ViewModels;
 using EasySave.lib.Models;
 using EasySave.lib.Services;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Threading;
 using System.Windows;
 
 namespace EasySave.DesktopApp
@@ -13,19 +11,18 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Model _Model { get; set; } = new Model();
+        private Model _Model = Model.GetInstance();
         private ViewModel _ViewModel = new ViewModel();
 
         public MainWindow()
         {
             InitializeComponent();
-            _ViewModel.ReturnModelList(_Model.ArrayOfSaveWork);
+
             _ViewModel.GenerateNewKey();
             _ViewModel.SaveWorkInitializing();
 
             //set ArrayOfSaveWork in datagrid
             dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
-
         }
 
         public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
@@ -65,7 +62,7 @@ namespace EasySave.DesktopApp
         {
             SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
 
-            while(_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
                 CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
                 _SoftwarePackage.ShowDialog();
@@ -85,6 +82,7 @@ namespace EasySave.DesktopApp
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
             RefreshSaveWorks();
         }
+
         public void generateCommand(object sender, RoutedEventArgs e)
         {
             _ViewModel.GenerateNewKey();
