@@ -6,7 +6,7 @@ namespace EasySave.DesktopApp.ViewModels
 {
     public class ViewModel
     {
-        public Model _Model { get; set; } = new Model();
+        private Model _Model = Model.GetInstance();
         public InputProcessingService _InputProcessingService = new InputProcessingService();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
         public Initializer _Initializer = new Initializer();
@@ -91,12 +91,6 @@ namespace EasySave.DesktopApp.ViewModels
         public int SequentialSaveWorksExecution()
         {
             return _SaveWorkManager.SequentialSaveWorksExecution(_Model.ArrayOfSaveWork);
-        }
-
-        public int ReturnModelList(List<SaveWork> _ArrayOfSaveWork)
-        {
-            _Model.ArrayOfSaveWork = _ArrayOfSaveWork;
-            return 0;
         }
 
         public bool CheckRunningProcess(string ProcessName)
