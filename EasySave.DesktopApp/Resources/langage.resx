@@ -120,6 +120,12 @@
   <data name="AddSaveWork" xml:space="preserve">
     <value>Add new SaveWork</value>
   </data>
+  <data name="allFiles" xml:space="preserve">
+    <value>All files</value>
+  </data>
+  <data name="browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

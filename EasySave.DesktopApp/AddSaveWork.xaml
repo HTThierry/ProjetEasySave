@@ -6,14 +6,54 @@
         xmlns:local="clr-namespace:EasySave.DesktopApp"
         xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
-        Title="{x:Static lang:langage.AddSaveWork}" Height="300" Width="400">
+        Title="{x:Static lang:langage.AddSaveWork}" Height="475" Width="550" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="BorderBrush" Value="#D2D2D2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="BorderBrush" Value="#D2D2D2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#007ACC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="{x:Static lang:langage.namePopUp}" FontSize="24" FontWeight="Bold" Margin="10"/>
@@ -30,13 +70,23 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10">
             <TextBlock Text="{x:Static lang:langage.pathFromInput}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <TextBox x:Name="SourcePathTextBox" Width="200" Margin="0,0,10,0"/>
+            <Button x:Name="SourcePathBrowseButton" Content="{x:Static lang:langage.browse}" Click="SourcePathBrowseButton_Click"/>
+
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10">
-            <TextBlock Text="{x:Static lang:langage.pathToInput}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <TextBox x:Name="DestinationPathTextBox" Width="200" Margin="0,0,10,0"/>
+            <TextBox x:Name="SourcePathTextBox" Width="500" Margin="10,0,10,0"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="{x:Static lang:langage.pathToInput}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Button x:Name="DestinationPathBrowseButton" Content="{x:Static lang:langage.browse}" Click="DestinationPathBrowseButton_Click"/>
+
+
+        </StackPanel>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="DestinationPathTextBox" Width="500" Margin="10,0,10,0"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="{x:Static lang:langage.cancel}" Margin="5" Click="CancelButton_Click"/>
             <Button Content="{x:Static lang:langage.save}" Margin="5" Click="SaveButton_Click"/>
         </StackPanel>
