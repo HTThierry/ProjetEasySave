@@ -7,10 +7,8 @@ namespace EasySave.DesktopApp.ViewModels
     public class ViewModel
     {
         private Model _Model = Model.GetInstance();
-        public InputProcessingService _InputProcessingService = new InputProcessingService();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
         public Initializer _Initializer = new Initializer();
-        public Presenter _Presenter = new Presenter();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
         public GenerateKey _GenerateKey = new GenerateKey();
         public RunningProcess _RunningProcess = new RunningProcess();
@@ -61,16 +59,6 @@ namespace EasySave.DesktopApp.ViewModels
         public int SaveWorkInitializing()
         {
             return _Initializer.SaveWorkInitializing(_Model.ArrayOfSaveWork);
-        }
-
-        public string[][] GetSaveWorkInfos()
-        {
-            return _Presenter.GetSaveWorkInfos(_Model.ArrayOfSaveWork);
-        }
-
-        public string[] GetSaveWorkNames()
-        {
-            return _Presenter.GetSaveWorkNames(_Model.ArrayOfSaveWork);
         }
 
         public int RemoveSaveWorkWPF(SaveWork _SaveWork)
