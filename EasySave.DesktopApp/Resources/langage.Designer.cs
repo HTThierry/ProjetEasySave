@@ -70,6 +70,24 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à All files.
+        /// </summary>
+        public static string allFiles {
+            get {
+                return ResourceManager.GetString("allFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Browse.
+        /// </summary>
+        public static string browse {
+            get {
+                return ResourceManager.GetString("browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Cancel.
         /// </summary>
         public static string cancel {
