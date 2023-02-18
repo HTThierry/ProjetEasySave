@@ -1,17 +1,28 @@
-﻿namespace EasySave.lib.Services
+﻿using EasySave.lib.Models;
+
+namespace EasySave.lib.Services
 {
     public class EntryProcessingService
     {
         private char[] IllegalChars = Path.GetInvalidPathChars();
+        private Model _Model = Model.GetInstance();
 
         public int TestNameSaveWork(string SaveWorkName)
         {
+            List<SaveWork> SaveWorkList = _Model.ArrayOfSaveWork;
             if (SaveWorkName != "")
             {
                 foreach (char c in IllegalChars)
                 {
                     if (SaveWorkName.Contains(c))
                         return 1;
+                }
+                foreach(SaveWork index in SaveWorkList)
+                {
+                    if (index._SaveWorkModel.NameSaveWork == SaveWorkName)
+                    {
+                        return 1;
+                    }
                 }
                 return 0;
             }
