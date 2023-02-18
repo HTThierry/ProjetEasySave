@@ -138,6 +138,15 @@
   <data name="diffSelect" xml:space="preserve">
     <value>Differentiel</value>
   </data>
+  <data name="ErrorName" xml:space="preserve">
+    <value>Le nom ne peut pas être vide ou déjà existant.</value>
+  </data>
+  <data name="ErrorPathDest" xml:space="preserve">
+    <value>Le chemin d'accès destination n'est pas valide.</value>
+  </data>
+  <data name="ErrorPathSource" xml:space="preserve">
+    <value>Le chemin d'accès source n'est pas valide.</value>
+  </data>
   <data name="generate" xml:space="preserve">
     <value>Genère une nouvelle clé</value>
   </data>

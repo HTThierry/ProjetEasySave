@@ -124,6 +124,33 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The name cannot be empty or already existing..
+        /// </summary>
+        public static string ErrorName {
+            get {
+                return ResourceManager.GetString("ErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The destination path is not valid..
+        /// </summary>
+        public static string ErrorPathDest {
+            get {
+                return ResourceManager.GetString("ErrorPathDest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The source path is not valid..
+        /// </summary>
+        public static string ErrorPathSource {
+            get {
+                return ResourceManager.GetString("ErrorPathSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Generate a new key.
         /// </summary>
         public static string generate {
