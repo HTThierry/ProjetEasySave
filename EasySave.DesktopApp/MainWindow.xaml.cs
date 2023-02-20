@@ -27,7 +27,7 @@ namespace EasySave.DesktopApp
 
         public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
         {
-            AddSaveWork NewsPage = new AddSaveWork();
+            SaveWorkControlPanel NewsPage = new SaveWorkControlPanel();
             // Wait for the user to close the windows
             NewsPage.ShowDialog();
             //get the data the user set in the windows pop-up
@@ -92,5 +92,10 @@ namespace EasySave.DesktopApp
         public void Lancer_Click(object sender, RoutedEventArgs e) { }
         public void Stop_Click(object sender, RoutedEventArgs e) { }
         public void Visual_Click(object sender, RoutedEventArgs e) { }
+
+        private void dgSaveWorks_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -61,15 +61,6 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add new SaveWork.
-        /// </summary>
-        public static string AddSaveWork {
-            get {
-                return ResourceManager.GetString("AddSaveWork", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à All files.
         /// </summary>
         public static string allFiles {
@@ -106,11 +97,38 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Control pannel.
+        /// </summary>
+        public static string ControlPanel {
+            get {
+                return ResourceManager.GetString("ControlPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Create new SaveWork.
+        /// </summary>
+        public static string CreateSaveWork {
+            get {
+                return ResourceManager.GetString("CreateSaveWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Delete.
         /// </summary>
         public static string delete {
             get {
                 return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete selected SaveWork.
+        /// </summary>
+        public static string deleteSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("deleteSelectedSaveWork", resourceCulture);
             }
         }
         
@@ -169,15 +187,6 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Launch All.
-        /// </summary>
-        public static string launchAll {
-            get {
-                return ResourceManager.GetString("launchAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Name:.
         /// </summary>
         public static string nameInput {
@@ -187,7 +196,7 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Create SaveWork.
+        ///   Recherche une chaîne localisée semblable à SaveWork control panel.
         /// </summary>
         public static string namePopUp {
             get {
@@ -196,7 +205,7 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Source Path:.
+        ///   Recherche une chaîne localisée semblable à Source Path :.
         /// </summary>
         public static string pathFromInput {
             get {
@@ -205,11 +214,29 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Destination Path:.
+        ///   Recherche une chaîne localisée semblable à Destination Path :.
         /// </summary>
         public static string pathToInput {
             get {
                 return ResourceManager.GetString("pathToInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pause selected SaveWork.
+        /// </summary>
+        public static string pauseSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("pauseSelectedSaveWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Play selected SaveWork.
+        /// </summary>
+        public static string playSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("playSelectedSaveWork", resourceCulture);
             }
         }
         
@@ -219,6 +246,42 @@ namespace EasySave.DesktopApp.Resources {
         public static string save {
             get {
                 return ResourceManager.GetString("save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select all.
+        /// </summary>
+        public static string selectAll {
+            get {
+                return ResourceManager.GetString("selectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop selected SaveWork.
+        /// </summary>
+        public static string stopSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("stopSelectedSaveWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete.
+        /// </summary>
+        public static string tabDelete {
+            get {
+                return ResourceManager.GetString("tabDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modification.
+        /// </summary>
+        public static string tabModification {
+            get {
+                return ResourceManager.GetString("tabModification", resourceCulture);
             }
         }
         
@@ -246,6 +309,51 @@ namespace EasySave.DesktopApp.Resources {
         public static string tabPathTo {
             get {
                 return ResourceManager.GetString("tabPathTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pause.
+        /// </summary>
+        public static string tabPause {
+            get {
+                return ResourceManager.GetString("tabPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Play or resume.
+        /// </summary>
+        public static string tabPlay {
+            get {
+                return ResourceManager.GetString("tabPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Progress bar.
+        /// </summary>
+        public static string tabProgressBar {
+            get {
+                return ResourceManager.GetString("tabProgressBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Progress state.
+        /// </summary>
+        public static string tabProgressState {
+            get {
+                return ResourceManager.GetString("tabProgressState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop .
+        /// </summary>
+        public static string tabStop {
+            get {
+                return ResourceManager.GetString("tabStop", resourceCulture);
             }
         }
         

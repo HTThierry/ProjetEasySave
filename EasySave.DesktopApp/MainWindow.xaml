@@ -5,66 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
-        Title="{x:Static lang:langage.WindowTitle}" Height="450" Width="800">
+        Title="{x:Static lang:langage.WindowTitle}" Height="450" Width="1000">
     <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="10" />
-        </Style>
-        <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="IsReadOnly" Value="True" />
-            <Setter Property="AutoGenerateColumns" Value="False" />
-            <Setter Property="HeadersVisibility" Value="Column" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderBrush" Value="LightGray" />
-            <Setter Property="RowBackground" Value="White" />
-            <Setter Property="AlternatingRowBackground" Value="#F6F6F6" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="SelectionMode" Value="Single" />
-            <Setter Property="GridLinesVisibility" Value="All" />
-        </Style>
-        <Style TargetType="DataGridTextColumn">
-            <Setter Property="Width" Value="*" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="ElementStyle">
-                <Setter.Value>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="VerticalAlignment" Value="Center" />
-                        <Setter Property="HorizontalAlignment" Value="Left" />
-                        <Setter Property="Margin" Value="5" />
-                        <Setter Property="TextWrapping" Value="Wrap" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="HeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="VerticalAlignment" Value="Center" />
-                        <Setter Property="HorizontalAlignment" Value="Left" />
-                        <Setter Property="Margin" Value="5" />
-                        <Setter Property="FontWeight" Value="Bold" />
-                        <Setter Property="Foreground" Value="Black" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="10,5" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Background" Value="#007ACC" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderBrush" Value="#007ACC" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-        </Style>
-        <Style TargetType="StackPanel">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="10" />
+        <Style x:Key="CenteredColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -74,62 +18,84 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
+        
+        <TextBlock Text="EasySave Version 3.0" FontSize="24" FontWeight="Bold" Margin="10" />
 
         <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}">
-            <DataGrid.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Background" Value="Red"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Padding" Value="10"/>
-                </Style>
-            </DataGrid.Resources>
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static lang:langage.tabName}" Binding="{Binding _SaveWorkModel.NameSaveWork}" Width="*" />
-                <DataGridTextColumn Header="{x:Static lang:langage.tabType}" Binding="{Binding _SaveWorkModel.TypeSaveWork}" Width="*" />
-                <DataGridTextColumn Header="{x:Static lang:langage.tabPathFrom}" Binding="{Binding _SaveWorkModel.SourcePathSaveWork}" Width="*" />
-                <DataGridTextColumn Header="{x:Static lang:langage.tabPathTo}" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork}" Width="*" />
-                <DataGridTemplateColumn>
+                <DataGridTextColumn Header="{x:Static lang:langage.tabName}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Binding="{Binding _SaveWorkModel.NameSaveWork}" IsReadOnly="True" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="{x:Static lang:langage.tabProgressBar}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Detail" Click="Visual_Click"/>
+                            <ProgressBar Value="{Binding ProgressValue}" Minimum="0" Maximum="100"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="{x:Static lang:langage.tabProgressState}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}"  IsReadOnly="True" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="{x:Static lang:langage.tabModification}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Lancer" Click="Lancer_Click"/>
+                            <Button Content="👁" Click="Visual_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="{x:Static lang:langage.tabPlay}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Pause" Click="Pause_Click"/>
+                            <Button Content="⏯︎" Click="Lancer_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="{x:Static lang:langage.tabPause}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Stop" Click="Stop_Click"/>
+                            <Button Content="⏸" Click="Pause_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="{x:Static lang:langage.tabStop}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Supprimer" Click="Supprimer_Click"/>
+                            <Button Content="⏹️" Click="Stop_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="{x:Static lang:langage.tabDelete}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="⌫" Click="Supprimer_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="{x:Static lang:langage.AddSaveWork}" Margin="5" Click="AddSaveWorkCommand" />
-            <Button Content="{x:Static lang:langage.launchAll}" Margin="5" Click="LaunchAllCommand" />
-            <Button Content="{x:Static lang:langage.launch}" Margin="5" Click="LaunchCommand" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="{x:Static lang:langage.selectAll}" Margin="5" Click="AddSaveWorkCommand" />
+            <Button Content="{x:Static lang:langage.CreateSaveWork}" Margin="5" Click="AddSaveWorkCommand" />
+            <Button Content="{x:Static lang:langage.playSelectedSaveWork}" Margin="5" Click="LaunchAllCommand" />
+            <Button Content="{x:Static lang:langage.pauseSelectedSaveWork}" Margin="5" Click="LaunchAllCommand" />
+            <Button Content="{x:Static lang:langage.stopSelectedSaveWork}" Margin="5" Click="LaunchAllCommand" />
+            <Button Content="{x:Static lang:langage.deleteSelectedSaveWork}" Margin="5" Click="LaunchAllCommand" />
             <Button Content="{x:Static lang:langage.delete}" Margin="5" Click="deleteCommand" />
             <Button Content="{x:Static lang:langage.generate}" Margin="5" Click="generateCommand" />
         </StackPanel>

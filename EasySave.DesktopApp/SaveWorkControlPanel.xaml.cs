@@ -8,14 +8,14 @@ using MessageBox = System.Windows.Forms.MessageBox;
 namespace EasySave.DesktopApp
 {
     /// <summary>
-    /// Logique d'interaction pour AddSaveWork.xaml
+    /// Logique d'interaction pour SaveWorkControlPanel.xaml
     /// </summary>
-    public partial class AddSaveWork : Window
+    public partial class SaveWorkControlPanel : Window
     {
         private ViewModel _ViewModel = new ViewModel();
         public string[] AttributsForSaveWork { get; private set; }
 
-        public AddSaveWork()
+        public SaveWorkControlPanel()
         {
             InitializeComponent();
         }
