@@ -6,17 +6,20 @@ namespace EasySave.lib.Services
 {
     public class RunningProcess
     {
+        /// <summary>
+        /// Refonte : Fusion avec Overwatch
+        /// </summary>
+
         private TaskCompletionSource<bool> eventHandled;
         
-        public bool CheckRunningProcess(string ProcessName)
+        public int CheckRunningProcess(string ProcessName)
         {
-            bool ProcessRunning = false;
-            var process = Process.GetProcessesByName(ProcessName);
+            Process[] process = Process.GetProcessesByName(ProcessName);
             if (process.Length > 0)
             {
-                ProcessRunning = true;
+                return 1;
             }
-            return ProcessRunning;
+            return 0;
         }
     }
 }

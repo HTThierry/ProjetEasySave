@@ -49,7 +49,7 @@ namespace EasySave.DesktopApp
         {
             foreach (SaveWork _saveWork in _Model.ArrayOfSaveWork)
             {
-                while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+                while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == 0)
                 {
                     CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
                     _SoftwarePackage.ShowDialog();
@@ -62,7 +62,7 @@ namespace EasySave.DesktopApp
         {
             SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
 
-            while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == 0)
             {
                 CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
                 _SoftwarePackage.ShowDialog();

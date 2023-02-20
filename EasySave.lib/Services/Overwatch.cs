@@ -2,8 +2,18 @@
 
 namespace EasySave.lib.Services
 {
-    public class EntryProcessingService
+    public class Overwatch
     {
+        /// <summary>
+        /// Refonte : Controleur
+        /// Vérification des codes retours
+        /// Controle des logiciels métiers
+        /// Controle de l'existance de la clé
+        /// Controle de l'existance de CryptoSoft
+        /// ...
+        /// </summary>
+
+
         private char[] IllegalChars = Path.GetInvalidPathChars();
         private Model _Model = Model.GetInstance();
 
