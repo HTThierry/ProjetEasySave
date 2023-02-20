@@ -87,5 +87,10 @@ namespace EasySave.DesktopApp
         {
             _ViewModel.GenerateNewKey();
         }
+        public void Supprimer_Click(object sender, RoutedEventArgs e) { }
+        public void Pause_Click(object sender, RoutedEventArgs e) { }
+        public void Lancer_Click(object sender, RoutedEventArgs e) { }
+        public void Stop_Click(object sender, RoutedEventArgs e) { }
+        public void Visual_Click(object sender, RoutedEventArgs e) { }
     }
 }

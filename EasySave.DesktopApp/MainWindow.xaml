@@ -77,11 +77,53 @@
         <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
 
         <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}">
+            <DataGrid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Padding" Value="10"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static lang:langage.tabName}" Binding="{Binding _SaveWorkModel.NameSaveWork}" Width="*" />
                 <DataGridTextColumn Header="{x:Static lang:langage.tabType}" Binding="{Binding _SaveWorkModel.TypeSaveWork}" Width="*" />
                 <DataGridTextColumn Header="{x:Static lang:langage.tabPathFrom}" Binding="{Binding _SaveWorkModel.SourcePathSaveWork}" Width="*" />
                 <DataGridTextColumn Header="{x:Static lang:langage.tabPathTo}" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork}" Width="*" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Detail" Click="Visual_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Lancer" Click="Lancer_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Pause" Click="Pause_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Stop" Click="Stop_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="Supprimer_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">

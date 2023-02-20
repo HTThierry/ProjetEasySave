@@ -1,6 +1,9 @@
 ﻿using EasySave.DesktopApp.ViewModels;
 using EasySave.DesktopApp.Resources;
 using System.Windows;
+using Microsoft.Win32;
+using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace EasySave.DesktopApp
 {
@@ -62,13 +65,23 @@ namespace EasySave.DesktopApp
 
         private void SourcePathBrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            //A faire
+            var dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK )
+            {
+                string selectedDirectory = dialog.SelectedPath;
+                SourcePathTextBox.Text = selectedDirectory;
+            }
 
         }
 
         private void DestinationPathBrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            //A faire
+            var dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string selectedDirectory = dialog.SelectedPath;
+                DestinationPathTextBox.Text = selectedDirectory;
+            }
         }
     }
 }
