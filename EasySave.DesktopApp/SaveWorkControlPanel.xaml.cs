@@ -1,4 +1,5 @@
 ﻿using EasySave.DesktopApp.ViewModels;
+using EasySave.lib.Models;
 using EasySave.DesktopApp.Resources;
 using System.Windows;
 using Microsoft.Win32;
@@ -12,8 +13,8 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class SaveWorkControlPanel : Window
     {
-        private ViewModel _ViewModel = new ViewModel();
-        public string[] AttributsForSaveWork { get; private set; }
+        //private ViewModel _ViewModel = new ViewModel();
+        public SaveWorkModel AttributsForSaveWork { get; set; }
 
         public SaveWorkControlPanel()
         {
@@ -29,38 +30,42 @@ namespace EasySave.DesktopApp
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             // get the data of the new saveWork
-            string name = NameTextBox.Text;
-            string type = (TypeComboBox.SelectedIndex == 0) ? "1" : "2";
-            string sourcePath = SourcePathTextBox.Text;
-            string destinationPath = DestinationPathTextBox.Text;
 
-            int verifName = _ViewModel.TestNameSaveWork(name);
-            int verifPathSource = _ViewModel.TestSourcePathSaveWork(sourcePath);
-            int verifPathDest= _ViewModel.TestDestinationPathSaveWork(destinationPath);
+            AttributsForSaveWork.NameSaveWork = NameTextBox.Text;
+            AttributsForSaveWork.TypeSaveWork = (TypeComboBox.SelectedIndex == 0) ? 1 : 2;
+            AttributsForSaveWork.SourcePathSaveWork = SourcePathTextBox.Text;
+            AttributsForSaveWork.DestinationPathSaveWork = DestinationPathTextBox.Text;
 
-            if (verifName==1 || verifPathSource==1 || verifPathDest==1)
-            {
-                if (verifName==1)
-                {
-                    MessageBox.Show($"{langage.ErrorName}");
-                }
-                if (verifPathSource == 1)
-                {
-                    MessageBox.Show($"{langage.ErrorPathSource}");
-                }
-                if (verifPathDest == 1)
-                {
-                    MessageBox.Show($"{langage.ErrorPathDest}");
-                }
-            }
-            else
-            {
-                this.AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
 
-                Close();
-            }
+            Close();
 
-            
+            //int verifName = _ViewModel.TestNameSaveWork(name);
+            //int verifPathSource = _ViewModel.TestSourcePathSaveWork(sourcePath);
+            //int verifPathDest= _ViewModel.TestDestinationPathSaveWork(destinationPath);
+
+            //if (verifName==1 || verifPathSource==1 || verifPathDest==1)
+            //{
+            //    if (verifName==1)
+            //    {
+            //        MessageBox.Show($"{langage.ErrorName}");
+            //    }
+            //    if (verifPathSource == 1)
+            //    {
+            //        MessageBox.Show($"{langage.ErrorPathSource}");
+            //    }
+            //    if (verifPathDest == 1)
+            //    {
+            //        MessageBox.Show($"{langage.ErrorPathDest}");
+            //    }
+            //}
+            //else
+            //{
+            //    this.AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
+
+            //    Close();
+            //}
+
+
         }
 
         private void SourcePathBrowseButton_Click(object sender, RoutedEventArgs e)
