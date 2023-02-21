@@ -31,7 +31,7 @@ namespace EasySave.DesktopApp
             // Wait for the user to close the windows
             NewsPage.ShowDialog();
             //get the data the user set in the windows pop-up
-            string[] savedVariable = NewsPage.AttributsForSaveWork;
+            SaveWorkModel savedVariable = NewsPage.SaveWork;
             if (savedVariable != null)
             {
                 _ViewModel.AddNewSaveWork(savedVariable);
@@ -47,37 +47,38 @@ namespace EasySave.DesktopApp
 
         public void LaunchAllCommand(object sender, RoutedEventArgs e)
         {
-            foreach (SaveWork _saveWork in _Model.ArrayOfSaveWork)
-            {
-                while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
-                {
-                    CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
-                    _SoftwarePackage.ShowDialog();
-                }
-                _ViewModel.ExecuteSaveWorkWPF(_saveWork);
-            }
+            //foreach (SaveWorkService _saveWork in _Model.ArrayOfSaveWork)
+            //{
+            //    while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            //    {
+            //        CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
+            //        _SoftwarePackage.ShowDialog();
+            //    }
+            //    _ViewModel.ExecuteSaveWorkWPF(_saveWork);
+            //}
+            _ViewModel.LaunchAllCommand();
         }
 
         public async void LaunchCommand(object sender, RoutedEventArgs e)
         {
-            SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
+            _ViewModel.LaunchCommand(selectedSaveWork);
+            //while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            //{
+            //    CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
+            //    _SoftwarePackage.ShowDialog();
+            //}
 
-            while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
-            {
-                CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
-                _SoftwarePackage.ShowDialog();
-            }
-
-            if (selectedSaveWork != null)
-            {
-                int x = _ViewModel.ExecuteSaveWorkWPF(selectedSaveWork);
-                if (x == 2) { }
-            }
+            //if (selectedSaveWork != null)
+            //{
+            //    int x = _ViewModel.ExecuteSaveWorkWPF(selectedSaveWork);
+            //    if (x == 2) { }
+            //}
         }
 
         public void deleteCommand(object sender, RoutedEventArgs e)
         {
-            SaveWork selectedSaveWork = dgSaveWorks.SelectedItem as SaveWork;
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
 
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
             RefreshSaveWorks();

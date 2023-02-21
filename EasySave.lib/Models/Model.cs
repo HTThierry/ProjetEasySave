@@ -5,7 +5,7 @@ namespace EasySave.lib.Models
     public class Model
     {
         private static Model _Model;
-        public List<SaveWork> ArrayOfSaveWork = new List<SaveWork>();
+        public List<SaveWorkService> ArrayOfSaveWork = new List<SaveWorkService>();
 
         private Model()
         { }

@@ -1,7 +1,8 @@
-﻿using EasySave.DesktopApp.ViewModels;
-using EasySave.DesktopApp.Resources;
+﻿using EasySave.DesktopApp.Resources;
+using EasySave.DesktopApp.ViewModels;
+using EasySave.lib.Models;
+using System;
 using System.Windows;
-using Microsoft.Win32;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -13,7 +14,9 @@ namespace EasySave.DesktopApp
     public partial class AddSaveWork : Window
     {
         private ViewModel _ViewModel = new ViewModel();
-        public string[] AttributsForSaveWork { get; private set; }
+
+        //public string[] AttributsForSaveWork { get; private set; }
+        public SaveWorkModel SaveWork = new SaveWorkModel();
 
         public AddSaveWork()
         {
@@ -36,11 +39,11 @@ namespace EasySave.DesktopApp
 
             int verifName = _ViewModel.TestNameSaveWork(name);
             int verifPathSource = _ViewModel.TestSourcePathSaveWork(sourcePath);
-            int verifPathDest= _ViewModel.TestDestinationPathSaveWork(destinationPath);
+            int verifPathDest = _ViewModel.TestDestinationPathSaveWork(destinationPath);
 
-            if (verifName==1 || verifPathSource==1 || verifPathDest==1)
+            if (verifName == 1 || verifPathSource == 1 || verifPathDest == 1)
             {
-                if (verifName==1)
+                if (verifName == 1)
                 {
                     MessageBox.Show($"{langage.ErrorName}");
                 }
@@ -55,23 +58,25 @@ namespace EasySave.DesktopApp
             }
             else
             {
-                this.AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
+                //this.AttributsForSaveWork = new string[4] { name, type, sourcePath, destinationPath };
+
+                SaveWork.NameSaveWork = name;
+                SaveWork.TypeSaveWork = Int32.Parse(type);
+                SaveWork.SourcePathSaveWork = sourcePath;
+                SaveWork.DestinationPathSaveWork = destinationPath;
 
                 Close();
             }
-
-            
         }
 
         private void SourcePathBrowseButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new FolderBrowserDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK )
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string selectedDirectory = dialog.SelectedPath;
                 SourcePathTextBox.Text = selectedDirectory;
             }
-
         }
 
         private void DestinationPathBrowseButton_Click(object sender, RoutedEventArgs e)

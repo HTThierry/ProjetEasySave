@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 namespace EasySave.lib.Services
 {
-    public class cryptoSoft
+    public static class cryptoSoft
     {
-        public int cryptoSoftEasySave(string type, string fichier_source, string fichier_destination)
+        public static int cryptoSoftEasySave(string type, string fichier_source, string fichier_destination)
         {
             string filePath = ConfigurationManager.AppSettings["CryptKeyPath"]; // spécifiez le chemin d'accès complet à votre fichier key.txt
             string key = File.ReadAllText(filePath);

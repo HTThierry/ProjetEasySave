@@ -1,14 +1,16 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Windows;
 
 namespace EasySave.DesktopApp.ViewModels
 {
     public class ViewModel
     {
-        private Model _Model = Model.GetInstance();
+        //private Model _Model = Model.GetInstance();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
-        public Initializer _Initializer = new Initializer();
+        //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
         public GenerateKey _GenerateKey = new GenerateKey();
         public RunningProcess _RunningProcess = new RunningProcess();
@@ -18,29 +20,29 @@ namespace EasySave.DesktopApp.ViewModels
             return _GenerateKey.Generate();
         }
 
-        public SaveWork SaveWorkCreator(string[] AttributsForSaveWork)
-        {
-            return _SaveWorkManager.SaveWorkCreator(AttributsForSaveWork);
-        }
+        //public SaveWorkService SaveWorkCreator(SaveWorkModel AttributsForSaveWork)
+        //{
+        //    return _SaveWorkManager.SaveWorkCreator(AttributsForSaveWork);
+        //}
 
         public int TestNameSaveWork(string SaveWorkName)
         {
-            return _EntryProcessingService.TestNameSaveWork(SaveWorkName);
+            return _SaveWorkManager.TestNameSaveWork(SaveWorkName);
         }
 
         public int TestTypeSaveWork(string SaveWorkTypeToConvert)
         {
-            return _EntryProcessingService.TestTypeSaveWork(SaveWorkTypeToConvert);
+            return _SaveWorkManager.TestTypeSaveWork(SaveWorkTypeToConvert);
         }
 
         public int TestSourcePathSaveWork(string SaveWorkSourcePath)
         {
-            return _EntryProcessingService.TestSourcePathSaveWork(SaveWorkSourcePath);
+            return _SaveWorkManager.TestSourcePathSaveWork(SaveWorkSourcePath);
         }
 
         public int TestDestinationPathSaveWork(string SaveWorkDestinationPath)
         {
-            return _EntryProcessingService.TestDestinationPathSaveWork(SaveWorkDestinationPath);
+            return _SaveWorkManager.TestDestinationPathSaveWork(SaveWorkDestinationPath);
         }
 
         /// <summary>
@@ -48,9 +50,9 @@ namespace EasySave.DesktopApp.ViewModels
         /// </summary>
         /// <param name="AttributsForSaveWork"></param>
         /// <returns></returns>
-        public int AddNewSaveWork(string[] AttributsForSaveWork)
+        public int AddNewSaveWork(SaveWorkModel AttributsForSaveWork)
         {
-            return _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork, _Model.ArrayOfSaveWork);
+            return _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork);
         }
 
         /// <summary>
@@ -58,32 +60,59 @@ namespace EasySave.DesktopApp.ViewModels
         /// </summary>
         public int SaveWorkInitializing()
         {
-            return _Initializer.SaveWorkInitializing(_Model.ArrayOfSaveWork);
+            return _SaveWorkManager.SaveWorkInitializing();
         }
 
-        public int RemoveSaveWorkWPF(SaveWork _SaveWork)
+        public int RemoveSaveWorkWPF(SaveWorkModel _SaveWork)
         {
-            return _SaveWorkManager.RemoveSaveWorkWPF(_SaveWork, _Model.ArrayOfSaveWork);
+            return _SaveWorkManager.RemoveSaveWorkWPF(_SaveWork);
         }
 
-        public int ExecuteSaveWork(string SaveWorkID)
-        {
-            return _SaveWorkManager.ExecuteSaveWork(SaveWorkID, _Model.ArrayOfSaveWork);
-        }
+        //public int ExecuteSaveWork(string SaveWorkID)
+        //{
+        //    return _SaveWorkManager.ExecuteSaveWork(SaveWorkID);
+        //}
 
-        public int ExecuteSaveWorkWPF(SaveWork _SaveWork)
+        public int ExecuteSaveWorkWPF(SaveWorkModel _SaveWork)
         {
             return _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
         }
 
-        public int SequentialSaveWorksExecution()
-        {
-            return _SaveWorkManager.SequentialSaveWorksExecution(_Model.ArrayOfSaveWork);
-        }
+        //public int SequentialSaveWorksExecution()
+        //{
+        //    return _SaveWorkManager.SequentialSaveWorksExecution(_Model.ArrayOfSaveWork);
+        //}
 
         public bool CheckRunningProcess(string ProcessName)
         {
             return _RunningProcess.CheckRunningProcess(ProcessName);
+        }
+        public void LaunchAllCommand()
+        {
+            foreach (SaveWorkModel _saveWork in _SaveWorkManager.ArrayOfSaveWork)
+            {
+                while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+                {
+                    CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
+                    _SoftwarePackage.ShowDialog();
+                }
+                ExecuteSaveWorkWPF(_saveWork);
+            }
+        }
+        public  void LaunchCommand(SaveWorkModel model)
+        {
+
+            while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            {
+                CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
+                _SoftwarePackage.ShowDialog();
+            }
+
+            if (model != null)
+            {
+                int x = ExecuteSaveWorkWPF(model);
+                if (x == 2) { }
+            }
         }
     }
 }

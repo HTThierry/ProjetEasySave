@@ -5,34 +5,34 @@ using System.IO;
 
 namespace EasySave.lib.Services
 {
-    public class SaveWork
+    public class SaveWorkService
     {
-        public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
-        public cryptoSoft _cryptoSoft = new cryptoSoft();
-        public RunningProcess _RunningProcess = new RunningProcess();
+        //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
+        //public cryptoSoft _cryptoSoft = new cryptoSoft();
+        //public RunningProcess _RunningProcess = new RunningProcess();
 
-        public string[] GetInstanceInfo()
-        {
-            string[] AttributsForPresentation = new string[4] { _SaveWorkModel.NameSaveWork, $"{_SaveWorkModel.TypeSaveWork}", _SaveWorkModel.SourcePathSaveWork, _SaveWorkModel.DestinationPathSaveWork };
-            return AttributsForPresentation;
-        }
+        //public string[] GetInstanceInfo()
+        //{
+        //    string[] AttributsForPresentation = new string[4] { _SaveWorkModel.NameSaveWork, $"{_SaveWorkModel.TypeSaveWork}", _SaveWorkModel.SourcePathSaveWork, _SaveWorkModel.DestinationPathSaveWork };
+        //    return AttributsForPresentation;
+        //}
 
-        public int LaunchSaveWork()
+        public int LaunchSaveWork(SaveWorkModel model)
         {
-            if (_SaveWorkModel.TypeSaveWork == 1)
+            if (model.TypeSaveWork == 1)
             {
-                return CompleteCopyFiles();
+                return CompleteCopyFiles(model);
             }
             else
             {
-                return DifferentialCopyFiles();
+                return DifferentialCopyFiles(model);
             }
         }
 
-        private int CompleteCopyFiles()
+        private int CompleteCopyFiles(SaveWorkModel model)
         {
-            string SourcePath = _SaveWorkModel.SourcePathSaveWork;
-            string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
+            string SourcePath = model.SourcePathSaveWork;
+            string DestinationPath = model.DestinationPathSaveWork;
             int TotalFilesToCopy = 0;
             long TotalFilesSizeToCopy = 0;
             int NbFilesLeft = 0;
@@ -90,7 +90,7 @@ namespace EasySave.lib.Services
 
                             if (isFileToCryp)
                             {
-                               timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}");
+                               timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}");
                                 var test = timeForCryp;
                             }
                             else
@@ -113,13 +113,13 @@ namespace EasySave.lib.Services
                         FilesSizeLeft -= fileInfo.Length;
 
                         LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime, timeForCryp));
-                        ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                        ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator(model, "Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                     }
-                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator(model, "Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator(model, "Inactive", 0, 0, 0, 0, "", ""));
                 }
                 if (LogReturnCode >= 1 || ProgressStateReturnCode >= 1)
                     return 1;
@@ -154,7 +154,7 @@ namespace EasySave.lib.Services
             return LogArray;
         }
 
-        private string[] ProgressArrayCreator(string ProgressState, int TotalFilesToCopy, long TotalFilesSizeToCopy, int NbFilesLeft, long FilesSizeLeft, string FilePath, string DestinationPath)
+        private string[] ProgressArrayCreator(SaveWorkModel model,string ProgressState, int TotalFilesToCopy, long TotalFilesSizeToCopy, int NbFilesLeft, long FilesSizeLeft, string FilePath, string DestinationPath)
         {
             DateTime today = DateTime.Now;
             string FileDestinationPath = "";
@@ -164,7 +164,7 @@ namespace EasySave.lib.Services
             }
 
             string[] ProgressArray = new string[] {
-                        _SaveWorkModel.NameSaveWork,
+                        model.NameSaveWork,
                         today.ToString("dd/MM/yyyy hh:mm:ss"),
                         ProgressState,
                         $"{TotalFilesToCopy}",
@@ -178,10 +178,10 @@ namespace EasySave.lib.Services
             return ProgressArray;
         }
 
-        private int DifferentialCopyFiles()
+        private int DifferentialCopyFiles(SaveWorkModel model)
         {
-            string SourcePath = _SaveWorkModel.SourcePathSaveWork;
-            string DestinationPath = _SaveWorkModel.DestinationPathSaveWork;
+            string SourcePath = model.SourcePathSaveWork;
+            string DestinationPath = model.DestinationPathSaveWork;
             int TotalFilesToCopy = 0;
             long TotalFilesSizeToCopy = 0;
             int NbFilesLeft = 0;
@@ -193,7 +193,7 @@ namespace EasySave.lib.Services
 
             try
             {
-                if (Directory.Exists(_SaveWorkModel.SourcePathSaveWork))
+                if (Directory.Exists(model.SourcePathSaveWork))
                 {
                     if (!Directory.Exists(DestinationPath))
                     {
@@ -243,7 +243,7 @@ namespace EasySave.lib.Services
                             {
                                 if (isFileToCryp)
                                 {
-                                    timeForCryp = _cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}");
+                                    timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{FileDestinationPath}");
                                     var test = timeForCryp;
                                 }
                                 else
@@ -264,14 +264,14 @@ namespace EasySave.lib.Services
                             FilesSizeLeft -= fileInfo.Length;
 
                             LogReturnCode += Log.LogFiles(LogArrayCreator(file, DestinationPath, FileTransferTime, timeForCryp));
-                            ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
+                            ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator(model,"Active", TotalFilesToCopy, TotalFilesSizeToCopy, NbFilesLeft, FilesSizeLeft, file, DestinationPath));
                         };
                     }
-                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator(model,"Inactive", 0, 0, 0, 0, "", ""));
                 }
                 else
                 {
-                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator("Inactive", 0, 0, 0, 0, "", ""));
+                    ProgressStateReturnCode += ProgressState.ProgressStateFile(ProgressArrayCreator(model, "Inactive", 0, 0, 0, 0, "", ""));
                 }
                 if (LogReturnCode >= 1 || ProgressStateReturnCode >= 1)
                     return 1;
