@@ -25,6 +25,7 @@ namespace EasySave.DesktopApp
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            SaveWork = null;
             //for the windows
             Close();
         }
