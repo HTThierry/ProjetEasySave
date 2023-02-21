@@ -11,8 +11,8 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Model _Model = Model.GetInstance();
-        private ViewModel _ViewModel = new ViewModel();
+        //private Model _Model = Model.GetInstance();
+        private MainViewViewModel _ViewModel = new MainViewViewModel();
 
         public MainWindow()
         {
@@ -22,7 +22,7 @@ namespace EasySave.DesktopApp
             _ViewModel.SaveWorkInitializing();
 
             //set ArrayOfSaveWork in datagrid
-            dgSaveWorks.ItemsSource = _Model.ArrayOfSaveWork;
+            dgSaveWorks.ItemsSource = _ViewModel.GetSaveWorks();
         }
 
         public void AddSaveWorkCommand(object sender, RoutedEventArgs e)

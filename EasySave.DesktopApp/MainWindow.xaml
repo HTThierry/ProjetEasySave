@@ -76,7 +76,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
 
-        <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _Model.ArrayOfSaveWork}">
+        <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _SaveWorkManager.ArrayOfSaveWork}">
             <DataGrid.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Red"/>

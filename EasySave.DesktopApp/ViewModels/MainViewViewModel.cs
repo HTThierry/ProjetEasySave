@@ -2,16 +2,18 @@
 using EasySave.lib.Services;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Windows;
+using System.Diagnostics;
 
 namespace EasySave.DesktopApp.ViewModels
 {
-    public class ViewModel
+    public class MainViewViewModel
     {
         //private Model _Model = Model.GetInstance();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
+
         //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
+
         public GenerateKey _GenerateKey = new GenerateKey();
         public RunningProcess _RunningProcess = new RunningProcess();
 
@@ -24,6 +26,11 @@ namespace EasySave.DesktopApp.ViewModels
         //{
         //    return _SaveWorkManager.SaveWorkCreator(AttributsForSaveWork);
         //}
+        public List<SaveWorkModel> GetSaveWorks()
+        {
+            Debug.WriteLine(_SaveWorkManager.ArrayOfSaveWork);
+            return _SaveWorkManager.ArrayOfSaveWork;
+        }
 
         public int TestNameSaveWork(string SaveWorkName)
         {
@@ -87,6 +94,7 @@ namespace EasySave.DesktopApp.ViewModels
         {
             return _RunningProcess.CheckRunningProcess(ProcessName);
         }
+
         public void LaunchAllCommand()
         {
             foreach (SaveWorkModel _saveWork in _SaveWorkManager.ArrayOfSaveWork)
@@ -99,9 +107,9 @@ namespace EasySave.DesktopApp.ViewModels
                 ExecuteSaveWorkWPF(_saveWork);
             }
         }
-        public  void LaunchCommand(SaveWorkModel model)
-        {
 
+        public void LaunchCommand(SaveWorkModel model)
+        {
             while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
                 CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
