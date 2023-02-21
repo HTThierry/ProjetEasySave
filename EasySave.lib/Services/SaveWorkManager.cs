@@ -1,42 +1,40 @@
 ﻿using EasySave.lib.Models;
 using System.Configuration;
 using System.Text.Json;
-using System.Configuration;
 
 namespace EasySave.lib.Services
 {
     public class SaveWorkManager
     {
         public static int index;
-        public List<SaveWorkModel> ArrayOfSaveWork = new();
+        public List<SaveWorkModel> ArrayOfSaveWork = new List<SaveWorkModel>();
         private SaveWorkService service = new SaveWorkService();
+
         public int AddNewSaveWork(SaveWorkModel model)
         {
-          
-                ArrayOfSaveWork.Add(model);
-                ProgressState.AddNewSaveWorkProgressState(model.NameSaveWork);
+            ArrayOfSaveWork.Add(model);
+            ProgressState.AddNewSaveWorkProgressState(model.NameSaveWork);
 
-                string jsonString = JsonSerializer.Serialize(model);
-                string DirectoryPath = ConfigurationManager.AppSettings["SaveWorkPath"];
-                string path = Path.Combine(DirectoryPath, $"{model.NameSaveWork}.json");
+            string jsonString = JsonSerializer.Serialize(model);
+            string DirectoryPath = ConfigurationManager.AppSettings["SaveWorkPath"];
+            string path = Path.Combine(DirectoryPath, $"{model.NameSaveWork}.json");
 
-                if (!Directory.Exists(DirectoryPath))
-                {
-                    Directory.CreateDirectory(DirectoryPath);
-                }
+            if (!Directory.Exists(DirectoryPath))
+            {
+                Directory.CreateDirectory(DirectoryPath);
+            }
 
-                try
-                {
-                    File.WriteAllText(path, jsonString);
-                    return 0;
-                }
-                catch
-                {
-                    return 1;
-                }
-
-            
+            try
+            {
+                File.WriteAllText(path, jsonString);
+                return 0;
+            }
+            catch
+            {
+                return 1;
+            }
         }
+
         public int SaveWorkInitializing()
         {
             string SaveWorkPath = ConfigurationManager.AppSettings["SaveWorkPath"];
@@ -56,10 +54,17 @@ namespace EasySave.lib.Services
                 SaveWorkModel _SaveWorkJSON = JsonSerializer.Deserialize<SaveWorkModel>(Json)!;
 
                 string[] AttributsForSaveWork = new string[4] { _SaveWorkJSON.NameSaveWork, $"{_SaveWorkJSON.TypeSaveWork}", _SaveWorkJSON.SourcePathSaveWork, _SaveWorkJSON.DestinationPathSaveWork };
-                SaveWorkModel model = null; // crée savework à partir de attritub (atab des tring)
+                SaveWorkModel model = new SaveWorkModel()
+                {
+                    NameSaveWork = _SaveWorkJSON.NameSaveWork,
+                    TypeSaveWork = _SaveWorkJSON.TypeSaveWork,
+                    SourcePathSaveWork = _SaveWorkJSON.SourcePathSaveWork,
+                    DestinationPathSaveWork = _SaveWorkJSON.DestinationPathSaveWork
+                }; // crée savework à partir de attritub (atab des tring)
                 ArrayOfSaveWork.Add(model);
                 ProgressState.AddNewSaveWorkProgressState(_SaveWorkJSON.NameSaveWork);
             }
+
             return 0;
         }
 
@@ -96,7 +101,7 @@ namespace EasySave.lib.Services
                     File.Delete(path);
 
                     string NameOfSaveWork = model.NameSaveWork;
-                    for (int i=0; i<ArrayOfSaveWork.Count; i++)
+                    for (int i = 0; i < ArrayOfSaveWork.Count; i++)
                     {
                         if (ArrayOfSaveWork[i].NameSaveWork == model.NameSaveWork)
                         {

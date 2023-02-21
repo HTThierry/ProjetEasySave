@@ -67,6 +67,7 @@ namespace EasySave.DesktopApp.ViewModels
         /// </summary>
         public int SaveWorkInitializing()
         {
+            
             return _SaveWorkManager.SaveWorkInitializing();
         }
 

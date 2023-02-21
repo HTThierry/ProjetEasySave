@@ -76,7 +76,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="EaseSave" FontSize="24" FontWeight="Bold" Margin="10" />
 
-        <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding _SaveWorkManager.ArrayOfSaveWork}">
+        <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding SaveWorkModel}">
             <DataGrid.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Red"/>
@@ -85,10 +85,10 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static lang:langage.tabName}" Binding="{Binding _SaveWorkModel.NameSaveWork}" Width="*" />
-                <DataGridTextColumn Header="{x:Static lang:langage.tabType}" Binding="{Binding _SaveWorkModel.TypeSaveWork}" Width="*" />
-                <DataGridTextColumn Header="{x:Static lang:langage.tabPathFrom}" Binding="{Binding _SaveWorkModel.SourcePathSaveWork}" Width="*" />
-                <DataGridTextColumn Header="{x:Static lang:langage.tabPathTo}" Binding="{Binding _SaveWorkModel.DestinationPathSaveWork}" Width="*" />
+                <DataGridTextColumn Header="{x:Static lang:langage.tabName}" Binding="{Binding NameSaveWork}" Width="*" />
+                <DataGridTextColumn Header="{x:Static lang:langage.tabType}" Binding="{Binding TypeSaveWork}" Width="*" />
+                <DataGridTextColumn Header="{x:Static lang:langage.tabPathFrom}" Binding="{Binding SourcePathSaveWork}" Width="*" />
+                <DataGridTextColumn Header="{x:Static lang:langage.tabPathTo}" Binding="{Binding DestinationPathSaveWork}" Width="*" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
