@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddSaveWork" xml:space="preserve">
-    <value>Add new SaveWork</value>
-  </data>
   <data name="allFiles" xml:space="preserve">
     <value>All files</value>
   </data>
@@ -132,8 +129,17 @@
   <data name="CompSelect" xml:space="preserve">
     <value>Complete</value>
   </data>
+  <data name="ControlPanel" xml:space="preserve">
+    <value>Control pannel</value>
+  </data>
+  <data name="CreateSaveWork" xml:space="preserve">
+    <value>Create new SaveWork</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="deleteSelectedSaveWork" xml:space="preserve">
+    <value>Delete selected SaveWork</value>
   </data>
   <data name="diffSelect" xml:space="preserve">
     <value>Differential</value>
@@ -153,23 +159,38 @@
   <data name="launch" xml:space="preserve">
     <value>Launch</value>
   </data>
-  <data name="launchAll" xml:space="preserve">
-    <value>Launch All</value>
-  </data>
   <data name="nameInput" xml:space="preserve">
     <value>Name:</value>
   </data>
   <data name="namePopUp" xml:space="preserve">
-    <value>Create SaveWork</value>
+    <value>SaveWork control panel</value>
   </data>
   <data name="pathFromInput" xml:space="preserve">
-    <value>Source Path:</value>
+    <value>Source Path :</value>
   </data>
   <data name="pathToInput" xml:space="preserve">
-    <value>Destination Path:</value>
+    <value>Destination Path :</value>
+  </data>
+  <data name="pauseSelectedSaveWork" xml:space="preserve">
+    <value>Pause selected SaveWork</value>
+  </data>
+  <data name="playSelectedSaveWork" xml:space="preserve">
+    <value>Play selected SaveWork</value>
   </data>
   <data name="save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="selectAll" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="stopSelectedSaveWork" xml:space="preserve">
+    <value>Stop selected SaveWork</value>
+  </data>
+  <data name="tabDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="tabModification" xml:space="preserve">
+    <value>Modification</value>
   </data>
   <data name="tabName" xml:space="preserve">
     <value>Name</value>
@@ -179,6 +200,21 @@
   </data>
   <data name="tabPathTo" xml:space="preserve">
     <value>Path to</value>
+  </data>
+  <data name="tabPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="tabPlay" xml:space="preserve">
+    <value>Play or resume</value>
+  </data>
+  <data name="tabProgressBar" xml:space="preserve">
+    <value>Progress bar</value>
+  </data>
+  <data name="tabProgressState" xml:space="preserve">
+    <value>Progress state</value>
+  </data>
+  <data name="tabStop" xml:space="preserve">
+    <value>Stop </value>
   </data>
   <data name="tabType" xml:space="preserve">
     <value>Type</value>

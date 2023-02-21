@@ -61,15 +61,6 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new SaveWork.
-        /// </summary>
-        public static string AddSaveWork {
-            get {
-                return ResourceManager.GetString("AddSaveWork", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to All files.
         /// </summary>
         public static string allFiles {
@@ -106,11 +97,38 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control pannel.
+        /// </summary>
+        public static string ControlPanel {
+            get {
+                return ResourceManager.GetString("ControlPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new SaveWork.
+        /// </summary>
+        public static string CreateSaveWork {
+            get {
+                return ResourceManager.GetString("CreateSaveWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string delete {
             get {
                 return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected SaveWork.
+        /// </summary>
+        public static string deleteSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("deleteSelectedSaveWork", resourceCulture);
             }
         }
         
@@ -169,15 +187,6 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Launch All.
-        /// </summary>
-        public static string launchAll {
-            get {
-                return ResourceManager.GetString("launchAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Name:.
         /// </summary>
         public static string nameInput {
@@ -187,7 +196,7 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create SaveWork.
+        ///   Looks up a localized string similar to SaveWork control panel.
         /// </summary>
         public static string namePopUp {
             get {
@@ -196,7 +205,7 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Source Path:.
+        ///   Looks up a localized string similar to Source Path :.
         /// </summary>
         public static string pathFromInput {
             get {
@@ -205,11 +214,29 @@ namespace EasySave.DesktopApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destination Path:.
+        ///   Looks up a localized string similar to Destination Path :.
         /// </summary>
         public static string pathToInput {
             get {
                 return ResourceManager.GetString("pathToInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause selected SaveWork.
+        /// </summary>
+        public static string pauseSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("pauseSelectedSaveWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play selected SaveWork.
+        /// </summary>
+        public static string playSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("playSelectedSaveWork", resourceCulture);
             }
         }
         
@@ -219,6 +246,42 @@ namespace EasySave.DesktopApp.Resources {
         public static string save {
             get {
                 return ResourceManager.GetString("save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select all.
+        /// </summary>
+        public static string selectAll {
+            get {
+                return ResourceManager.GetString("selectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop selected SaveWork.
+        /// </summary>
+        public static string stopSelectedSaveWork {
+            get {
+                return ResourceManager.GetString("stopSelectedSaveWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string tabDelete {
+            get {
+                return ResourceManager.GetString("tabDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modification.
+        /// </summary>
+        public static string tabModification {
+            get {
+                return ResourceManager.GetString("tabModification", resourceCulture);
             }
         }
         
@@ -246,6 +309,51 @@ namespace EasySave.DesktopApp.Resources {
         public static string tabPathTo {
             get {
                 return ResourceManager.GetString("tabPathTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        public static string tabPause {
+            get {
+                return ResourceManager.GetString("tabPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play or resume.
+        /// </summary>
+        public static string tabPlay {
+            get {
+                return ResourceManager.GetString("tabPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Progress bar.
+        /// </summary>
+        public static string tabProgressBar {
+            get {
+                return ResourceManager.GetString("tabProgressBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Progress state.
+        /// </summary>
+        public static string tabProgressState {
+            get {
+                return ResourceManager.GetString("tabProgressState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop .
+        /// </summary>
+        public static string tabStop {
+            get {
+                return ResourceManager.GetString("tabStop", resourceCulture);
             }
         }
         
