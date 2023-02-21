@@ -14,9 +14,9 @@
 
   <ItemGroup>
     <Compile Update="Resources\langage.Designer.cs">
-      <DependentUpon>langage.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>langage.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

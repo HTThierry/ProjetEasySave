@@ -32,25 +32,7 @@ namespace EasySave.DesktopApp.ViewModels
             return _SaveWorkManager.ArrayOfSaveWork;
         }
 
-        public int TestNameSaveWork(string SaveWorkName)
-        {
-            return _SaveWorkManager.TestNameSaveWork(SaveWorkName);
-        }
-
-        public int TestTypeSaveWork(string SaveWorkTypeToConvert)
-        {
-            return _SaveWorkManager.TestTypeSaveWork(SaveWorkTypeToConvert);
-        }
-
-        public int TestSourcePathSaveWork(string SaveWorkSourcePath)
-        {
-            return _SaveWorkManager.TestSourcePathSaveWork(SaveWorkSourcePath);
-        }
-
-        public int TestDestinationPathSaveWork(string SaveWorkDestinationPath)
-        {
-            return _SaveWorkManager.TestDestinationPathSaveWork(SaveWorkDestinationPath);
-        }
+        
 
         /// <summary>
         /// Adds a SaveWork as an instance and saves it in a JSON file
