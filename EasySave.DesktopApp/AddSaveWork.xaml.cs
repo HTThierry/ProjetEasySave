@@ -13,7 +13,7 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class AddSaveWork : Window
     {
-        private MainViewViewModel _ViewModel = new MainViewViewModel();
+        private MainWindowViewModel _ViewModel = new MainWindowViewModel();
 
         //public string[] AttributsForSaveWork { get; private set; }
         public SaveWorkModel SaveWork = new SaveWorkModel();

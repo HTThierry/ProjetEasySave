@@ -3,10 +3,11 @@ using EasySave.lib.Services;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.Windows;
 
 namespace EasySave.DesktopApp.ViewModels
 {
-    public class MainViewViewModel
+    public class MainWindowViewModel
     {
         //private Model _Model = Model.GetInstance();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
@@ -102,8 +103,7 @@ namespace EasySave.DesktopApp.ViewModels
             {
                 while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
                 {
-                    CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
-                    _SoftwarePackage.ShowDialog();
+                    MessageBox.Show("Un logiciel métier est actif");
                 }
                 ExecuteSaveWorkWPF(_saveWork);
             }
@@ -113,8 +113,7 @@ namespace EasySave.DesktopApp.ViewModels
         {
             while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
-                CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
-                _SoftwarePackage.ShowDialog();
+                MessageBox.Show("Un logiciel métier est actif");
             }
 
             if (model != null)

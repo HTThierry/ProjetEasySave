@@ -79,9 +79,9 @@
         <DataGrid Grid.Row="1" Name="dgSaveWorks" AutoGenerateColumns="False" ItemsSource="{Binding SaveWorkModel}">
             <DataGrid.Resources>
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="Red"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Padding" Value="10"/>
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Padding" Value="10" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -92,35 +92,35 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Detail" Click="Visual_Click"/>
+                            <Button Content="Detail" Click="Visual_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Lancer" Click="Lancer_Click"/>
+                            <Button Content="Lancer" Click="Lancer_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Pause" Click="Pause_Click"/>
+                            <Button Content="Pause" Click="Pause_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Stop" Click="Stop_Click"/>
+                            <Button Content="Stop" Click="Stop_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Supprimer" Click="Supprimer_Click"/>
+                            <Button Content="Supprimer" Click="Supprimer_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
