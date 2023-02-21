@@ -1,5 +1,7 @@
 ﻿using EasySave.DesktopApp.ViewModels;
 using EasySave.lib.Models;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 
 namespace EasySave.DesktopApp
@@ -23,9 +25,49 @@ namespace EasySave.DesktopApp
             dgSaveWorks.ItemsSource = _ViewModel.GetSaveWorks();
         }
 
+        //                                                                           method for savework in datagrid
+        public void RefreshSaveWorks()
+        {
+            // refresh the datagrid
+            dgSaveWorks.Items.Refresh();
+        }
+
+        public void deleteCommand(object sender, RoutedEventArgs e)
+        {
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
+
+            _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
+            RefreshSaveWorks();
+        }
+        public void Supprimer_Click(object sender, RoutedEventArgs e)
+        {
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
+
+            _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
+            RefreshSaveWorks();
+        }
+        public void Pause_Click(object sender, RoutedEventArgs e)
+        { 
+          //avec multi-thread
+        }
+        public void Lancer_Click(object sender, RoutedEventArgs e)
+        {
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
+            _ViewModel.LaunchCommand(selectedSaveWork);
+        }
+        public void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            //avec multi-thread
+        }
+        public void Visual_Click(object sender, RoutedEventArgs e)
+        { 
+        
+        }
+
+        //                                                                           method for bouton select
         public void AddSaveWorkCommand(object sender, RoutedEventArgs e)
         {
-            AddSaveWork NewsPage = new AddSaveWork();
+            SaveWorkControlPanel NewsPage = new SaveWorkControlPanel();
             // Wait for the user to close the windows
             NewsPage.ShowDialog();
             //get the data the user set in the windows pop-up
@@ -36,70 +78,44 @@ namespace EasySave.DesktopApp
                 dgSaveWorks.Items.Refresh();
             }
         }
-
-        public void RefreshSaveWorks()
-        {
-            // refresh the datagrid
-            dgSaveWorks.Items.Refresh();
-        }
-
-        public void LaunchAllCommand(object sender, RoutedEventArgs e)
-        {
-            //foreach (SaveWorkService _saveWork in _Model.ArrayOfSaveWork)
-            //{
-            //    while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
-            //    {
-            //        CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
-            //        _SoftwarePackage.ShowDialog();
-            //    }
-            //    _ViewModel.ExecuteSaveWorkWPF(_saveWork);
-            //}
-            _ViewModel.LaunchAllCommand();
-        }
-
-        public async void LaunchCommand(object sender, RoutedEventArgs e)
-        {
-            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
-            _ViewModel.LaunchCommand(selectedSaveWork);
-            //while (_ViewModel.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
-            //{
-            //    CloseSoftwarePackage _SoftwarePackage = new CloseSoftwarePackage();
-            //    _SoftwarePackage.ShowDialog();
-            //}
-
-            //if (selectedSaveWork != null)
-            //{
-            //    int x = _ViewModel.ExecuteSaveWorkWPF(selectedSaveWork);
-            //    if (x == 2) { }
-            //}
-        }
-
-        public void deleteCommand(object sender, RoutedEventArgs e)
-        {
-            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
-
-            _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
-            RefreshSaveWorks();
-        }
-
         public void generateCommand(object sender, RoutedEventArgs e)
         {
             _ViewModel.GenerateNewKey();
         }
+        public void LaunchSelectedCommand(object sender, RoutedEventArgs e)
+        {
+           foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
+            {
+                _ViewModel.ExecuteSaveWorkWPF(item);
+            }
+        }
+        public void selectAllCommand(object sender, RoutedEventArgs e)
+        {
+            dgSaveWorks.SelectAll();
+        }
+        public void pauseSelectedCommand(object sender, RoutedEventArgs e)
+        {   // !!!!!!! avec multi-thread !!!!!!!!
+            foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
+            {
+               
+            }
 
-        public void Supprimer_Click(object sender, RoutedEventArgs e)
-        { }
+        }
+        public void stopSelectedCommand(object sender, RoutedEventArgs e)
+        {   // !!!!!!! avec multi-thread !!!!!!!!!
+            foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
+            {
 
-        public void Pause_Click(object sender, RoutedEventArgs e)
-        { }
+            }
+        }
+        public void deleteSelectedCommand(object sender, RoutedEventArgs e)
+        {
 
-        public void Lancer_Click(object sender, RoutedEventArgs e)
-        { }
-
-        public void Stop_Click(object sender, RoutedEventArgs e)
-        { }
-
-        public void Visual_Click(object sender, RoutedEventArgs e)
-        { }
+            foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
+            {
+                _ViewModel.RemoveSaveWorkWPF(item);
+            }
+            RefreshSaveWorks();
+        }
     }
 }
