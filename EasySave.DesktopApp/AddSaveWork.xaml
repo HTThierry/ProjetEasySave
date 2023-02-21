@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EasySave.DesktopApp"
         xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
-        Title="{x:Static lang:langage.AddSaveWork}" Height="475" Width="550" ResizeMode="NoResize">
+        Title="{x:Static lang:langage.CreateSaveWork}" Height="475" Width="550" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
