@@ -121,9 +121,11 @@ namespace EasySave.lib.Services
 
                 for (int i = 0; i < AllFiles.Length; i++)
                 {
-                    if (indexA != PrioritizedBigFiles.Length || indexB != PrioritizedSmallFiles.Length)
+                    model.PauseEvent.WaitOne();
+                    model.PauseEvent.Set();
+                    if (indexA != PrioritizedBigFiles.Length-1 || indexB != PrioritizedSmallFiles.Length-1)
                     {
-                        if (TokenOfAvailability && indexA != PrioritizedBigFiles.Length)
+                        if (TokenOfAvailability && indexA != PrioritizedBigFiles.Length - 1)
                         {
                             TokenOfAvailability = false;
                             CompleteFileCopy(PrioritizedBigFiles[indexA], model, copyModel);
@@ -140,7 +142,7 @@ namespace EasySave.lib.Services
                     }
                     else
                     {
-                        if (TokenOfAvailability && indexB != OtherBigFiles.Length)
+                        if (TokenOfAvailability && indexC != OtherBigFiles.Length - 1)
                         {
                             TokenOfAvailability = false;
                             CompleteFileCopy(OtherBigFiles[indexC], model, copyModel);
@@ -279,8 +281,14 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.FilePath = file;
             model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
 
-            LogService.LogFiles(logModel);
-            ProgressStateService.ProgressStateFile();
+            lock (LockerLog)
+            {
+                LogService.LogFiles(logModel);
+            }
+            lock (LockerProgressState)
+            {
+                ProgressStateService.ProgressStateFile();
+            }
         }
 
         private void CompleteCopyListOfFiles(string[] Files, SaveWorkModel model, CopyModel copyModel)
