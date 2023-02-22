@@ -36,6 +36,12 @@ namespace EasySave.lib.Services
             }
         }
 
+        public int UpdateSaveWork(SaveWorkModel model, SaveWorkModel oldModel)
+        {
+            // à faire
+            return 0; 
+        }
+
         public int SaveWorkInitializing()
         {
             string SaveWorkPath = ConfigurationManager.AppSettings["SaveWorkPath"];

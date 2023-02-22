@@ -60,8 +60,22 @@ namespace EasySave.DesktopApp
             //avec multi-thread
         }
         public void Visual_Click(object sender, RoutedEventArgs e)
-        { 
-        
+        {
+            SaveWorkControlPanel NewsPage = new SaveWorkControlPanel();
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
+            // Wait for the user to close the windows
+            NewsPage.NameTextBox.Text = selectedSaveWork.NameSaveWork;
+            NewsPage.TypeComboBox.SelectedValue = selectedSaveWork.TypeSaveWork;
+            NewsPage.SourcePathTextBox.Text= selectedSaveWork.SourcePathSaveWork;
+            NewsPage.DestinationPathTextBox.Text= selectedSaveWork.DestinationPathSaveWork;
+            NewsPage.ShowDialog();
+            //get the data the user set in the windows pop-up
+            SaveWorkModel savedVariable = NewsPage.SaveWork;
+            if (savedVariable != null)
+            {
+                _ViewModel.UpdateSaveWork(savedVariable, selectedSaveWork);
+                dgSaveWorks.Items.Refresh();
+            }
         }
 
         //                                                                           method for bouton select
