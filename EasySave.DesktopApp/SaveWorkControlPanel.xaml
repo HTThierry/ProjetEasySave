@@ -4,7 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
-        Closing="Window_Closing"
         mc:Ignorable="d"
         Title="{x:Static lang:langage.ControlPanel}" Height="300" Width="550" ResizeMode="NoResize">
 

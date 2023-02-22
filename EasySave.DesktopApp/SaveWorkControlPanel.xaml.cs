@@ -20,7 +20,6 @@ namespace EasySave.DesktopApp
         public SaveWorkControlPanel()
         {
             InitializeComponent();
-            Closing += Window_Closing;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -29,10 +28,7 @@ namespace EasySave.DesktopApp
             //for the windows
             Close();
         }
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            SaveWork = null;
-        }
+
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
