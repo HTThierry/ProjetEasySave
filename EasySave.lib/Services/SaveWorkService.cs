@@ -10,7 +10,8 @@ namespace EasySave.lib.Services
     {
         //private Thread Thread;
         //private AutoResetEvent pauseEvent = new AutoResetEvent(false);
-        private object _locker = new object();
+        private object LockerLog = new object();
+        private object LockerProgressState = new object();
 
         //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         //public cryptoSoft _cryptoSoft = new cryptoSoft();
@@ -26,36 +27,36 @@ namespace EasySave.lib.Services
         {
             if (model.TypeSaveWork == 1)
             {
-                model.thread = new Thread(() => {
+                Thread thread = new Thread(() => {
 
                     CompleteCopyFiles(model);
 
                 });
 
-                model.thread.Start();
+                thread.Start();
                 //CompleteCopyFiles(model);
             }
             else
             {
-                model.thread = new Thread(() => {
+                Thread thread = new Thread(() => {
 
                     DifferentialCopyFiles(model);
 
                 });
 
-                model.thread.Start();
+                thread.Start();
                 //DifferentialCopyFiles(model);
             }
         }
 
         public void PauseSaveWork(SaveWorkModel model)
         {
-            model.pauseEvent.Reset();
+            model.PauseEvent.Reset();
         }
 
         public void ResumeSaveWork(SaveWorkModel model)
         {
-            model.pauseEvent.Set();
+            model.PauseEvent.Set();
         }
 
         private int CompleteCopyFiles(SaveWorkModel model)
@@ -175,7 +176,8 @@ namespace EasySave.lib.Services
         {
             foreach (string file in Files)
             {
-                model.pauseEvent.WaitOne();
+                model.PauseEvent.WaitOne();
+                model.PauseEvent.Set();
                 
                 int timeForCryp = 0;
 
@@ -223,15 +225,18 @@ namespace EasySave.lib.Services
                 model.ProgressStateModel.Percentage= copyModel.Percentage;
                 model.ProgressStateModel.FilePath = file;
                 model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
-                lock (_locker)
+
+                lock (LockerLog)
                 {
                     LogService.LogFiles(logModel);
+                }
+                lock (LockerProgressState)
+                {
                     ProgressStateService.ProgressStateFile();
                 }
 
 
 
- 
                 //Debug.WriteLine("c copié");
             }
         }
@@ -240,6 +245,8 @@ namespace EasySave.lib.Services
         {
             foreach (string file in Files)
             {
+                model.PauseEvent.WaitOne();
+                model.PauseEvent.Set();
                 if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(copyModel.SourcePath, copyModel.DestinationPath)))
                 {
                     int timeForCryp = 0;
@@ -259,7 +266,6 @@ namespace EasySave.lib.Services
 
                     stopwatch.Stop();
                     double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
-                    int pourcent = (copyModel.NbFilesLeft / copyModel.TotalFilesToCopy) * 100;
                     copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy) * 100;
                     copyModel.NbFilesLeft--;
                     copyModel.FilesSizeLeft -= new FileInfo(file).Length;
@@ -286,12 +292,18 @@ namespace EasySave.lib.Services
                     model.ProgressStateModel.Percentage= copyModel.Percentage;
                     model.ProgressStateModel.FilePath = file;
                     model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
-                    
-                    LogService.LogFiles(logModel);
-                    ProgressStateService.ProgressStateFile();
 
-                    model.pauseEvent.WaitOne(100);
-                    Debug.WriteLine("c copié");
+                    lock (LockerLog)
+                    {
+                        LogService.LogFiles(logModel);
+                    }
+                    lock (LockerProgressState)
+                    {
+                        ProgressStateService.ProgressStateFile();
+                    }
+
+
+
                 }
             }
         }

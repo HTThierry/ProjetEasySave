@@ -11,9 +11,7 @@
         public string DestinationPathSaveWork { get; set; }
 
         public ProgressStateModel ProgressStateModel { get; set; } = new ProgressStateModel();
-
-        public Thread thread {get; set;}
         
-        public AutoResetEvent pauseEvent = new AutoResetEvent(true);
+        public AutoResetEvent PauseEvent = new AutoResetEvent(true);
     }
 }
