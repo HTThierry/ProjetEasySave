@@ -53,7 +53,8 @@ namespace EasySave.DesktopApp
         public void Lancer_Click(object sender, RoutedEventArgs e)
         {
             SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
-            _ViewModel.LaunchCommand(selectedSaveWork);
+            //_ViewModel.LaunchCommand(selectedSaveWork);
+            _ViewModel.resumeSaveWork(selectedSaveWork);
         }
         public void Stop_Click(object sender, RoutedEventArgs e)
         {

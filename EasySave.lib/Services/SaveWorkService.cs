@@ -8,8 +8,9 @@ namespace EasySave.lib.Services
 {
     public class SaveWorkService
     {
-        private Thread Thread;
-        private AutoResetEvent pauseEvent = new AutoResetEvent(true);
+        //private Thread Thread;
+        //private AutoResetEvent pauseEvent = new AutoResetEvent(false);
+        private object _locker = new object();
 
         //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         //public cryptoSoft _cryptoSoft = new cryptoSoft();
@@ -25,30 +26,41 @@ namespace EasySave.lib.Services
         {
             if (model.TypeSaveWork == 1)
             {
-                Thread = new Thread(() => CompleteCopyFiles(model));
-                Thread.Start();
+                model.thread = new Thread(() => {
+
+                    CompleteCopyFiles(model);
+
+                });
+
+                model.thread.Start();
                 //CompleteCopyFiles(model);
             }
             else
             {
-                Thread = new Thread(() => DifferentialCopyFiles(model));
-                Thread.Start();
+                model.thread = new Thread(() => {
+
+                    DifferentialCopyFiles(model);
+
+                });
+
+                model.thread.Start();
                 //DifferentialCopyFiles(model);
             }
         }
 
-        public void PauseSaveWork()
+        public void PauseSaveWork(SaveWorkModel model)
         {
-            pauseEvent.Reset();
+            model.pauseEvent.Reset();
         }
 
-        public void ResumeSaveWork()
+        public void ResumeSaveWork(SaveWorkModel model)
         {
-            pauseEvent.Set();
+            model.pauseEvent.Set();
         }
 
         private int CompleteCopyFiles(SaveWorkModel model)
         {
+            
             CopyModel copyModel = new CopyModel()
             {
                 SourcePath = model.SourcePathSaveWork,
@@ -99,6 +111,7 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.FileDestinationPath = "";
 
             ProgressStateService.ProgressStateFile();
+            
             return 0;
         }
 
@@ -162,6 +175,8 @@ namespace EasySave.lib.Services
         {
             foreach (string file in Files)
             {
+                model.pauseEvent.WaitOne();
+                
                 int timeForCryp = 0;
 
                 string[] ExtensionToCrypt = ConfigurationManager.AppSettings["fileToCryp"].Split(',');
@@ -208,12 +223,16 @@ namespace EasySave.lib.Services
                 model.ProgressStateModel.Percentage= copyModel.Percentage;
                 model.ProgressStateModel.FilePath = file;
                 model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
+                lock (_locker)
+                {
+                    LogService.LogFiles(logModel);
+                    ProgressStateService.ProgressStateFile();
+                }
 
-                LogService.LogFiles(logModel);
-                ProgressStateService.ProgressStateFile();
 
-                pauseEvent.WaitOne(100);
-                Debug.WriteLine("c copié");
+
+ 
+                //Debug.WriteLine("c copié");
             }
         }
 
@@ -271,7 +290,7 @@ namespace EasySave.lib.Services
                     LogService.LogFiles(logModel);
                     ProgressStateService.ProgressStateFile();
 
-                    pauseEvent.WaitOne(100);
+                    model.pauseEvent.WaitOne(100);
                     Debug.WriteLine("c copié");
                 }
             }
