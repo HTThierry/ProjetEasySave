@@ -27,7 +27,11 @@ namespace EasySave.lib.Services
                 };
                 string JsonLog = JsonSerializer.Serialize(model, options);
 
-                File.AppendAllText(LogPath, JsonLog + Environment.NewLine);
+                try
+                {
+                    File.AppendAllText(LogPath, JsonLog + Environment.NewLine);
+                }
+                catch { }
             }
             else
             {

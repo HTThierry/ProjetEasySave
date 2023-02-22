@@ -11,28 +11,31 @@ namespace EasySave.lib.Services
         public List<SaveWorkModel> ArrayOfSaveWork = new List<SaveWorkModel>();
         private SaveWorkService service = new SaveWorkService();
 
-        public int AddNewSaveWork(SaveWorkModel model)
+        public void AddNewSaveWork(SaveWorkModel model)
         {
             ArrayOfSaveWork.Add(model);
-            ProgressStateService.AddNewSaveWorkProgressState(model.NameSaveWork);
 
-            string jsonString = JsonSerializer.Serialize(model);
+            model.ProgressStateModel.Name = model.NameSaveWork;
+            model.ProgressStateModel.Time = DateTime.Now;
+            model.ProgressStateModel.ProgressState = "Inactive";
+            model.ProgressStateModel.TotalFilesToCopy = 0;
+            model.ProgressStateModel.TotalFilesSizeToCopy = 0;
+            model.ProgressStateModel.NbFilesLeft = 0;
+            model.ProgressStateModel.FilesSizeLeft = 0;
+            model.ProgressStateModel.FilePath = "";
+            model.ProgressStateModel.FileDestinationPath = "";
+
+            ProgressStateService.AddNewSaveWorkProgressState(model.ProgressStateModel);
+
             string DirectoryPath = ConfigurationManager.AppSettings["SaveWorkPath"];
             string path = Path.Combine(DirectoryPath, $"{model.NameSaveWork}.json");
 
-            if (!Directory.Exists(DirectoryPath))
-            {
-                Directory.CreateDirectory(DirectoryPath);
-            }
+            Directory.CreateDirectory(DirectoryPath);
 
-            try
+            if (!File.Exists(path))
             {
+                string jsonString = JsonSerializer.Serialize(model);
                 File.WriteAllText(path, jsonString);
-                return 0;
-            }
-            catch
-            {
-                return 1;
             }
         }
 
@@ -46,11 +49,7 @@ namespace EasySave.lib.Services
         {
             string SaveWorkPath = ConfigurationManager.AppSettings["SaveWorkPath"];
 
-            if (!Directory.Exists(SaveWorkPath))
-            {
-                Directory.CreateDirectory(SaveWorkPath);
-                return 0;
-            }
+            Directory.CreateDirectory(SaveWorkPath);
 
             string[] Files = Directory.GetFiles(SaveWorkPath, "*.json");
             int FileCount = Files.Length;
@@ -58,21 +57,19 @@ namespace EasySave.lib.Services
             for (int i = 0; i < FileCount; i++)
             {
                 string Json = File.ReadAllText(Path.Combine(SaveWorkPath, Files[i]));
-                SaveWorkModel _SaveWorkJSON = JsonSerializer.Deserialize<SaveWorkModel>(Json)!;
+                SaveWorkModel saveWorkJSON = JsonSerializer.Deserialize<SaveWorkModel>(Json)!;
 
-                string[] AttributsForSaveWork = new string[4] { _SaveWorkJSON.NameSaveWork, $"{_SaveWorkJSON.TypeSaveWork}", _SaveWorkJSON.SourcePathSaveWork, _SaveWorkJSON.DestinationPathSaveWork };
                 SaveWorkModel model = new SaveWorkModel()
                 {
-                    NameSaveWork = _SaveWorkJSON.NameSaveWork,
-                    TypeSaveWork = _SaveWorkJSON.TypeSaveWork,
-                    SourcePathSaveWork = _SaveWorkJSON.SourcePathSaveWork,
-                    DestinationPathSaveWork = _SaveWorkJSON.DestinationPathSaveWork
+                    NameSaveWork = saveWorkJSON.NameSaveWork,
+                    TypeSaveWork = saveWorkJSON.TypeSaveWork,
+                    SourcePathSaveWork = saveWorkJSON.SourcePathSaveWork,
+                    DestinationPathSaveWork = saveWorkJSON.DestinationPathSaveWork
                 }; // crée savework à partir de attritub (atab des tring)
-                ArrayOfSaveWork.Add(model);
-                ProgressStateService.AddNewSaveWorkProgressState(_SaveWorkJSON.NameSaveWork);
+
+                AddNewSaveWork(model);
             }
 
-            return 0;
         }
 
         //public int RemoveSaveWork(string SaveWorkID)

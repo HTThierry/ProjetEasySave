@@ -39,9 +39,9 @@ namespace EasySave.DesktopApp.ViewModels
         /// </summary>
         /// <param name="AttributsForSaveWork"></param>
         /// <returns></returns>
-        public int AddNewSaveWork(SaveWorkModel AttributsForSaveWork)
+        public void AddNewSaveWork(SaveWorkModel AttributsForSaveWork)
         {
-            return _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork);
+            _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork);
         }
         /// <summary>
         /// Adds a SaveWork as an instance and saves it in a JSON file
@@ -57,10 +57,10 @@ namespace EasySave.DesktopApp.ViewModels
         /// <summary>
         /// Instance all save works from the json files
         /// </summary>
-        public int SaveWorkInitializing()
+        public void SaveWorkInitializing()
         {
             
-            return _SaveWorkManager.SaveWorkInitializing();
+            _SaveWorkManager.SaveWorkInitializing();
         }
 
         public int RemoveSaveWorkWPF(SaveWorkModel _SaveWork)
