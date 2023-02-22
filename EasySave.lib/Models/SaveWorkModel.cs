@@ -1,6 +1,8 @@
-﻿namespace EasySave.lib.Models
+﻿using System.ComponentModel;
+
+namespace EasySave.lib.Models
 {
-    public class SaveWorkModel
+    public class SaveWorkModel : INotifyPropertyChanged
     {
         public string NameSaveWork { get; set; }
 
@@ -10,8 +12,24 @@
 
         public string DestinationPathSaveWork { get; set; }
 
-        public ProgressStateModel ProgressStateModel { get; set; } = new ProgressStateModel();
-        
+        public ProgressStateModel progressStateModel { get; set; } = new ProgressStateModel();
+        public ProgressStateModel ProgressStateModel
+        {
+            get { return progressStateModel; }
+            set
+            {
+                progressStateModel = value;
+                OnPropertyChanged("ProgressStateModel");
+            }
+        }
+
         public AutoResetEvent PauseEvent = new AutoResetEvent(true);
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

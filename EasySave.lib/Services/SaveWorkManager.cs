@@ -22,6 +22,7 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.TotalFilesSizeToCopy = 0;
             model.ProgressStateModel.NbFilesLeft = 0;
             model.ProgressStateModel.FilesSizeLeft = 0;
+            model.ProgressStateModel.Percentage = 0;
             model.ProgressStateModel.FilePath = "";
             model.ProgressStateModel.FileDestinationPath = "";
 

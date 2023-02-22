@@ -1,6 +1,7 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Windows;
@@ -17,6 +18,12 @@ namespace EasySave.DesktopApp.ViewModels
 
         public GenerateKey _GenerateKey = new GenerateKey();
         public SaveWorkService SaveWorkService = new SaveWorkService();
+        public SaveWorkModel _SaveWorkModel;
+
+        private static void ProgessState_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Debug.WriteLine(e.PropertyName);
+        }
 
         public int GenerateNewKey()
         {
@@ -73,7 +80,9 @@ namespace EasySave.DesktopApp.ViewModels
 
         public void ExecuteSaveWorkWPF(SaveWorkModel _SaveWork)
         {
-            _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
+            _SaveWorkModel = _SaveWork;
+            _SaveWorkModel.PropertyChanged += ProgessState_PropertyChanged;
+            _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWorkModel);
         }
 
         //public int SequentialSaveWorksExecution()

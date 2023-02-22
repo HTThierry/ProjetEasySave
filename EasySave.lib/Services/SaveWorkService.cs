@@ -1,4 +1,5 @@
 ﻿using EasySave.lib.Models;
+using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Reflection;
@@ -25,7 +26,7 @@ namespace EasySave.lib.Services
         //    string[] AttributsForPresentation = new string[4] { _SaveWorkModel.NameSaveWork, $"{_SaveWorkModel.TypeSaveWork}", _SaveWorkModel.SourcePathSaveWork, _SaveWorkModel.DestinationPathSaveWork };
         //    return AttributsForPresentation;
         //}
-
+        
         public void LaunchSaveWork(SaveWorkModel model)
         {
             if (model.TypeSaveWork == 1)
@@ -35,7 +36,7 @@ namespace EasySave.lib.Services
                     CompleteCopyFiles(model);
 
                 });
-
+                thread.Name = $"{thread}"+ $"{model.NameSaveWork}";
                 thread.Start();
                 //CompleteCopyFiles(model);
             }
@@ -46,7 +47,7 @@ namespace EasySave.lib.Services
                     DifferentialCopyFiles(model);
 
                 });
-
+                thread.Name = $"{thread}" + $"{model.NameSaveWork}";
                 thread.Start();
                 //DifferentialCopyFiles(model);
             }
