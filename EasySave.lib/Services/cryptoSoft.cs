@@ -12,7 +12,7 @@ namespace EasySave.lib.Services
             ProcessStartInfo info = new ProcessStartInfo
             {
                 FileName = $@"{ConfigurationManager.AppSettings["pathToCryptoSoft"]}\CryptoSoftEasySave.exe",
-                Arguments = $"{type} {fichier_source} {fichier_destination} {key}",
+                Arguments = $"{type} \"{fichier_source}\" \"{fichier_destination}\" {key}",
             };
 
             Process process = new Process();

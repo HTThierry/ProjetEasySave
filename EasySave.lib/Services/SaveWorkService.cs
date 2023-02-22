@@ -148,7 +148,7 @@ namespace EasySave.lib.Services
 
                 if (ExtensionToCrypt.Contains(Path.GetExtension(file)))
                 {
-                    timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", Path.Combine(copyModel.DestinationPath, Path.GetFileName(file)));
+                    timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{Path.Combine(copyModel.DestinationPath, Path.GetFileName(file))}");
                 }
                 else
                 {
@@ -202,7 +202,7 @@ namespace EasySave.lib.Services
 
                     if (ExtensionToCrypt.Contains(Path.GetExtension(file)))
                     {
-                        timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", Path.Combine(copyModel.DestinationPath, Path.GetFileName(file)));
+                        timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{Path.Combine(copyModel.DestinationPath, Path.GetFileName(file))}");
                     }
                     else
                     {
