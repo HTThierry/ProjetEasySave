@@ -132,7 +132,8 @@ namespace EasySave.lib.Services
         //}
         public void ExecuteSaveWorkWPF(SaveWorkModel model)
         {
-            service.LaunchSaveWork(model);
+            SaveWorkService ANTHOservice = new SaveWorkService();
+            ANTHOservice.LaunchSaveWork(model);
         }
 
         //public int SequentialSaveWorksExecution(List<SaveWorkService> ArrayOfSaveWork)

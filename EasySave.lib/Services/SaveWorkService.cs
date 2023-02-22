@@ -124,26 +124,27 @@ namespace EasySave.lib.Services
                 {
                     model.PauseEvent.WaitOne();
                     model.PauseEvent.Set();
-                    if (indexA != PrioritizedBigFiles.Length-1 || indexB != PrioritizedSmallFiles.Length-1)
+                    if (indexA != PrioritizedBigFiles.Length || indexB != PrioritizedSmallFiles.Length)
                     {
-                        if (TokenOfAvailability && indexA != PrioritizedBigFiles.Length - 1)
+                        if (TokenOfAvailability && indexA != PrioritizedBigFiles.Length)
                         {
                             TokenOfAvailability = false;
                             CompleteFileCopy(PrioritizedBigFiles[indexA], model, copyModel);
-                            // Copy PrioritizedBigFiles[indexA]
                             indexA++;
                             TokenOfAvailability = true;
                         }
                         else
                         {
-                            CompleteFileCopy(PrioritizedSmallFiles[indexB], model, copyModel);
-                            // Copy PrioritizedSmallFiles[indexB]
-                            indexB++;
+                            if (indexB < PrioritizedSmallFiles.Length)
+                            {
+                                CompleteFileCopy(PrioritizedSmallFiles[indexB], model, copyModel);
+                                indexB++;
+                            }
                         }
                     }
                     else
                     {
-                        if (TokenOfAvailability && indexC != OtherBigFiles.Length - 1)
+                        if (TokenOfAvailability && indexC != OtherBigFiles.Length)
                         {
                             TokenOfAvailability = false;
                             CompleteFileCopy(OtherBigFiles[indexC], model, copyModel);
@@ -152,8 +153,11 @@ namespace EasySave.lib.Services
                         }
                         else
                         {
-                            CompleteFileCopy(OtherSmallFiles[indexD], model, copyModel);
-                            indexD++;
+                            if (indexD < OtherSmallFiles.Length)
+                            {
+                                CompleteFileCopy(OtherSmallFiles[indexD], model, copyModel);
+                                indexD++;
+                            }
                         }
                     }
                 }

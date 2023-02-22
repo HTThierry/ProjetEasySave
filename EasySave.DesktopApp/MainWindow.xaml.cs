@@ -58,6 +58,7 @@ namespace EasySave.DesktopApp
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
             RefreshSaveWorks();
         }
+
         public void Supprimer_Click(object sender, RoutedEventArgs e)
         {
             SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
@@ -65,10 +66,12 @@ namespace EasySave.DesktopApp
             _ViewModel.RemoveSaveWorkWPF(selectedSaveWork);
             RefreshSaveWorks();
         }
+
         public void Pause_Click(object sender, RoutedEventArgs e)
         {
             _ViewModel.pauseSaveWork(dgSaveWorks.SelectedItem as SaveWorkModel);
         }
+
         public void Lancer_Click(object sender, RoutedEventArgs e)
         {
             SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
@@ -85,19 +88,21 @@ namespace EasySave.DesktopApp
             }
             
         }
+
         public void Stop_Click(object sender, RoutedEventArgs e)
         {
             //avec multi-thread
         }
+
         public void Visual_Click(object sender, RoutedEventArgs e)
         {
             SaveWorkControlPanel NewsPage = new SaveWorkControlPanel();
             SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
             // Wait for the user to close the windows
             NewsPage.NameTextBox.Text = selectedSaveWork.NameSaveWork;
-            NewsPage.TypeComboBox.SelectedIndex = selectedSaveWork.TypeSaveWork-1;
-            NewsPage.SourcePathTextBox.Text= selectedSaveWork.SourcePathSaveWork;
-            NewsPage.DestinationPathTextBox.Text= selectedSaveWork.DestinationPathSaveWork;
+            NewsPage.TypeComboBox.SelectedIndex = selectedSaveWork.TypeSaveWork - 1;
+            NewsPage.SourcePathTextBox.Text = selectedSaveWork.SourcePathSaveWork;
+            NewsPage.DestinationPathTextBox.Text = selectedSaveWork.DestinationPathSaveWork;
             NewsPage.ShowDialog();
             //get the data the user set in the windows pop-up
             SaveWorkModel savedVariable = NewsPage.SaveWork;
@@ -123,39 +128,42 @@ namespace EasySave.DesktopApp
                 dgSaveWorks.Items.Refresh();
             }
         }
+
         public void generateCommand(object sender, RoutedEventArgs e)
         {
             _ViewModel.GenerateNewKey();
         }
+
         public void LaunchSelectedCommand(object sender, RoutedEventArgs e)
         {
-           foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
+            foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
                 _ViewModel.ExecuteSaveWorkWPF(item);
             }
         }
+
         public void selectAllCommand(object sender, RoutedEventArgs e)
         {
             dgSaveWorks.SelectAll();
         }
+
         public void pauseSelectedCommand(object sender, RoutedEventArgs e)
         {   // !!!!!!! avec multi-thread !!!!!!!!
             foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
                 _ViewModel.pauseSaveWork(item);
             }
-
         }
+
         public void stopSelectedCommand(object sender, RoutedEventArgs e)
         {   // !!!!!!! avec multi-thread !!!!!!!!!
             foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
-
             }
         }
+
         public void deleteSelectedCommand(object sender, RoutedEventArgs e)
         {
-
             foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
                 _ViewModel.RemoveSaveWorkWPF(item);
