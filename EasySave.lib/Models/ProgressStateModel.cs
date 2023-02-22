@@ -9,6 +9,7 @@
         public long TotalFilesSizeToCopy { get; set; }
         public int NbFilesLeft { get; set; }
         public long FilesSizeLeft { get; set; }
+        public float Percentage { get; set; }
         public string FilePath { get; set; }
         public string FileDestinationPath { get; set; }
     }
