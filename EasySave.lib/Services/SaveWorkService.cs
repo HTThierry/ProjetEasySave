@@ -6,6 +6,9 @@ namespace EasySave.lib.Services
 {
     public class SaveWorkService
     {
+        private bool TokenOfPriority { get; set; } = true;
+        private static bool TokenOfAvailability { get; set; } = true;
+
         //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         //public cryptoSoft _cryptoSoft = new cryptoSoft();
         //public RunningProcess _RunningProcess = new RunningProcess();
@@ -52,8 +55,25 @@ namespace EasySave.lib.Services
                 string[] AllFiles = Directory.GetFiles(copyModel.SourcePath, "*.*", SearchOption.AllDirectories);
 
                 string[] SpecificExtensions = ConfigurationManager.AppSettings["FileToPrioritize"].Split(',');
+                long FileSizeLimit = long.Parse(ConfigurationManager.AppSettings["FileSizeLimit"]);
+
                 string[] PrioritizedFiles = AllFiles.Where(file => SpecificExtensions.Contains(Path.GetExtension(file))).ToArray();
                 string[] OtherFiles = AllFiles.Except(PrioritizedFiles).ToArray();
+
+                // Création des 4 listes
+                string[] PrioritizedBigFiles = PrioritizedFiles.Where(file => new FileInfo(file).Length <= FileSizeLimit).ToArray();
+                string[] PrioritizedSmallFiles = PrioritizedFiles.Except(PrioritizedFiles).ToArray();
+
+                string[] OtherBigFiles = OtherFiles.Where(file => new FileInfo(file).Length >= FileSizeLimit).ToArray();
+                string[] OtherSmallFiles = OtherFiles.Except(OtherBigFiles).ToArray();
+
+                // Création des 4 index
+
+                int indexA = 0;
+                int indexB = 0;
+                int indexC = 0;
+                int indexD = 0;
+
 
                 copyModel.TotalFilesToCopy = AllFiles.Length;
                 copyModel.NbFilesLeft = copyModel.TotalFilesToCopy;
