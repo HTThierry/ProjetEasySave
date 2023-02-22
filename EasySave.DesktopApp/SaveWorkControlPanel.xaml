@@ -6,7 +6,7 @@
         xmlns:lang="clr-namespace:EasySave.DesktopApp.Resources"
         mc:Ignorable="d"
         Title="{x:Static lang:langage.ControlPanel}" Height="300" Width="550" ResizeMode="NoResize" Cursor="AppStarting">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="542*"/>

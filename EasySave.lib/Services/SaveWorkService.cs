@@ -1,6 +1,8 @@
 ﻿using EasySave.lib.Models;
 using System.Configuration;
 using System.Diagnostics;
+using System.Reflection;
+using System.Threading;
 
 namespace EasySave.lib.Services
 {
@@ -8,6 +10,11 @@ namespace EasySave.lib.Services
     {
         //private bool TokenOfPriority { get; set; } = true;
         private static bool TokenOfAvailability { get; set; } = true;
+
+        //private Thread Thread;
+        //private AutoResetEvent pauseEvent = new AutoResetEvent(false);
+        private object LockerLog = new object();
+        private object LockerProgressState = new object();
 
         //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         //public cryptoSoft _cryptoSoft = new cryptoSoft();
@@ -19,20 +26,45 @@ namespace EasySave.lib.Services
         //    return AttributsForPresentation;
         //}
 
-        public int LaunchSaveWork(SaveWorkModel model)
+        public void LaunchSaveWork(SaveWorkModel model)
         {
             if (model.TypeSaveWork == 1)
             {
-                return CompleteCopyFiles(model);
+                Thread thread = new Thread(() => {
+
+                    CompleteCopyFiles(model);
+
+                });
+
+                thread.Start();
+                //CompleteCopyFiles(model);
             }
             else
             {
-                return DifferentialCopyFiles(model);
+                Thread thread = new Thread(() => {
+
+                    DifferentialCopyFiles(model);
+
+                });
+
+                thread.Start();
+                //DifferentialCopyFiles(model);
             }
+        }
+
+        public void PauseSaveWork(SaveWorkModel model)
+        {
+            model.PauseEvent.Reset();
+        }
+
+        public void ResumeSaveWork(SaveWorkModel model)
+        {
+            model.PauseEvent.Set();
         }
 
         private int CompleteCopyFiles(SaveWorkModel model)
         {
+            
             CopyModel copyModel = new CopyModel()
             {
                 SourcePath = model.SourcePathSaveWork,
@@ -138,6 +170,7 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.FileDestinationPath = "";
 
             ProgressStateService.ProgressStateFile();
+            
             return 0;
         }
 
@@ -254,6 +287,9 @@ namespace EasySave.lib.Services
         {
             foreach (string file in Files)
             {
+                model.PauseEvent.WaitOne();
+                model.PauseEvent.Set();
+                
                 int timeForCryp = 0;
 
                 string[] ExtensionToCrypt = ConfigurationManager.AppSettings["fileToCryp"].Split(',');
@@ -301,8 +337,18 @@ namespace EasySave.lib.Services
                 model.ProgressStateModel.FilePath = file;
                 model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
 
-                LogService.LogFiles(logModel);
-                ProgressStateService.ProgressStateFile();
+                lock (LockerLog)
+                {
+                    LogService.LogFiles(logModel);
+                }
+                lock (LockerProgressState)
+                {
+                    ProgressStateService.ProgressStateFile();
+                }
+
+
+
+                //Debug.WriteLine("c copié");
             }
         }
 
@@ -310,6 +356,8 @@ namespace EasySave.lib.Services
         {
             foreach (string file in Files)
             {
+                model.PauseEvent.WaitOne();
+                model.PauseEvent.Set();
                 if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(copyModel.SourcePath, copyModel.DestinationPath)))
                 {
                     int timeForCryp = 0;
@@ -329,7 +377,6 @@ namespace EasySave.lib.Services
 
                     stopwatch.Stop();
                     double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
-                    int pourcent = (copyModel.NbFilesLeft / copyModel.TotalFilesToCopy) * 100;
                     copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy) * 100;
                     copyModel.NbFilesLeft--;
                     copyModel.FilesSizeLeft -= new FileInfo(file).Length;
@@ -356,9 +403,18 @@ namespace EasySave.lib.Services
                     model.ProgressStateModel.Percentage= copyModel.Percentage;
                     model.ProgressStateModel.FilePath = file;
                     model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
-                    
-                    LogService.LogFiles(logModel);
-                    ProgressStateService.ProgressStateFile();
+
+                    lock (LockerLog)
+                    {
+                        LogService.LogFiles(logModel);
+                    }
+                    lock (LockerProgressState)
+                    {
+                        ProgressStateService.ProgressStateFile();
+                    }
+
+
+
                 }
             }
         }

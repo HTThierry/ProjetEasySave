@@ -16,6 +16,7 @@ namespace EasySave.DesktopApp.ViewModels
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
 
         public GenerateKey _GenerateKey = new GenerateKey();
+        public SaveWorkService SaveWorkService = new SaveWorkService();
 
         public int GenerateNewKey()
         {
@@ -32,8 +33,6 @@ namespace EasySave.DesktopApp.ViewModels
             return _SaveWorkManager.ArrayOfSaveWork;
         }
 
-        
-
         /// <summary>
         /// Adds a SaveWork as an instance and saves it in a JSON file
         /// </summary>
@@ -43,6 +42,7 @@ namespace EasySave.DesktopApp.ViewModels
         {
             _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork);
         }
+
         /// <summary>
         /// Adds a SaveWork as an instance and saves it in a JSON file
         /// </summary>
@@ -53,13 +53,11 @@ namespace EasySave.DesktopApp.ViewModels
             return _SaveWorkManager.UpdateSaveWork(AttributsForSaveWork, OldSaveWork);
         }
 
-
         /// <summary>
         /// Instance all save works from the json files
         /// </summary>
         public void SaveWorkInitializing()
         {
-            
             _SaveWorkManager.SaveWorkInitializing();
         }
 
@@ -73,9 +71,9 @@ namespace EasySave.DesktopApp.ViewModels
         //    return _SaveWorkManager.ExecuteSaveWork(SaveWorkID);
         //}
 
-        public int ExecuteSaveWorkWPF(SaveWorkModel _SaveWork)
+        public void ExecuteSaveWorkWPF(SaveWorkModel _SaveWork)
         {
-            return _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
+            _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
         }
 
         //public int SequentialSaveWorksExecution()
@@ -109,11 +107,16 @@ namespace EasySave.DesktopApp.ViewModels
                 MessageBox.Show("Un logiciel métier est actif");
             }
 
-            if (model != null)
-            {
-                int x = ExecuteSaveWorkWPF(model);
-                if (x == 2) { }
-            }
+            ExecuteSaveWorkWPF(model);
+        }
+
+        public void pauseSaveWork(SaveWorkModel model)
+        {
+            SaveWorkService.PauseSaveWork(model);
+        }
+        public void resumeSaveWork(SaveWorkModel model)
+        {
+            SaveWorkService.ResumeSaveWork(model);
         }
     }
 }
