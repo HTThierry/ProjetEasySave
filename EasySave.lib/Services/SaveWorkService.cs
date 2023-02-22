@@ -41,6 +41,7 @@ namespace EasySave.lib.Services
                 TotalFilesSizeToCopy = 0,
                 NbFilesLeft = 0,
                 FilesSizeLeft = 0,
+                Percentage = 0,
             };
 
             if (Directory.Exists(copyModel.SourcePath))
@@ -94,6 +95,7 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.TotalFilesSizeToCopy = 0;
             model.ProgressStateModel.NbFilesLeft = 0;
             model.ProgressStateModel.FilesSizeLeft = 0;
+            model.ProgressStateModel.Percentage = 0;
             model.ProgressStateModel.FilePath = "";
             model.ProgressStateModel.FileDestinationPath = "";
 
@@ -111,6 +113,7 @@ namespace EasySave.lib.Services
                 TotalFilesSizeToCopy = 0,
                 NbFilesLeft = 0,
                 FilesSizeLeft = 0,
+                Percentage = 0,
             };
 
             if (Directory.Exists(copyModel.SourcePath))
@@ -148,6 +151,7 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.TotalFilesSizeToCopy = 0;
             model.ProgressStateModel.NbFilesLeft = 0;
             model.ProgressStateModel.FilesSizeLeft = 0;
+            model.ProgressStateModel.Percentage = 0;
             model.ProgressStateModel.FilePath = "";
             model.ProgressStateModel.FileDestinationPath = "";
 
@@ -157,7 +161,6 @@ namespace EasySave.lib.Services
 
         private void CompleteCopyListOfFiles(string[] Files, SaveWorkModel model, CopyModel copyModel)
         {
-
             foreach (string file in Files)
             {
                 int timeForCryp = 0;
@@ -168,7 +171,7 @@ namespace EasySave.lib.Services
 
                 if (ExtensionToCrypt.Contains(Path.GetExtension(file)))
                 {
-                    timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{Path.Combine(copyModel.DestinationPath, Path.GetFileName(file))}");
+                    timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{file.Replace(copyModel.SourcePath, copyModel.DestinationPath)}");
                 }
                 else
                 {
@@ -178,6 +181,9 @@ namespace EasySave.lib.Services
                 stopwatch.Stop();
                 double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
 
+                //pourcent = (((copyModel.TotalFilesToCopy - copyModel.NbFilesLeft) / copyModel.TotalFilesToCopy));
+
+                copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy)*100;
                 copyModel.NbFilesLeft--;
                 copyModel.FilesSizeLeft -= new FileInfo(file).Length;
 
@@ -200,6 +206,7 @@ namespace EasySave.lib.Services
                 model.ProgressStateModel.TotalFilesSizeToCopy = copyModel.TotalFilesSizeToCopy;
                 model.ProgressStateModel.NbFilesLeft = copyModel.NbFilesLeft;
                 model.ProgressStateModel.FilesSizeLeft = copyModel.FilesSizeLeft;
+                model.ProgressStateModel.Percentage= copyModel.Percentage;
                 model.ProgressStateModel.FilePath = file;
                 model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
 
@@ -222,7 +229,7 @@ namespace EasySave.lib.Services
 
                     if (ExtensionToCrypt.Contains(Path.GetExtension(file)))
                     {
-                        timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{Path.Combine(copyModel.DestinationPath, Path.GetFileName(file))}");
+                        timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{file.Replace(copyModel.SourcePath, copyModel.DestinationPath)}");
                     }
                     else
                     {
@@ -231,7 +238,8 @@ namespace EasySave.lib.Services
 
                     stopwatch.Stop();
                     double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
-
+                    int pourcent = (copyModel.NbFilesLeft / copyModel.TotalFilesToCopy) * 100;
+                    copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy) * 100;
                     copyModel.NbFilesLeft--;
                     copyModel.FilesSizeLeft -= new FileInfo(file).Length;
 
@@ -254,9 +262,10 @@ namespace EasySave.lib.Services
                     model.ProgressStateModel.TotalFilesSizeToCopy = copyModel.TotalFilesSizeToCopy;
                     model.ProgressStateModel.NbFilesLeft = copyModel.NbFilesLeft;
                     model.ProgressStateModel.FilesSizeLeft = copyModel.FilesSizeLeft;
+                    model.ProgressStateModel.Percentage= copyModel.Percentage;
                     model.ProgressStateModel.FilePath = file;
                     model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
-
+                    
                     LogService.LogFiles(logModel);
                     ProgressStateService.ProgressStateFile();
                 }

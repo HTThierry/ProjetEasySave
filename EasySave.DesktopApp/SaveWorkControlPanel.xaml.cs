@@ -2,6 +2,7 @@
 using EasySave.DesktopApp.ViewModels;
 using EasySave.lib.Models;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -14,7 +15,7 @@ namespace EasySave.DesktopApp
     public partial class SaveWorkControlPanel : Window
     {
         private ControlPanelViewModel ViewModel = new ControlPanelViewModel();
-        public SaveWorkModel SaveWork = new SaveWorkModel();
+        public SaveWorkModel SaveWork;
 
         public SaveWorkControlPanel()
         {
@@ -28,8 +29,10 @@ namespace EasySave.DesktopApp
             Close();
         }
 
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            SaveWork = new SaveWorkModel();
             // get the data of the new saveWork
             string name = NameTextBox.Text;
             string type = (TypeComboBox.SelectedIndex == 0) ? "1" : "2";

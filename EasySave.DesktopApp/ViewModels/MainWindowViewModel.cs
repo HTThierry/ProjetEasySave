@@ -43,6 +43,16 @@ namespace EasySave.DesktopApp.ViewModels
         {
             _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork);
         }
+        /// <summary>
+        /// Adds a SaveWork as an instance and saves it in a JSON file
+        /// </summary>
+        /// <param name="AttributsForSaveWork"></param>
+        /// <returns></returns>
+        public int UpdateSaveWork(SaveWorkModel AttributsForSaveWork, SaveWorkModel OldSaveWork)
+        {
+            return _SaveWorkManager.UpdateSaveWork(AttributsForSaveWork, OldSaveWork);
+        }
+
 
         /// <summary>
         /// Instance all save works from the json files
