@@ -15,7 +15,7 @@ namespace EasySave.DesktopApp
     public partial class SaveWorkControlPanel : Window
     {
         private ControlPanelViewModel ViewModel = new ControlPanelViewModel();
-        public SaveWorkModel SaveWork = new SaveWorkModel();
+        public SaveWorkModel SaveWork;
 
         public SaveWorkControlPanel()
         {
@@ -32,6 +32,7 @@ namespace EasySave.DesktopApp
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            SaveWork = new SaveWorkModel();
             // get the data of the new saveWork
             string name = NameTextBox.Text;
             string type = (TypeComboBox.SelectedIndex == 0) ? "1" : "2";

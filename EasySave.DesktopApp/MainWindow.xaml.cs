@@ -84,6 +84,7 @@ namespace EasySave.DesktopApp
             SaveWorkControlPanel NewsPage = new SaveWorkControlPanel();
             // Wait for the user to close the windows
             NewsPage.ShowDialog();
+
             //get the data the user set in the windows pop-up
             SaveWorkModel savedVariable = NewsPage.SaveWork;
             if (savedVariable != null)
