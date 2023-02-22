@@ -13,7 +13,7 @@ namespace EasySave.lib.Services
         public int AddNewSaveWork(SaveWorkModel model)
         {
             ArrayOfSaveWork.Add(model);
-            ProgressState.AddNewSaveWorkProgressState(model.NameSaveWork);
+            ProgressStateService.AddNewSaveWorkProgressState(model.NameSaveWork);
 
             string jsonString = JsonSerializer.Serialize(model);
             string DirectoryPath = ConfigurationManager.AppSettings["SaveWorkPath"];
@@ -62,7 +62,7 @@ namespace EasySave.lib.Services
                     DestinationPathSaveWork = _SaveWorkJSON.DestinationPathSaveWork
                 }; // crée savework à partir de attritub (atab des tring)
                 ArrayOfSaveWork.Add(model);
-                ProgressState.AddNewSaveWorkProgressState(_SaveWorkJSON.NameSaveWork);
+                ProgressStateService.AddNewSaveWorkProgressState(_SaveWorkJSON.NameSaveWork);
             }
 
             return 0;
