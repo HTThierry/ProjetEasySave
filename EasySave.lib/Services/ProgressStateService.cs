@@ -88,7 +88,11 @@ namespace EasySave.lib.Services
             };
             string JsonProgressState = JsonSerializer.Serialize(ProgressStates, options);
 
-            File.WriteAllText(ProgressStatePath, JsonProgressState + Environment.NewLine);
+            try
+            {
+                File.WriteAllText(ProgressStatePath, JsonProgressState + Environment.NewLine);
+            }
+            catch { }
         }
     }
 }
