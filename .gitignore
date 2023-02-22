@@ -27,3 +27,4 @@ ProgressState/
 .vs/
 /EasySave.lib/Services/SaveWorks/*.json
 /EasySave.DesktopApp/App.config
+/EasySave.DesktopApp/Resources/langage.Designer.cs

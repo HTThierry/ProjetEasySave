@@ -9,16 +9,14 @@ using MessageBox = System.Windows.Forms.MessageBox;
 namespace EasySave.DesktopApp
 {
     /// <summary>
-    /// Logique d'interaction pour AddSaveWork.xaml
+    /// Logique d'interaction pour SaveWorkControlPanel.xaml
     /// </summary>
-    public partial class AddSaveWork : Window
+    public partial class SaveWorkControlPanel : Window
     {
-        private MainWindowViewModel _ViewModel = new MainWindowViewModel();
-
-        //public string[] AttributsForSaveWork { get; private set; }
+        private ControlPanelViewModel ViewModel = new ControlPanelViewModel();
         public SaveWorkModel SaveWork = new SaveWorkModel();
 
-        public AddSaveWork()
+        public SaveWorkControlPanel()
         {
             InitializeComponent();
         }
@@ -38,9 +36,9 @@ namespace EasySave.DesktopApp
             string sourcePath = SourcePathTextBox.Text;
             string destinationPath = DestinationPathTextBox.Text;
 
-            int verifName = _ViewModel.TestNameSaveWork(name);
-            int verifPathSource = _ViewModel.TestSourcePathSaveWork(sourcePath);
-            int verifPathDest = _ViewModel.TestDestinationPathSaveWork(destinationPath);
+            int verifName = ViewModel.TestNameSaveWork(name);
+            int verifPathSource = ViewModel.TestSourcePathSaveWork(sourcePath);
+            int verifPathDest = ViewModel.TestDestinationPathSaveWork(destinationPath);
 
             if (verifName == 1 || verifPathSource == 1 || verifPathDest == 1)
             {

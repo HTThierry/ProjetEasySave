@@ -16,7 +16,6 @@ namespace EasySave.DesktopApp.ViewModels
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
 
         public GenerateKey _GenerateKey = new GenerateKey();
-        public RunningProcess _RunningProcess = new RunningProcess();
 
         public int GenerateNewKey()
         {
@@ -33,25 +32,7 @@ namespace EasySave.DesktopApp.ViewModels
             return _SaveWorkManager.ArrayOfSaveWork;
         }
 
-        public int TestNameSaveWork(string SaveWorkName)
-        {
-            return _SaveWorkManager.TestNameSaveWork(SaveWorkName);
-        }
-
-        public int TestTypeSaveWork(string SaveWorkTypeToConvert)
-        {
-            return _SaveWorkManager.TestTypeSaveWork(SaveWorkTypeToConvert);
-        }
-
-        public int TestSourcePathSaveWork(string SaveWorkSourcePath)
-        {
-            return _SaveWorkManager.TestSourcePathSaveWork(SaveWorkSourcePath);
-        }
-
-        public int TestDestinationPathSaveWork(string SaveWorkDestinationPath)
-        {
-            return _SaveWorkManager.TestDestinationPathSaveWork(SaveWorkDestinationPath);
-        }
+        
 
         /// <summary>
         /// Adds a SaveWork as an instance and saves it in a JSON file
@@ -94,7 +75,7 @@ namespace EasySave.DesktopApp.ViewModels
 
         public bool CheckRunningProcess(string ProcessName)
         {
-            return _RunningProcess.CheckRunningProcess(ProcessName);
+            return _SaveWorkManager.CheckRunningProcess(ProcessName);
         }
 
         public void LaunchAllCommand()
@@ -103,6 +84,7 @@ namespace EasySave.DesktopApp.ViewModels
             {
                 while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
                 {
+                    Debug.WriteLine("Un logiciel métier est actif");
                     MessageBox.Show("Un logiciel métier est actif");
                 }
                 ExecuteSaveWorkWPF(_saveWork);
@@ -113,6 +95,7 @@ namespace EasySave.DesktopApp.ViewModels
         {
             while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
+                Debug.WriteLine("Un logiciel métier est actif");
                 MessageBox.Show("Un logiciel métier est actif");
             }
 
