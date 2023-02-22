@@ -41,11 +41,12 @@ namespace EasySave.lib.Services
 
         public int UpdateSaveWork(SaveWorkModel model, SaveWorkModel oldModel)
         {
-            // à faire
+            RemoveSaveWorkWPF(oldModel);
+            AddNewSaveWork(model);
             return 0; 
         }
 
-        public int SaveWorkInitializing()
+        public void SaveWorkInitializing()
         {
             string SaveWorkPath = ConfigurationManager.AppSettings["SaveWorkPath"];
 

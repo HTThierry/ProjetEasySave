@@ -2,6 +2,7 @@
 using EasySave.DesktopApp.ViewModels;
 using EasySave.lib.Models;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -19,6 +20,7 @@ namespace EasySave.DesktopApp
         public SaveWorkControlPanel()
         {
             InitializeComponent();
+            Closing += Window_Closing;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -26,6 +28,10 @@ namespace EasySave.DesktopApp
             SaveWork = null;
             //for the windows
             Close();
+        }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            SaveWork = null;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

@@ -65,7 +65,7 @@ namespace EasySave.DesktopApp
             SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
             // Wait for the user to close the windows
             NewsPage.NameTextBox.Text = selectedSaveWork.NameSaveWork;
-            NewsPage.TypeComboBox.SelectedValue = selectedSaveWork.TypeSaveWork;
+            NewsPage.TypeComboBox.SelectedIndex = selectedSaveWork.TypeSaveWork-1;
             NewsPage.SourcePathTextBox.Text= selectedSaveWork.SourcePathSaveWork;
             NewsPage.DestinationPathTextBox.Text= selectedSaveWork.DestinationPathSaveWork;
             NewsPage.ShowDialog();
