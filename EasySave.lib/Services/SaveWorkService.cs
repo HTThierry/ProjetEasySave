@@ -58,30 +58,26 @@ namespace EasySave.lib.Services
                 copyModel.TotalFilesToCopy = AllFiles.Length;
                 copyModel.NbFilesLeft = copyModel.TotalFilesToCopy;
 
-                foreach (string file in PrioritizedFiles)
+                foreach (string file in AllFiles)
                 {
-                    FileInfo fileInfo = new FileInfo(file);
-                    copyModel.TotalFilesSizeToCopy += fileInfo.Length;
+                    copyModel.TotalFilesSizeToCopy += new FileInfo(file).Length;
                 }
                 copyModel.FilesSizeLeft = copyModel.TotalFilesSizeToCopy;
 
-                CompleteCopyListOfFiles(PrioritizedFiles, model);
-                CompleteCopyListOfFiles(OtherFiles, model);
+                CompleteCopyListOfFiles(PrioritizedFiles, model, copyModel);
+                CompleteCopyListOfFiles(OtherFiles, model, copyModel);
             }
-            else
-            {
-                model.ProgressStateModel.Name = model.NameSaveWork;
-                model.ProgressStateModel.Time = DateTime.Now;
-                model.ProgressStateModel.ProgressState = "Inactive";
-                model.ProgressStateModel.TotalFilesToCopy = 0;
-                model.ProgressStateModel.TotalFilesSizeToCopy = 0;
-                model.ProgressStateModel.NbFilesLeft = 0;
-                model.ProgressStateModel.FilesSizeLeft = 0;
-                model.ProgressStateModel.FilePath = "";
-                model.ProgressStateModel.FileDestinationPath = "";
+            model.ProgressStateModel.Name = model.NameSaveWork;
+            model.ProgressStateModel.Time = DateTime.Now;
+            model.ProgressStateModel.ProgressState = "Inactive";
+            model.ProgressStateModel.TotalFilesToCopy = 0;
+            model.ProgressStateModel.TotalFilesSizeToCopy = 0;
+            model.ProgressStateModel.NbFilesLeft = 0;
+            model.ProgressStateModel.FilesSizeLeft = 0;
+            model.ProgressStateModel.FilePath = "";
+            model.ProgressStateModel.FileDestinationPath = "";
 
-                ProgressStateService.ProgressStateFile();
-            }
+            ProgressStateService.ProgressStateFile();
             return 0;
         }
 
@@ -117,42 +113,30 @@ namespace EasySave.lib.Services
 
                 foreach (string file in AllFiles)
                 {
-                    FileInfo fileInfo = new FileInfo(file);
-                    copyModel.TotalFilesSizeToCopy += fileInfo.Length;
+                    copyModel.TotalFilesSizeToCopy += new FileInfo(file).Length;
                 }
                 copyModel.FilesSizeLeft = copyModel.TotalFilesSizeToCopy;
 
-                DifferentialCopyListOfFiles(PrioritizedFiles, model);
-                DifferentialCopyListOfFiles(OtherFiles, model);
+                DifferentialCopyListOfFiles(PrioritizedFiles, model, copyModel);
+                DifferentialCopyListOfFiles(OtherFiles, model, copyModel);
             }
-            else
-            {
-                model.ProgressStateModel.Name = model.NameSaveWork;
-                model.ProgressStateModel.Time = DateTime.Now;
-                model.ProgressStateModel.ProgressState = "Inactive";
-                model.ProgressStateModel.TotalFilesToCopy = 0;
-                model.ProgressStateModel.TotalFilesSizeToCopy = 0;
-                model.ProgressStateModel.NbFilesLeft = 0;
-                model.ProgressStateModel.FilesSizeLeft = 0;
-                model.ProgressStateModel.FilePath = "";
-                model.ProgressStateModel.FileDestinationPath = "";
 
-                ProgressStateService.ProgressStateFile();
-            }
+            model.ProgressStateModel.Name = model.NameSaveWork;
+            model.ProgressStateModel.Time = DateTime.Now;
+            model.ProgressStateModel.ProgressState = "Inactive";
+            model.ProgressStateModel.TotalFilesToCopy = 0;
+            model.ProgressStateModel.TotalFilesSizeToCopy = 0;
+            model.ProgressStateModel.NbFilesLeft = 0;
+            model.ProgressStateModel.FilesSizeLeft = 0;
+            model.ProgressStateModel.FilePath = "";
+            model.ProgressStateModel.FileDestinationPath = "";
+
+            ProgressStateService.ProgressStateFile();
             return 0;
         }
 
-        private void CompleteCopyListOfFiles(string[] Files, SaveWorkModel model)
+        private void CompleteCopyListOfFiles(string[] Files, SaveWorkModel model, CopyModel copyModel)
         {
-            CopyModel copyModel = new CopyModel()
-            {
-                SourcePath = model.SourcePathSaveWork,
-                DestinationPath = model.DestinationPathSaveWork,
-                TotalFilesToCopy = 0,
-                TotalFilesSizeToCopy = 0,
-                NbFilesLeft = 0,
-                FilesSizeLeft = 0,
-            };
 
             foreach (string file in Files)
             {
@@ -204,18 +188,8 @@ namespace EasySave.lib.Services
             }
         }
 
-        private void DifferentialCopyListOfFiles(string[] Files, SaveWorkModel model)
+        private void DifferentialCopyListOfFiles(string[] Files, SaveWorkModel model, CopyModel copyModel)
         {
-            CopyModel copyModel = new CopyModel()
-            {
-                SourcePath = model.SourcePathSaveWork,
-                DestinationPath = model.DestinationPathSaveWork,
-                TotalFilesToCopy = 0,
-                TotalFilesSizeToCopy = 0,
-                NbFilesLeft = 0,
-                FilesSizeLeft = 0,
-            };
-
             foreach (string file in Files)
             {
                 if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(copyModel.SourcePath, copyModel.DestinationPath)))
