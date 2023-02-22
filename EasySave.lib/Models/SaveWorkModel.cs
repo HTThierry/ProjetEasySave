@@ -11,6 +11,5 @@
         public string DestinationPathSaveWork { get; set; }
 
         public ProgressStateModel ProgressStateModel { get; set; } = new ProgressStateModel();
-
     }
 }

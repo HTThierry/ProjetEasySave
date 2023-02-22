@@ -1,11 +1,16 @@
 ﻿using EasySave.lib.Models;
 using System.Configuration;
 using System.Diagnostics;
+using System.Reflection;
+using System.Threading;
 
 namespace EasySave.lib.Services
 {
     public class SaveWorkService
     {
+        private Thread Thread;
+        private AutoResetEvent pauseEvent = new AutoResetEvent(true);
+
         //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         //public cryptoSoft _cryptoSoft = new cryptoSoft();
         //public RunningProcess _RunningProcess = new RunningProcess();
@@ -16,16 +21,30 @@ namespace EasySave.lib.Services
         //    return AttributsForPresentation;
         //}
 
-        public int LaunchSaveWork(SaveWorkModel model)
+        public void LaunchSaveWork(SaveWorkModel model)
         {
             if (model.TypeSaveWork == 1)
             {
-                return CompleteCopyFiles(model);
+                Thread = new Thread(() => CompleteCopyFiles(model));
+                Thread.Start();
+                //CompleteCopyFiles(model);
             }
             else
             {
-                return DifferentialCopyFiles(model);
+                Thread = new Thread(() => DifferentialCopyFiles(model));
+                Thread.Start();
+                //DifferentialCopyFiles(model);
             }
+        }
+
+        public void PauseSaveWork()
+        {
+            pauseEvent.Reset();
+        }
+
+        public void ResumeSaveWork()
+        {
+            pauseEvent.Set();
         }
 
         private int CompleteCopyFiles(SaveWorkModel model)
@@ -192,6 +211,9 @@ namespace EasySave.lib.Services
 
                 LogService.LogFiles(logModel);
                 ProgressStateService.ProgressStateFile();
+
+                pauseEvent.WaitOne(100);
+                Debug.WriteLine("c copié");
             }
         }
 
@@ -248,6 +270,9 @@ namespace EasySave.lib.Services
                     
                     LogService.LogFiles(logModel);
                     ProgressStateService.ProgressStateFile();
+
+                    pauseEvent.WaitOne(100);
+                    Debug.WriteLine("c copié");
                 }
             }
         }

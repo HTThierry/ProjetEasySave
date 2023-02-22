@@ -47,8 +47,8 @@ namespace EasySave.DesktopApp
             RefreshSaveWorks();
         }
         public void Pause_Click(object sender, RoutedEventArgs e)
-        { 
-          //avec multi-thread
+        {
+            _ViewModel.pauseSaveWork(dgSaveWorks.SelectedItem as SaveWorkModel);
         }
         public void Lancer_Click(object sender, RoutedEventArgs e)
         {
@@ -111,7 +111,7 @@ namespace EasySave.DesktopApp
         {   // !!!!!!! avec multi-thread !!!!!!!!
             foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
-               
+                _ViewModel.pauseSaveWork(item);
             }
 
         }

@@ -129,9 +129,9 @@ namespace EasySave.lib.Services
         //{
         //    return ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].LaunchSaveWork();
         //}
-        public int ExecuteSaveWorkWPF(SaveWorkModel model)
+        public void ExecuteSaveWorkWPF(SaveWorkModel model)
         {
-            return service.LaunchSaveWork(model);
+            service.LaunchSaveWork(model);
         }
 
         //public int SequentialSaveWorksExecution(List<SaveWorkService> ArrayOfSaveWork)
