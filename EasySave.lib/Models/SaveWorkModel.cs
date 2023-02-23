@@ -65,5 +65,6 @@ namespace EasySave.lib.Models
         }
 
         public AutoResetEvent PauseEvent = new AutoResetEvent(true);
+        public AutoResetEvent StopEvent = new AutoResetEvent(false);
     }
 }

@@ -149,5 +149,9 @@ namespace EasySave.DesktopApp.ViewModels
         {
             SaveWorkService.ResumeSaveWork(model);
         }
+        public void stopSaveWork(SaveWorkModel model)
+        {
+            SaveWorkService.StopSaveWork(model);
+        }
     }
 }

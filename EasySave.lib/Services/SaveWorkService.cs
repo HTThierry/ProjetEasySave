@@ -62,6 +62,11 @@ namespace EasySave.lib.Services
         {
             model.PauseEvent.Set();
         }
+        public void StopSaveWork(SaveWorkModel model)
+        {
+            model.PauseEvent.Reset();
+            model.StopEvent.Set();
+        }
 
         private int CompleteCopyFiles(SaveWorkModel model)
         {
@@ -122,6 +127,10 @@ namespace EasySave.lib.Services
 
                 for (int i = 0; i < AllFiles.Length; i++)
                 {
+                    if (model.StopEvent.WaitOne(0))
+                    {
+                        break;
+                    }
                     model.PauseEvent.WaitOne();
                     model.PauseEvent.Set();
                     if (indexA != PrioritizedBigFiles.Length || indexB != PrioritizedSmallFiles.Length)

@@ -76,7 +76,8 @@ namespace EasySave.DesktopApp
 
         public void Stop_Click(object sender, RoutedEventArgs e)
         {
-            //avec multi-thread
+            SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
+            _ViewModel.stopSaveWork(selectedSaveWork);
         }
 
         public void Visual_Click(object sender, RoutedEventArgs e)
@@ -146,6 +147,7 @@ namespace EasySave.DesktopApp
         {   // !!!!!!! avec multi-thread !!!!!!!!!
             foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
+                _ViewModel.stopSaveWork(item);
             }
         }
 
