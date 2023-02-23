@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using EasySave.lib.Models;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace EasySave.lib.Services.Server
 {
@@ -23,6 +20,7 @@ namespace EasySave.lib.Services.Server
         public void Start()
         {
             new Thread(Listen).Start();
+            Send("Hello");
         }
 
         public void Send(string message)
@@ -30,6 +28,13 @@ namespace EasySave.lib.Services.Server
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(message);
             Socket.Send(buffer);
         }
+
+        //public void Send(List<SaveWorkModel> saveWorkModels)
+        //{
+        //    string message = JsonSerializer.Serialize(saveWorkModels);
+        //    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(message);
+        //    Socket.Send(buffer);
+        //}
 
         private void Listen()
         {

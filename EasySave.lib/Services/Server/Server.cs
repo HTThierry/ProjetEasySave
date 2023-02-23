@@ -34,6 +34,7 @@ namespace EasySave.lib.Services.Server
             clients.Remove(client);
             client.Disconnected -= Client_Disconnected;
             client.MessageReceived -= Client_MessageReceived;
+            client.Socket.Dispose();
 
             Debug.WriteLine("Client décédé");
         }

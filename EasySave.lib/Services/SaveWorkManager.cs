@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 using System.Text.Json;
+using EasySave.lib.Services.Server;
 
 namespace EasySave.lib.Services
 {
@@ -44,7 +45,7 @@ namespace EasySave.lib.Services
         {
             RemoveSaveWorkWPF(oldModel);
             AddNewSaveWork(model);
-            return 0; 
+            return 0;
         }
 
         public void SaveWorkInitializing()
@@ -71,7 +72,6 @@ namespace EasySave.lib.Services
 
                 AddNewSaveWork(model);
             }
-
         }
 
         //public int RemoveSaveWork(string SaveWorkID)
