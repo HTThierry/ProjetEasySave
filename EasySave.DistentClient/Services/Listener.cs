@@ -1,7 +1,7 @@
-﻿using System.Net;
-using System.Net.Sockets;
+﻿using System;
 using System.Diagnostics;
-using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace EasySave.DistentClient.Services
@@ -9,11 +9,14 @@ namespace EasySave.DistentClient.Services
     internal class Listener
     {
         public int Port { get; set; }
+        public EventHandler<msgEventArgs> msgRecevie;
+        public Object Locker;
 
         public Listener(int port)
         {
             Port = port;
         }
+
         public void Start()
         {
             Socket socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -21,23 +24,27 @@ namespace EasySave.DistentClient.Services
             Debug.WriteLine("Chat connecté au serveur");
 
             new Thread(Listen).Start(socket);
-
-
         }
-        private void Listen(object? obj)
+
+        public void Listen(object? obj)
         {
             Socket? socket = obj as Socket;
             if (socket == null)
                 return;
 
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
 
             while (true)
             {
                 int length = socket.Receive(buffer);
                 string message = System.Text.Encoding.UTF8.GetString(buffer, 0, length);
-                Debug.WriteLine(message);
+                msgRecevie?.Invoke(this, new msgEventArgs() { msg = message });
             }
+        }
+
+        public class msgEventArgs : EventArgs
+        {
+            public string? msg { get; set; }
         }
     }
 }

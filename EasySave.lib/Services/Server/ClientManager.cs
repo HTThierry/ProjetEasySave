@@ -1,11 +1,14 @@
 ﻿using EasySave.lib.Models;
 using System.Net.Sockets;
 using System.Text.Json;
+using EasySave.lib.Services;
+using System.Diagnostics;
 
 namespace EasySave.lib.Services.Server
 {
     public class ClientManager
     {
+        public SaveWorkManager saveWorkManager = new SaveWorkManager();
         public event EventHandler? Disconnected;
 
         public event EventHandler<MessageReceivedEventArgs>? MessageReceived;
@@ -20,7 +23,13 @@ namespace EasySave.lib.Services.Server
         public void Start()
         {
             new Thread(Listen).Start();
-            Send("Hello");
+            //Send("Test send");
+            saveWorkManager.SaveWorkInitializing();
+            foreach (SaveWorkModel item in saveWorkManager.ArrayOfSaveWork)
+            {
+                Send(item);
+            }
+            //Send(saveWorkManager.ArrayOfSaveWork[0]);
         }
 
         public void Send(string message)
@@ -29,12 +38,13 @@ namespace EasySave.lib.Services.Server
             Socket.Send(buffer);
         }
 
-        //public void Send(List<SaveWorkModel> saveWorkModels)
-        //{
-        //    string message = JsonSerializer.Serialize(saveWorkModels);
-        //    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(message);
-        //    Socket.Send(buffer);
-        //}
+        public void Send(SaveWorkModel saveWorkModels)
+        {
+            string message = JsonSerializer.Serialize(saveWorkModels);
+            Debug.WriteLine(message);
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(message);
+            Socket.Send(buffer);
+        }
 
         private void Listen()
         {
