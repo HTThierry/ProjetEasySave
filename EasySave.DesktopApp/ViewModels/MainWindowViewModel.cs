@@ -1,5 +1,6 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
+using EasySave.lib.Services.Server;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -11,18 +12,23 @@ namespace EasySave.DesktopApp.ViewModels
     public class MainWindowViewModel
     {
         //private Model _Model = Model.GetInstance();
-        public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
 
         //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
 
         public GenerateKey _GenerateKey = new GenerateKey();
         public SaveWorkService SaveWorkService = new SaveWorkService();
+        public Server Server = new Server();
         public SaveWorkModel _SaveWorkModel;
 
         private static void ProgessState_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Debug.WriteLine(e.PropertyName);
+        }
+
+        public void OpenSocket()
+        {
+            Server.Start();
         }
 
         public int GenerateNewKey()
