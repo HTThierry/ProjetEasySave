@@ -126,10 +126,6 @@ namespace EasySave.lib.Services
 
                 for (int i = 0; i < AllFiles.Length; i++)
                 {
-                    bool indexABool = false;
-                    bool indexBBool = false;
-                    bool indexCBool = false;
-                    bool indexDBool = false;
 
                     if (model.StopEvent.WaitOne(0))
                     {
@@ -144,7 +140,6 @@ namespace EasySave.lib.Services
                             TokenOfAvailability = false;
                             CompleteFileCopy(PrioritizedBigFiles[indexA], model, copyModel);
                             indexA++;
-                            indexABool = true;
                             TokenOfAvailability = true;
                         }
                         else
@@ -153,7 +148,6 @@ namespace EasySave.lib.Services
                             {
                                 CompleteFileCopy(PrioritizedSmallFiles[indexB], model, copyModel);
                                 indexB++;
-                                indexBBool = true;
                             }
                         }
                     }
@@ -164,7 +158,6 @@ namespace EasySave.lib.Services
                             TokenOfAvailability = false;
                             CompleteFileCopy(OtherBigFiles[indexC], model, copyModel);
                             indexC++;
-                            indexCBool = true;
                             TokenOfAvailability = true;
                         }
                         else
@@ -173,13 +166,12 @@ namespace EasySave.lib.Services
                             {
                                 CompleteFileCopy(OtherSmallFiles[indexD], model, copyModel);
                                 indexD++;
-                                indexDBool = true;
                             }
                         }
                     }
-                    if (!indexABool && !indexBBool && !indexCBool && !indexDBool)
+                    if ((indexA + indexB + indexC + indexD) != i)
                     {
-                        i--;
+                        i = indexA + indexB + indexC + indexD;
                     }
                 }
 
