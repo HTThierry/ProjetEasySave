@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Data;
+using System.Windows.Data;
 using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace EasySave.DesktopApp
 {
@@ -15,41 +18,22 @@ namespace EasySave.DesktopApp
     {
         //private Model _Model = Model.GetInstance();
         private MainWindowViewModel _ViewModel = new MainWindowViewModel();
+        
 
         public MainWindow()
         {
-
             InitializeComponent();
-
             _ViewModel.GenerateNewKey();
             _ViewModel.SaveWorkInitializing();
-
-            //set ArrayOfSaveWork in datagrid
-            dgSaveWorks.ItemsSource = _ViewModel.GetSaveWorks();
-            
+            _ViewModel.GetData();
+            DataContext = _ViewModel;
         }
-       
+
         //                                                                           method for savework in datagrid
         public void RefreshSaveWorks()
         {
-            // refresh the datagrid
             dgSaveWorks.Items.Refresh();
         }
-        //temporary solution 
-        //public void RefreshSaveWorksALL()
-        //{
-        //    // refresh the datagrid
-        //    while(true)
-        //    {
-        //        Dispatcher.Invoke(() =>
-        //        {
-        //            dgSaveWorks.Items.Refresh();
-        //        });
-                
-        //        Thread.Sleep(200);
-        //    }
-            
-        //}
 
         public void deleteCommand(object sender, RoutedEventArgs e)
         {
@@ -80,7 +64,6 @@ namespace EasySave.DesktopApp
             if (selectedSaveWork.ProgressStateModel.ProgressState == "Active")
             {
                 _ViewModel.resumeSaveWork(selectedSaveWork);
-                
             }
             else
             {

@@ -11,6 +11,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
     </Window.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
 
         <TextBlock Text="EasySave" FontSize="24" FontWeight="Bold" Margin="10" />
 
-        <DataGrid Grid.Row="1" IsReadOnly="True" Name="dgSaveWorks" AutoGenerateColumns="false" ItemsSource="{Binding SaveWorkModel}">
+        <DataGrid Grid.Row="1" IsReadOnly="True" Name="dgSaveWorks" AutoGenerateColumns="false" ItemsSource="{Binding SaveWork}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static lang:langage.tabName}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Binding="{Binding NameSaveWork}" IsReadOnly="True" Width="*">
@@ -35,12 +36,12 @@
                 <DataGridTemplateColumn Header="{x:Static lang:langage.tabProgressBar}"  HeaderStyle="{StaticResource CenteredColumnHeaderStyle}" Width="2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ProgressBar Value="{Binding ProgressStateModel.Percentage}" Minimum="0" Maximum="100" />
+                            <ProgressBar Value="{Binding Percentage}" Minimum="0" Maximum="100" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="{x:Static lang:langage.tabProgressState}" Binding="{Binding ProgressStateModel.ProgressState}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}"  IsReadOnly="True" Width="*">
+                <DataGridTextColumn Header="{x:Static lang:langage.tabProgressState}" Binding="{Binding ProgressState}" HeaderStyle="{StaticResource CenteredColumnHeaderStyle}"  IsReadOnly="True" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center" />

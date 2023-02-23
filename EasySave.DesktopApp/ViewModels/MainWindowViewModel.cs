@@ -1,6 +1,7 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -12,18 +13,36 @@ namespace EasySave.DesktopApp.ViewModels
     {
         //private Model _Model = Model.GetInstance();
         public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
-
+        public ObservableCollection<SaveWorkModel> SaveWork { get; } = new ObservableCollection<SaveWorkModel>();
         //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
 
         public GenerateKey _GenerateKey = new GenerateKey();
         public SaveWorkService SaveWorkService = new SaveWorkService();
-        public SaveWorkModel _SaveWorkModel;
 
-        private static void ProgessState_PropertyChanged(object sender, PropertyChangedEventArgs e)
+       
+
+        public void GetData()
         {
-            Debug.WriteLine(e.PropertyName);
+            Application.Current.Dispatcher.Invoke( () =>
+            {
+                SaveWork.Clear();
+                foreach (SaveWorkModel model in GetSaveWorks())
+                {
+                    // peut être à utiliser pour les socket
+                    //model.PercentageChange += PercentageChangeEvent;
+                    SaveWork.Add(model);
+                }
+
+            });
+            
         }
+        // peut être à utiliser pour les socket
+        private void PercentageChangeEvent(object sender, float percentage)
+        {
+            Debug.Write(percentage);
+        }
+
 
         public int GenerateNewKey()
         {
@@ -48,6 +67,7 @@ namespace EasySave.DesktopApp.ViewModels
         public void AddNewSaveWork(SaveWorkModel AttributsForSaveWork)
         {
             _SaveWorkManager.AddNewSaveWork(AttributsForSaveWork);
+            GetData();
         }
 
         /// <summary>
@@ -55,9 +75,10 @@ namespace EasySave.DesktopApp.ViewModels
         /// </summary>
         /// <param name="AttributsForSaveWork"></param>
         /// <returns></returns>
-        public int UpdateSaveWork(SaveWorkModel AttributsForSaveWork, SaveWorkModel OldSaveWork)
+        public void UpdateSaveWork(SaveWorkModel AttributsForSaveWork, SaveWorkModel OldSaveWork)
         {
-            return _SaveWorkManager.UpdateSaveWork(AttributsForSaveWork, OldSaveWork);
+             _SaveWorkManager.UpdateSaveWork(AttributsForSaveWork, OldSaveWork);
+            GetData();
         }
 
         /// <summary>
@@ -68,9 +89,10 @@ namespace EasySave.DesktopApp.ViewModels
             _SaveWorkManager.SaveWorkInitializing();
         }
 
-        public int RemoveSaveWorkWPF(SaveWorkModel _SaveWork)
+        public void RemoveSaveWorkWPF(SaveWorkModel _SaveWork)
         {
-            return _SaveWorkManager.RemoveSaveWorkWPF(_SaveWork);
+             _SaveWorkManager.RemoveSaveWorkWPF(_SaveWork);
+            GetData();
         }
 
         //public int ExecuteSaveWork(string SaveWorkID)
@@ -80,9 +102,9 @@ namespace EasySave.DesktopApp.ViewModels
 
         public void ExecuteSaveWorkWPF(SaveWorkModel _SaveWork)
         {
-            _SaveWorkModel = _SaveWork;
-            _SaveWorkModel.PropertyChanged += ProgessState_PropertyChanged;
-            _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWorkModel);
+
+            _SaveWorkManager.ExecuteSaveWorkWPF(_SaveWork);
+            
         }
 
         //public int SequentialSaveWorksExecution()

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿
+
+using System.ComponentModel;
 
 namespace EasySave.lib.Models
 {
@@ -12,24 +14,56 @@ namespace EasySave.lib.Models
 
         public string DestinationPathSaveWork { get; set; }
 
-        public ProgressStateModel progressStateModel { get; set; } = new ProgressStateModel();
-        public ProgressStateModel ProgressStateModel
+        private string _ProgressState = "Inactive";
+        public string ProgressState
         {
-            get { return progressStateModel; }
+            get { return _ProgressState; }
             set
             {
-                progressStateModel = value;
-                OnPropertyChanged("ProgressStateModel");
+                if (_ProgressState != value)
+                {
+                    _ProgressState = value;
+                    OnPropertyChanged("ProgressState");
+                }
             }
         }
 
-        public AutoResetEvent PauseEvent = new AutoResetEvent(true);
+        private ProgressStateModel _ProgressStateModel { get; set; } = new ProgressStateModel();
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public ProgressStateModel ProgressStateModel
+        {
+            get { return _ProgressStateModel; }
+            set
+            {
+                if (_ProgressStateModel != value)
+                {
+                    _ProgressStateModel = value;
+                    OnPropertyChanged("ProgressStateModel");
+                }
+            }
+        }
+
+        private float _percentage;
+        public float Percentage
+        {
+            get { return _percentage; }
+            set
+            {
+                if (_percentage != value)
+                {
+                    _percentage = value;
+                    OnPropertyChanged("Percentage");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public AutoResetEvent PauseEvent = new AutoResetEvent(true);
     }
 }

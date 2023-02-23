@@ -1,4 +1,5 @@
 ﻿using EasySave.lib.Models;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Text.Json;
@@ -40,11 +41,10 @@ namespace EasySave.lib.Services
             }
         }
 
-        public int UpdateSaveWork(SaveWorkModel model, SaveWorkModel oldModel)
+        public void UpdateSaveWork(SaveWorkModel model, SaveWorkModel oldModel)
         {
             RemoveSaveWorkWPF(oldModel);
-            AddNewSaveWork(model);
-            return 0; 
+            AddNewSaveWork(model); 
         }
 
         public void SaveWorkInitializing()
@@ -97,7 +97,7 @@ namespace EasySave.lib.Services
         //    }
         //}
 
-        public int RemoveSaveWorkWPF(SaveWorkModel model)
+        public void RemoveSaveWorkWPF(SaveWorkModel model)
         {
             string path = Path.Combine(ConfigurationManager.AppSettings["SaveWorkPath"], $"{model.NameSaveWork}.json");
             try
@@ -115,14 +115,14 @@ namespace EasySave.lib.Services
                         }
                     }
                     ArrayOfSaveWork.RemoveAt(index);
-                    return 0;
+
                 }
-                else
-                    return 1;
+
+
             }
             catch (Exception ex)
             {
-                return 1;
+
             }
         }
 

@@ -16,13 +16,13 @@ namespace EasySave.DesktopApp
     /// </summary>
     public partial class App : Application
     {
-        private const string LockFileName = "EasySave.DesktopApp.lock";
+        private const string LockFileName = "EasySave.DesktopApp";
         private FileStream lockFile;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
+            File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LockFileName));
             string lockFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LockFileName);
             try
             {

@@ -36,7 +36,7 @@ namespace EasySave.lib.Services
                     CompleteCopyFiles(model);
 
                 });
-                thread.Name = $"{thread}"+ $"{model.NameSaveWork}";
+                //thread.Name = $"{thread}"+ $"{model.NameSaveWork}";
                 thread.Start();
                 //CompleteCopyFiles(model);
             }
@@ -47,7 +47,7 @@ namespace EasySave.lib.Services
                     DifferentialCopyFiles(model);
 
                 });
-                thread.Name = $"{thread}" + $"{model.NameSaveWork}";
+                //thread.Name = $"{thread}" + $"{model.NameSaveWork}";
                 thread.Start();
                 //DifferentialCopyFiles(model);
             }
@@ -113,10 +113,10 @@ namespace EasySave.lib.Services
 
                 // Création des 4 index
 
-                int indexA = 0;
-                int indexB = 0;
-                int indexC = 0;
-                int indexD = 0;
+                int indexA = 0; // PrioritizedBigFiles
+                int indexB = 0; // PrioritizedSmallFiles
+                int indexC = 0; // OtherBigFiles
+                int indexD = 0; // OtherSmallFiles
 
                 // Création de la boucle infernale
 
@@ -176,6 +176,9 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.FilePath = "";
             model.ProgressStateModel.FileDestinationPath = "";
 
+            model.Percentage = 0;
+            model.ProgressState = "Inactive";
+
             ProgressStateService.ProgressStateFile();
             
             return 0;
@@ -233,6 +236,9 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.FilePath = "";
             model.ProgressStateModel.FileDestinationPath = "";
 
+            model.Percentage = 0;
+            model.ProgressState = "Inactive";
+
             ProgressStateService.ProgressStateFile();
             return 0;
         }
@@ -286,6 +292,8 @@ namespace EasySave.lib.Services
             model.ProgressStateModel.FilePath = file;
             model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
 
+            model.Percentage = copyModel.Percentage;
+            model.ProgressState = "Active";
             lock (LockerLog)
             {
                 LogService.LogFiles(logModel);
@@ -349,6 +357,7 @@ namespace EasySave.lib.Services
                 model.ProgressStateModel.Percentage= copyModel.Percentage;
                 model.ProgressStateModel.FilePath = file;
                 model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
+
 
                 lock (LockerLog)
                 {
@@ -416,6 +425,9 @@ namespace EasySave.lib.Services
                     model.ProgressStateModel.Percentage= copyModel.Percentage;
                     model.ProgressStateModel.FilePath = file;
                     model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
+
+                    model.Percentage = copyModel.Percentage;
+                    model.ProgressState = "Active";
 
                     lock (LockerLog)
                     {
