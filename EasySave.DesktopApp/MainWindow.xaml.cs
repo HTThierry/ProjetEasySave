@@ -18,6 +18,7 @@ namespace EasySave.DesktopApp
 
         public MainWindow()
         {
+
             InitializeComponent();
 
             _ViewModel.GenerateNewKey();
@@ -25,8 +26,7 @@ namespace EasySave.DesktopApp
 
             //set ArrayOfSaveWork in datagrid
             dgSaveWorks.ItemsSource = _ViewModel.GetSaveWorks();
-            Thread thread = new Thread(RefreshSaveWorksALL);
-            thread.Start();
+            
         }
        
         //                                                                           method for savework in datagrid
@@ -36,20 +36,20 @@ namespace EasySave.DesktopApp
             dgSaveWorks.Items.Refresh();
         }
         //temporary solution 
-        public void RefreshSaveWorksALL()
-        {
-            // refresh the datagrid
-            while(true)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    dgSaveWorks.Items.Refresh();
-                });
+        //public void RefreshSaveWorksALL()
+        //{
+        //    // refresh the datagrid
+        //    while(true)
+        //    {
+        //        Dispatcher.Invoke(() =>
+        //        {
+        //            dgSaveWorks.Items.Refresh();
+        //        });
                 
-                Thread.Sleep(200);
-            }
+        //        Thread.Sleep(200);
+        //    }
             
-        }
+        //}
 
         public void deleteCommand(object sender, RoutedEventArgs e)
         {
@@ -84,7 +84,9 @@ namespace EasySave.DesktopApp
             }
             else
             {
+
                 _ViewModel.LaunchCommand(selectedSaveWork);
+                
             }
             
         }
@@ -136,10 +138,12 @@ namespace EasySave.DesktopApp
 
         public void LaunchSelectedCommand(object sender, RoutedEventArgs e)
         {
+
             foreach (SaveWorkModel item in dgSaveWorks.SelectedItems)
             {
                 _ViewModel.ExecuteSaveWorkWPF(item);
             }
+            
         }
 
         public void selectAllCommand(object sender, RoutedEventArgs e)

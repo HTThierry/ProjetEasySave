@@ -144,6 +144,9 @@
   <data name="diffSelect" xml:space="preserve">
     <value>Differential</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="ErrorName" xml:space="preserve">
     <value>The name cannot be empty or already existing.</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="launch" xml:space="preserve">
     <value>Launch</value>
+  </data>
+  <data name="MonoInstance" xml:space="preserve">
+    <value>An instance of the application is already running.</value>
   </data>
   <data name="nameInput" xml:space="preserve">
     <value>Name:</value>
