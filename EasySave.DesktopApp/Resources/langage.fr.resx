@@ -139,7 +139,7 @@
     <value>Supprimer</value>
   </data>
   <data name="deleteSelectedSaveWork" xml:space="preserve">
-    <value>Supprimer les SaveWorks sélectionné</value>
+    <value>Supprimer les SaveWorks sélectionnés</value>
   </data>
   <data name="diffSelect" xml:space="preserve">
     <value>Differentiel</value>
@@ -151,13 +151,13 @@
     <value>Le nom ne peut pas être vide ou déjà existant.</value>
   </data>
   <data name="ErrorPathDest" xml:space="preserve">
-    <value>Le chemin d'accès destination n'est pas valide.</value>
+    <value>Le chemin d'accès cible n'est pas valide.</value>
   </data>
   <data name="ErrorPathSource" xml:space="preserve">
     <value>Le chemin d'accès source n'est pas valide.</value>
   </data>
   <data name="generate" xml:space="preserve">
-    <value>Genère une nouvelle clé</value>
+    <value>Générer une nouvelle clé</value>
   </data>
   <data name="launch" xml:space="preserve">
     <value>Lancer</value>
@@ -172,16 +172,16 @@
     <value>Panneau de configuration de SaveWork</value>
   </data>
   <data name="pathFromInput" xml:space="preserve">
-    <value>Chemin de base :</value>
+    <value>Chemin d'accès source :</value>
   </data>
   <data name="pathToInput" xml:space="preserve">
-    <value>Chemin de destination :</value>
+    <value>Chemin d'accès cible :</value>
   </data>
   <data name="pauseSelectedSaveWork" xml:space="preserve">
-    <value>Pauser les SaveWorks sélectionné</value>
+    <value>Mettre en pause les SaveWorks sélectionnés</value>
   </data>
   <data name="playSelectedSaveWork" xml:space="preserve">
-    <value>Lancer les SaveWorks sélectionné</value>
+    <value>Lancer les SaveWorks sélectionnés</value>
   </data>
   <data name="save" xml:space="preserve">
     <value>Enregistrer</value>
@@ -190,7 +190,7 @@
     <value>Tout sélectionner</value>
   </data>
   <data name="stopSelectedSaveWork" xml:space="preserve">
-    <value>Stopper les SaveWorks sélectionné</value>
+    <value>Arrêter les SaveWorks sélectionnés</value>
   </data>
   <data name="tabDelete" xml:space="preserve">
     <value>Suppression</value>
@@ -202,10 +202,10 @@
     <value>Nom</value>
   </data>
   <data name="tabPathFrom" xml:space="preserve">
-    <value>Chemin de base</value>
+    <value>Chemin d'accès source</value>
   </data>
   <data name="tabPathTo" xml:space="preserve">
-    <value>Chemin de destination</value>
+    <value>Chemin d'accès cible</value>
   </data>
   <data name="tabPause" xml:space="preserve">
     <value>Pause</value>
@@ -214,7 +214,7 @@
     <value>Lancement</value>
   </data>
   <data name="tabProgressBar" xml:space="preserve">
-    <value>Bar de progression</value>
+    <value>Barre de progression</value>
   </data>
   <data name="tabProgressState" xml:space="preserve">
     <value>Etat de progression</value>
