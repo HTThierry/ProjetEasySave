@@ -16,9 +16,7 @@ namespace EasySave.DesktopApp.ViewModels
     public class MainWindowViewModel
     {
         //private Model _Model = Model.GetInstance();
-        //public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
         public ObservableCollection<SaveWorkModel> SaveWork { get; } = new ObservableCollection<SaveWorkModel>();
-        //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = SaveWorkManager.GetInstance();
 
         public GenerateKey _GenerateKey = new GenerateKey();

@@ -8,26 +8,14 @@ namespace EasySave.lib.Services
     {
         public SaveWorkManager saveWorkManager = SaveWorkManager.GetInstance();
 
-        //private bool TokenOfPriority { get; set; } = true;
+        public bool RunningProcess { get; set; } = false;
         private static bool TokenOfAvailability { get; set; } = true;
 
-        //private Thread Thread;
-        //private AutoResetEvent pauseEvent = new AutoResetEvent(false);
         private object LockerLog = new object();
 
         private object LockerProgressState = new object();
         private Server.Server server = new Server.Server();
-
-        //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
-        //public cryptoSoft _cryptoSoft = new cryptoSoft();
-        //public RunningProcess _RunningProcess = new RunningProcess();
-
-        //public string[] GetInstanceInfo()
-        //{
-        //    string[] AttributsForPresentation = new string[4] { _SaveWorkModel.NameSaveWork, $"{_SaveWorkModel.TypeSaveWork}", _SaveWorkModel.SourcePathSaveWork, _SaveWorkModel.DestinationPathSaveWork };
-        //    return AttributsForPresentation;
-        //}
-
+        
         public void LaunchSaveWork(SaveWorkModel model)
         {
             if (model.TypeSaveWork == 1)
@@ -335,7 +323,9 @@ namespace EasySave.lib.Services
             while (saveWorkManager.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
                 Debug.WriteLine("Logiciel Métier Actif");
+                RunningProcess = true;
             }
+            RunningProcess = false;
 
             int timeForCryp = 0;
 

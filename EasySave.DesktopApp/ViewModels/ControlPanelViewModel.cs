@@ -9,7 +9,6 @@ namespace EasySave.DesktopApp.ViewModels
 {
     public class ControlPanelViewModel
     {
-        //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
         public int TestNameSaveWork(string SaveWorkName)
         {
