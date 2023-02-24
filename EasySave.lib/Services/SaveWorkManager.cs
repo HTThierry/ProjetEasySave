@@ -12,7 +12,7 @@ namespace EasySave.lib.Services
     {
         public static int index;
         public List<SaveWorkModel> ArrayOfSaveWork { get; set; } = new List<SaveWorkModel>();
-
+        private Server.Server server = new Server.Server();
         private static SaveWorkManager instance = new();
 
         public static SaveWorkManager GetInstance()
@@ -47,12 +47,13 @@ namespace EasySave.lib.Services
                 string jsonString = JsonSerializer.Serialize(model);
                 File.WriteAllText(path, jsonString);
             }
+            server.Send(model);
         }
 
         public void UpdateSaveWork(SaveWorkModel model, SaveWorkModel oldModel)
         {
             RemoveSaveWorkWPF(oldModel);
-            AddNewSaveWork(model); 
+            AddNewSaveWork(model);
         }
 
         public void SaveWorkInitializing()
@@ -99,7 +100,6 @@ namespace EasySave.lib.Services
                         }
                     }
                     ArrayOfSaveWork.RemoveAt(index);
-
                 }
 
 
