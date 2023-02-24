@@ -14,7 +14,7 @@ namespace EasySave.DesktopApp.ViewModels
         //private Model _Model = Model.GetInstance();
 
         //public Initializer _Initializer = new Initializer();
-        public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
+        public SaveWorkManager _SaveWorkManager = SaveWorkManager.GetInstance();
 
         public GenerateKey _GenerateKey = new GenerateKey();
         public SaveWorkService SaveWorkService = new SaveWorkService();

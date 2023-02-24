@@ -3,12 +3,13 @@ using EasySave.DistentClient.Models;
 using static EasySave.DistentClient.Services.Listener;
 using System.Text.Json;
 using System.Collections.ObjectModel;
+using System;
 
 namespace EasySave.DistentClient.ViewModels
 {
     public class MainWindowViewModel
     {
-        public ObservableCollection<SaveWorkModel> SaveWork { get; } = new ObservableCollection<SaveWorkModel>();
+        public ObservableCollection<ModelForSocket> SaveWork { get; } = new ObservableCollection<ModelForSocket>();
         Listener _Listener = new(55263);
         
         public void ConnectSocket()
@@ -39,7 +40,14 @@ namespace EasySave.DistentClient.ViewModels
 
         private void Listener_msgRecevie(object sender, msgEventArgs e)
         {
-            SaveWorkModel saveWorkJSON = JsonSerializer.Deserialize<SaveWorkModel>(e.msg)!;
+            ModelForSocket saveWorkJSON = new ModelForSocket()
+            {
+                NameSaveWork = e.msg[0],
+                TypeSaveWork = Int32.Parse(e.msg[1]),
+                SourcePathSaveWork = e.msg[2],
+                DestinationPathSaveWork = e.msg[3],
+                ProgressState = Int32.Parse(e.msg[4])
+            };
             SaveWork.Add(saveWorkJSON);
         }
     }

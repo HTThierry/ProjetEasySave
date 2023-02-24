@@ -3,17 +3,21 @@ using System.Net.Sockets;
 using System.Text.Json;
 using EasySave.lib.Services;
 using System.Diagnostics;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 namespace EasySave.lib.Services.Server
 {
     public class ClientManager
     {
-        public SaveWorkManager saveWorkManager = new SaveWorkManager();
+        public SaveWorkManager saveWorkManager = SaveWorkManager.GetInstance();
         public event EventHandler? Disconnected;
 
         public event EventHandler<MessageReceivedEventArgs>? MessageReceived;
 
         public Socket Socket { get; set; }
+
+        private const int HEADERSIZE = 20; 
 
         public ClientManager(Socket socket)
         {
@@ -24,7 +28,7 @@ namespace EasySave.lib.Services.Server
         {
             new Thread(Listen).Start();
             //Send("Test send");
-            saveWorkManager.SaveWorkInitializing();
+            //saveWorkManager.SaveWorkInitializing();
             foreach (SaveWorkModel item in saveWorkManager.ArrayOfSaveWork)
             {
                 Send(item);
@@ -40,10 +44,34 @@ namespace EasySave.lib.Services.Server
 
         public void Send(SaveWorkModel saveWorkModels)
         {
-            string message = JsonSerializer.Serialize(saveWorkModels);
-            Debug.WriteLine(message);
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(message);
-            Socket.Send(buffer);
+
+            byte[] serializedData = Serialize(ClassReformater(saveWorkModels));
+            serializedData = Encoding.ASCII.GetBytes(serializedData.Length.ToString().PadLeft(HEADERSIZE, '<')).Concat(serializedData).ToArray();
+
+            Socket.Send(serializedData);
+        }
+
+        private string[] ClassReformater(SaveWorkModel saveWorkModels)
+        {
+            string[] ModelAttributs = new string[]
+            {
+                saveWorkModels.NameSaveWork,
+                saveWorkModels.TypeSaveWork.ToString(),
+                saveWorkModels.SourcePathSaveWork,
+                saveWorkModels.DestinationPathSaveWork,
+                "8"
+            };
+            return ModelAttributs;
+        }
+
+        private byte[] Serialize(string[] ModelAttributs)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                formatter.Serialize(memoryStream, ModelAttributs);
+                return memoryStream.ToArray();
+            }
         }
 
         private void Listen()

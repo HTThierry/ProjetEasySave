@@ -3,14 +3,22 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Text.Json;
 using EasySave.lib.Services.Server;
+using System.ComponentModel;
 
 namespace EasySave.lib.Services
 {
     public class SaveWorkManager
     {
         public static int index;
-        public List<SaveWorkModel> ArrayOfSaveWork = new List<SaveWorkModel>();
-        private SaveWorkService service = new SaveWorkService();
+        public List<SaveWorkModel> ArrayOfSaveWork { get; set; } = new List<SaveWorkModel>();
+        //private SaveWorkService service = new SaveWorkService();
+
+        private static SaveWorkManager instance = new();
+
+        public static SaveWorkManager GetInstance()
+        {
+            return instance;
+        }
 
         public void AddNewSaveWork(SaveWorkModel model)
         {

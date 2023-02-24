@@ -13,7 +13,7 @@ namespace EasySave.DistentClient
         public MainWindow()
         {
             InitializeComponent();
-            dgSaveWorks.DataContext= ViewModel;
+            dgSaveWorks.DataContext = ViewModel;
             try
             {
                 ViewModel.ConnectSocket();

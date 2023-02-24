@@ -2,8 +2,9 @@
 
 namespace EasySave.DistentClient.Models
 {
+    [Serializable]
     public class ProgressStateModel
-    { //changer les strings par des types précis
+    {
         public string Name { get; set; }
         public DateTime Time { get; set; }
         public string ProgressState { get; set; }
