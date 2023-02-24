@@ -1,5 +1,8 @@
-﻿namespace EasySave.lib.Models
+﻿using System;
+
+namespace EasySave.DistentClient.Models
 {
+    [Serializable]
     public class ProgressStateModel
     {
         public string Name { get; set; }

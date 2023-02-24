@@ -1,5 +1,6 @@
 ﻿using EasySave.lib.Models;
 using EasySave.lib.Services;
+using EasySave.lib.Services.Server;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,14 +16,18 @@ namespace EasySave.DesktopApp.ViewModels
     public class MainWindowViewModel
     {
         //private Model _Model = Model.GetInstance();
-        public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
+        //public EntryProcessingService _EntryProcessingService = new EntryProcessingService();
         public ObservableCollection<SaveWorkModel> SaveWork { get; } = new ObservableCollection<SaveWorkModel>();
         //public Initializer _Initializer = new Initializer();
-        public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
+        public SaveWorkManager _SaveWorkManager = SaveWorkManager.GetInstance();
+
         public GenerateKey _GenerateKey = new GenerateKey();
         public SaveWorkService SaveWorkService = new SaveWorkService();
         public Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-
+        // peut être à utiliser pour les socket
+        
+        public Server Server = new Server();
+        public SaveWorkModel _SaveWorkModel;
 
         //public MainWindowViewModel(Window currentWindow)
         //{
@@ -45,12 +50,17 @@ namespace EasySave.DesktopApp.ViewModels
             });
             
         }
-        // peut être à utiliser pour les socket
+  
+
         private void PercentageChangeEvent(object sender, float percentage)
         {
             Debug.Write(percentage);
         }
 
+        public void OpenSocket()
+        {
+            Server.Start();
+        }
 
         public int GenerateNewKey()
         {

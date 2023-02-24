@@ -30,6 +30,11 @@ namespace EasySave.DesktopApp
             DataContext = _ViewModel;
             
 
+            _ViewModel.OpenSocket();
+
+            //set ArrayOfSaveWork in datagrid
+            dgSaveWorks.ItemsSource = _ViewModel.GetSaveWorks();
+            
         }
 
         //                                                                           method for savework in datagrid
