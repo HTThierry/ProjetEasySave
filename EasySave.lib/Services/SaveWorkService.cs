@@ -1,22 +1,20 @@
 ﻿using EasySave.lib.Models;
-using EasySave.lib.Services.Server;
-using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
-using System.Reflection;
-using System.Threading;
 
 namespace EasySave.lib.Services
 {
     public class SaveWorkService
     {
         public SaveWorkManager saveWorkManager = SaveWorkManager.GetInstance();
+
         //private bool TokenOfPriority { get; set; } = true;
         private static bool TokenOfAvailability { get; set; } = true;
 
         //private Thread Thread;
         //private AutoResetEvent pauseEvent = new AutoResetEvent(false);
         private object LockerLog = new object();
+
         private object LockerProgressState = new object();
         private Server.Server server = new Server.Server();
 
@@ -29,15 +27,14 @@ namespace EasySave.lib.Services
         //    string[] AttributsForPresentation = new string[4] { _SaveWorkModel.NameSaveWork, $"{_SaveWorkModel.TypeSaveWork}", _SaveWorkModel.SourcePathSaveWork, _SaveWorkModel.DestinationPathSaveWork };
         //    return AttributsForPresentation;
         //}
-        
+
         public void LaunchSaveWork(SaveWorkModel model)
         {
             if (model.TypeSaveWork == 1)
             {
-                Thread thread = new Thread(() => {
-
+                Thread thread = new Thread(() =>
+                {
                     CompleteCopyFiles(model);
-
                 });
                 //thread.Name = $"{thread}"+ $"{model.NameSaveWork}";
                 thread.Start();
@@ -45,10 +42,9 @@ namespace EasySave.lib.Services
             }
             else
             {
-                Thread thread = new Thread(() => {
-
+                Thread thread = new Thread(() =>
+                {
                     DifferentialCopyFiles(model);
-
                 });
                 //thread.Name = $"{thread}" + $"{model.NameSaveWork}";
                 thread.Start();
@@ -65,6 +61,7 @@ namespace EasySave.lib.Services
         {
             model.PauseEvent.Set();
         }
+
         public void StopSaveWork(SaveWorkModel model)
         {
             model.PauseEvent.Reset();
@@ -117,7 +114,6 @@ namespace EasySave.lib.Services
                 string[] OtherBigFiles = OtherFiles.Where(file => new FileInfo(file).Length >= FileSizeLimit).ToArray();
                 string[] OtherSmallFiles = OtherFiles.Except(OtherBigFiles).ToArray();
 
-
                 // Création des 4 index
 
                 int indexA = 0; // PrioritizedBigFiles
@@ -128,7 +124,6 @@ namespace EasySave.lib.Services
 
                 for (int i = 0; i < AllFiles.Length; i++)
                 {
-
                     if (model.StopEvent.WaitOne(0))
                     {
                         break;
@@ -180,7 +175,7 @@ namespace EasySave.lib.Services
                         i = indexA + indexB + indexC + indexD;
                     }
                 }
-                
+
                 //CompleteCopyListOfFiles(PrioritizedFiles, model, copyModel);
                 //CompleteCopyListOfFiles(OtherFiles, model, copyModel);
             }
@@ -199,7 +194,7 @@ namespace EasySave.lib.Services
             model.ProgressState = "Inactive";
             server.Send(model);
             ProgressStateService.ProgressStateFile();
-            
+
             return 0;
         }
 
@@ -226,22 +221,95 @@ namespace EasySave.lib.Services
                 }
 
                 string[] AllFiles = Directory.GetFiles(copyModel.SourcePath, "*.*", SearchOption.AllDirectories);
+                string[] DestFiles = Directory.GetFiles(copyModel.DestinationPath, "*", SearchOption.AllDirectories);
 
-                string[] SpecificExtensions = ConfigurationManager.AppSettings["FileToPrioritize"].Split(',');
-                string[] PrioritizedFiles = AllFiles.Where(file => SpecificExtensions.Contains(Path.GetExtension(file))).ToArray();
-                string[] OtherFiles = AllFiles.Except(PrioritizedFiles).ToArray();
-
-                copyModel.TotalFilesToCopy = AllFiles.Length;
-                copyModel.NbFilesLeft = copyModel.TotalFilesToCopy;
+                copyModel.TotalFilesToCopy = 1;
+                
 
                 foreach (string file in AllFiles)
                 {
-                    copyModel.TotalFilesSizeToCopy += new FileInfo(file).Length;
+                    if(File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(copyModel.SourcePath, copyModel.DestinationPath)))
+                    {
+                        copyModel.TotalFilesToCopy++;
+                        copyModel.TotalFilesSizeToCopy += new FileInfo(file).Length;
+                    }
                 }
+                copyModel.NbFilesLeft = copyModel.TotalFilesToCopy;
                 copyModel.FilesSizeLeft = copyModel.TotalFilesSizeToCopy;
 
-                DifferentialCopyListOfFiles(PrioritizedFiles, model, copyModel);
-                DifferentialCopyListOfFiles(OtherFiles, model, copyModel);
+                string[] SpecificExtensions = ConfigurationManager.AppSettings["FileToPrioritize"].Split(',');
+                long FileSizeLimit = long.Parse(ConfigurationManager.AppSettings["FileSizeLimit"]);
+
+                string[] PrioritizedFiles = AllFiles.Where(file => SpecificExtensions.Contains(Path.GetExtension(file))).ToArray();
+                string[] OtherFiles = AllFiles.Except(PrioritizedFiles).ToArray();
+
+                // Création des 4 listes
+                string[] PrioritizedBigFiles = PrioritizedFiles.Where(file => new FileInfo(file).Length >= FileSizeLimit).ToArray();
+                string[] PrioritizedSmallFiles = PrioritizedFiles.Except(PrioritizedBigFiles).ToArray();
+
+                string[] OtherBigFiles = OtherFiles.Where(file => new FileInfo(file).Length >= FileSizeLimit).ToArray();
+                string[] OtherSmallFiles = OtherFiles.Except(OtherBigFiles).ToArray();
+
+                int indexA = 0; // PrioritizedBigFiles
+                int indexB = 0; // PrioritizedSmallFiles
+                int indexC = 0; // OtherBigFiles
+                int indexD = 0; // OtherSmallFiles
+                // Création de la boucle infernale
+
+                for (int i = 0; i < AllFiles.Length; i++)
+                {
+                    if (model.StopEvent.WaitOne(0))
+                    {
+                        break;
+                    }
+                    model.PauseEvent.WaitOne();
+                    model.PauseEvent.Set();
+                    if (indexA != PrioritizedBigFiles.Length || indexB != PrioritizedSmallFiles.Length)
+                    {
+                        if (TokenOfAvailability && indexA != PrioritizedBigFiles.Length)
+                        {
+                            TokenOfAvailability = false;
+                            DifferentialFileCopy(PrioritizedBigFiles[indexA], model, copyModel);
+                            indexA++;
+                            TokenOfAvailability = true;
+                            server.Send(model);
+                        }
+                        else
+                        {
+                            if (indexB < PrioritizedSmallFiles.Length)
+                            {
+                                DifferentialFileCopy(PrioritizedSmallFiles[indexB], model, copyModel);
+                                indexB++;
+                                server.Send(model);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (TokenOfAvailability && indexC != OtherBigFiles.Length)
+                        {
+                            TokenOfAvailability = false;
+                            DifferentialFileCopy(OtherBigFiles[indexC], model, copyModel);
+                            indexC++;
+                            TokenOfAvailability = true;
+                            server.Send(model);
+                        }
+                        else
+                        {
+                            if (indexD < OtherSmallFiles.Length)
+                            {
+                                DifferentialFileCopy(OtherSmallFiles[indexD], model, copyModel);
+                                indexD++;
+                                server.Send(model);
+                            }
+                        }
+                    }
+                    if ((indexA + indexB + indexC + indexD) != i)
+                    {
+                        i = indexA + indexB + indexC + indexD;
+                    }
+                }
+                
             }
 
             model.ProgressStateModel.Name = model.NameSaveWork;
@@ -257,14 +325,14 @@ namespace EasySave.lib.Services
 
             model.Percentage = 0;
             model.ProgressState = "Inactive";
-
+            server.Send(model);
             ProgressStateService.ProgressStateFile();
             return 0;
         }
 
         private void CompleteFileCopy(string file, SaveWorkModel model, CopyModel copyModel)
         {
-            while(saveWorkManager.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            while (saveWorkManager.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
                 Debug.WriteLine("Logiciel Métier Actif");
             }
@@ -328,13 +396,13 @@ namespace EasySave.lib.Services
             }
         }
 
-        private void CompleteCopyListOfFiles(string[] Files, SaveWorkModel model, CopyModel copyModel)
+
+        private void DifferentialFileCopy(string file, SaveWorkModel model, CopyModel copyModel)
         {
-            foreach (string file in Files)
+            model.PauseEvent.WaitOne();
+            model.PauseEvent.Set();
+            if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(copyModel.SourcePath, copyModel.DestinationPath)))
             {
-                model.PauseEvent.WaitOne();
-                model.PauseEvent.Set();
-                
                 int timeForCryp = 0;
 
                 string[] ExtensionToCrypt = ConfigurationManager.AppSettings["fileToCryp"].Split(',');
@@ -352,10 +420,7 @@ namespace EasySave.lib.Services
 
                 stopwatch.Stop();
                 double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
-
-                //pourcent = (((copyModel.TotalFilesToCopy - copyModel.NbFilesLeft) / copyModel.TotalFilesToCopy));
-
-                copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy)*100;
+                copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy) * 100;
                 copyModel.NbFilesLeft--;
                 copyModel.FilesSizeLeft -= new FileInfo(file).Length;
 
@@ -378,10 +443,12 @@ namespace EasySave.lib.Services
                 model.ProgressStateModel.TotalFilesSizeToCopy = copyModel.TotalFilesSizeToCopy;
                 model.ProgressStateModel.NbFilesLeft = copyModel.NbFilesLeft;
                 model.ProgressStateModel.FilesSizeLeft = copyModel.FilesSizeLeft;
-                model.ProgressStateModel.Percentage= copyModel.Percentage;
+                model.ProgressStateModel.Percentage = copyModel.Percentage;
                 model.ProgressStateModel.FilePath = file;
                 model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
 
+                model.Percentage = copyModel.Percentage;
+                model.ProgressState = "Active";
 
                 lock (LockerLog)
                 {
@@ -390,80 +457,6 @@ namespace EasySave.lib.Services
                 lock (LockerProgressState)
                 {
                     ProgressStateService.ProgressStateFile();
-                }
-
-
-
-                //Debug.WriteLine("c copié");
-            }
-        }
-
-        private void DifferentialCopyListOfFiles(string[] Files, SaveWorkModel model, CopyModel copyModel)
-        {
-            foreach (string file in Files)
-            {
-                model.PauseEvent.WaitOne();
-                model.PauseEvent.Set();
-                if (File.GetLastWriteTime(file) > File.GetLastWriteTime(file.Replace(copyModel.SourcePath, copyModel.DestinationPath)))
-                {
-                    int timeForCryp = 0;
-
-                    string[] ExtensionToCrypt = ConfigurationManager.AppSettings["fileToCryp"].Split(',');
-
-                    Stopwatch stopwatch = Stopwatch.StartNew();
-
-                    if (ExtensionToCrypt.Contains(Path.GetExtension(file)))
-                    {
-                        timeForCryp = cryptoSoft.cryptoSoftEasySave("-c", $"{file}", $"{file.Replace(copyModel.SourcePath, copyModel.DestinationPath)}");
-                    }
-                    else
-                    {
-                        File.Copy(file, file.Replace(copyModel.SourcePath, copyModel.DestinationPath), true);
-                    }
-
-                    stopwatch.Stop();
-                    double FileTransferTime = stopwatch.Elapsed.TotalSeconds;
-                    copyModel.Percentage = (((float)copyModel.TotalFilesToCopy - (float)copyModel.NbFilesLeft) / (float)copyModel.TotalFilesToCopy) * 100;
-                    copyModel.NbFilesLeft--;
-                    copyModel.FilesSizeLeft -= new FileInfo(file).Length;
-
-                    LogModel logModel = new LogModel()
-                    {
-                        Name = Path.GetFileName(file),
-                        FileSource = file,
-                        FileTarget = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file)),
-                        DestPath = copyModel.DestinationPath,
-                        TimeToCrypt = timeForCryp,
-                        FileSize = new FileInfo(file).Length,
-                        FileTransferTime = FileTransferTime,
-                        Time = DateTime.Now,
-                    };
-
-                    model.ProgressStateModel.Name = model.NameSaveWork;
-                    model.ProgressStateModel.Time = DateTime.Now;
-                    model.ProgressStateModel.ProgressState = "Active";
-                    model.ProgressStateModel.TotalFilesToCopy = copyModel.TotalFilesToCopy;
-                    model.ProgressStateModel.TotalFilesSizeToCopy = copyModel.TotalFilesSizeToCopy;
-                    model.ProgressStateModel.NbFilesLeft = copyModel.NbFilesLeft;
-                    model.ProgressStateModel.FilesSizeLeft = copyModel.FilesSizeLeft;
-                    model.ProgressStateModel.Percentage= copyModel.Percentage;
-                    model.ProgressStateModel.FilePath = file;
-                    model.ProgressStateModel.FileDestinationPath = Path.Combine(copyModel.DestinationPath, Path.GetFileName(file));
-
-                    model.Percentage = copyModel.Percentage;
-                    model.ProgressState = "Active";
-
-                    lock (LockerLog)
-                    {
-                        LogService.LogFiles(logModel);
-                    }
-                    lock (LockerProgressState)
-                    {
-                        ProgressStateService.ProgressStateFile();
-                    }
-
-
-
                 }
             }
         }

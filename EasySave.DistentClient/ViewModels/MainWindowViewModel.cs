@@ -52,32 +52,30 @@ namespace EasySave.DistentClient.ViewModels
                 ProgressState = e.msg[4],
                 Percentage = float.Parse(e.msg[5])
             };
-
-            for (int i = 0; i < SaveWork.Count; i++)
+            Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                if (SaveWork[i].NameSaveWork == saveWorkJSON.NameSaveWork)
+                for (int i = 0; i < SaveWork.Count; i++)
                 {
-                    index = i;
-                    notNewModel = true;
+                    if (SaveWork[i].NameSaveWork == saveWorkJSON.NameSaveWork)
+                    {
+                        index = i;
+                        notNewModel = true;
+                        break;
+                    }
+                    else
+                    {
+                        notNewModel = false;
+                    }
+                }
+                if (notNewModel)
+                {
+                    SaveWork[index] = saveWorkJSON;
                 }
                 else
                 {
-                    notNewModel = false;
-                }
-            }
-            if (notNewModel)
-
-                Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    SaveWork[index] = saveWorkJSON;
-                }));
-            else
-            {
-                Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
                     SaveWork.Add(saveWorkJSON);
-                }));
-            }
+                }
+            }));
         }
     }
 }
