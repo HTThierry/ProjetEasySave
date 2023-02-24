@@ -5,7 +5,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+
 
 namespace EasySave.DesktopApp.ViewModels
 {
@@ -16,11 +19,16 @@ namespace EasySave.DesktopApp.ViewModels
         public ObservableCollection<SaveWorkModel> SaveWork { get; } = new ObservableCollection<SaveWorkModel>();
         //public Initializer _Initializer = new Initializer();
         public SaveWorkManager _SaveWorkManager = new SaveWorkManager();
-
         public GenerateKey _GenerateKey = new GenerateKey();
         public SaveWorkService SaveWorkService = new SaveWorkService();
+        public Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
 
-       
+
+        //public MainWindowViewModel(Window currentWindow)
+        //{
+        //    _currentWindow = currentWindow;
+        //}
+        //public ICommand ShowDialogCommand => new RelayCommand(ShowDialog);
 
         public void GetData()
         {
@@ -114,17 +122,22 @@ namespace EasySave.DesktopApp.ViewModels
 
         public bool CheckRunningProcess(string ProcessName)
         {
-            return _SaveWorkManager.CheckRunningProcess(ProcessName);
+            while (_SaveWorkManager.CheckRunningProcess(ProcessName))
+            {
+                
+                return true;
+            }
+            return false;
         }
 
         public void LaunchAllCommand()
         {
+            
             foreach (SaveWorkModel _saveWork in _SaveWorkManager.ArrayOfSaveWork)
             {
                 while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
                 {
-                    Debug.WriteLine("Un logiciel métier est actif");
-                    MessageBox.Show("Un logiciel métier est actif");
+                    MessageBox.Show(currentWindow,"Un logiciel métier est actif");
                 }
                 ExecuteSaveWorkWPF(_saveWork);
             }
@@ -132,10 +145,10 @@ namespace EasySave.DesktopApp.ViewModels
 
         public void LaunchCommand(SaveWorkModel model)
         {
+            
             while (CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
             {
-                Debug.WriteLine("Un logiciel métier est actif");
-                MessageBox.Show("Un logiciel métier est actif");
+                MessageBox.Show(currentWindow,"Un logiciel métier est actif");
             }
 
             ExecuteSaveWorkWPF(model);

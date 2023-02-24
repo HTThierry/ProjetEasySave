@@ -8,6 +8,7 @@ using System.Data;
 using System.Windows.Data;
 using System.Threading;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace EasySave.DesktopApp
 {
@@ -27,6 +28,8 @@ namespace EasySave.DesktopApp
             _ViewModel.SaveWorkInitializing();
             _ViewModel.GetData();
             DataContext = _ViewModel;
+            
+
         }
 
         //                                                                           method for savework in datagrid
@@ -61,7 +64,7 @@ namespace EasySave.DesktopApp
             SaveWorkModel selectedSaveWork = dgSaveWorks.SelectedItem as SaveWorkModel;
 
             //_ViewModel.LaunchCommand(selectedSaveWork);
-            if (selectedSaveWork.ProgressStateModel.ProgressState == "Active")
+            if (selectedSaveWork.ProgressState == "Active")
             {
                 _ViewModel.resumeSaveWork(selectedSaveWork);
             }
