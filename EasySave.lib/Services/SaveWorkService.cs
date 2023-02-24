@@ -10,6 +10,7 @@ namespace EasySave.lib.Services
 {
     public class SaveWorkService
     {
+        public SaveWorkManager saveWorkManager = SaveWorkManager.GetInstance();
         //private bool TokenOfPriority { get; set; } = true;
         private static bool TokenOfAvailability { get; set; } = true;
 
@@ -72,7 +73,6 @@ namespace EasySave.lib.Services
 
         private int CompleteCopyFiles(SaveWorkModel model)
         {
-            
             CopyModel copyModel = new CopyModel()
             {
                 SourcePath = model.SourcePathSaveWork,
@@ -264,6 +264,11 @@ namespace EasySave.lib.Services
 
         private void CompleteFileCopy(string file, SaveWorkModel model, CopyModel copyModel)
         {
+            while(saveWorkManager.CheckRunningProcess(ConfigurationManager.AppSettings["RunningProcess"]) == true)
+            {
+                Debug.WriteLine("Logiciel Métier Actif");
+            }
+
             int timeForCryp = 0;
 
             string[] ExtensionToCrypt = ConfigurationManager.AppSettings["fileToCryp"].Split(',');

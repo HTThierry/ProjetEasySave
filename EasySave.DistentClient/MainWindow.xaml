@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lang="clr-namespace:EasySave.DistentClient.Resources"
         mc:Ignorable="d"
+        Icon=".\Resources\logo_easysave_V2.ico"
         Title="{x:Static lang:langage.WindowTitle}" Height="450" Width="Auto">
     <Window.Resources>
+        <BitmapImage x:Key="Logo_Easysave" UriSource="/Resources/logo_easysave_V2.1.png"/>
         <Style x:Key="CenteredColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
@@ -14,12 +16,31 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="13*" />
+            <RowDefinition Height="83*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="EasySave" FontSize="24" FontWeight="Bold" Margin="10" />
+        <Rectangle Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#001633" Offset="0.0" />
+                    <GradientStop Color="#0001F5" Offset="1.0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="0">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#001633" Offset="0.0" />
+                    <GradientStop Color="#0001F5" Offset="1.0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock Text="EasySave Client" FontSize="24" FontWeight="Bold" Margin="10" HorizontalAlignment="Center" Grid.Column="0" Foreground="White" VerticalAlignment="Center"/>
+        <Image HorizontalAlignment="Left" Height="Auto" Width="Auto" Source="{StaticResource ResourceKey=Logo_Easysave}" Grid.Column="1"/>
 
         <DataGrid Grid.Row="1" IsReadOnly="True" Name="dgSaveWorks" AutoGenerateColumns="false" ItemsSource="{Binding SaveWork}">
 
@@ -83,10 +104,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="{x:Static lang:langage.selectAll}" Margin="5" Click="selectAllCommand" />
-            <Button Content="{x:Static lang:langage.playSelectedSaveWork}" Margin="5" Click="LaunchSelectedCommand" />
-            <Button Content="{x:Static lang:langage.pauseSelectedSaveWork}" Margin="5" Click="pauseSelectedCommand" />
-            <Button Content="{x:Static lang:langage.stopSelectedSaveWork}" Margin="5" Click="stopSelectedCommand" />
+            <Button Content="{x:Static lang:langage.selectAll}" Margin="5" Click="selectAllCommand" Background="Transparent" BorderBrush="Transparent" Foreground="Orange" />
+            <Button Content="{x:Static lang:langage.playSelectedSaveWork}" Margin="5" Click="LaunchSelectedCommand" Background="Transparent" BorderBrush="Transparent" Foreground="Orange" />
+            <Button Content="{x:Static lang:langage.pauseSelectedSaveWork}" Margin="5" Click="pauseSelectedCommand" Background="Transparent" BorderBrush="Transparent" Foreground="Orange" />
+            <Button Content="{x:Static lang:langage.stopSelectedSaveWork}" Margin="5" Click="stopSelectedCommand" Background="Transparent" BorderBrush="Transparent" Foreground="Orange" />
         </StackPanel>
     </Grid>
 </Window>

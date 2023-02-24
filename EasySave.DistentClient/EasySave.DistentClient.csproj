@@ -5,7 +5,22 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>logo_easysave_V2.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\logo_easysave_V2.1.png" />
+    <None Remove="Resources\logo_easysave_V2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo_easysave_V2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\logo_easysave_V2.1.png" />
+    <Resource Include="Resources\logo_easysave_V2.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources\langage.Designer.cs">
