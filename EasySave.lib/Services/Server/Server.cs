@@ -1,16 +1,25 @@
-﻿using System.Diagnostics;
+﻿using EasySave.lib.Models;
+using System.Diagnostics;
 
 namespace EasySave.lib.Services.Server
 {
     public class Server
     {
-        private readonly List<ClientManager> clients = new(16);
+        private static readonly List<ClientManager> clients = new(16);
 
         public void Start()
         {
             Listener listener = new(55263);
             listener.ClientConnected += Listener_ClientConnected;
             listener.Start();
+        }
+
+        public void Send(SaveWorkModel model)
+        {
+            foreach (ClientManager client in clients) {
+                client.Send(model);
+
+            }
         }
 
         private void Listener_ClientConnected(object? sender, SocketEventArgs e)

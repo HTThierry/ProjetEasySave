@@ -1,4 +1,5 @@
 ﻿using EasySave.lib.Models;
+using EasySave.lib.Services.Server;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace EasySave.lib.Services
         //private AutoResetEvent pauseEvent = new AutoResetEvent(false);
         private object LockerLog = new object();
         private object LockerProgressState = new object();
+        private Server.Server server = new Server.Server();
 
         //public SaveWorkModel _SaveWorkModel { get; set; } = new SaveWorkModel();
         //public cryptoSoft _cryptoSoft = new cryptoSoft();
@@ -141,6 +143,7 @@ namespace EasySave.lib.Services
                             CompleteFileCopy(PrioritizedBigFiles[indexA], model, copyModel);
                             indexA++;
                             TokenOfAvailability = true;
+                            server.Send(model);
                         }
                         else
                         {
@@ -148,6 +151,7 @@ namespace EasySave.lib.Services
                             {
                                 CompleteFileCopy(PrioritizedSmallFiles[indexB], model, copyModel);
                                 indexB++;
+                                server.Send(model);
                             }
                         }
                     }
@@ -159,6 +163,7 @@ namespace EasySave.lib.Services
                             CompleteFileCopy(OtherBigFiles[indexC], model, copyModel);
                             indexC++;
                             TokenOfAvailability = true;
+                            server.Send(model);
                         }
                         else
                         {
@@ -166,6 +171,7 @@ namespace EasySave.lib.Services
                             {
                                 CompleteFileCopy(OtherSmallFiles[indexD], model, copyModel);
                                 indexD++;
+                                server.Send(model);
                             }
                         }
                     }
@@ -174,7 +180,7 @@ namespace EasySave.lib.Services
                         i = indexA + indexB + indexC + indexD;
                     }
                 }
-
+                
                 //CompleteCopyListOfFiles(PrioritizedFiles, model, copyModel);
                 //CompleteCopyListOfFiles(OtherFiles, model, copyModel);
             }
@@ -191,7 +197,7 @@ namespace EasySave.lib.Services
 
             model.Percentage = 0;
             model.ProgressState = "Inactive";
-
+            server.Send(model);
             ProgressStateService.ProgressStateFile();
             
             return 0;

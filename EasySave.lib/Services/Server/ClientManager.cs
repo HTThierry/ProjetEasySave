@@ -59,7 +59,9 @@ namespace EasySave.lib.Services.Server
                 saveWorkModels.TypeSaveWork.ToString(),
                 saveWorkModels.SourcePathSaveWork,
                 saveWorkModels.DestinationPathSaveWork,
-                "8"
+                saveWorkModels.ProgressState,
+                saveWorkModels.Percentage.ToString(),
+               
             };
             return ModelAttributs;
         }

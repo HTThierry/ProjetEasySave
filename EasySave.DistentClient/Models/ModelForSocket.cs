@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Threading;
-
-namespace EasySave.DistentClient.Models
+﻿namespace EasySave.DistentClient.Models
 {
     public class ModelForSocket
     {
@@ -14,6 +10,8 @@ namespace EasySave.DistentClient.Models
 
         public string DestinationPathSaveWork { get; set; }
 
-        public float ProgressState { get; set; }
+        public string ProgressState { get; set; }
+
+        public float Percentage { get; set; }
     }
 }
