@@ -112,8 +112,8 @@ namespace EasySave.lib.Services
 
         public void ExecuteSaveWorkWPF(SaveWorkModel model)
         {
-            SaveWorkService ANTHOservice = new SaveWorkService();
-            ANTHOservice.LaunchSaveWork(model);
+            SaveWorkService service = new SaveWorkService();
+            service.LaunchSaveWork(model);
         }
 
         private char[] IllegalChars = Path.GetInvalidPathChars();
