@@ -24,6 +24,7 @@ namespace EasySave.DesktopApp
         public MainWindow()
         {
             InitializeComponent();
+
             _ViewModel.GenerateNewKey();
             _ViewModel.SaveWorkInitializing();
             _ViewModel.GetData();

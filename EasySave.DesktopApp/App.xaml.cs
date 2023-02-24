@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.IO;
 using EasySave.DesktopApp.Resources;
+using System.Diagnostics;
 
 namespace EasySave.DesktopApp
 {
@@ -44,8 +45,7 @@ namespace EasySave.DesktopApp
 
             lockFile.Close();
             File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LockFileName));
+            Process.GetCurrentProcess().Kill();
         }
-
-
     }
 }
