@@ -12,7 +12,6 @@ namespace EasySave.lib.Services
     {
         public static int index;
         public List<SaveWorkModel> ArrayOfSaveWork { get; set; } = new List<SaveWorkModel>();
-        //private SaveWorkService service = new SaveWorkService();
 
         private static SaveWorkManager instance = new();
 
@@ -76,34 +75,11 @@ namespace EasySave.lib.Services
                     TypeSaveWork = saveWorkJSON.TypeSaveWork,
                     SourcePathSaveWork = saveWorkJSON.SourcePathSaveWork,
                     DestinationPathSaveWork = saveWorkJSON.DestinationPathSaveWork
-                }; // crée savework à partir de attritub (atab des tring)
+                }; // crée savework à partir de attributs
 
                 AddNewSaveWork(model);
             }
         }
-
-        //public int RemoveSaveWork(string SaveWorkID)
-        //{
-        //    string directory = ConfigurationManager.AppSettings["SaveWorkPath"];
-        //    string path = Path.Combine(directory, $"{ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].GetInstanceInfo()[0]}.json");
-        //    try
-        //    {
-        //        if (File.Exists(path))
-        //        {
-        //            File.Delete(path);
-        //            ProgressState.RemoveSaveWork(ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1]._SaveWorkModel.NameSaveWork);
-        //            ArrayOfSaveWork.RemoveAt(Int32.Parse(SaveWorkID) - 1);
-        //            return 0;
-        //        }
-        //        else
-        //            return 1;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Une erreur s'est produite : " + ex.Message);                                             //A retirer après test
-        //        return 1;
-        //    }
-        //}
 
         public void RemoveSaveWorkWPF(SaveWorkModel model)
         {
@@ -134,34 +110,13 @@ namespace EasySave.lib.Services
             }
         }
 
-        //public int ExecuteSaveWork(string SaveWorkID, List<SaveWorkService> ArrayOfSaveWork)
-        //{
-        //    return ArrayOfSaveWork[Int32.Parse(SaveWorkID) - 1].LaunchSaveWork();
-        //}
         public void ExecuteSaveWorkWPF(SaveWorkModel model)
         {
             SaveWorkService ANTHOservice = new SaveWorkService();
             ANTHOservice.LaunchSaveWork(model);
         }
 
-        //public int SequentialSaveWorksExecution(List<SaveWorkService> ArrayOfSaveWork)
-        //{
-        //    int ReturnCode = 0;
-        //    for (int i = 1; i < (ArrayOfSaveWork.Count + 1); i++)
-        //    {
-        //        if (ExecuteSaveWork($"{i}", ArrayOfSaveWork) == 1)
-        //        {
-        //            ReturnCode++;
-        //        }
-        //    }
-        //    if (ReturnCode > 0)
-        //        return 1;
-        //    else
-        //        return 0;
-        //}
-
         private char[] IllegalChars = Path.GetInvalidPathChars();
-        //private Model _Model = Model.GetInstance();
 
         public int TestNameSaveWork(string SaveWorkName)
         {
